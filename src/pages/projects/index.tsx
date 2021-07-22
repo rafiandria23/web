@@ -82,6 +82,8 @@ ProjectsPage.getInitialProps = async () => {
           overview
           cover {
             url
+            width
+            height
           }
           tags {
             id

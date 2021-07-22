@@ -84,6 +84,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
               article.tags.map((tag) => (
                 <Grid item key={tag._id}>
                   <Chip
+                    className={classes.tag}
                     label={tag.name}
                     size={`small`}
                     clickable
@@ -113,10 +114,12 @@ ArticlePage.getInitialProps = async ({ query }) => {
           summary
           cover {
             url
+            width
+            height
           }
           content
           tags {
-            id
+            _id
             name
           }
           published_at
@@ -156,6 +159,9 @@ const useStyles = makeStyles((theme) =>
       '& > *': {
         margin: theme.spacing(0, 0.4),
       },
+    },
+    tag: {
+      color: theme.palette.common.white,
     },
     date: {
       color: theme.palette.grey[500],

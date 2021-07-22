@@ -8,6 +8,9 @@ import moment from 'moment';
 // Types
 import { Article } from '@/types/article';
 
+//  Utils
+import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
+
 interface ArticleCardProps {
   article: Article;
 }
@@ -35,10 +38,12 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
       >
         <Grid item>
           <Image
-            src={article.cover.url}
+            src={getPublicID(article.cover.url)}
             alt={article.title}
-            width={100}
-            height={100}
+            width={article.cover.width}
+            height={article.cover.height}
+            placeholder='blur'
+            blurDataURL={getBlurredImageURL(article.cover.url)}
           />
         </Grid>
 

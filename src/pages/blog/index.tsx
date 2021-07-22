@@ -80,6 +80,8 @@ BlogPage.getInitialProps = async () => {
           summary
           cover {
             url
+            width
+            height
           }
           tags {
             _id

@@ -8,6 +8,9 @@ import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
 // Types
 import { Project } from '@/types/project';
 
+// Utils
+import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
+
 interface ProjectCardProps {
   project: Project;
 }
@@ -29,10 +32,12 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           <Grid item container justifyContent={`center`}>
             <Grid item>
               <Image
-                src={project.cover.url}
+                src={getPublicID(project.cover.url)}
                 alt={project.title}
-                width={100}
-                height={100}
+                width={project.cover.width}
+                height={project.cover.height}
+                placeholder='blur'
+                blurDataURL={getBlurredImageURL(project.cover.url)}
               />
             </Grid>
           </Grid>

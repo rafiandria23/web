@@ -154,7 +154,7 @@ ProjectPage.getInitialProps = async ({ query }) => {
           }
           description
           tags {
-            id
+            _id
             name
           }
         }
