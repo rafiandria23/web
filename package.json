@@ -9,12 +9,31 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.21",
+    "@fontsource/roboto": "^4.5.0",
+    "@material-ui/core": "^4.12.2",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@types/react-lazy-load-image-component": "^1.5.2",
+    "cloudinary-build-url": "^0.2.1",
+    "clsx": "^1.1.1",
+    "graphql": "^15.5.1",
+    "moment": "^2.29.1",
     "next": "11.0.1",
+    "next-compose-plugins": "^2.2.1",
+    "next-seo": "^4.26.0",
+    "notistack": "^1.0.9",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-lazy-load-image-component": "^1.5.1",
+    "react-markdown": "^6.0.2",
+    "sass": "^1.35.2"
   },
   "devDependencies": {
+    "@types/node": "^16.3.3",
+    "@types/react": "^17.0.14",
     "eslint": "7.31.0",
-    "eslint-config-next": "11.0.1"
+    "eslint-config-next": "11.0.1",
+    "typescript": "^4.3.5"
   }
 }
