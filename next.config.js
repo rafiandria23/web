@@ -3,6 +3,7 @@ const withPlugins = require('next-compose-plugins');
 
 const nextConfig = {
   reactStrictMode: true,
+  target: 'serverless',
   distDir: '.next',
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
