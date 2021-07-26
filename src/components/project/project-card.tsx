@@ -61,7 +61,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
             size={`small`}
             onClick={() =>
               router.push({
-                pathname: `/projects/${project._id}`,
+                pathname: `/projects/${project.slug}`,
               })
             }
             endIcon={<ArrowForwardIcon />}
@@ -78,27 +78,15 @@ export default ProjectCard;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    paper: {
-      borderColor: theme.palette.primary.contrastText,
-      background: 'transparent',
-    },
+    paper: {},
     wrapper: {
       padding: theme.spacing(0.5, 1),
       '& > *': {
         margin: theme.spacing(0.8, 0),
       },
     },
-    title: {
-      color: theme.palette.primary.contrastText,
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    overview: {
-      color: theme.palette.primary.contrastText,
-    },
-    button: {
-      textTransform: 'none',
-      color: theme.palette.primary.contrastText,
-      // borderColor: theme.palette.primary.contrastText,
-    },
+    title: {},
+    overview: {},
+    button: {},
   }),
 );

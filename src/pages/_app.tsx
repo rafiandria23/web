@@ -1,61 +1,101 @@
 import '@fontsource/roboto';
 import '@/styles/global.scss';
 
-import { createRef, RefObject } from 'react';
-import NextApp from 'next/app';
+import { FC, useMemo, createRef } from 'react';
+import NextApp, { AppContext, AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
 import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { IconButton } from '@material-ui/core';
+import { useMediaQuery, CssBaseline, IconButton } from '@material-ui/core';
 import { CloseOutlined } from '@material-ui/icons';
 import { SnackbarProvider, SnackbarKey, SnackbarAction } from 'notistack';
 
+// Types
+import { PageInitialProps } from '@/types';
+
 // Styles
-import { theme } from '@/styles';
+import { light, dark } from '@/styles/theme';
 
-export default class App extends NextApp {
-  private notistackRef: RefObject<SnackbarProvider> = createRef();
+// Pages
+import ErrorPage from './_error';
 
-  handleCloseSnackbar = (key: SnackbarKey) => {
-    this.notistackRef.current?.closeSnackbar(key);
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<PageInitialProps>) {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const notistackRef = createRef<SnackbarProvider>();
+
+  const theme = useMemo(
+    () => (prefersDarkMode ? dark : light),
+    [prefersDarkMode],
+  );
+
+  const handleCloseSnackbar = (key: SnackbarKey) => {
+    notistackRef.current?.closeSnackbar(key);
   };
 
-  render() {
-    const { Component, pageProps } = this.props;
+  const snackbarAction: SnackbarAction = (key) => (
+    <IconButton color={`inherit`} onClick={() => handleCloseSnackbar(key)}>
+      <CloseOutlined />
+    </IconButton>
+  );
 
-    const snackbarAction: SnackbarAction = (key) => (
-      <IconButton
-        color={`inherit`}
-        onClick={() => this.handleCloseSnackbar(key)}
+  const handleRender = () => {
+    if (pageProps.errorStatus) {
+      return (
+        <ErrorPage
+          statusCode={pageProps.errorStatus}
+          title={pageProps.statusMessage}
+        />
+      );
+    }
+
+    return <Component {...pageProps} />;
+  };
+
+  return (
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <SnackbarProvider
+        ref={notistackRef}
+        maxSnack={1}
+        autoHideDuration={3000}
+        action={snackbarAction}
       >
-        <CloseOutlined />
-      </IconButton>
-    );
-
-    return (
-      <MuiThemeProvider theme={theme}>
-        <SnackbarProvider
-          ref={this.notistackRef}
-          maxSnack={1}
-          autoHideDuration={3000}
-          action={snackbarAction}
-        >
-          <DefaultSeo
-            titleTemplate='%s | rafiandria23.me'
-            openGraph={{
-              type: 'website',
-              locale: 'en_US',
-              url: 'https://rafiandria23.me',
-              site_name: 'Adam Rafiandri',
-            }}
-            twitter={{
-              handle: '@handle',
-              site: '@site',
-              cardType: 'summary_large_image',
-            }}
-          />
-          <Component {...pageProps} />
-        </SnackbarProvider>
-      </MuiThemeProvider>
-    );
-  }
+        <DefaultSeo
+          titleTemplate='%s | rafiandria23.me'
+          openGraph={{
+            type: 'website',
+            locale: 'en_US',
+            url: 'https://rafiandria23.me',
+            site_name: 'Adam Rafiandri',
+          }}
+          twitter={{
+            handle: '@handle',
+            site: '@site',
+            cardType: 'summary_large_image',
+          }}
+        />
+        {handleRender()}
+      </SnackbarProvider>
+    </MuiThemeProvider>
+  );
 }
+
+App.getInitialProps = async (appCtx: AppContext) => {
+  const { res } = appCtx.ctx;
+
+  const appProps = await NextApp.getInitialProps(appCtx);
+
+  if (appProps.pageProps.errorStatus && res) {
+    res.statusCode = appProps.pageProps.errorStatus;
+
+    if (appProps.pageProps.errorMessage) {
+      res.statusMessage = appProps.pageProps.errorMessage;
+    }
+  }
+
+  return {
+    ...appProps,
+  };
+};

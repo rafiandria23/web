@@ -19,6 +19,7 @@ import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
 // Types
 import { Article } from '@/types/article';
 import { Project } from '@/types/project';
+import { Tag } from '@/types/tag';
 
 interface LatestCardProps {
   data: Article | Project;
@@ -62,10 +63,10 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
           onClick={() =>
             type === `article`
               ? router.push({
-                  pathname: `/projects/${(data as Article).title}/${data._id}`,
+                  pathname: `/projects/${(data as Article).slug}`,
                 })
               : router.push({
-                  pathname: `/projects/${(data as Project).title}/${data._id}`,
+                  pathname: `/projects/${(data as Project).slug}`,
                 })
           }
         >
@@ -88,18 +89,15 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
       >
         <CardContent>
           {data.tags.length &&
-            data.tags.map((tag: any) => (
+            data.tags.map((tag: Tag) => (
               <Chip
                 classes={{ root: classes.tagChip }}
-                key={tag.id}
+                key={tag._id}
                 label={tag.name.toUpperCase()}
                 clickable
                 onClick={() =>
                   router.push({
-                    pathname: `/tags/${tag.name
-                      .split(' ')
-                      .join('-')
-                      .toLowerCase()}`,
+                    pathname: `/tags/${tag.slug}`,
                   })
                 }
               />

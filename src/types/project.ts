@@ -5,6 +5,7 @@ import { Tag } from './tag';
 export interface Project {
   _id: string;
   title: string;
+  slug: string;
   overview: string;
   link: string;
   description: string;

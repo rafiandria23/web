@@ -40,8 +40,8 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
           <Grid item>
             <Typography
               className={classes.title}
-              variant={`h4`}
               component={`h1`}
+              variant={`h5`}
               gutterBottom
             >
               {`My Projects`}
@@ -55,6 +55,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             direction={`column`}
             justifyContent={`space-evenly`}
             alignItems={`stretch`}
+            spacing={1}
           >
             {projects !== undefined && projects.length > 0
               ? projects.map((project) => {
@@ -79,6 +80,7 @@ ProjectsPage.getInitialProps = async () => {
         projects {
           _id
           title
+          slug
           overview
           cover {
             url
@@ -101,21 +103,10 @@ ProjectsPage.getInitialProps = async () => {
 
 export default ProjectsPage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
-    wrapper: {
-      minHeight: '100vh',
-      backgroundColor: theme.palette.primary.light,
-      padding: theme.spacing(2, 1),
-    },
-    title: {
-      color: theme.palette.primary.contrastText,
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    list: {
-      '& > *': {
-        margin: theme.spacing(1, 0),
-      },
-    },
+    wrapper: {},
+    title: {},
+    list: {},
   }),
 );

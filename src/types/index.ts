@@ -1,6 +1,9 @@
 import { Moment } from 'moment';
 
-export type Heading = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+export interface PageInitialProps {
+  errorStatus?: number;
+  errorMessage?: string;
+}
 
 export interface UploadFile {
   _id: string;

@@ -7,6 +7,7 @@ import { Tag } from './tag';
 export interface Article {
   _id: string;
   title: string;
+  slug: string;
   summary: string;
   content: string;
   cover: UploadFile;

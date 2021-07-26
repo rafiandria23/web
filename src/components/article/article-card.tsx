@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Typography } from '@material-ui/core';
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
 import moment from 'moment';
 
 // Types
@@ -20,23 +20,22 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
   const classes = useStyles();
 
   return (
-    <Paper
-      className={classes.paper}
+    <ButtonBase
       onClick={() =>
         router.push({
-          pathname: `/blog/${article._id}`,
+          pathname: `/blog/${article.slug}`,
         })
       }
     >
       <Grid
-        className={classes.wrapper}
         container
         direction={`row-reverse`}
         wrap={`nowrap`}
         justifyContent={`space-between`}
         alignItems={`stretch`}
+        spacing={1}
       >
-        <Grid item>
+        <Grid item xs={3}>
           <Image
             src={getPublicID(article.cover.url)}
             alt={article.title}
@@ -49,6 +48,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
 
         <Grid
           item
+          xs={9}
           container
           direction={`column`}
           justifyContent={`center`}
@@ -57,21 +57,21 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
           <Grid item>
             <Typography
               className={classes.title}
-              variant={`subtitle1`}
-              align={`left`}
+              variant='h6'
+              align='left'
               gutterBottom
             >
               {article.title}
             </Typography>
 
-            <Typography
+            {/* <Typography
               className={classes.summary}
-              variant={`caption`}
-              align={`left`}
+              variant='caption'
+              align='left'
               paragraph
             >
               {article.summary}
-            </Typography>
+            </Typography> */}
           </Grid>
 
           <Grid item>
@@ -86,7 +86,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
           </Grid>
         </Grid>
       </Grid>
-    </Paper>
+    </ButtonBase>
   );
 };
 
@@ -94,23 +94,11 @@ export default ArticleCard;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    paper: {
-      padding: theme.spacing(1, 0.5),
-    },
-    wrapper: {
-      '& > *': {
-        margin: theme.spacing(0, 0.8),
-      },
-    },
-    title: {
-      color: theme.palette.text.primary,
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    summary: {
-      color: theme.palette.text.primary,
-    },
+    title: {},
+    summary: {},
     date: {
-      color: theme.palette.grey[500],
+      textTransform: 'none',
+      color: theme.palette.text.secondary,
     },
   }),
 );

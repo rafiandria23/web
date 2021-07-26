@@ -22,14 +22,14 @@ import markdownComponents from '@/components/markdown';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
 interface ProjectPageProps {
-  project: Project;
+  project: Project | null;
 }
 
 const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
   const router = useRouter();
   const classes = useStyles();
 
-  return (
+  return project !== null ? (
     <>
       <NextSeo title={project.title} description={project.overview} />
 
@@ -124,7 +124,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
                     clickable
                     onClick={() =>
                       router.push({
-                        pathname: `/tags/${tag._id}`,
+                        pathname: `/tags/${tag.slug}`,
                       })
                     }
                   />
@@ -134,17 +134,20 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
         </Grid>
       </Layout>
     </>
+  ) : (
+    <></>
   );
 };
 
 ProjectPage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-  const { data } = await client.query<{ project: Project }>({
+  const { slug } = query;
+  const { data } = await client.query<{ projects: Project[] }>({
     query: gql`
-      query ($id: ID!) {
-        project(id: $id) {
+      query ($slug: String!) {
+        projects(where: { slug: $slug }) {
           _id
           title
+          slug
           overview
           link
           cover {
@@ -161,12 +164,19 @@ ProjectPage.getInitialProps = async ({ query }) => {
       }
     `,
     variables: {
-      id,
+      slug,
     },
   });
 
+  if (!data.projects.length) {
+    return {
+      errorStatus: 404,
+      project: null,
+    };
+  }
+
   return {
-    project: data.project,
+    project: data.projects[0],
   };
 };
 

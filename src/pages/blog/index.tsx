@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { Grid, Typography, Divider } from '@material-ui/core';
 
 // Types
 import { Article } from '@/types/article';
@@ -37,12 +37,15 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
           <Grid item>
             <Typography
               className={classes.title}
-              variant={`h4`}
               component={`h1`}
-              gutterBottom
+              variant={`h5`}
             >
               {`My Blog`}
             </Typography>
+          </Grid>
+
+          <Grid item>
+            <Divider />
           </Grid>
 
           <Grid
@@ -53,6 +56,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
             wrap={`wrap`}
             justifyContent={`space-evenly`}
             alignItems={`stretch`}
+            spacing={1}
           >
             {articles !== undefined && articles.length > 0
               ? articles.map((article) => {
@@ -77,6 +81,7 @@ BlogPage.getInitialProps = async () => {
         articles {
           _id
           title
+          slug
           summary
           cover {
             url
@@ -103,18 +108,13 @@ export default BlogPage;
 const useStyles = makeStyles((theme) =>
   createStyles({
     wrapper: {
-      minHeight: '100vh',
-      backgroundColor: theme.palette.primary.light,
-      padding: theme.spacing(2, 1),
+      padding: theme.spacing(2),
     },
     title: {
-      color: theme.palette.primary.contrastText,
       fontWeight: theme.typography.fontWeightBold,
     },
     list: {
-      '& > *': {
-        margin: theme.spacing(1, 0),
-      },
+      marginTop: theme.spacing(1),
     },
   }),
 );

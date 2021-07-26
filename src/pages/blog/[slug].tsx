@@ -8,6 +8,7 @@ import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
 // Types
+import { PageInitialProps } from '@/types';
 import { Article } from '@/types/article';
 
 // GraphQL
@@ -17,15 +18,15 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import markdownComponents from '@/components/markdown';
 
-interface ArticlePageProps {
-  article: Article;
+interface ArticlePageProps extends PageInitialProps {
+  article: Article | null;
 }
 
 const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   const router = useRouter();
   const classes = useStyles();
 
-  return (
+  return article !== null ? (
     <>
       <NextSeo title={article.title} description={article.summary} />
 
@@ -90,7 +91,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                     clickable
                     onClick={() =>
                       router.push({
-                        pathname: `/tags/${tag._id}`,
+                        pathname: `/tags/${tag.slug}`,
                       })
                     }
                   />
@@ -100,17 +101,20 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
         </Grid>
       </Layout>
     </>
+  ) : (
+    <></>
   );
 };
 
 ArticlePage.getInitialProps = async ({ query }) => {
-  const { id } = query;
-  const { data } = await client.query<{ article: Article }>({
+  const { slug } = query;
+  const { data } = await client.query<{ articles: Article[] }>({
     query: gql`
-      query ($id: ID!) {
-        article(id: $id) {
+      query ($slug: String!) {
+        articles(where: { slug: $slug }) {
           _id
           title
+          slug
           summary
           cover {
             url
@@ -127,12 +131,19 @@ ArticlePage.getInitialProps = async ({ query }) => {
       }
     `,
     variables: {
-      id,
+      slug,
     },
   });
 
+  if (!data.articles.length) {
+    return {
+      errorStatus: 404,
+      article: null,
+    };
+  }
+
   return {
-    article: data.article,
+    article: data.articles[0],
   };
 };
 

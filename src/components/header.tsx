@@ -4,6 +4,7 @@ import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
+  ButtonGroup,
   Button,
   IconButton,
   Container,
@@ -41,7 +42,7 @@ const Header: FC = () => {
   };
 
   return (
-    <Container className={classes.header} component={`header`}>
+    <Container className={classes.header}>
       <AppBar>
         <Toolbar variant={`dense`}>
           <IconButton edge={`start`} onClick={handleOpen}>
@@ -75,18 +76,18 @@ const Header: FC = () => {
           direction={`column`}
           justifyContent={`space-between`}
           alignItems={`stretch`}
-          spacing={1}
         >
           <Grid
             item
             container
             direction={`column`}
             justifyContent={`space-between`}
-            alignItems={`center`}
+            alignItems={`stretch`}
           >
             <Grid item>
               <Button
-                color={`primary`}
+                fullWidth
+                variant='text'
                 onClick={() =>
                   router.push({
                     pathname: '/',
@@ -99,7 +100,8 @@ const Header: FC = () => {
 
             <Grid item>
               <Button
-                color={`primary`}
+                fullWidth
+                variant='text'
                 onClick={() =>
                   router.push({
                     pathname: '/projects',
@@ -112,7 +114,8 @@ const Header: FC = () => {
 
             <Grid item>
               <Button
-                color={`primary`}
+                fullWidth
+                variant='text'
                 onClick={() =>
                   router.push({
                     pathname: '/blog',
@@ -136,23 +139,21 @@ const Header: FC = () => {
             alignItems={`center`}
           >
             <Grid item>
-              <IconButton
-                color={`primary`}
-                href={`https://linkedin.com/in/rafiandria23`}
-                target={`_blank`}
-              >
-                <LinkedInLogo />
-              </IconButton>
-            </Grid>
+              <ButtonGroup variant='text'>
+                <IconButton
+                  href={`https://linkedin.com/in/rafiandria23`}
+                  target={`_blank`}
+                >
+                  <LinkedInLogo />
+                </IconButton>
 
-            <Grid item>
-              <IconButton
-                color={`primary`}
-                href={`https://github.com/rafiandria23`}
-                target={`_blank`}
-              >
-                <GitHubLogo />
-              </IconButton>
+                <IconButton
+                  href={`https://github.com/rafiandria23`}
+                  target={`_blank`}
+                >
+                  <GitHubLogo />
+                </IconButton>
+              </ButtonGroup>
             </Grid>
           </Grid>
         </Grid>
@@ -167,6 +168,9 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(0, 4),
+      '& > *': {
+        margin: theme.spacing(1, 0),
+      },
     },
     header: {
       position: 'fixed',
@@ -177,9 +181,6 @@ const useStyles = makeStyles((theme) =>
     },
     menuIcon: {
       color: theme.palette.primary.contrastText,
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
     },
     hireButton: {
       borderColor: theme.palette.primary.contrastText,
