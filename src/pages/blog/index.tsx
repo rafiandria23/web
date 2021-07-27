@@ -25,7 +25,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
     <>
       <NextSeo title={`Blog`} />
 
-      <Layout footer={false}>
+      <Layout>
         <Grid
           className={classes.wrapper}
           container

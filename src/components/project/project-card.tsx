@@ -31,8 +31,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
         className={classes.card}
         container
         direction={`column`}
-        justifyContent={`space-between`}
-        alignItems={`stretch`}
+        alignItems={`center`}
       >
         {project.cover && (
           <Grid item container justifyContent='center' alignItems='center'>
@@ -63,7 +62,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           <Typography
             className={classes.overview}
             variant='caption'
-            align='left'
+            align='center'
             paragraph
           >
             {project.overview}

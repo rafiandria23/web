@@ -1,13 +1,15 @@
 import { FC, HTMLProps, DetailedHTMLProps, AnchorHTMLAttributes } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { Link, Typography } from '@material-ui/core';
 import { Components } from 'react-markdown/src/ast-to-react';
 
 const Anchor: FC<
   DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
 > = ({ href, children }) => {
+  const theme = useTheme();
+
   return (
-    <Link href={href} target={`_blank`}>
+    <Link color='secondary' href={href} target={`_blank`}>
       {children}
     </Link>
   );

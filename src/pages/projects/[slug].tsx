@@ -33,7 +33,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
     <>
       <NextSeo title={project.title} description={project.overview} />
 
-      <Layout footer={false}>
+      <Layout>
         <Grid
           className={classes.wrapper}
           container
@@ -89,7 +89,6 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
                 className={classes.button}
                 fullWidth
                 variant={`outlined`}
-                size={`small`}
                 endIcon={<OpenInNewIcon />}
                 href={project.link}
                 target={`_blank`}
@@ -103,14 +102,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
             </ReactMarkdown>
           </Grid>
 
-          <Grid
-            className={classes.tags}
-            item
-            container
-            direction={`row`}
-            wrap={`wrap`}
-            justifyContent={`center`}
-          >
+          <Grid className={classes.tags} item container>
             {project.tags.length > 0 &&
               project.tags.map((tag) => (
                 <Grid item key={tag._id}>
@@ -208,7 +200,6 @@ const useStyles = makeStyles((theme) =>
       color: theme.palette.text.secondary,
     },
     button: {
-      textTransform: 'none',
       color: theme.palette.primary.contrastText,
       borderColor: theme.palette.primary.contrastText,
     },

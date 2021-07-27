@@ -30,7 +30,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
     <>
       <NextSeo title={article.title} description={article.summary} />
 
-      <Layout footer={false}>
+      <Layout>
         <Grid
           className={classes.wrapper}
           container
@@ -38,7 +38,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
           justifyContent={`space-between`}
           alignItems={`stretch`}
         >
-          <Grid className={classes.header} item container>
+          <Grid className={classes.header} item container direction='column'>
             <Grid item>
               <Typography
                 className={classes.title}

@@ -28,7 +28,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
         description={`All the projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack`}
       />
 
-      <Layout footer={false}>
+      <Layout>
         <Grid
           className={classes.wrapper}
           container
@@ -118,6 +118,7 @@ const useStyles = makeStyles((theme) =>
     list: {
       marginTop: theme.spacing(2),
       '& > *': {
+        width: '100%',
         margin: theme.spacing(1.5, 0),
       },
     },

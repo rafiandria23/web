@@ -94,7 +94,7 @@ export default function App({
           action={snackbarAction}
         >
           <DefaultSeo
-            titleTemplate='%s | rafiandria23.me'
+            titleTemplate='%s | Adam Rafiandri'
             openGraph={{
               type: 'website',
               locale: 'en_US',

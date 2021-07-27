@@ -16,7 +16,7 @@ const HomePage: NextPage = () => {
         description={`Adam Rafiandri is a Software Engineer who's passionate about Computer Science`}
       />
 
-      <Layout footer={false}>
+      <Layout>
         <Grid
           container
           className={classes.wrapper}

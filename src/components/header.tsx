@@ -52,8 +52,11 @@ const Header: FC = () => {
           <div className={classes.grow} />
 
           <Button
-            className={classes.hireButton}
             variant={`outlined`}
+            style={{
+              borderColor: theme.palette.primary.contrastText,
+              color: theme.palette.primary.contrastText,
+            }}
           >{`Hire me`}</Button>
         </Toolbar>
       </AppBar>
@@ -78,7 +81,13 @@ const Header: FC = () => {
           <Button
             variant={`outlined`}
             color={theme.palette.type === 'light' ? 'primary' : undefined}
-          >{`Hire me`}</Button>
+            style={{
+              borderColor: theme.palette.primary.contrastText,
+              color: theme.palette.primary.contrastText,
+            }}
+          >
+            Hire Me
+          </Button>
         </Toolbar>
 
         <Grid
@@ -193,10 +202,6 @@ const useStyles = makeStyles((theme) =>
       flexGrow: 1,
     },
     menuIcon: {
-      color: theme.palette.primary.contrastText,
-    },
-    hireButton: {
-      borderColor: theme.palette.primary.contrastText,
       color: theme.palette.primary.contrastText,
     },
   }),
