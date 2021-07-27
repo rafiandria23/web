@@ -21,43 +21,20 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
 
   return (
     <ButtonBase
+      className={classes.wrapper}
       onClick={() =>
         router.push({
           pathname: `/blog/${article.slug}`,
         })
       }
     >
-      <Grid
-        container
-        direction={`row-reverse`}
-        wrap={`nowrap`}
-        justifyContent={`space-between`}
-        alignItems={`stretch`}
-        spacing={1}
-      >
-        <Grid item xs={3}>
-          <Image
-            src={getPublicID(article.cover.url)}
-            alt={article.title}
-            width={article.cover.width}
-            height={article.cover.height}
-            placeholder='blur'
-            blurDataURL={getBlurredImageURL(article.cover.url)}
-          />
-        </Grid>
-
-        <Grid
-          item
-          xs={9}
-          container
-          direction={`column`}
-          justifyContent={`center`}
-          alignItems={`stretch`}
-        >
+      <Grid container wrap='nowrap'>
+        <Grid item container direction='column'>
           <Grid item>
             <Typography
               className={classes.title}
               variant='h6'
+              component='h2'
               align='left'
               gutterBottom
             >
@@ -85,6 +62,19 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
             </Typography>
           </Grid>
         </Grid>
+
+        <Grid item xs={3} container justifyContent='flex-end'>
+          <Grid item>
+            <Image
+              src={getPublicID(article.cover.url)}
+              alt={article.title}
+              width={article.cover.width}
+              height={article.cover.width}
+              placeholder='blur'
+              blurDataURL={getBlurredImageURL(article.cover.url)}
+            />
+          </Grid>
+        </Grid>
       </Grid>
     </ButtonBase>
   );
@@ -94,6 +84,9 @@ export default ArticleCard;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
+    wrapper: {
+      width: '100%',
+    },
     title: {},
     summary: {},
     date: {

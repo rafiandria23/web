@@ -53,10 +53,10 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
             <Grid item>
               <Typography
-                className={classes.date}
                 variant={`caption`}
                 component={`p`}
                 align={`left`}
+                color='textSecondary'
               >
                 {moment(article.createdAt).format('MMMM D, YYYY')}
               </Typography>
@@ -67,10 +67,6 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
             <ReactMarkdown components={markdownComponents}>
               {article.content}
             </ReactMarkdown>
-          </Grid>
-
-          <Grid item>
-            <Divider />
           </Grid>
 
           <Grid
@@ -87,7 +83,6 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                   <Chip
                     className={classes.tag}
                     label={tag.name}
-                    size={`small`}
                     clickable
                     onClick={() =>
                       router.push({
@@ -125,6 +120,7 @@ ArticlePage.getInitialProps = async ({ query }) => {
           tags {
             _id
             name
+            slug
           }
           published_at
         }
@@ -168,14 +164,11 @@ const useStyles = makeStyles((theme) =>
     content: {},
     tags: {
       '& > *': {
-        margin: theme.spacing(0, 0.4),
+        margin: theme.spacing(0.5),
       },
     },
     tag: {
-      color: theme.palette.common.white,
-    },
-    date: {
-      color: theme.palette.grey[500],
+      color: theme.palette.text.secondary,
     },
   }),
 );

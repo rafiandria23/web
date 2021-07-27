@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Chip, Button, Divider } from '@material-ui/core';
+import { Grid, Typography, Chip, Button } from '@material-ui/core';
 import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
 import ReactMarkdown from 'react-markdown';
 
@@ -103,10 +103,6 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
             </ReactMarkdown>
           </Grid>
 
-          <Grid item>
-            <Divider />
-          </Grid>
-
           <Grid
             className={classes.tags}
             item
@@ -119,8 +115,8 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
               project.tags.map((tag) => (
                 <Grid item key={tag._id}>
                   <Chip
+                    className={classes.tag}
                     label={tag.name}
-                    size={`small`}
                     clickable
                     onClick={() =>
                       router.push({
@@ -159,6 +155,7 @@ ProjectPage.getInitialProps = async ({ query }) => {
           tags {
             _id
             name
+            slug
           }
         }
       }
@@ -200,13 +197,15 @@ const useStyles = makeStyles((theme) =>
       color: theme.palette.primary.contrastText,
     },
     description: {
-      minHeight: '100vh',
       padding: theme.spacing(2, 1),
     },
     tags: {
       '& > *': {
-        margin: theme.spacing(0, 0.5),
+        margin: theme.spacing(0.5),
       },
+    },
+    tag: {
+      color: theme.palette.text.secondary,
     },
     button: {
       textTransform: 'none',

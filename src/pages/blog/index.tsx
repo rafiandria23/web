@@ -32,13 +32,13 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
           direction={`column`}
           justifyContent={`flex-start`}
           alignItems={`stretch`}
-          spacing={1}
         >
           <Grid item>
             <Typography
               className={classes.title}
               component={`h1`}
               variant={`h5`}
+              gutterBottom
             >
               {`My Blog`}
             </Typography>
@@ -52,11 +52,9 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
             className={classes.list}
             item
             container
-            direction={`row`}
-            wrap={`wrap`}
+            direction={`column`}
             justifyContent={`space-evenly`}
             alignItems={`stretch`}
-            spacing={1}
           >
             {articles !== undefined && articles.length > 0
               ? articles.map((article) => {
@@ -115,6 +113,9 @@ const useStyles = makeStyles((theme) =>
     },
     list: {
       marginTop: theme.spacing(1),
+      '& > *': {
+        margin: theme.spacing(1.5, 0),
+      },
     },
   }),
 );

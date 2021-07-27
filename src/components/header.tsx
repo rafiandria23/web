@@ -1,6 +1,6 @@
 import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
 import { useRouter } from 'next/router';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
@@ -11,7 +11,6 @@ import {
   Grid,
   Dialog,
   Slide,
-  Divider,
 } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import {
@@ -30,6 +29,7 @@ Transition.displayName = 'Transition';
 
 const Header: FC = () => {
   const router = useRouter();
+  const theme = useTheme();
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -65,9 +65,20 @@ const Header: FC = () => {
         TransitionComponent={Transition}
       >
         <Toolbar>
-          <IconButton edge={`start`} onClick={handleClose}>
+          <IconButton
+            edge={`start`}
+            color={theme.palette.type === 'light' ? 'primary' : undefined}
+            onClick={handleClose}
+          >
             <CloseIcon />
           </IconButton>
+
+          <div className={classes.grow} />
+
+          <Button
+            variant={`outlined`}
+            color={theme.palette.type === 'light' ? 'primary' : undefined}
+          >{`Hire me`}</Button>
         </Toolbar>
 
         <Grid
@@ -88,6 +99,7 @@ const Header: FC = () => {
               <Button
                 fullWidth
                 variant='text'
+                color={theme.palette.type === 'light' ? 'primary' : undefined}
                 onClick={() =>
                   router.push({
                     pathname: '/',
@@ -102,6 +114,7 @@ const Header: FC = () => {
               <Button
                 fullWidth
                 variant='text'
+                color={theme.palette.type === 'light' ? 'primary' : undefined}
                 onClick={() =>
                   router.push({
                     pathname: '/projects',
@@ -116,6 +129,7 @@ const Header: FC = () => {
               <Button
                 fullWidth
                 variant='text'
+                color={theme.palette.type === 'light' ? 'primary' : undefined}
                 onClick={() =>
                   router.push({
                     pathname: '/blog',
@@ -127,10 +141,6 @@ const Header: FC = () => {
             </Grid>
           </Grid>
 
-          <Grid item>
-            <Divider />
-          </Grid>
-
           <Grid
             item
             container
@@ -139,7 +149,10 @@ const Header: FC = () => {
             alignItems={`center`}
           >
             <Grid item>
-              <ButtonGroup variant='text'>
+              <ButtonGroup
+                variant='text'
+                color={theme.palette.type === 'light' ? 'primary' : undefined}
+              >
                 <IconButton
                   href={`https://linkedin.com/in/rafiandria23`}
                   target={`_blank`}

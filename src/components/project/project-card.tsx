@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Button, Typography } from '@material-ui/core';
-import { ArrowForward as ArrowForwardIcon } from '@material-ui/icons';
+import { ButtonBase, Grid, Typography } from '@material-ui/core';
 
 // Types
 import { Project } from '@/types/project';
@@ -20,16 +19,23 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
   const classes = useStyles();
 
   return (
-    <Paper className={classes.paper} variant={`outlined`}>
+    <ButtonBase
+      className={classes.wrapper}
+      onClick={() =>
+        router.push({
+          pathname: `/projects/${project.slug}`,
+        })
+      }
+    >
       <Grid
-        className={classes.wrapper}
+        className={classes.card}
         container
         direction={`column`}
-        justifyContent={`center`}
+        justifyContent={`space-between`}
         alignItems={`stretch`}
       >
         {project.cover && (
-          <Grid item container justifyContent={`center`}>
+          <Grid item container justifyContent='center' alignItems='center'>
             <Grid item>
               <Image
                 src={getPublicID(project.cover.url)}
@@ -44,33 +50,27 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
         )}
 
         <Grid item>
-          <Typography className={classes.title} variant={`h6`} gutterBottom>
+          <Typography
+            className={classes.title}
+            variant='h6'
+            component='h2'
+            align='center'
+            gutterBottom
+          >
             {project.title}
           </Typography>
 
-          <Typography className={classes.overview} variant={`body2`}>
+          <Typography
+            className={classes.overview}
+            variant='caption'
+            align='left'
+            paragraph
+          >
             {project.overview}
           </Typography>
         </Grid>
-
-        <Grid item>
-          <Button
-            className={classes.button}
-            fullWidth
-            variant={`text`}
-            size={`small`}
-            onClick={() =>
-              router.push({
-                pathname: `/projects/${project.slug}`,
-              })
-            }
-            endIcon={<ArrowForwardIcon />}
-          >
-            {`View Project`}
-          </Button>
-        </Grid>
       </Grid>
-    </Paper>
+    </ButtonBase>
   );
 };
 
@@ -78,11 +78,12 @@ export default ProjectCard;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    paper: {},
     wrapper: {
-      padding: theme.spacing(0.5, 1),
+      width: '100%',
+    },
+    card: {
       '& > *': {
-        margin: theme.spacing(0.8, 0),
+        margin: theme.spacing(1, 0),
       },
     },
     title: {},
