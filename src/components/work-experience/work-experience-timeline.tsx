@@ -102,8 +102,8 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                       <Image
                         src={getPublicID(company.logo.url)}
                         alt={company.name}
-                        width={36}
-                        height={36}
+                        width={40}
+                        height={40}
                         placeholder='blur'
                         blurDataURL={getBlurredImageURL(company.logo.url)}
                       />
@@ -155,11 +155,11 @@ const useStyles = makeStyles((theme) =>
       width: '100%',
     },
     content: {
-      marginTop: theme.spacing(-1),
+      marginTop: theme.spacing(-1.5),
       marginBottom: theme.spacing(3),
     },
     company: {
-      height: 36,
+      height: 40,
       marginBottom: theme.spacing(1),
     },
     name: {
