@@ -9,7 +9,6 @@ const nextConfig = {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
   images: {
-    // domains: ['res.cloudinary.com'],
     loader: 'cloudinary',
     path: 'https://res.cloudinary.com/rafiandria23/image/upload/',
   },

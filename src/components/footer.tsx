@@ -8,6 +8,7 @@ const Footer: FC = () => {
   return (
     <Grid
       className={classes.wrapper}
+      component='footer'
       container
       justifyContent='center'
       alignItems='center'
