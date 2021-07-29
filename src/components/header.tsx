@@ -7,7 +7,6 @@ import {
   ButtonGroup,
   Button,
   IconButton,
-  Container,
   Grid,
   Dialog,
   Slide,
@@ -42,8 +41,8 @@ const Header: FC = () => {
   };
 
   return (
-    <Container className={classes.header}>
-      <AppBar>
+    <>
+      <AppBar className={classes.header}>
         <Toolbar variant={`dense`}>
           <IconButton edge={`start`} onClick={handleOpen}>
             <MenuIcon className={classes.menuIcon} />
@@ -180,7 +179,7 @@ const Header: FC = () => {
           </Grid>
         </Grid>
       </Dialog>
-    </Container>
+    </>
   );
 };
 

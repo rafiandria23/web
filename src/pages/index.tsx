@@ -3,6 +3,7 @@ import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
+import clsx from 'clsx';
 
 // Types
 import { Company } from '@/types/company';
@@ -45,7 +46,7 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
           >
             <Grid item>
               <Typography
-                className={classes.title}
+                className={clsx(classes.title, classes.introductionTitle)}
                 variant={`h2`}
                 component={`h1`}
                 gutterBottom
@@ -55,7 +56,12 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
             </Grid>
 
             <Grid item>
-              <Typography className={classes.text} variant={`h6`} paragraph>
+              <Typography
+                className={classes.text}
+                variant={`h6`}
+                component='p'
+                paragraph
+              >
                 {`Software engineer from Bogor, Indonesia. I create web, mobile,
                 and desktop applications to help businesses grow online.`}
               </Typography>
@@ -71,6 +77,18 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
             justifyContent='center'
             alignItems='center'
           >
+            <Grid item>
+              <Typography
+                className={classes.title}
+                variant='h5'
+                component='h2'
+                align='left'
+                gutterBottom
+              >
+                Work Experiences
+              </Typography>
+            </Grid>
+
             <Grid item>
               <WorkExperienceTimeline companies={companies} />
             </Grid>
@@ -125,6 +143,9 @@ const useStyles = makeStyles((theme) =>
       backgroundColor: theme.palette.primary.light,
       padding: theme.spacing(2, 1),
     },
+    introductionTitle: {
+      color: theme.palette.primary.contrastText,
+    },
     workExperiences: {
       padding: theme.spacing(2, 1),
       '& > *': {
@@ -133,7 +154,6 @@ const useStyles = makeStyles((theme) =>
     },
     title: {
       fontWeight: theme.typography.fontWeightBold,
-      color: theme.palette.primary.contrastText,
     },
     text: {
       color: theme.palette.primary.contrastText,
