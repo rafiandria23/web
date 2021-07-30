@@ -1,4 +1,4 @@
-import { NextPage } from 'next';
+import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -99,7 +99,7 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
   );
 };
 
-HomePage.getInitialProps = async () => {
+export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const { data } = await client.query<{ companies: Company[] }>({
     query: gql`
       query {
@@ -131,7 +131,10 @@ HomePage.getInitialProps = async () => {
   });
 
   return {
-    companies: data.companies,
+    props: {
+      companies: data.companies,
+    },
+    revalidate: 10,
   };
 };
 

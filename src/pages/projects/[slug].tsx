@@ -1,4 +1,9 @@
-import { NextPage } from 'next';
+import {
+  NextPage,
+  GetStaticPaths,
+  GetStaticPathsResult,
+  GetStaticProps,
+} from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
@@ -127,8 +132,34 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
   );
 };
 
-ProjectPage.getInitialProps = async ({ query }) => {
-  const { slug } = query;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await client.query<{ projects: Project[] }>({
+    query: gql`
+      query {
+        projects {
+          slug
+        }
+      }
+    `,
+  });
+
+  const slugs: GetStaticPathsResult['paths'] = data.projects.map((project) => ({
+    params: {
+      slug: project.slug,
+    },
+  }));
+
+  return {
+    paths: slugs,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<
+  ProjectPageProps,
+  { slug: Project['slug'] }
+> = async ({ params }) => {
+  const slug = params?.slug;
   const { data } = await client.query<{ projects: Project[] }>({
     query: gql`
       query ($slug: String!) {
@@ -157,15 +188,11 @@ ProjectPage.getInitialProps = async ({ query }) => {
     },
   });
 
-  if (!data.projects.length) {
-    return {
-      errorStatus: 404,
-      project: null,
-    };
-  }
-
   return {
-    project: data.projects[0],
+    props: {
+      project: data.projects[0],
+    },
+    revalidate: 1,
   };
 };
 

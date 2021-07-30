@@ -81,8 +81,14 @@ const Header: FC = () => {
             variant={`outlined`}
             color={theme.palette.type === 'light' ? 'primary' : undefined}
             style={{
-              borderColor: theme.palette.primary.contrastText,
-              color: theme.palette.primary.contrastText,
+              borderColor:
+                theme.palette.type === 'light'
+                  ? theme.palette.primary.main
+                  : theme.palette.primary.contrastText,
+              color:
+                theme.palette.type === 'light'
+                  ? theme.palette.primary.main
+                  : theme.palette.primary.contrastText,
             }}
           >
             Hire Me
