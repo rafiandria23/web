@@ -1,6 +1,6 @@
 import { FC, CSSProperties } from 'react';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import {
   Timeline,
@@ -27,6 +27,7 @@ interface WorkExperienceTimelineProps {
 const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   companies,
 }) => {
+  const theme = useTheme();
   const classes = useStyles();
 
   const renderEmploymentType = (type: EmploymentTypes): string => {
@@ -78,7 +79,10 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
         return (
           <TimelineItem className={classes.item} key={company._id}>
             <TimelineSeparator>
-              <TimelineDot variant='outlined' color='primary' />
+              <TimelineDot
+                variant='outlined'
+                color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
+              />
               {idx !== companies.length - 1 ? <TimelineConnector /> : null}
             </TimelineSeparator>
             <TimelineContent>

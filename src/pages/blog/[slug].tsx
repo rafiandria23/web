@@ -1,9 +1,14 @@
-import { NextPage } from 'next';
+import {
+  NextPage,
+  GetStaticPaths,
+  GetStaticPathsResult,
+  GetStaticProps,
+} from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Chip, Divider } from '@material-ui/core';
+import { Grid, Typography, Chip } from '@material-ui/core';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
@@ -101,8 +106,34 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   );
 };
 
-ArticlePage.getInitialProps = async ({ query }) => {
-  const { slug } = query;
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await client.query<{ articles: Article[] }>({
+    query: gql`
+      query {
+        articles {
+          slug
+        }
+      }
+    `,
+  });
+
+  const slugs: GetStaticPathsResult['paths'] = data.articles.map((article) => ({
+    params: {
+      slug: article.slug,
+    },
+  }));
+
+  return {
+    paths: slugs,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<
+  ArticlePageProps,
+  { slug: Article['slug'] }
+> = async ({ params }) => {
+  const slug = params?.slug;
   const { data } = await client.query<{ articles: Article[] }>({
     query: gql`
       query ($slug: String!) {
@@ -131,15 +162,10 @@ ArticlePage.getInitialProps = async ({ query }) => {
     },
   });
 
-  if (!data.articles.length) {
-    return {
-      errorStatus: 404,
-      article: null,
-    };
-  }
-
   return {
-    article: data.articles[0],
+    props: {
+      article: data.articles[0],
+    },
   };
 };
 
