@@ -1,7 +1,7 @@
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -20,6 +20,7 @@ interface HomePageProps {
 }
 
 const HomePage: NextPage<HomePageProps> = ({ companies }) => {
+  const theme = useTheme();
   const classes = useStyles();
 
   return (
@@ -38,15 +39,17 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
         >
           {/* Introduction */}
           <Grid
+            className={clsx(classes.banner, classes.coloredBanner)}
+            item
             container
-            className={classes.introduction}
+            component='section'
             direction={`column`}
             justifyContent={`space-evenly`}
             alignItems={`center`}
           >
             <Grid item>
               <Typography
-                className={clsx(classes.title, classes.introductionTitle)}
+                className={clsx(classes.title, classes.text)}
                 variant={`h2`}
                 component={`h1`}
                 gutterBottom
@@ -70,9 +73,10 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
 
           {/* Work Experiences */}
           <Grid
-            className={classes.workExperiences}
+            className={clsx(classes.banner, classes.workExperienceBanner)}
             item
             container
+            component='section'
             direction='column'
             justifyContent='center'
             alignItems='center'
@@ -92,6 +96,35 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
             <Grid item>
               <WorkExperienceTimeline companies={companies} />
             </Grid>
+          </Grid>
+
+          {/* Skill Progress */}
+          <Grid
+            className={clsx(
+              classes.banner,
+              classes.coloredBanner,
+              classes.skillProgressBanner,
+            )}
+            item
+            container
+            component='section'
+            direction={`column`}
+            justifyContent={`space-evenly`}
+            alignItems={`flex-start`}
+          >
+            <Grid item>
+              <Typography
+                className={clsx(classes.title, classes.text)}
+                variant='h5'
+                component='h2'
+                align='left'
+                gutterBottom
+              >
+                Skills
+              </Typography>
+            </Grid>
+
+            <Grid item></Grid>
           </Grid>
         </Grid>
       </Layout>
@@ -142,24 +175,24 @@ export default HomePage;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    introduction: {
-      backgroundColor: theme.palette.primary.light,
-      padding: theme.spacing(2, 1),
-    },
-    introductionTitle: {
-      color: theme.palette.primary.contrastText,
-    },
-    workExperiences: {
-      padding: theme.spacing(2, 1),
-      '& > *': {
-        width: '100%',
-      },
-    },
     title: {
       fontWeight: theme.typography.fontWeightBold,
     },
     text: {
       color: theme.palette.primary.contrastText,
     },
+    banner: {
+      padding: theme.spacing(2, 1),
+    },
+    coloredBanner: {
+      backgroundColor: theme.palette.primary.light,
+    },
+    introductionBanner: {},
+    workExperienceBanner: {
+      '& > *': {
+        width: '100%',
+      },
+    },
+    skillProgressBanner: {},
   }),
 );
