@@ -41,6 +41,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
       <Layout>
         <Grid
           className={classes.wrapper}
+          component='article'
           container
           direction={`column`}
           justifyContent={`space-between`}
