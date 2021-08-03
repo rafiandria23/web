@@ -7,6 +7,7 @@ import clsx from 'clsx';
 
 // Types
 import { Company } from '@/types/company';
+import { SkillType } from '@/types/skill';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -14,12 +15,14 @@ import { client } from '@/graphql';
 // Components
 import { Layout } from '@/components';
 import { WorkExperienceTimeline } from '@/components/work-experience';
+import { SkillProgressList } from '@/components/skill';
 
 interface HomePageProps {
   companies: Company[];
+  skillTypes: SkillType[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({ companies }) => {
+const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
   const theme = useTheme();
   const classes = useStyles();
 
@@ -124,7 +127,9 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
               </Typography>
             </Grid>
 
-            <Grid item></Grid>
+            <Grid item>
+              <SkillProgressList skillTypes={skillTypes} />
+            </Grid>
           </Grid>
         </Grid>
       </Layout>
@@ -133,7 +138,10 @@ const HomePage: NextPage<HomePageProps> = ({ companies }) => {
 };
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const { data } = await client.query<{ companies: Company[] }>({
+  const { data } = await client.query<{
+    companies: Company[];
+    skillTypes: SkillType[];
+  }>({
     query: gql`
       query {
         companies {
@@ -159,6 +167,16 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
             description
           }
         }
+
+        skillTypes {
+          _id
+          name
+          skills {
+            _id
+            name
+            level
+          }
+        }
       }
     `,
   });
@@ -166,6 +184,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   return {
     props: {
       companies: data.companies,
+      skillTypes: data.skillTypes,
     },
     revalidate: 10,
   };
