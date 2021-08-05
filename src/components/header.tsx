@@ -4,6 +4,7 @@ import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
+  Typography,
   ButtonGroup,
   Button,
   IconButton,
@@ -48,15 +49,19 @@ const Header: FC = () => {
             <MenuIcon className={classes.menuIcon} />
           </IconButton>
 
+          <Typography className={classes.title} variant='h6'>
+            rafiandria23.me
+          </Typography>
+
           <div className={classes.grow} />
 
-          <Button
+          {/* <Button
             variant={`outlined`}
             style={{
               borderColor: theme.palette.primary.contrastText,
               color: theme.palette.primary.contrastText,
             }}
-          >{`Hire me`}</Button>
+          >{`Hire me`}</Button> */}
         </Toolbar>
       </AppBar>
 
@@ -77,7 +82,7 @@ const Header: FC = () => {
 
           <div className={classes.grow} />
 
-          <Button
+          {/* <Button
             variant={`outlined`}
             color={theme.palette.type === 'light' ? 'primary' : undefined}
             style={{
@@ -92,7 +97,7 @@ const Header: FC = () => {
             }}
           >
             Hire Me
-          </Button>
+          </Button> */}
         </Toolbar>
 
         <Grid
@@ -208,6 +213,9 @@ const useStyles = makeStyles((theme) =>
     },
     menuIcon: {
       color: theme.palette.primary.contrastText,
+    },
+    title: {
+      fontWeight: theme.typography.fontWeightBold,
     },
   }),
 );

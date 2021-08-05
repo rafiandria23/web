@@ -48,7 +48,7 @@ const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
             component='section'
             direction={`column`}
             justifyContent={`space-evenly`}
-            alignItems={`center`}
+            alignItems={`stretch`}
           >
             <Grid item>
               <Typography
@@ -68,7 +68,7 @@ const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
                 component='p'
                 paragraph
               >
-                {`Software engineer from Bogor, Indonesia. I create web, mobile,
+                {`Software engineer from Bogor, Indonesia. I develop web, mobile,
                 and desktop applications to help businesses grow online.`}
               </Typography>
             </Grid>
@@ -186,7 +186,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
       companies: data.companies,
       skillTypes: data.skillTypes,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
 
