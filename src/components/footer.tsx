@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
+import moment from 'moment';
 
 const Footer: FC = () => {
   const classes = useStyles();
@@ -16,10 +17,10 @@ const Footer: FC = () => {
       <Grid item>
         <Typography
           className={classes.copyright}
-          variant='subtitle2'
+          variant='subtitle1'
           component='p'
         >
-          Copyright &copy; 2020 Adam Rafiandri.
+          Copyright &copy; {moment().format('YYYY')} Adam Rafiandri.
         </Typography>
       </Grid>
     </Grid>

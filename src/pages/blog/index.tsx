@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
     props: {
       articles: data.articles,
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
 

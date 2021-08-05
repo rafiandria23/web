@@ -40,7 +40,6 @@ const SkillProgressList: FC<SkillProgressListProps> = ({ skillTypes }) => {
               variant='h6'
               component='h3'
               align='center'
-              gutterBottom
             >
               {skillType.name}
             </Typography>
@@ -90,12 +89,12 @@ export default SkillProgressList;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    wrapper: {},
-    skillTypeWrapper: {
+    wrapper: {
       '& > *': {
-        margin: theme.spacing(0.5, 0),
+        margin: theme.spacing(1, 0),
       } as CSSProperties,
     },
+    skillTypeWrapper: {},
     text: {
       color: theme.palette.primary.contrastText,
     },
