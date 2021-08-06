@@ -182,7 +182,7 @@ const useStyles = makeStyles((theme) =>
     },
     logo: {
       '&::after': {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(2),
         content: `""`,
       } as CSSProperties,
     },

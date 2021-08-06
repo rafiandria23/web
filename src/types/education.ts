@@ -6,7 +6,7 @@ import { School } from './school';
 export interface Education {
   _id: string;
   school: School;
-  degree: string;
+  degree: string | null;
   field: string;
   startDate: Moment | Date | string;
   endDate: Moment | Date | string;

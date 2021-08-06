@@ -17,6 +17,7 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { WorkExperienceTimeline } from '@/components/work-experience';
 import { SkillProgressList } from '@/components/skill';
+import { EducationTimeline } from '@/components/education';
 
 interface HomePageProps {
   companies: Company[];
@@ -24,8 +25,11 @@ interface HomePageProps {
   educations: Education[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
-  const theme = useTheme();
+const HomePage: NextPage<HomePageProps> = ({
+  companies,
+  skillTypes,
+  educations,
+}) => {
   const classes = useStyles();
 
   return (
@@ -157,7 +161,7 @@ const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
             </Grid>
 
             <Grid item>
-              <SkillProgressList skillTypes={skillTypes} />
+              <EducationTimeline educations={educations} />
             </Grid>
           </Grid>
         </Grid>
