@@ -33,7 +33,17 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
   return article !== null ? (
     <>
-      <NextSeo title={article.title} description={article.summary} />
+      <NextSeo
+        title={article.title}
+        description={article.summary}
+        openGraph={{
+          images: [
+            {
+              url: article.cover.url,
+            },
+          ],
+        }}
+      />
 
       <Layout>
         <Grid
