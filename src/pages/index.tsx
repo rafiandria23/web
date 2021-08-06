@@ -8,6 +8,7 @@ import clsx from 'clsx';
 // Types
 import { Company } from '@/types/company';
 import { SkillType } from '@/types/skill';
+import { Education } from '@/types/education';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -20,6 +21,7 @@ import { SkillProgressList } from '@/components/skill';
 interface HomePageProps {
   companies: Company[];
   skillTypes: SkillType[];
+  educations: Education[];
 }
 
 const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
@@ -131,6 +133,33 @@ const HomePage: NextPage<HomePageProps> = ({ companies, skillTypes }) => {
               <SkillProgressList skillTypes={skillTypes} />
             </Grid>
           </Grid>
+
+          {/* Educations */}
+          <Grid
+            className={clsx(classes.banner, classes.educationBanner)}
+            item
+            container
+            component='section'
+            direction={`column`}
+            justifyContent={`space-evenly`}
+            alignItems={`flex-start`}
+          >
+            <Grid item>
+              <Typography
+                className={clsx(classes.title)}
+                variant='h5'
+                component='h2'
+                align='left'
+                gutterBottom
+              >
+                Educations
+              </Typography>
+            </Grid>
+
+            <Grid item>
+              <SkillProgressList skillTypes={skillTypes} />
+            </Grid>
+          </Grid>
         </Grid>
       </Layout>
     </>
@@ -141,6 +170,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const { data } = await client.query<{
     companies: Company[];
     skillTypes: SkillType[];
+    educations: Education[];
   }>({
     query: gql`
       query {
@@ -177,6 +207,25 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
             level
           }
         }
+
+        educations {
+          _id
+          degree
+          field
+          startDate
+          endDate
+          grade
+          description
+          school {
+            _id
+            name
+            logo {
+              url
+              width
+              height
+            }
+          }
+        }
       }
     `,
   });
@@ -185,6 +234,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
     props: {
       companies: data.companies,
       skillTypes: data.skillTypes,
+      educations: data.educations,
     },
     revalidate: 1,
   };
@@ -213,5 +263,6 @@ const useStyles = makeStyles((theme) =>
       },
     },
     skillProgressBanner: {},
+    educationBanner: {},
   }),
 );
