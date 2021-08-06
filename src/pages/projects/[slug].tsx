@@ -36,7 +36,17 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
 
   return project !== null ? (
     <>
-      <NextSeo title={project.title} description={project.overview} />
+      <NextSeo
+        title={project.title}
+        description={project.overview}
+        openGraph={{
+          images: [
+            {
+              url: project.cover.url,
+            },
+          ],
+        }}
+      />
 
       <Layout>
         <Grid

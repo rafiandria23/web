@@ -94,17 +94,11 @@ export default function App({
           action={snackbarAction}
         >
           <DefaultSeo
-            titleTemplate='%s | Adam Rafiandri'
+            titleTemplate='%s | rafiandria23.me'
             openGraph={{
               type: 'website',
               locale: 'en_US',
               url: 'https://rafiandria23.me',
-              site_name: 'Adam Rafiandri',
-            }}
-            twitter={{
-              handle: '@handle',
-              site: '@site',
-              cardType: 'summary_large_image',
             }}
           />
           {handleRender()}

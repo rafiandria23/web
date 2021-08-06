@@ -35,7 +35,7 @@ const HomePage: NextPage<HomePageProps> = ({
   return (
     <>
       <NextSeo
-        title={`Home`}
+        title={`Adam Rafiandri's Personal Web`}
         description={`Adam Rafiandri is a Software Engineer who's passionate about Computer Science`}
       />
 
