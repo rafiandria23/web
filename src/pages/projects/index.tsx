@@ -112,9 +112,7 @@ export default ProjectsPage;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    wrapper: {
-      padding: theme.spacing(2),
-    },
+    wrapper: {},
     title: {
       fontWeight: theme.typography.fontWeightBold,
     },

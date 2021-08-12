@@ -1,7 +1,7 @@
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
@@ -39,130 +39,119 @@ const HomePage: NextPage<HomePageProps> = ({
         description={`Adam Rafiandri is a Software Engineer who's passionate about Computer Science`}
       />
 
-      <Layout>
+      <Layout elevate>
+        {/* Introduction */}
         <Grid
+          className={clsx(classes.banner, classes.coloredBanner)}
           container
+          component='section'
+          direction='column'
+          justifyContent='space-evenly'
+          alignItems='stretch'
+        >
+          <Grid item>
+            <Typography
+              className={clsx(classes.title, classes.text)}
+              variant={`h2`}
+              component={`h1`}
+              gutterBottom
+            >
+              {`Hey, I'm Adam.`}
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Typography
+              className={classes.text}
+              variant={`h6`}
+              component='p'
+              paragraph
+            >
+              {`Software engineer from Bogor, Indonesia. I develop web, mobile,
+                and desktop applications to help businesses grow online.`}
+            </Typography>
+          </Grid>
+        </Grid>
+
+        {/* Work Experiences */}
+        <Grid
+          className={clsx(classes.banner, classes.workExperienceBanner)}
+          container
+          component='section'
+          direction='column'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Grid item>
+            <Typography
+              className={classes.title}
+              variant='h5'
+              component='h2'
+              align='left'
+              gutterBottom
+            >
+              Work Experiences
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <WorkExperienceTimeline companies={companies} />
+          </Grid>
+        </Grid>
+
+        {/* Skill Progress */}
+        <Grid
+          className={clsx(
+            classes.banner,
+            classes.coloredBanner,
+            classes.skillProgressBanner,
+          )}
+          container
+          component='section'
           direction={`column`}
           justifyContent={`space-evenly`}
-          alignItems={`center`}
+          alignItems={`flex-start`}
         >
-          {/* Introduction */}
-          <Grid
-            className={clsx(classes.banner, classes.coloredBanner)}
-            item
-            container
-            component='section'
-            direction={`column`}
-            justifyContent={`space-evenly`}
-            alignItems={`stretch`}
-          >
-            <Grid item>
-              <Typography
-                className={clsx(classes.title, classes.text)}
-                variant={`h2`}
-                component={`h1`}
-                gutterBottom
-              >
-                {`Hey, I'm Adam.`}
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Typography
-                className={classes.text}
-                variant={`h6`}
-                component='p'
-                paragraph
-              >
-                {`Software engineer from Bogor, Indonesia. I develop web, mobile,
-                and desktop applications to help businesses grow online.`}
-              </Typography>
-            </Grid>
+          <Grid item>
+            <Typography
+              className={clsx(classes.title, classes.text)}
+              variant='h5'
+              component='h2'
+              align='left'
+              gutterBottom
+            >
+              Skills
+            </Typography>
           </Grid>
 
-          {/* Work Experiences */}
-          <Grid
-            className={clsx(classes.banner, classes.workExperienceBanner)}
-            item
-            container
-            component='section'
-            direction='column'
-            justifyContent='center'
-            alignItems='center'
-          >
-            <Grid item>
-              <Typography
-                className={classes.title}
-                variant='h5'
-                component='h2'
-                align='left'
-                gutterBottom
-              >
-                Work Experiences
-              </Typography>
-            </Grid>
+          <Grid item>
+            <SkillProgressList skillTypes={skillTypes} />
+          </Grid>
+        </Grid>
 
-            <Grid item>
-              <WorkExperienceTimeline companies={companies} />
-            </Grid>
+        {/* Educations */}
+        <Grid
+          className={clsx(classes.banner, classes.educationBanner)}
+          container
+          component='section'
+          direction={`column`}
+          justifyContent={`space-evenly`}
+          alignItems={`flex-start`}
+        >
+          <Grid item>
+            <Typography
+              className={clsx(classes.title)}
+              variant='h5'
+              component='h2'
+              align='left'
+              gutterBottom
+            >
+              Educations
+            </Typography>
           </Grid>
 
-          {/* Skill Progress */}
-          <Grid
-            className={clsx(
-              classes.banner,
-              classes.coloredBanner,
-              classes.skillProgressBanner,
-            )}
-            item
-            container
-            component='section'
-            direction={`column`}
-            justifyContent={`space-evenly`}
-            alignItems={`flex-start`}
-          >
-            <Grid item>
-              <Typography
-                className={clsx(classes.title, classes.text)}
-                variant='h5'
-                component='h2'
-                align='left'
-                gutterBottom
-              >
-                Skills
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <SkillProgressList skillTypes={skillTypes} />
-            </Grid>
-          </Grid>
-
-          {/* Educations */}
-          <Grid
-            className={clsx(classes.banner, classes.educationBanner)}
-            item
-            container
-            component='section'
-            direction={`column`}
-            justifyContent={`space-evenly`}
-            alignItems={`flex-start`}
-          >
-            <Grid item>
-              <Typography
-                className={clsx(classes.title)}
-                variant='h5'
-                component='h2'
-                align='left'
-                gutterBottom
-              >
-                Educations
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <EducationTimeline educations={educations} />
-            </Grid>
+          <Grid item>
+            <EducationTimeline educations={educations} />
           </Grid>
         </Grid>
       </Layout>
