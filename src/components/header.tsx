@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
   const classes = useStyles();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 0,
+    threshold: 100,
   });
   const [open, setOpen] = useState<boolean>(false);
 
