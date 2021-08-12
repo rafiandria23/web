@@ -27,14 +27,14 @@ import markdownComponents from '@/components/markdown';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
 interface ProjectPageProps {
-  project: Project | null;
+  project: Project;
 }
 
 const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
   const router = useRouter();
   const classes = useStyles();
 
-  return project !== null ? (
+  return (
     <>
       <NextSeo
         title={project.title}
@@ -48,98 +48,87 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
         }}
       />
 
-      <Layout>
+      <Layout elevate>
         <Grid
-          className={classes.wrapper}
-          component='article'
+          className={classes.header}
           container
           direction={`column`}
-          justifyContent={`space-between`}
+          justifyContent={`center`}
           alignItems={`stretch`}
         >
-          <Grid
-            className={classes.header}
-            item
-            container
-            direction={`column`}
-            justifyContent={`center`}
-            alignItems={`stretch`}
-          >
-            <Grid item container justifyContent={`center`}>
-              <Grid item>
-                <Image
-                  src={getPublicID(project.cover.url)}
-                  alt={project.title}
-                  width={project.cover.width}
-                  height={project.cover.height}
-                  placeholder='blur'
-                  blurDataURL={getBlurredImageURL(project.cover.url)}
+          <Grid item container justifyContent={`center`}>
+            <Grid item>
+              <Image
+                src={getPublicID(project.cover.url)}
+                alt={project.title}
+                width={project.cover.width}
+                height={project.cover.height}
+                placeholder='blur'
+                blurDataURL={getBlurredImageURL(project.cover.url)}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid item>
+            <Typography
+              className={classes.title}
+              variant={`h4`}
+              component={`h1`}
+              align={`center`}
+              gutterBottom
+            >
+              {project.title}
+            </Typography>
+
+            <Typography
+              className={classes.overview}
+              variant={`subtitle1`}
+              component={`h2`}
+              align={`center`}
+              paragraph
+            >
+              {project.overview}
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <Button
+              className={classes.button}
+              fullWidth
+              variant={`outlined`}
+              endIcon={<OpenInNewIcon />}
+              href={project.link}
+              target={`_blank`}
+            >{`Visit Project`}</Button>
+          </Grid>
+        </Grid>
+
+        <ReactMarkdown
+          className={classes.description}
+          components={markdownComponents}
+        >
+          {project.description}
+        </ReactMarkdown>
+
+        <Grid className={classes.tags} container>
+          {project.tags.length > 0 &&
+            project.tags.map((tag) => (
+              <Grid item key={tag._id}>
+                <Chip
+                  className={classes.tag}
+                  label={tag.name}
+                  clickable
+                  onClick={() =>
+                    router.push({
+                      pathname: `/projects/tags/${tag.slug}`,
+                    })
+                  }
                 />
               </Grid>
-            </Grid>
-
-            <Grid item>
-              <Typography
-                className={classes.title}
-                variant={`h4`}
-                component={`h1`}
-                align={`center`}
-                gutterBottom
-              >
-                {project.title}
-              </Typography>
-
-              <Typography
-                className={classes.overview}
-                variant={`subtitle1`}
-                component={`h2`}
-                align={`center`}
-                paragraph
-              >
-                {project.overview}
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Button
-                className={classes.button}
-                fullWidth
-                variant={`outlined`}
-                endIcon={<OpenInNewIcon />}
-                href={project.link}
-                target={`_blank`}
-              >{`Visit Project`}</Button>
-            </Grid>
-          </Grid>
-
-          <Grid className={classes.description} item>
-            <ReactMarkdown components={markdownComponents}>
-              {project.description}
-            </ReactMarkdown>
-          </Grid>
-
-          <Grid className={classes.tags} item container>
-            {project.tags.length > 0 &&
-              project.tags.map((tag) => (
-                <Grid item key={tag._id}>
-                  <Chip
-                    className={classes.tag}
-                    label={tag.name}
-                    clickable
-                    onClick={() =>
-                      router.push({
-                        pathname: `/projects/tags/${tag.slug}`,
-                      })
-                    }
-                  />
-                </Grid>
-              ))}
-          </Grid>
+            ))}
         </Grid>
       </Layout>
     </>
-  ) : (
-    <></>
   );
 };
 
@@ -214,7 +203,6 @@ const useStyles = makeStyles((theme) =>
     wrapper: {},
     header: {
       backgroundColor: theme.palette.primary.light,
-      padding: theme.spacing(2, 1),
       '& > *': {
         margin: theme.spacing(0.8, 0),
       },
@@ -226,12 +214,11 @@ const useStyles = makeStyles((theme) =>
     overview: {
       color: theme.palette.primary.contrastText,
     },
-    description: {
-      padding: theme.spacing(2, 1),
-    },
+    description: {},
     tags: {
       '& > *': {
-        margin: theme.spacing(0.5),
+        marginBottom: theme.spacing(1),
+        marginRight: theme.spacing(1),
       },
     },
     tag: {

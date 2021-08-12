@@ -11,6 +11,7 @@ import {
   Grid,
   Dialog,
   Slide,
+  useScrollTrigger,
 } from '@material-ui/core';
 import { TransitionProps } from '@material-ui/core/transitions';
 import {
@@ -19,6 +20,7 @@ import {
   LinkedIn as LinkedInLogo,
   GitHub as GitHubLogo,
 } from '@material-ui/icons';
+import clsx from 'clsx';
 
 const Transition = forwardRef(
   (props: TransitionProps & { children?: ReactElement }, ref: Ref<unknown>) => {
@@ -27,10 +29,18 @@ const Transition = forwardRef(
 );
 Transition.displayName = 'Transition';
 
-const Header: FC = () => {
+export interface HeaderProps {
+  elevate?: boolean;
+}
+
+const Header: FC<HeaderProps> = ({ elevate = false }) => {
   const router = useRouter();
   const theme = useTheme();
   const classes = useStyles();
+  const scrollTriggered = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+  });
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = (): void => {
@@ -43,7 +53,13 @@ const Header: FC = () => {
 
   return (
     <>
-      <AppBar className={classes.header}>
+      <AppBar
+        className={clsx({
+          [classes.transparentHeader]: elevate && !scrollTriggered,
+        })}
+        position='fixed'
+        elevation={elevate ? (scrollTriggered ? 8 : 0) : undefined}
+      >
         <Toolbar variant={`dense`}>
           <IconButton edge={`start`} onClick={handleOpen}>
             <MenuIcon className={classes.menuIcon} />
@@ -204,9 +220,8 @@ const useStyles = makeStyles((theme) =>
         margin: theme.spacing(1, 0),
       },
     },
-    header: {
-      position: 'fixed',
-      zIndex: theme.zIndex.appBar,
+    transparentHeader: {
+      backgroundColor: 'transparent',
     },
     grow: {
       flexGrow: 1,

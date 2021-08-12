@@ -201,7 +201,8 @@ const useStyles = makeStyles((theme) =>
     content: {},
     tags: {
       '& > *': {
-        margin: theme.spacing(0.5),
+        marginBottom: theme.spacing(1),
+        marginRight: theme.spacing(1),
       },
     },
     tag: {
