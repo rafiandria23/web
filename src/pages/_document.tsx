@@ -40,7 +40,7 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html lang='en'>
+      <Html lang='en-US'>
         <Head>
           {/* Favicon */}
           <link
@@ -113,9 +113,9 @@ export default class Document extends NextDocument {
             href='/favicon-16x16.png'
           />
           <link rel='manifest' href='/manifest.json' />
-          <meta name='msapplication-TileColor' content='#ffffff' />
+          <meta name='msapplication-TileColor' content='#ffffff00' />
           <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
-          <meta name='theme-color' content='#ffffff' />
+          <meta name='theme-color' content='#2196f3' />
 
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script

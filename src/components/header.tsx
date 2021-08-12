@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
   const classes = useStyles();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 100,
+    threshold: 0,
   });
   const [open, setOpen] = useState<boolean>(false);
 
@@ -58,7 +58,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
           [classes.transparentHeader]: elevate && !scrollTriggered,
         })}
         position='fixed'
-        elevation={elevate ? (scrollTriggered ? 8 : 0) : undefined}
+        elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
       >
         <Toolbar variant={`dense`}>
           <IconButton edge={`start`} onClick={handleOpen}>
