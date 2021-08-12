@@ -30,7 +30,7 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
     <>
       <NextSeo
         title={tag.name}
-        description={`Project that are made with ${tag.name}`}
+        description={`Projects that are made with ${tag.name}`}
       />
 
       <Layout>
