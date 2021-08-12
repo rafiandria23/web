@@ -102,7 +102,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                     clickable
                     onClick={() =>
                       router.push({
-                        pathname: `/tags/${tag.slug}`,
+                        pathname: `/blog/tags/${tag.slug}`,
                       })
                     }
                   />

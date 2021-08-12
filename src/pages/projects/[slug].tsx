@@ -128,7 +128,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
                     clickable
                     onClick={() =>
                       router.push({
-                        pathname: `/tags/${tag.slug}`,
+                        pathname: `/projects/tags/${tag.slug}`,
                       })
                     }
                   />
