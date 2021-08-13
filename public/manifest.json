@@ -3,6 +3,7 @@
   "short_name": "rafiandria23.me",
   "description": "Adam Rafiandri's Personal Web",
   "lang": "en-US",
+  "scope": "/",
   "start_url": "/",
   "display": "minimal-ui",
   "orientation": "any",
