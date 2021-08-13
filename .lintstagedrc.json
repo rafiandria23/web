@@ -1,0 +1,4 @@
+{
+  "src/**/*.{ts,tsx}": ["next lint", "prettier --write"],
+  "*.json": ["prettier --write"]
+}
