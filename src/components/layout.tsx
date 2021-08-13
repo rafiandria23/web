@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) =>
     main: {
       minHeight: '100vh',
       '& > :first-child': {
-        paddingTop: Number(theme.mixins.toolbar.minHeight) + theme.spacing(1),
+        paddingTop: Number(theme.mixins.toolbar.minHeight) + theme.spacing(2),
       } as CSSProperties,
       '& > *': {
         padding: theme.spacing(2, 1),

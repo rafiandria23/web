@@ -1,32 +1,22 @@
-import {
-  Reducer,
-  CombinedState,
-  combineReducers,
-  compose,
-  createStore,
-} from 'redux';
+import { Store, AnyAction, compose, createStore } from 'redux';
+import { MakeStore, createWrapper } from 'next-redux-wrapper';
 
 // Types
-import { RootState, Action } from '@/types/redux';
+import { RootState } from '@/types/redux';
 
 // Reducers
-import { themeReducer } from './reducers';
-
-const reducers: Reducer<CombinedState<RootState>, Action> = combineReducers<
-  RootState,
-  Action
->({
-  theme: themeReducer,
-});
+import reducers from './reducers';
 
 const composeEnhancers = getComposeEnhancers();
 
 const store = createStore(
   reducers,
-  process.env.NODE_ENV !== 'production' && typeof window !== 'undefined'
-    ? composeEnhancers()
-    : undefined,
+  process.env.NODE_ENV !== 'production' ? composeEnhancers() : undefined,
 );
+
+const makeStore: MakeStore<Store<RootState, AnyAction>> = () => store;
+
+export const wrapper = createWrapper(makeStore);
 
 export default store;
 

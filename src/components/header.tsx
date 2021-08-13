@@ -22,6 +22,9 @@ import {
 } from '@material-ui/icons';
 import clsx from 'clsx';
 
+// Components
+import { ThemeSwitcher } from '@/components';
+
 const Transition = forwardRef(
   (props: TransitionProps & { children?: ReactElement }, ref: Ref<unknown>) => {
     return <Slide direction={`right`} ref={ref} {...props} />;
@@ -39,7 +42,6 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
   const classes = useStyles();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
-    threshold: 0,
   });
   const [open, setOpen] = useState<boolean>(false);
 
@@ -60,8 +62,12 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
         position='fixed'
         elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
       >
-        <Toolbar variant={`dense`}>
-          <IconButton edge={`start`} onClick={handleOpen}>
+        <Toolbar>
+          <IconButton
+            className={classes.menuButton}
+            edge={`start`}
+            onClick={handleOpen}
+          >
             <MenuIcon className={classes.menuIcon} />
           </IconButton>
 
@@ -78,6 +84,8 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
               color: theme.palette.primary.contrastText,
             }}
           >{`Hire me`}</Button> */}
+
+          <ThemeSwitcher />
         </Toolbar>
       </AppBar>
 
@@ -225,6 +233,9 @@ const useStyles = makeStyles((theme) =>
     },
     grow: {
       flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
     },
     menuIcon: {
       color: theme.palette.primary.contrastText,
