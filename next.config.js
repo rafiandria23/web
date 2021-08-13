@@ -2,7 +2,7 @@ const path = require('path');
 const withPlugins = require('next-compose-plugins');
 
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   target: 'serverless',
   distDir: '.next',
   sassOptions: {
