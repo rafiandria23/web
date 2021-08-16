@@ -1,4 +1,4 @@
-import { FC, useState, useRef } from 'react';
+import { FC, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import {
@@ -23,16 +23,17 @@ import {
 // Redux Actions
 import { setThemeType } from '@/redux/actions/theme';
 
-// Custom Hooks
-import { useThemeReducer } from '@/hooks';
-
 const ThemeSwitcher: FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const theme = useThemeReducer();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [init, setInit] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setInit(true);
+  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -109,7 +110,7 @@ const ThemeSwitcher: FC = () => {
     return false;
   };
 
-  return typeof window !== 'undefined' ? (
+  return init ? (
     <>
       <Tooltip title='Switch theme'>
         <IconButton
