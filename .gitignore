@@ -36,5 +36,3 @@ yarn-error.log*
 # public
 /public/robots.txt
 /public/sitemap.xml
-/public/*.js
-/public/*.js.map
