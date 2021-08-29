@@ -64,7 +64,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
         elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
       >
         <Toolbar>
-          <Hidden mdUp>
+          <Hidden smUp>
             <IconButton
               className={classes.menuButton}
               edge={`start`}
@@ -72,19 +72,14 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             >
               <MenuIcon className={classes.menuIcon} />
             </IconButton>
-          </Hidden>
 
-          <Typography className={classes.title} variant='h6'>
-            rafiandria23.me
-          </Typography>
+            <Typography className={classes.title} variant='h6'>
+              rafiandria23.me
+            </Typography>
 
-          <Hidden mdDown>
-            <ThemeSwitcher />
-          </Hidden>
+            <div className={classes.grow} />
 
-          <div className={classes.grow} />
-
-          {/* <Button
+            {/* <Button
             variant={`outlined`}
             style={{
               borderColor: theme.palette.primary.contrastText,
@@ -92,13 +87,75 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             }}
           >{`Hire me`}</Button> */}
 
-          <Hidden mdUp>
             <ThemeSwitcher />
+          </Hidden>
+
+          <Hidden xsDown>
+            <Typography className={classes.title} variant='h6'>
+              rafiandria23.me
+            </Typography>
+
+            <ThemeSwitcher />
+
+            <div className={classes.grow} />
+
+            <Button
+              variant='text'
+              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              onClick={() =>
+                router.push({
+                  pathname: '/',
+                })
+              }
+            >
+              Home
+            </Button>
+
+            <Button
+              variant='text'
+              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              onClick={() =>
+                router.push({
+                  pathname: '/projects',
+                })
+              }
+            >
+              Projects
+            </Button>
+
+            <Button
+              variant='text'
+              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              onClick={() =>
+                router.push({
+                  pathname: '/blog',
+                })
+              }
+            >
+              Blog
+            </Button>
+
+            <IconButton
+              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              href={`https://linkedin.com/in/rafiandria23`}
+              target={`_blank`}
+            >
+              <LinkedInLogo />
+            </IconButton>
+
+            <IconButton
+              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              href={`https://github.com/rafiandria23`}
+              target={`_blank`}
+            >
+              <GitHubLogo />
+            </IconButton>
           </Hidden>
         </Toolbar>
       </AppBar>
 
       <Dialog
+        className={classes.menu}
         fullScreen
         open={open}
         onClose={handleClose}
@@ -249,6 +306,7 @@ const useStyles = makeStyles((theme) =>
     menuIcon: {
       color: theme.palette.primary.contrastText,
     },
+    menu: {},
     title: {
       fontWeight: theme.typography.fontWeightBold,
     },

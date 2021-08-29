@@ -1,8 +1,8 @@
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
 // Types
@@ -16,7 +16,7 @@ import { client } from '@/graphql';
 // Components
 import { Layout } from '@/components';
 import { WorkExperienceTimeline } from '@/components/work-experience';
-import { SkillProgressList } from '@/components/skill';
+import { SkillProgressList, SkillTabs } from '@/components/skill';
 import { EducationTimeline } from '@/components/education';
 
 interface HomePageProps {
@@ -30,6 +30,8 @@ const HomePage: NextPage<HomePageProps> = ({
   skillTypes,
   educations,
 }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -87,7 +89,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={classes.title}
               variant='h5'
               component='h2'
-              align='left'
+              align={matches ? 'center' : 'left'}
               gutterBottom
             >
               Work Experiences
@@ -99,12 +101,12 @@ const HomePage: NextPage<HomePageProps> = ({
           </Grid>
         </Grid>
 
-        {/* Skill Progress */}
+        {/* Skills */}
         <Grid
           className={clsx(
             classes.banner,
             classes.coloredBanner,
-            classes.skillProgressBanner,
+            classes.skillsBanner,
           )}
           container
           component='section'
@@ -117,7 +119,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={clsx(classes.title, classes.text)}
               variant='h5'
               component='h2'
-              align='left'
+              align={matches ? 'center' : 'left'}
               gutterBottom
             >
               Skills
@@ -125,7 +127,11 @@ const HomePage: NextPage<HomePageProps> = ({
           </Grid>
 
           <Grid item>
-            <SkillProgressList skillTypes={skillTypes} />
+            {matches ? (
+              <SkillTabs skillTypes={skillTypes} />
+            ) : (
+              <SkillProgressList skillTypes={skillTypes} />
+            )}
           </Grid>
         </Grid>
 
@@ -143,7 +149,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={clsx(classes.title)}
               variant='h5'
               component='h2'
-              align='left'
+              align={matches ? 'center' : 'left'}
               gutterBottom
             >
               Educations
@@ -245,17 +251,16 @@ const useStyles = makeStyles((theme) =>
     },
     banner: {
       padding: theme.spacing(2, 1),
+      '& > *': {
+        width: '100%',
+      },
     },
     coloredBanner: {
       backgroundColor: theme.palette.primary.light,
     },
     introductionBanner: {},
-    workExperienceBanner: {
-      '& > *': {
-        width: '100%',
-      },
-    },
-    skillProgressBanner: {},
+    workExperienceBanner: {},
+    skillsBanner: {},
     educationBanner: {},
   }),
 );
