@@ -1,8 +1,8 @@
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Divider } from '@material-ui/core';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, Typography, Divider } from '@material-ui/core';
 
 // Types
 import { Project } from '@/types/project';
@@ -19,12 +19,14 @@ interface ProjectsPageProps {
 }
 
 const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
     <>
       <NextSeo
-        title={`My Projects`}
+        title='My Projects'
         description={`All the projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack`}
       />
 
@@ -43,7 +45,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
               variant={`h5`}
               gutterBottom
             >
-              {`My Projects`}
+              My Projects
             </Typography>
           </Grid>
 
@@ -57,8 +59,9 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             container
             direction={`row`}
             wrap={`wrap`}
-            justifyContent={`space-evenly`}
-            alignItems={`stretch`}
+            justifyContent={matches ? 'flex-start' : 'space-evenly'}
+            alignItems={matches ? 'center' : 'stretch'}
+            spacing={2}
           >
             {projects !== undefined && projects.length > 0
               ? projects.map((project) => {
@@ -118,10 +121,6 @@ const useStyles = makeStyles((theme) =>
     },
     list: {
       marginTop: theme.spacing(2),
-      '& > *': {
-        width: '100%',
-        margin: theme.spacing(1.5, 0),
-      },
     },
   }),
 );
