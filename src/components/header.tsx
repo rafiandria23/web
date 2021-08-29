@@ -2,6 +2,7 @@ import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import {
+  Hidden,
   AppBar,
   Toolbar,
   Typography,
@@ -63,17 +64,23 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
         elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
       >
         <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            edge={`start`}
-            onClick={handleOpen}
-          >
-            <MenuIcon className={classes.menuIcon} />
-          </IconButton>
+          <Hidden mdUp>
+            <IconButton
+              className={classes.menuButton}
+              edge={`start`}
+              onClick={handleOpen}
+            >
+              <MenuIcon className={classes.menuIcon} />
+            </IconButton>
+          </Hidden>
 
           <Typography className={classes.title} variant='h6'>
             rafiandria23.me
           </Typography>
+
+          <Hidden mdDown>
+            <ThemeSwitcher />
+          </Hidden>
 
           <div className={classes.grow} />
 
@@ -85,7 +92,9 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             }}
           >{`Hire me`}</Button> */}
 
-          <ThemeSwitcher />
+          <Hidden mdUp>
+            <ThemeSwitcher />
+          </Hidden>
         </Toolbar>
       </AppBar>
 
