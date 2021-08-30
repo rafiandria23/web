@@ -101,7 +101,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
             <Button
               variant='text'
-              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              color={theme.palette.type === 'light' ? 'inherit' : undefined}
               onClick={() =>
                 router.push({
                   pathname: '/',
@@ -113,7 +113,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
             <Button
               variant='text'
-              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              color={theme.palette.type === 'light' ? 'inherit' : undefined}
               onClick={() =>
                 router.push({
                   pathname: '/projects',
@@ -125,7 +125,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
             <Button
               variant='text'
-              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              color={theme.palette.type === 'light' ? 'inherit' : undefined}
               onClick={() =>
                 router.push({
                   pathname: '/blog',
@@ -136,7 +136,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             </Button>
 
             <IconButton
-              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              color={theme.palette.type === 'light' ? 'inherit' : undefined}
               href={`https://linkedin.com/in/rafiandria23`}
               target={`_blank`}
             >
@@ -144,7 +144,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             </IconButton>
 
             <IconButton
-              color={theme.palette.type === 'light' ? 'primary' : undefined}
+              color={theme.palette.type === 'light' ? 'inherit' : undefined}
               href={`https://github.com/rafiandria23`}
               target={`_blank`}
             >

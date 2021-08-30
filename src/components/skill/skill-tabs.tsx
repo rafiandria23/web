@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, ChangeEvent } from 'react';
+import { FC, useState, useEffect, CSSProperties, ChangeEvent } from 'react';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { Grid, Tabs, Tab, Typography, LinearProgress } from '@material-ui/core';
 import clsx from 'clsx';
@@ -41,12 +41,16 @@ const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
         className={classes.tabs}
         variant='scrollable'
         orientation='vertical'
+        textColor='secondary'
         value={tabValue}
         onChange={handleChangeTab}
       >
         {sortedSkills.map((skillType) => (
           <Tab
             key={skillType._id}
+            classes={{
+              root: classes.tab,
+            }}
             value={skillType.name}
             label={skillType.name}
           />
@@ -111,6 +115,9 @@ const useStyles = makeStyles((theme) =>
     },
     tabs: {
       borderRight: `1px solid ${theme.palette.divider}`,
+    },
+    tab: {
+      color: theme.palette.primary.contrastText,
     },
     tabPanel: {
       width: '100%',
