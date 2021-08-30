@@ -55,6 +55,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
             direction={`column`}
             justifyContent={`space-evenly`}
             alignItems={`stretch`}
+            spacing={4}
           >
             {articles !== undefined && articles.length > 0
               ? articles.map((article) => {
