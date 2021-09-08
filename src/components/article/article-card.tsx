@@ -1,8 +1,14 @@
 import { FC } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { ButtonBase, Grid, Typography } from '@material-ui/core';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import {
+  useMediaQuery,
+  ButtonBase,
+  Grid,
+  Hidden,
+  Typography,
+} from '@material-ui/core';
 import moment from 'moment';
 
 // Types
@@ -17,6 +23,8 @@ interface ArticleCardProps {
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
   const router = useRouter();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -41,14 +49,16 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
               {article.title}
             </Typography>
 
-            {/* <Typography
-              className={classes.summary}
-              variant='caption'
-              align='left'
-              paragraph
-            >
-              {article.summary}
-            </Typography> */}
+            <Hidden xsDown>
+              <Typography
+                className={classes.summary}
+                variant='caption'
+                align='left'
+                paragraph
+              >
+                {article.summary}
+              </Typography>
+            </Hidden>
           </Grid>
 
           <Grid item>

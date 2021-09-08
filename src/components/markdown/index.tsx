@@ -1,11 +1,8 @@
-import { FC, HTMLProps, DetailedHTMLProps, AnchorHTMLAttributes } from 'react';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import { Link, Typography } from '@material-ui/core';
 import { Components } from 'react-markdown/lib/ast-to-react';
 
-const Anchor: FC<
-  DetailedHTMLProps<AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>
-> = ({ href, children }) => {
+const Anchor: Components['a'] = ({ href, children }) => {
   const theme = useTheme();
 
   return (
@@ -15,7 +12,7 @@ const Anchor: FC<
   );
 };
 
-const Heading1: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading1: Components['h1'] = (props) => {
   return (
     <Typography
       variant='h1'
@@ -29,7 +26,7 @@ const Heading1: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Heading2: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading2: Components['h2'] = (props) => {
   return (
     <Typography
       variant='h2'
@@ -43,7 +40,7 @@ const Heading2: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Heading3: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading3: Components['h3'] = (props) => {
   return (
     <Typography
       variant='h3'
@@ -57,7 +54,7 @@ const Heading3: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Heading4: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading4: Components['h4'] = (props) => {
   return (
     <Typography
       variant='h4'
@@ -71,7 +68,7 @@ const Heading4: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Heading5: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading5: Components['h5'] = (props) => {
   return (
     <Typography
       variant='h5'
@@ -85,7 +82,7 @@ const Heading5: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Heading6: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
+const Heading6: Components['h6'] = (props) => {
   return (
     <Typography
       // classes={{ root: classes.markdownParagraph }}
@@ -101,7 +98,7 @@ const Heading6: FC<HTMLProps<HTMLHeadingElement>> = (props) => {
   );
 };
 
-const Paragraph: FC<HTMLProps<HTMLParagraphElement>> = (props) => {
+const Paragraph: Components['p'] = (props) => {
   const classes = useStyles();
 
   return (

@@ -11,7 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.7",
+    "@apollo/client": "^3.4.10",
     "@fontsource/roboto": "^4.5.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -19,32 +19,32 @@
     "@types/react-lazy-load-image-component": "^1.5.2",
     "cloudinary-build-url": "^0.2.1",
     "clsx": "^1.1.1",
-    "graphql": "^15.5.1",
+    "graphql": "^15.5.3",
     "immutability-helper": "^3.1.1",
     "moment": "^2.29.1",
-    "next": "11.1.0",
+    "next": "11.1.2",
     "next-pwa": "^5.3.1",
-    "next-redux-wrapper": "^7.0.2",
+    "next-redux-wrapper": "^7.0.4",
     "next-seo": "^4.26.0",
     "notistack": "^1.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-lazy-load-image-component": "^1.5.1",
-    "react-markdown": "^7.0.0",
-    "react-redux": "^7.2.4",
+    "react-markdown": "^7.0.1",
+    "react-redux": "^7.2.5",
     "redux": "^4.1.1",
-    "sass": "^1.37.5"
+    "sass": "^1.39.0"
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.7",
-    "@types/node": "^16.6.1",
-    "@types/react": "^17.0.18",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
     "eslint": "^7.32.0",
-    "eslint-config-next": "11.1.0",
-    "husky": "^7.0.0",
+    "eslint-config-next": "11.1.2",
+    "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
-    "next-sitemap": "^1.6.157",
+    "next-sitemap": "^1.6.168",
     "prettier": "^2.3.2",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.2"
   }
 }

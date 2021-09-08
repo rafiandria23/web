@@ -1,7 +1,7 @@
 import { FC, CSSProperties } from 'react';
 import Image from 'next/image';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { useMediaQuery, Grid, Typography } from '@material-ui/core';
 import {
   Timeline,
   TimelineItem,
@@ -16,6 +16,7 @@ import moment from 'moment';
 import { Education } from '@/types/education';
 
 // Utils
+import { isOdd } from '@/utils';
 import { sortEducations } from '@/utils/education';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
@@ -25,6 +26,7 @@ interface EducationTimelineProps {
 
 const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   const renderEducationPeriod = (education: Education): string => {
@@ -35,7 +37,10 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   };
 
   return (
-    <Timeline className={classes.wrapper} align='left'>
+    <Timeline
+      className={classes.wrapper}
+      align={matches ? 'alternate' : 'left'}
+    >
       {sortEducations(educations).map((education, idx) => {
         return (
           <TimelineItem className={classes.item} key={education._id}>
@@ -58,12 +63,28 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
                   className={classes.education}
                   item
                   container
+                  direction={
+                    matches
+                      ? isOdd(idx + 1)
+                        ? 'row'
+                        : 'row-reverse'
+                      : undefined
+                  }
                   wrap='nowrap'
                   justifyContent='flex-start'
                   alignItems='center'
                 >
                   {education.school.logo !== null && (
-                    <Grid item className={classes.logo}>
+                    <Grid
+                      item
+                      className={
+                        matches
+                          ? isOdd(idx + 1)
+                            ? classes.logoOdd
+                            : classes.logoEven
+                          : classes.logo
+                      }
+                    >
                       <Image
                         src={getPublicID(education.school.logo.url)}
                         alt={education.school.name}
@@ -115,7 +136,7 @@ export default EducationTimeline;
 const useStyles = makeStyles((theme) =>
   createStyles({
     wrapper: {
-      width: '100%',
+      // width: '100%',
     },
     content: {
       marginTop: theme.spacing(-1.5),
@@ -129,9 +150,11 @@ const useStyles = makeStyles((theme) =>
       fontWeight: theme.typography.fontWeightBold,
     },
     item: {
-      '&::before': {
-        content: 'none',
-      } as CSSProperties,
+      [theme.breakpoints.down('xs')]: {
+        '&::before': {
+          content: 'none',
+        } as CSSProperties,
+      },
     },
     degree: {
       fontWeight: theme.typography.fontWeightBold,
@@ -139,6 +162,18 @@ const useStyles = makeStyles((theme) =>
     logo: {
       '&::after': {
         marginLeft: theme.spacing(2),
+        content: `""`,
+      } as CSSProperties,
+    },
+    logoOdd: {
+      '&::after': {
+        marginLeft: theme.spacing(2),
+        content: `""`,
+      } as CSSProperties,
+    },
+    logoEven: {
+      '&::before': {
+        marginRight: theme.spacing(2),
         content: `""`,
       } as CSSProperties,
     },

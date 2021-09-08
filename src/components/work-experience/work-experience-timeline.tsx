@@ -1,7 +1,7 @@
 import { FC, CSSProperties } from 'react';
 import Image from 'next/image';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { useMediaQuery, Grid, Typography } from '@material-ui/core';
 import {
   Timeline,
   TimelineItem,
@@ -17,6 +17,7 @@ import { Company } from '@/types/company';
 import { WorkExperience, EmploymentTypes } from '@/types/work-experience';
 
 // Utils
+import { isOdd } from '@/utils';
 import { sortWorkExperiences } from '@/utils/work-experience';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
@@ -28,6 +29,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   companies,
 }) => {
   const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   const renderEmploymentType = (type: EmploymentTypes): string => {
@@ -74,7 +76,10 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   };
 
   return (
-    <Timeline className={classes.wrapper} align='left'>
+    <Timeline
+      className={classes.wrapper}
+      align={matches ? 'alternate' : 'left'}
+    >
       {sortWorkExperiences(companies).map((company, idx) => {
         return (
           <TimelineItem className={classes.item} key={company._id}>
@@ -97,12 +102,28 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                   className={classes.company}
                   item
                   container
+                  direction={
+                    matches
+                      ? isOdd(idx + 1)
+                        ? 'row'
+                        : 'row-reverse'
+                      : undefined
+                  }
                   wrap='nowrap'
                   justifyContent='flex-start'
                   alignItems='center'
                 >
                   {company.logo && (
-                    <Grid item className={classes.logo}>
+                    <Grid
+                      item
+                      className={
+                        matches
+                          ? isOdd(idx + 1)
+                            ? classes.logoOdd
+                            : classes.logoEven
+                          : classes.logo
+                      }
+                    >
                       <Image
                         src={getPublicID(company.logo.url)}
                         alt={company.name}
@@ -156,7 +177,7 @@ export default WorkExperienceTimeline;
 const useStyles = makeStyles((theme) =>
   createStyles({
     wrapper: {
-      width: '100%',
+      // width: '100%',
     },
     content: {
       marginTop: theme.spacing(-1.5),
@@ -170,9 +191,11 @@ const useStyles = makeStyles((theme) =>
       fontWeight: theme.typography.fontWeightBold,
     },
     item: {
-      '&::before': {
-        content: 'none',
-      } as CSSProperties,
+      [theme.breakpoints.down('xs')]: {
+        '&::before': {
+          content: 'none',
+        } as CSSProperties,
+      },
     },
     workExperience: {
       margin: theme.spacing(1, 0),
@@ -183,6 +206,18 @@ const useStyles = makeStyles((theme) =>
     logo: {
       '&::after': {
         marginLeft: theme.spacing(2),
+        content: `""`,
+      } as CSSProperties,
+    },
+    logoOdd: {
+      '&::after': {
+        marginLeft: theme.spacing(2),
+        content: `""`,
+      } as CSSProperties,
+    },
+    logoEven: {
+      '&::before': {
+        marginRight: theme.spacing(2),
         content: `""`,
       } as CSSProperties,
     },
