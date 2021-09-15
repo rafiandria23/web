@@ -11,7 +11,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.10",
+    "@apollo/client": "^3.4.11",
     "@fontsource/roboto": "^4.5.0",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
@@ -24,7 +24,7 @@
     "moment": "^2.29.1",
     "next": "11.1.2",
     "next-pwa": "^5.3.1",
-    "next-redux-wrapper": "^7.0.4",
+    "next-redux-wrapper": "^7.0.5",
     "next-seo": "^4.26.0",
     "notistack": "^1.0.10",
     "react": "17.0.2",
@@ -33,18 +33,18 @@
     "react-markdown": "^7.0.1",
     "react-redux": "^7.2.5",
     "redux": "^4.1.1",
-    "sass": "^1.39.0"
+    "sass": "^1.40.1"
   },
   "devDependencies": {
     "@types/gtag.js": "^0.0.7",
-    "@types/node": "^16.7.13",
+    "@types/node": "^16.9.1",
     "@types/react": "^17.0.20",
     "eslint": "^7.32.0",
     "eslint-config-next": "11.1.2",
     "husky": "^7.0.2",
     "lint-staged": "^11.1.2",
     "next-sitemap": "^1.6.168",
-    "prettier": "^2.3.2",
-    "typescript": "^4.4.2"
+    "prettier": "^2.4.0",
+    "typescript": "^4.4.3"
   }
 }

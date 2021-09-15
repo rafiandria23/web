@@ -65,7 +65,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles }) => {
                     </Grid>
                   );
                 })
-              : ''}
+              : null}
           </Grid>
         </Grid>
       </Layout>
