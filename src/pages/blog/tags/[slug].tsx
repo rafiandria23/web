@@ -38,15 +38,15 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
         <Grid
           className={classes.wrapper}
           container
-          direction={`column`}
-          justifyContent={`flex-start`}
-          alignItems={`stretch`}
+          direction='column'
+          justifyContent='flex-start'
+          alignItems='stretch'
         >
           <Grid item>
             <Typography
               className={classes.title}
-              component={`h1`}
-              variant={`h5`}
+              component='h1'
+              variant='h5'
               gutterBottom
             >
               {`${tag.name} Articles`}
@@ -61,9 +61,10 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
             className={classes.list}
             item
             container
-            direction={`column`}
-            justifyContent={`space-evenly`}
-            alignItems={`stretch`}
+            direction='column'
+            justifyContent='space-evenly'
+            alignItems='stretch'
+            spacing={4}
           >
             {tag.articles !== undefined && tag.articles.length > 0
               ? tag.articles.map((article) => {
@@ -73,7 +74,7 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
                     </Grid>
                   );
                 })
-              : ''}
+              : null}
           </Grid>
         </Grid>
       </Layout>

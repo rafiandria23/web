@@ -185,7 +185,7 @@ export default ArticlePage;
 const useStyles = makeStyles((theme) =>
   createStyles({
     wrapper: {
-      padding: theme.spacing(2, 1),
+      padding: theme.spacing(2, 4),
       '& > *': {
         margin: theme.spacing(0.8, 0),
       },

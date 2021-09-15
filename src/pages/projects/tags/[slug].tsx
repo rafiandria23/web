@@ -6,8 +6,8 @@ import {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Divider } from '@material-ui/core';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { useMediaQuery, Grid, Typography, Divider } from '@material-ui/core';
 
 // Types
 import { Tag } from '@/types/tag';
@@ -24,6 +24,8 @@ interface ProjectTagsPageProps {
 }
 
 const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -37,15 +39,15 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
         <Grid
           className={classes.wrapper}
           container
-          direction={`column`}
-          justifyContent={`flex-start`}
-          alignItems={`stretch`}
+          direction='column'
+          justifyContent='flex-start'
+          alignItems='stretch'
         >
           <Grid item>
             <Typography
               className={classes.title}
-              component={`h1`}
-              variant={`h5`}
+              component='h1'
+              variant='h5'
               gutterBottom
             >
               {`${tag.name} Projects`}
@@ -60,10 +62,11 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
             className={classes.list}
             item
             container
-            direction={`row`}
-            wrap={`wrap`}
-            justifyContent={`space-evenly`}
-            alignItems={`stretch`}
+            direction='row'
+            wrap='wrap'
+            justifyContent={matches ? 'flex-start' : 'space-evenly'}
+            alignItems={matches ? 'center' : 'stretch'}
+            spacing={2}
           >
             {tag.projects !== undefined && tag.projects.length > 0
               ? tag.projects.map((project) => {
@@ -145,18 +148,12 @@ export default ProjectTagsPage;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    wrapper: {
-      padding: theme.spacing(2),
-    },
+    wrapper: {},
     title: {
       fontWeight: theme.typography.fontWeightBold,
     },
     list: {
       marginTop: theme.spacing(2),
-      '& > *': {
-        width: '100%',
-        margin: theme.spacing(1.5, 0),
-      },
     },
   }),
 );

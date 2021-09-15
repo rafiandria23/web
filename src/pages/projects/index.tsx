@@ -34,15 +34,15 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
         <Grid
           className={classes.wrapper}
           container
-          direction={`column`}
-          justifyContent={`flex-start`}
-          alignItems={`stretch`}
+          direction='column'
+          justifyContent='flex-start'
+          alignItems='stretch'
         >
           <Grid item>
             <Typography
               className={classes.title}
-              component={`h1`}
-              variant={`h5`}
+              component='h1'
+              variant='h5'
               gutterBottom
             >
               My Projects
@@ -57,8 +57,8 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             className={classes.list}
             item
             container
-            direction={`row`}
-            wrap={`wrap`}
+            direction='row'
+            wrap='wrap'
             justifyContent={matches ? 'flex-start' : 'space-evenly'}
             alignItems={matches ? 'center' : 'stretch'}
             spacing={2}
