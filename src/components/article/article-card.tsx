@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import Image from 'next/image';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import {
-  useMediaQuery,
+  // useMediaQuery,
   ButtonBase,
   Grid,
   Hidden,
@@ -22,71 +22,65 @@ interface ArticleCardProps {
 }
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
-  const router = useRouter();
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  // const matches = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
-    <ButtonBase
-      className={classes.wrapper}
-      onClick={() =>
-        router.push({
-          pathname: `/blog/${article.slug}`,
-        })
-      }
-    >
-      <Grid container wrap='nowrap'>
-        <Grid item container direction='column'>
-          <Grid item>
-            <Typography
-              className={classes.title}
-              variant='h6'
-              component='h2'
-              align='left'
-              gutterBottom
-            >
-              {article.title}
-            </Typography>
-
-            <Hidden xsDown>
+    <NextLink href={`/blog/${article.slug}`} passHref>
+      <ButtonBase className={classes.wrapper}>
+        <Grid container wrap='nowrap'>
+          <Grid item container direction='column'>
+            <Grid item>
               <Typography
-                className={classes.summary}
-                variant='caption'
+                className={classes.title}
+                variant='h6'
+                component='h2'
                 align='left'
-                paragraph
+                gutterBottom
               >
-                {article.summary}
+                {article.title}
               </Typography>
-            </Hidden>
+
+              <Hidden xsDown>
+                <Typography
+                  className={classes.summary}
+                  variant='caption'
+                  align='left'
+                  paragraph
+                >
+                  {article.summary}
+                </Typography>
+              </Hidden>
+            </Grid>
+
+            <Grid item>
+              <Typography
+                className={classes.date}
+                variant={`overline`}
+                component={`p`}
+                align={`left`}
+              >
+                {moment(article.createdAt).format('MMM D')}
+              </Typography>
+            </Grid>
           </Grid>
 
-          <Grid item>
-            <Typography
-              className={classes.date}
-              variant={`overline`}
-              component={`p`}
-              align={`left`}
-            >
-              {moment(article.createdAt).format('MMM D')}
-            </Typography>
+          <Grid item xs={3} container justifyContent='flex-end'>
+            <Grid item>
+              <Image
+                src={getPublicID(article.cover.url)}
+                alt={article.title}
+                width={article.cover.width}
+                height={article.cover.width}
+                placeholder='blur'
+                blurDataURL={getBlurredImageURL(article.cover.url)}
+              />
+            </Grid>
           </Grid>
         </Grid>
-
-        <Grid item xs={3} container justifyContent='flex-end'>
-          <Grid item>
-            <Image
-              src={getPublicID(article.cover.url)}
-              alt={article.title}
-              width={article.cover.width}
-              height={article.cover.width}
-              placeholder='blur'
-              blurDataURL={getBlurredImageURL(article.cover.url)}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-    </ButtonBase>
+      </ButtonBase>
+    </NextLink>
   );
 };
 

@@ -4,7 +4,7 @@ import {
   GetStaticPathsResult,
   GetStaticProps,
 } from 'next';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
@@ -31,7 +31,6 @@ interface ProjectPageProps {
 }
 
 const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
-  const router = useRouter();
   const classes = useStyles();
 
   return (
@@ -114,16 +113,14 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
           {project.tags.length > 0 &&
             project.tags.map((tag) => (
               <Grid item key={tag._id}>
-                <Chip
-                  className={classes.tag}
-                  label={tag.name}
-                  clickable
-                  onClick={() =>
-                    router.push({
-                      pathname: `/projects/tags/${tag.slug}`,
-                    })
-                  }
-                />
+                <NextLink href={`/projects/tags/${tag.slug}`} passHref>
+                  <Chip
+                    className={classes.tag}
+                    component='a'
+                    label={tag.name}
+                    clickable
+                  />
+                </NextLink>
               </Grid>
             ))}
         </Grid>

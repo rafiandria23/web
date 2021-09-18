@@ -4,7 +4,7 @@ import {
   GetStaticPathsResult,
   GetStaticProps,
 } from 'next';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
@@ -28,7 +28,6 @@ interface ArticlePageProps extends PageInitialProps {
 }
 
 const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
-  const router = useRouter();
   const classes = useStyles();
 
   return article !== null ? (
@@ -96,16 +95,14 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
             {article.tags.length > 0 &&
               article.tags.map((tag) => (
                 <Grid item key={tag._id}>
-                  <Chip
-                    className={classes.tag}
-                    label={tag.name}
-                    clickable
-                    onClick={() =>
-                      router.push({
-                        pathname: `/blog/tags/${tag.slug}`,
-                      })
-                    }
-                  />
+                  <NextLink href={`/blog/tags/${tag.slug}`} passHref>
+                    <Chip
+                      className={classes.tag}
+                      component='a'
+                      label={tag.name}
+                      clickable
+                    />
+                  </NextLink>
                 </Grid>
               ))}
           </Grid>

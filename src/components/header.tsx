@@ -1,5 +1,5 @@
 import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
 import {
   Hidden,
@@ -38,7 +38,6 @@ export interface HeaderProps {
 }
 
 const Header: FC<HeaderProps> = ({ elevate = false }) => {
-  const router = useRouter();
   const theme = useTheme();
   const classes = useStyles();
   const scrollTriggered = useScrollTrigger({
@@ -99,54 +98,45 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
             <div className={classes.grow} />
 
-            <Button
-              variant='text'
-              color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              onClick={() =>
-                router.push({
-                  pathname: '/',
-                })
-              }
-            >
-              Home
-            </Button>
+            <NextLink href='/' passHref>
+              <Button
+                variant='text'
+                color={theme.palette.type === 'light' ? 'inherit' : undefined}
+              >
+                Home
+              </Button>
+            </NextLink>
 
-            <Button
-              variant='text'
-              color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              onClick={() =>
-                router.push({
-                  pathname: '/projects',
-                })
-              }
-            >
-              Projects
-            </Button>
+            <NextLink href='/projects' passHref>
+              <Button
+                variant='text'
+                color={theme.palette.type === 'light' ? 'inherit' : undefined}
+              >
+                Projects
+              </Button>
+            </NextLink>
 
-            <Button
-              variant='text'
-              color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              onClick={() =>
-                router.push({
-                  pathname: '/blog',
-                })
-              }
-            >
-              Blog
-            </Button>
+            <NextLink href='/blog' passHref>
+              <Button
+                variant='text'
+                color={theme.palette.type === 'light' ? 'inherit' : undefined}
+              >
+                Blog
+              </Button>
+            </NextLink>
 
             <IconButton
               color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              href={`https://linkedin.com/in/rafiandria23`}
-              target={`_blank`}
+              href='https://linkedin.com/in/rafiandria23'
+              target='_blank'
             >
               <LinkedInLogo />
             </IconButton>
 
             <IconButton
               color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              href={`https://github.com/rafiandria23`}
-              target={`_blank`}
+              href='https://github.com/rafiandria23'
+              target='_blank'
             >
               <GitHubLogo />
             </IconButton>
@@ -205,48 +195,39 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             alignItems={`stretch`}
           >
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                color={theme.palette.type === 'light' ? 'primary' : undefined}
-                onClick={() =>
-                  router.push({
-                    pathname: '/',
-                  })
-                }
-              >
-                Home
-              </Button>
+              <NextLink href='/' passHref>
+                <Button
+                  fullWidth
+                  variant='text'
+                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                >
+                  Home
+                </Button>
+              </NextLink>
             </Grid>
 
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                color={theme.palette.type === 'light' ? 'primary' : undefined}
-                onClick={() =>
-                  router.push({
-                    pathname: '/projects',
-                  })
-                }
-              >
-                Projects
-              </Button>
+              <NextLink href='/projects' passHref>
+                <Button
+                  fullWidth
+                  variant='text'
+                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                >
+                  Projects
+                </Button>
+              </NextLink>
             </Grid>
 
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                color={theme.palette.type === 'light' ? 'primary' : undefined}
-                onClick={() =>
-                  router.push({
-                    pathname: '/blog',
-                  })
-                }
-              >
-                Blog
-              </Button>
+              <NextLink href='/blog' passHref>
+                <Button
+                  fullWidth
+                  variant='text'
+                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                >
+                  Blog
+                </Button>
+              </NextLink>
             </Grid>
           </Grid>
 
@@ -263,15 +244,15 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 color={theme.palette.type === 'light' ? 'primary' : undefined}
               >
                 <IconButton
-                  href={`https://linkedin.com/in/rafiandria23`}
-                  target={`_blank`}
+                  href='https://linkedin.com/in/rafiandria23'
+                  target='_blank'
                 >
                   <LinkedInLogo />
                 </IconButton>
 
                 <IconButton
-                  href={`https://github.com/rafiandria23`}
-                  target={`_blank`}
+                  href='https://github.com/rafiandria23'
+                  target='_blank'
                 >
                   <GitHubLogo />
                 </IconButton>
