@@ -26,7 +26,7 @@ interface EducationTimelineProps {
 
 const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   const renderEducationPeriod = (education: Education): string => {
@@ -39,7 +39,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   return (
     <Timeline
       className={classes.wrapper}
-      align={matches ? 'alternate' : 'left'}
+      align={matchesSM ? 'alternate' : 'left'}
     >
       {sortEducations(educations).map((education, idx) => {
         return (
@@ -64,7 +64,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
                   item
                   container
                   direction={
-                    matches
+                    matchesSM
                       ? isOdd(idx + 1)
                         ? 'row'
                         : 'row-reverse'
@@ -78,7 +78,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
                     <Grid
                       item
                       className={
-                        matches
+                        matchesSM
                           ? isOdd(idx + 1)
                             ? classes.logoOdd
                             : classes.logoEven

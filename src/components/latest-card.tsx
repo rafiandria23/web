@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import clsx from 'clsx';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {
@@ -27,7 +27,6 @@ interface LatestCardProps {
 }
 
 const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
-  const router = useRouter();
   const classes = useStyles();
   const [showTags, setShowTags] = useState<boolean>(false);
 
@@ -56,22 +55,18 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
         </CardContent>
       </CardActionArea>
       <CardActions classes={{ root: classes.latestCardActionsWrapper }}>
-        <Button
-          size={`medium`}
-          color={`primary`}
-          variant={`outlined`}
-          onClick={() =>
-            type === `article`
-              ? router.push({
-                  pathname: `/projects/${(data as Article).slug}`,
-                })
-              : router.push({
-                  pathname: `/projects/${(data as Project).slug}`,
-                })
+        <NextLink
+          href={
+            type === 'article'
+              ? `/blog/${(data as Article).slug}`
+              : `/projects/${(data as Project).slug}`
           }
+          passHref
         >
-          {type === `article` ? `Read More` : `Explore!`}
-        </Button>
+          <Button size={`medium`} color={`primary`} variant={`outlined`}>
+            {type === `article` ? `Read More` : `Explore!`}
+          </Button>
+        </NextLink>
         <IconButton
           className={clsx(classes.showTags, {
             [classes.showTagsOpen]: showTags,
@@ -90,17 +85,14 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
         <CardContent>
           {data.tags.length &&
             data.tags.map((tag: Tag) => (
-              <Chip
-                classes={{ root: classes.tagChip }}
-                key={tag._id}
-                label={tag.name.toUpperCase()}
-                clickable
-                onClick={() =>
-                  router.push({
-                    pathname: `/tags/${tag.slug}`,
-                  })
-                }
-              />
+              <NextLink key={tag._id} href={`/tags/${tag.slug}`} passHref>
+                <Chip
+                  classes={{ root: classes.tagChip }}
+                  component='a'
+                  label={tag.name.toUpperCase()}
+                  clickable
+                />
+              </NextLink>
             ))}
         </CardContent>
       </Collapse>

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { useRouter } from 'next/router';
+import NextLink from 'next/link';
 import Image from 'next/image';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import { ButtonBase, Typography } from '@material-ui/core';
@@ -15,56 +15,53 @@ interface ProjectCardProps {
 }
 
 const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
-  const router = useRouter();
   const classes = useStyles();
 
   return (
     <div className={classes.wrapper}>
-      <ButtonBase
-        focusRipple
-        className={classes.image}
-        focusVisibleClassName={classes.focusVisible}
-        onClick={() =>
-          router.push({
-            pathname: `/projects/${project.slug}`,
-          })
-        }
-        style={{
-          width: '100%',
-        }}
-      >
-        {/* <span
+      <NextLink href={`/projects/${project.slug}`} passHref>
+        <ButtonBase
+          focusRipple
+          className={classes.image}
+          focusVisibleClassName={classes.focusVisible}
+          style={{
+            width: '100%',
+          }}
+        >
+          {/* <span
           className={classes.imageSrc}
           style={{
             backgroundImage: `url(${project.cover.url})`,
           }}
         /> */}
-        <Image
-          className={classes.imageSrc}
-          src={getPublicID(project.cover.url)}
-          alt={project.title}
-          width={project.cover.width}
-          height={project.cover.height}
-          placeholder='blur'
-          blurDataURL={getBlurredImageURL(project.cover.url)}
-        />
-        <span className={classes.imageBackdrop} />
-        <span className={classes.imageButton}>
-          <Typography
-            component='span'
-            variant='subtitle1'
-            color='inherit'
-            className={classes.imageTitle}
-          >
-            {project.title}
-            <br />
-            <Typography component='span' variant='caption' color='inherit'>
-              {project.overview}
+          <Image
+            className={classes.imageSrc}
+            src={getPublicID(project.cover.url)}
+            alt={project.title}
+            width={project.cover.width}
+            height={project.cover.height}
+            placeholder='blur'
+            blurDataURL={getBlurredImageURL(project.cover.url)}
+          />
+          <span className={classes.imageBackdrop} />
+          <span className={classes.imageButton}>
+            <Typography
+              className={classes.imageTitle}
+              component='span'
+              variant='subtitle1'
+              color='inherit'
+              align='center'
+            >
+              {project.title}
+              <br />
+              <Typography component='span' variant='caption' color='inherit'>
+                {project.overview}
+              </Typography>
+              <span className={classes.imageMarked} />
             </Typography>
-            <span className={classes.imageMarked} />
-          </Typography>
-        </span>
-      </ButtonBase>
+          </span>
+        </ButtonBase>
+      </NextLink>
     </div>
   );
 };
