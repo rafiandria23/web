@@ -46,10 +46,11 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
             <Typography
+              className={classes.imageTitle}
               component='span'
               variant='subtitle1'
               color='inherit'
-              className={classes.imageTitle}
+              align='center'
             >
               {project.title}
               <br />
