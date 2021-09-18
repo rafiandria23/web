@@ -23,7 +23,7 @@ interface ArticleCardProps {
 
 const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
   const theme = useTheme();
-  // const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  // const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (

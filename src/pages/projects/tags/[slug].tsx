@@ -25,7 +25,7 @@ interface ProjectTagsPageProps {
 
 const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -64,8 +64,8 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={matches ? 'flex-start' : 'space-evenly'}
-            alignItems={matches ? 'center' : 'stretch'}
+            justifyContent={matchesSM ? 'flex-start' : 'space-evenly'}
+            alignItems={matchesSM ? 'center' : 'stretch'}
             spacing={2}
           >
             {tag.projects !== undefined && tag.projects.length > 0

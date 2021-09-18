@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import {
   NextPage,
   GetStaticPaths,
@@ -8,8 +9,17 @@ import NextLink from 'next/link';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Chip, Button } from '@material-ui/core';
+import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import {
+  useMediaQuery,
+  Grid,
+  Hidden,
+  Typography,
+  Chip,
+  Tooltip,
+  Button,
+  IconButton,
+} from '@material-ui/core';
 import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
 import ReactMarkdown from 'react-markdown';
 
@@ -32,6 +42,8 @@ interface ProjectPageProps {
 
 const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
   const classes = useStyles();
+  const theme = useTheme();
+  const matchesMD = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <>
@@ -51,11 +63,12 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
         <Grid
           className={classes.header}
           container
-          direction={`column`}
-          justifyContent={`center`}
-          alignItems={`stretch`}
+          direction={matchesMD ? 'row-reverse' : 'column'}
+          wrap='nowrap'
+          justifyContent={matchesMD ? 'space-between' : 'center'}
+          alignItems={matchesMD ? 'center' : 'stretch'}
         >
-          <Grid item container justifyContent={`center`}>
+          <Grid item container justifyContent='center' md={4}>
             <Grid item>
               <Image
                 src={getPublicID(project.cover.url)}
@@ -68,38 +81,51 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
             </Grid>
           </Grid>
 
-          <Grid item>
+          <Grid item md={4}>
             <Typography
               className={classes.title}
-              variant={`h4`}
-              component={`h1`}
-              align={`center`}
+              variant='h4'
+              component='h1'
+              align={matchesMD ? 'left' : 'center'}
               gutterBottom
             >
-              {project.title}
+              {project.title}{' '}
+              <Hidden smDown>
+                <Tooltip title='Visit Project'>
+                  <IconButton
+                    className={classes.button}
+                    href={project.link}
+                    target={`_blank`}
+                  >
+                    <OpenInNewIcon />
+                  </IconButton>
+                </Tooltip>
+              </Hidden>
             </Typography>
 
             <Typography
               className={classes.overview}
-              variant={`subtitle1`}
-              component={`h2`}
-              align={`center`}
+              variant='subtitle1'
+              component='h2'
+              align={matchesMD ? 'left' : 'center'}
               paragraph
             >
               {project.overview}
             </Typography>
           </Grid>
 
-          <Grid item>
-            <Button
-              className={classes.button}
-              fullWidth
-              variant={`outlined`}
-              endIcon={<OpenInNewIcon />}
-              href={project.link}
-              target={`_blank`}
-            >{`Visit Project`}</Button>
-          </Grid>
+          <Hidden mdUp>
+            <Grid item>
+              <Button
+                className={classes.button}
+                fullWidth
+                variant={`outlined`}
+                endIcon={<OpenInNewIcon />}
+                href={project.link}
+                target={`_blank`}
+              >{`Visit Project`}</Button>
+            </Grid>
+          </Hidden>
         </Grid>
 
         <ReactMarkdown
@@ -197,9 +223,11 @@ export default ProjectPage;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    wrapper: {},
     header: {
       backgroundColor: theme.palette.primary.light,
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(4, 8),
+      } as CSSProperties,
       '& > *': {
         margin: theme.spacing(0.8, 0),
       },
@@ -211,8 +239,15 @@ const useStyles = makeStyles((theme) =>
     overview: {
       color: theme.palette.primary.contrastText,
     },
-    description: {},
+    description: {
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(8),
+      } as CSSProperties,
+    },
     tags: {
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(8),
+      } as CSSProperties,
       '& > *': {
         marginBottom: theme.spacing(1),
         marginRight: theme.spacing(1),

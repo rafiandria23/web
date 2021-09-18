@@ -32,7 +32,7 @@ const HomePage: NextPage<HomePageProps> = ({
   educations,
 }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -94,7 +94,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={classes.title}
               variant='h5'
               component='h2'
-              align={matches ? 'center' : 'left'}
+              align={matchesSM ? 'center' : 'left'}
               gutterBottom
             >
               Work Experiences
@@ -124,7 +124,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={clsx(classes.title, classes.text)}
               variant='h5'
               component='h2'
-              align={matches ? 'center' : 'left'}
+              align={matchesSM ? 'center' : 'left'}
               gutterBottom
             >
               Skills
@@ -132,7 +132,7 @@ const HomePage: NextPage<HomePageProps> = ({
           </Grid>
 
           <Grid item>
-            {matches ? (
+            {matchesSM ? (
               <SkillTabs skillTypes={skillTypes} />
             ) : (
               <SkillProgressList skillTypes={skillTypes} />
@@ -154,7 +154,7 @@ const HomePage: NextPage<HomePageProps> = ({
               className={clsx(classes.title)}
               variant='h5'
               component='h2'
-              align={matches ? 'center' : 'left'}
+              align={matchesSM ? 'center' : 'left'}
               gutterBottom
             >
               Educations

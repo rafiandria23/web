@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
@@ -20,7 +21,7 @@ interface ProjectsPageProps {
 
 const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   return (
@@ -59,8 +60,8 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={matches ? 'flex-start' : 'space-evenly'}
-            alignItems={matches ? 'center' : 'stretch'}
+            justifyContent={matchesSM ? 'flex-start' : 'space-evenly'}
+            alignItems={matchesSM ? 'center' : 'stretch'}
             spacing={2}
           >
             {projects !== undefined && projects.length > 0
@@ -115,7 +116,11 @@ export default ProjectsPage;
 
 const useStyles = makeStyles((theme) =>
   createStyles({
-    wrapper: {},
+    wrapper: {
+      [theme.breakpoints.up('md')]: {
+        padding: theme.spacing(8),
+      } as CSSProperties,
+    },
     title: {
       fontWeight: theme.typography.fontWeightBold,
     },

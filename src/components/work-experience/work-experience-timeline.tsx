@@ -29,7 +29,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   companies,
 }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
   const renderEmploymentType = (type: EmploymentTypes): string => {
@@ -78,7 +78,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   return (
     <Timeline
       className={classes.wrapper}
-      align={matches ? 'alternate' : 'left'}
+      align={matchesSM ? 'alternate' : 'left'}
     >
       {sortWorkExperiences(companies).map((company, idx) => {
         return (
@@ -103,7 +103,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                   item
                   container
                   direction={
-                    matches
+                    matchesSM
                       ? isOdd(idx + 1)
                         ? 'row'
                         : 'row-reverse'
@@ -117,7 +117,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                     <Grid
                       item
                       className={
-                        matches
+                        matchesSM
                           ? isOdd(idx + 1)
                             ? classes.logoOdd
                             : classes.logoEven
