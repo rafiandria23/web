@@ -61,7 +61,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
                 component={`p`}
                 align={`left`}
               >
-                {moment(article.createdAt).format('MMM D')}
+                {moment(article.published_at).format('MMM D')}
               </Typography>
             </Grid>
           </Grid>

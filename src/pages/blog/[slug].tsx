@@ -73,7 +73,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                 align={`left`}
                 color='textSecondary'
               >
-                {moment(article.createdAt).format('MMMM D, YYYY')}
+                {moment(article.published_at).format('MMMM D, YYYY')}
               </Typography>
             </Grid>
           </Grid>
