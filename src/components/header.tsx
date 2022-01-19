@@ -1,7 +1,10 @@
 import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
 import NextLink from 'next/link';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
+  useTheme,
+  Theme,
+  Container,
   Hidden,
   AppBar,
   Toolbar,
@@ -13,21 +16,21 @@ import {
   Dialog,
   Slide,
   useScrollTrigger,
-} from '@material-ui/core';
-import { TransitionProps } from '@material-ui/core/transitions';
+} from '@mui/material';
+import { TransitionProps } from '@mui/material/transitions';
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
   LinkedIn as LinkedInLogo,
   GitHub as GitHubLogo,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import clsx from 'clsx';
 
 // Components
 import { ThemeSwitcher } from '@/components';
 
 const Transition = forwardRef(
-  (props: TransitionProps & { children?: ReactElement }, ref: Ref<unknown>) => {
+  (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => {
     return <Slide direction={`right`} ref={ref} {...props} />;
   },
 );
@@ -62,23 +65,24 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
         position='fixed'
         elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
       >
-        <Toolbar>
-          <Hidden smUp>
-            <IconButton
-              className={classes.menuButton}
-              edge={`start`}
-              onClick={handleOpen}
-            >
-              <MenuIcon className={classes.menuIcon} />
-            </IconButton>
+        <Container>
+          <Toolbar style={{ paddingLeft: 0, paddingRight: 0 }}>
+            <Hidden smUp>
+              <IconButton
+                className={classes.menuButton}
+                edge={`start`}
+                onClick={handleOpen}
+              >
+                <MenuIcon className={classes.menuIcon} />
+              </IconButton>
 
-            <Typography className={classes.title} variant='h6'>
-              rafiandria23.me
-            </Typography>
+              <Typography className={classes.title} variant='h6'>
+                rafiandria23.me
+              </Typography>
 
-            <div className={classes.grow} />
+              <div className={classes.grow} />
 
-            {/* <Button
+              {/* <Button
             variant={`outlined`}
             style={{
               borderColor: theme.palette.primary.contrastText,
@@ -86,62 +90,46 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             }}
           >{`Hire me`}</Button> */}
 
-            <ThemeSwitcher />
-          </Hidden>
+              <ThemeSwitcher />
+            </Hidden>
 
-          <Hidden xsDown>
-            <Typography className={classes.title} variant='h6'>
-              rafiandria23.me
-            </Typography>
+            <Hidden xsDown>
+              <Typography className={classes.title} variant='h6'>
+                rafiandria23.me
+              </Typography>
 
-            <ThemeSwitcher />
+              <ThemeSwitcher />
 
-            <div className={classes.grow} />
+              <div className={classes.grow} />
 
-            <NextLink href='/' passHref>
-              <Button
-                variant='text'
-                color={theme.palette.type === 'light' ? 'inherit' : undefined}
+              <NextLink href='/' passHref>
+                <Button variant='text'>Home</Button>
+              </NextLink>
+
+              <NextLink href='/projects' passHref>
+                <Button variant='text'>Projects</Button>
+              </NextLink>
+
+              <NextLink href='/blog' passHref>
+                <Button variant='text'>Blog</Button>
+              </NextLink>
+
+              <IconButton
+                href='https://linkedin.com/in/rafiandria23'
+                target='_blank'
               >
-                Home
-              </Button>
-            </NextLink>
+                <LinkedInLogo />
+              </IconButton>
 
-            <NextLink href='/projects' passHref>
-              <Button
-                variant='text'
-                color={theme.palette.type === 'light' ? 'inherit' : undefined}
+              <IconButton
+                href='https://github.com/rafiandria23'
+                target='_blank'
               >
-                Projects
-              </Button>
-            </NextLink>
-
-            <NextLink href='/blog' passHref>
-              <Button
-                variant='text'
-                color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              >
-                Blog
-              </Button>
-            </NextLink>
-
-            <IconButton
-              color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              href='https://linkedin.com/in/rafiandria23'
-              target='_blank'
-            >
-              <LinkedInLogo />
-            </IconButton>
-
-            <IconButton
-              color={theme.palette.type === 'light' ? 'inherit' : undefined}
-              href='https://github.com/rafiandria23'
-              target='_blank'
-            >
-              <GitHubLogo />
-            </IconButton>
-          </Hidden>
-        </Toolbar>
+                <GitHubLogo />
+              </IconButton>
+            </Hidden>
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <Dialog
@@ -154,7 +142,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
         <Toolbar>
           <IconButton
             edge={`start`}
-            color={theme.palette.type === 'light' ? 'primary' : undefined}
+            color={theme.palette.mode === 'light' ? 'primary' : undefined}
             onClick={handleClose}
           >
             <CloseIcon />
@@ -164,14 +152,14 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
           {/* <Button
             variant={`outlined`}
-            color={theme.palette.type === 'light' ? 'primary' : undefined}
+            color={theme.palette.mode === 'light' ? 'primary' : undefined}
             style={{
               borderColor:
-                theme.palette.type === 'light'
+                theme.palette.mode === 'light'
                   ? theme.palette.primary.main
                   : theme.palette.primary.contrastText,
               color:
-                theme.palette.type === 'light'
+                theme.palette.mode === 'light'
                   ? theme.palette.primary.main
                   : theme.palette.primary.contrastText,
             }}
@@ -199,7 +187,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 <Button
                   fullWidth
                   variant='text'
-                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
                   Home
                 </Button>
@@ -211,7 +199,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 <Button
                   fullWidth
                   variant='text'
-                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
                   Projects
                 </Button>
@@ -223,7 +211,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 <Button
                   fullWidth
                   variant='text'
-                  color={theme.palette.type === 'light' ? 'primary' : undefined}
+                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
                   Blog
                 </Button>
@@ -241,7 +229,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
             <Grid item>
               <ButtonGroup
                 variant='text'
-                color={theme.palette.type === 'light' ? 'primary' : undefined}
+                color={theme.palette.mode === 'light' ? 'primary' : undefined}
               >
                 <IconButton
                   href='https://linkedin.com/in/rafiandria23'
@@ -267,7 +255,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 
 export default Header;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(0, 4),

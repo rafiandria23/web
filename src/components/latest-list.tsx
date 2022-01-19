@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Typography, Grid } from '@material-ui/core';
+import { Typography, Grid } from '@mui/material';
 
 // Types
 import { Article } from '@/types/article';

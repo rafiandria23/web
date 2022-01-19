@@ -9,9 +9,11 @@ import NextLink from 'next/link';
 import Image from 'next/image';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
   useMediaQuery,
+  useTheme,
+  Theme,
   Grid,
   Hidden,
   Typography,
@@ -19,8 +21,8 @@ import {
   Tooltip,
   Button,
   IconButton,
-} from '@material-ui/core';
-import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 
 // Types
@@ -221,7 +223,7 @@ export const getStaticProps: GetStaticProps<
 
 export default ProjectPage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     header: {
       backgroundColor: theme.palette.primary.light,

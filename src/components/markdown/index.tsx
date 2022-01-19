@@ -1,5 +1,5 @@
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { Link, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { useTheme, Theme, Link, Typography } from '@mui/material';
 import { Components } from 'react-markdown/lib/ast-to-react';
 
 const Anchor: Components['a'] = ({ href, children }) => {
@@ -129,7 +129,7 @@ const components: Components = {
 
 export default components;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     paragraph: {
       fontWeight: theme.typography.fontWeightRegular,

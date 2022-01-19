@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { ButtonBase, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, ButtonBase, Typography } from '@mui/material';
 
 // Types
 import { Project } from '@/types/project';
@@ -68,7 +68,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 
 export default ProjectCard;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       display: 'flex',

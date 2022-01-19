@@ -3,8 +3,8 @@ import { NextPage, GetStaticProps } from 'next';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Hidden, Grid, Typography, Divider, Chip } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Hidden, Grid, Typography, Divider, Chip } from '@mui/material';
 
 // Types
 import { Article } from '@/types/article';
@@ -206,7 +206,7 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
 
 export default BlogPage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(2),

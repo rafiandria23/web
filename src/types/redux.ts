@@ -8,5 +8,5 @@ export interface RootState {
 }
 
 export interface ThemeReducer {
-  type: 'light' | 'dark';
+  mode: 'light' | 'dark';
 }

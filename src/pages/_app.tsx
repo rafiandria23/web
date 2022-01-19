@@ -7,9 +7,13 @@ import NextApp, { AppContext, AppInitialProps, AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import { useDispatch } from 'react-redux';
-import { ThemeProvider as MuiThemeProvider } from '@material-ui/core/styles';
-import { useMediaQuery, CssBaseline, IconButton } from '@material-ui/core';
-import { CloseOutlined } from '@material-ui/icons';
+import {
+  useMediaQuery,
+  ThemeProvider,
+  CssBaseline,
+  IconButton,
+} from '@mui/material';
+import { CloseOutlined } from '@mui/icons-material';
 import { SnackbarProvider, SnackbarKey, SnackbarAction } from 'notistack';
 
 // Types
@@ -20,7 +24,7 @@ import * as gtag from '@/utils/gtag';
 
 // Redux
 import { wrapper } from '@/redux';
-import { setThemeType } from '@/redux/actions/theme';
+import { setThemeMode } from '@/redux/actions/theme';
 
 // Custom Hooks
 import { useThemeReducer } from '@/hooks';
@@ -38,7 +42,7 @@ const App: NextComponentType<
 > = ({ Component, pageProps }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const theme = useThemeReducer();
+  const { mode } = useThemeReducer();
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const notistackRef = createRef<SnackbarProvider>();
 
@@ -54,18 +58,18 @@ const App: NextComponentType<
     } else {
       switch (themeFromLS) {
         case 'light':
-          dispatch(setThemeType('light'));
+          dispatch(setThemeMode('light'));
           break;
 
         case 'dark':
-          dispatch(setThemeType('dark'));
+          dispatch(setThemeMode('dark'));
           break;
 
         case 'system':
           if (prefersDarkMode) {
-            dispatch(setThemeType('dark'));
+            dispatch(setThemeMode('dark'));
           } else {
-            dispatch(setThemeType('light'));
+            dispatch(setThemeMode('light'));
           }
           break;
 
@@ -89,9 +93,9 @@ const App: NextComponentType<
 
     if (themeFromLS === 'system') {
       if (prefersDarkMode) {
-        dispatch(setThemeType('dark'));
+        dispatch(setThemeMode('dark'));
       } else {
-        dispatch(setThemeType('light'));
+        dispatch(setThemeMode('light'));
       }
     }
   }, [dispatch, prefersDarkMode]);
@@ -103,10 +107,7 @@ const App: NextComponentType<
     };
   }, [router.events]);
 
-  const muiTheme = useMemo(
-    () => (theme.type === 'light' ? light : dark),
-    [theme],
-  );
+  const theme = useMemo(() => (mode === 'light' ? light : dark), [mode]);
 
   const handleCloseSnackbar = (key: SnackbarKey) => {
     notistackRef.current?.closeSnackbar(key);
@@ -132,7 +133,7 @@ const App: NextComponentType<
   };
 
   return (
-    <MuiThemeProvider theme={muiTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
       <SnackbarProvider
         ref={notistackRef}
@@ -150,7 +151,7 @@ const App: NextComponentType<
         />
         {handleRender()}
       </SnackbarProvider>
-    </MuiThemeProvider>
+    </ThemeProvider>
   );
 };
 

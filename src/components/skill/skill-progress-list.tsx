@@ -1,6 +1,6 @@
 import { FC, CSSProperties } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, LinearProgress } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Grid, Typography, LinearProgress } from '@mui/material';
 import clsx from 'clsx';
 
 // Types
@@ -87,7 +87,7 @@ const SkillProgressList: FC<SkillProgressListProps> = ({ skillTypes }) => {
 
 export default SkillProgressList;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       '& > *': {

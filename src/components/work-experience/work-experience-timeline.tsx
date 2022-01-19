@@ -1,7 +1,13 @@
 import { FC, CSSProperties } from 'react';
 import Image from 'next/image';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  useMediaQuery,
+  useTheme,
+  Theme,
+  Grid,
+  Typography,
+} from '@mui/material';
 import {
   Timeline,
   TimelineItem,
@@ -9,7 +15,7 @@ import {
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-} from '@material-ui/lab';
+} from '@mui/lab';
 import moment from 'moment';
 
 // Types
@@ -78,7 +84,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   return (
     <Timeline
       className={classes.wrapper}
-      align={matchesSM ? 'alternate' : 'left'}
+      position={matchesSM ? 'alternate' : 'left'}
     >
       {sortWorkExperiences(companies).map((company, idx) => {
         return (
@@ -86,7 +92,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
             <TimelineSeparator>
               <TimelineDot
                 variant='outlined'
-                color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
+                color={theme.palette.mode === 'light' ? 'primary' : 'inherit'}
               />
               {idx !== companies.length - 1 ? <TimelineConnector /> : null}
             </TimelineSeparator>
@@ -174,7 +180,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
 
 export default WorkExperienceTimeline;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       // width: '100%',

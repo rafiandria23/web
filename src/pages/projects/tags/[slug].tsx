@@ -6,8 +6,15 @@ import {
 } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography, Divider } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  useMediaQuery,
+  Theme,
+  useTheme,
+  Grid,
+  Typography,
+  Divider,
+} from '@mui/material';
 
 // Types
 import { Tag } from '@/types/tag';
@@ -146,7 +153,7 @@ export const getStaticProps: GetStaticProps<
 
 export default ProjectTagsPage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {},
     title: {

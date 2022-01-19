@@ -1,6 +1,13 @@
 import { FC, useState, useEffect, CSSProperties, ChangeEvent } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Tabs, Tab, Typography, LinearProgress } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  Theme,
+  Grid,
+  Tabs,
+  Tab,
+  Typography,
+  LinearProgress,
+} from '@mui/material';
 import clsx from 'clsx';
 
 // Types
@@ -107,7 +114,7 @@ const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
 
 export default SkillTabs;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       flexGrow: 1,

@@ -6,7 +6,7 @@ import NextDocument, {
   Main,
   NextScript,
 } from 'next/document';
-import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@material-ui/core/styles';
+import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@mui/styles';
 
 // Config
 import { GOOGLE_ANALYTICS_TRACKING_ID } from '@/config';

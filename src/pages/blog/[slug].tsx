@@ -7,8 +7,8 @@ import {
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Chip } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Grid, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
@@ -179,7 +179,7 @@ export const getStaticProps: GetStaticProps<
 
 export default ArticlePage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(2, 4),

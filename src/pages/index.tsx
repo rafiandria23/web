@@ -2,8 +2,15 @@ import { CSSProperties } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  useMediaQuery,
+  useTheme,
+  Theme,
+  Container,
+  Grid,
+  Typography,
+} from '@mui/material';
 import clsx from 'clsx';
 
 // Types
@@ -51,32 +58,35 @@ const HomePage: NextPage<HomePageProps> = ({
             classes.introductionBanner,
           )}
           container
-          component='section'
           direction='column'
           justifyContent='space-evenly'
           alignItems='stretch'
         >
           <Grid item>
-            <Typography
-              className={clsx(classes.title, classes.text)}
-              variant='h2'
-              component='h1'
-              gutterBottom
-            >
-              Hey, I&apos;m Adam
-            </Typography>
+            <Container>
+              <Typography
+                className={clsx(classes.title, classes.text)}
+                variant='h2'
+                component='h1'
+                gutterBottom
+              >
+                Hey, I&apos;m Adam
+              </Typography>
+            </Container>
           </Grid>
 
           <Grid item>
-            <Typography
-              className={classes.text}
-              variant='h6'
-              component='p'
-              paragraph
-            >
-              Software engineer from Bogor, Indonesia. I develop web, mobile,
-              and desktop applications to help businesses grow online.
-            </Typography>
+            <Container>
+              <Typography
+                className={classes.text}
+                variant='h6'
+                component='p'
+                paragraph
+              >
+                Software engineer from Bogor, Indonesia. I develop web, mobile,
+                and desktop applications to help businesses grow online.
+              </Typography>
+            </Container>
           </Grid>
         </Grid>
 
@@ -84,7 +94,7 @@ const HomePage: NextPage<HomePageProps> = ({
         <Grid
           className={clsx(classes.banner, classes.workExperienceBanner)}
           container
-          component='section'
+          component={Container}
           direction='column'
           justifyContent='center'
           alignItems='center'
@@ -114,7 +124,7 @@ const HomePage: NextPage<HomePageProps> = ({
             classes.skillsBanner,
           )}
           container
-          component='section'
+          component={Container}
           direction={`column`}
           justifyContent={`space-evenly`}
           alignItems={`flex-start`}
@@ -144,7 +154,7 @@ const HomePage: NextPage<HomePageProps> = ({
         <Grid
           className={clsx(classes.banner, classes.educationBanner)}
           container
-          component='section'
+          component={Container}
           direction={`column`}
           justifyContent={`space-evenly`}
           alignItems={`flex-start`}
@@ -246,7 +256,7 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 
 export default HomePage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     title: {
       fontWeight: theme.typography.fontWeightBold,
