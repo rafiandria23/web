@@ -1,8 +1,9 @@
 import { FC, useState } from 'react';
 import NextLink from 'next/link';
 import clsx from 'clsx';
-import { createStyles, makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles } from '@mui/styles';
 import {
+  Theme,
   Card,
   CardActionArea,
   CardActions,
@@ -13,8 +14,8 @@ import {
   Collapse,
   Typography,
   Button,
-} from '@material-ui/core';
-import { ExpandMore as ExpandMoreIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 
 // Types
 import { Article } from '@/types/article';
@@ -102,7 +103,7 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
 
 export default LatestCard;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     latestCardWrapper: {
       maxWidth: 345,

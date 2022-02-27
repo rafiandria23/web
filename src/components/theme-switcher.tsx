@@ -1,8 +1,9 @@
 import { FC, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
   useMediaQuery,
+  Theme,
   Tooltip,
   IconButton,
   Popper,
@@ -13,15 +14,15 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   WbSunny as WbSunnyIcon,
   NightsStay as NightsStayIcon,
   Computer as ComputerIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 // Redux Actions
-import { setThemeType } from '@/redux/actions/theme';
+import { setThemeMode } from '@/redux/actions/theme';
 
 const ThemeSwitcher: FC = () => {
   const dispatch = useDispatch();
@@ -46,29 +47,29 @@ const ThemeSwitcher: FC = () => {
     switch (target) {
       case 'light':
         localStorage.setItem('theme', 'light');
-        dispatch(setThemeType('light'));
+        dispatch(setThemeMode('light'));
         break;
 
       case 'dark':
         localStorage.setItem('theme', 'dark');
-        dispatch(setThemeType('dark'));
+        dispatch(setThemeMode('dark'));
         break;
 
       case 'system':
         localStorage.setItem('theme', 'system');
         if (prefersDarkMode) {
-          dispatch(setThemeType('dark'));
+          dispatch(setThemeMode('dark'));
         } else {
-          dispatch(setThemeType('light'));
+          dispatch(setThemeMode('light'));
         }
         break;
 
       default:
         localStorage.setItem('theme', 'system');
         if (prefersDarkMode) {
-          dispatch(setThemeType('dark'));
+          dispatch(setThemeMode('dark'));
         } else {
-          dispatch(setThemeType('light'));
+          dispatch(setThemeMode('light'));
         }
         break;
     }
@@ -176,7 +177,7 @@ const ThemeSwitcher: FC = () => {
 
 export default ThemeSwitcher;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     icon: {
       color: theme.palette.primary.contrastText,

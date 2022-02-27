@@ -1,6 +1,6 @@
 import { FC, useEffect } from 'react';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 
 // Config
@@ -33,7 +33,7 @@ const PostContent: FC<PostContentProps> = ({ content }: PostContentProps) => {
 
 export default PostContent;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       paddingLeft: theme.spacing(20),

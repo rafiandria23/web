@@ -1,5 +1,6 @@
 import { FC, ReactNode, CSSProperties } from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme } from '@mui/material';
 
 // Components
 import { Header, Footer } from '@/components';
@@ -32,14 +33,16 @@ const Layout: FC<LayoutProps> = ({
 
 export default Layout;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     main: {
       minHeight: '100vh',
       '& > :first-child': {
-        paddingTop: Number(theme.mixins.toolbar.minHeight) + theme.spacing(2),
+        paddingTop:
+          `${Number(theme.mixins.toolbar.minHeight)}px` + theme.spacing(2),
         [theme.breakpoints.up('sm')]: {
-          paddingTop: Number(theme.mixins.toolbar.minHeight) + theme.spacing(4),
+          paddingTop:
+            `${Number(theme.mixins.toolbar.minHeight)}px` + theme.spacing(4),
         } as CSSProperties,
       } as CSSProperties,
       '& > *': {

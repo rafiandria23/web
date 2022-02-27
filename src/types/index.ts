@@ -1,5 +1,3 @@
-import { Moment } from 'moment';
-
 export interface PageInitialProps {
   errorStatus?: number;
   errorMessage?: string;
@@ -19,6 +17,4 @@ export interface UploadFile {
   url: string;
   previewUrl: string;
   provider: string;
-  createdAt: Moment | Date | string;
-  updatedAt: Moment | Date | string;
 }

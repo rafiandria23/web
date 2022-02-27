@@ -1,14 +1,16 @@
 import { FC } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
 import {
   // useMediaQuery,
+  useTheme,
+  Theme,
   ButtonBase,
   Grid,
   Hidden,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import moment from 'moment';
 
 // Types
@@ -61,7 +63,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
                 component={`p`}
                 align={`left`}
               >
-                {moment(article.createdAt).format('MMM D')}
+                {moment(article.published_at).format('MMM D')}
               </Typography>
             </Grid>
           </Grid>
@@ -86,7 +88,7 @@ const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
 
 export default ArticleCard;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       width: '100%',

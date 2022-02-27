@@ -1,5 +1,5 @@
 import { FC, ReactNode, HTMLProps } from 'react';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 
 export interface TabPanelProps extends HTMLProps<HTMLDivElement> {
   children?: ReactNode;

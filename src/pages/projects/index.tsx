@@ -2,8 +2,15 @@ import { CSSProperties } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography, Divider } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  useMediaQuery,
+  useTheme,
+  Theme,
+  Grid,
+  Typography,
+  Divider,
+} from '@mui/material';
 
 // Types
 import { Project } from '@/types/project';
@@ -114,7 +121,7 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
 
 export default ProjectsPage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       [theme.breakpoints.up('md')]: {

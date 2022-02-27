@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Grid, Typography } from '@mui/material';
 
 // Types
 import { Article } from '@/types/article';
@@ -36,7 +36,7 @@ const ArticleHeader: FC<ArticleHeaderProps> = ({ article }) => {
 
 export default ArticleHeader;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     projectPageWrapper: {
       backgroundColor: theme.palette.primary.main,

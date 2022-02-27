@@ -2,13 +2,13 @@
 import { Action, ThemeReducer } from '@/types/redux';
 
 // Constants
-import { SET_THEME_TYPE } from '@/constants/redux';
+import { SET_THEME_MODE } from '@/constants/redux';
 
-export function setThemeType(
-  type: ThemeReducer['type'],
-): Action<ThemeReducer['type']> {
+export function setThemeMode(
+  type: ThemeReducer['mode'],
+): Action<ThemeReducer['mode']> {
   return {
-    type: SET_THEME_TYPE,
+    type: SET_THEME_MODE,
     payload: type,
   };
 }

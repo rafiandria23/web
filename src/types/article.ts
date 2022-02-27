@@ -13,6 +13,4 @@ export interface Article {
   cover: UploadFile;
   tags: Tag[];
   published_at: Moment | Date | string;
-  createdAt: Moment | Date | string;
-  updatedAt: Moment | Date | string;
 }

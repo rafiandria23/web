@@ -1,7 +1,13 @@
 import { FC, CSSProperties } from 'react';
 import Image from 'next/image';
-import { useTheme, makeStyles, createStyles } from '@material-ui/core/styles';
-import { useMediaQuery, Grid, Typography } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import {
+  useMediaQuery,
+  useTheme,
+  Theme,
+  Grid,
+  Typography,
+} from '@mui/material';
 import {
   Timeline,
   TimelineItem,
@@ -9,7 +15,7 @@ import {
   TimelineConnector,
   TimelineContent,
   TimelineDot,
-} from '@material-ui/lab';
+} from '@mui/lab';
 import moment from 'moment';
 
 // Types
@@ -39,7 +45,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   return (
     <Timeline
       className={classes.wrapper}
-      align={matchesSM ? 'alternate' : 'left'}
+      position={matchesSM ? 'alternate' : 'left'}
     >
       {sortEducations(educations).map((education, idx) => {
         return (
@@ -47,7 +53,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
             <TimelineSeparator>
               <TimelineDot
                 variant='outlined'
-                color={theme.palette.type === 'light' ? 'primary' : 'inherit'}
+                color={theme.palette.mode === 'light' ? 'primary' : 'inherit'}
               />
               {idx !== educations.length - 1 ? <TimelineConnector /> : null}
             </TimelineSeparator>
@@ -133,7 +139,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
 
 export default EducationTimeline;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       // width: '100%',

@@ -1,9 +1,24 @@
-import { createTheme } from '@material-ui/core/styles';
-import { colors } from '@material-ui/core';
+import { createTheme, colors } from '@mui/material';
+
+const defaultTheme = createTheme({
+  components: {
+    MuiButton: {
+      defaultProps: {
+        color: 'inherit',
+      },
+    },
+    MuiIconButton: {
+      defaultProps: {
+        color: 'inherit',
+      },
+    },
+  },
+});
 
 export const light = createTheme({
+  ...defaultTheme,
   palette: {
-    type: 'light',
+    mode: 'light',
     primary: {
       light: colors.blue[300],
       main: colors.blue[500],
@@ -18,8 +33,9 @@ export const light = createTheme({
 });
 
 export const dark = createTheme({
+  ...defaultTheme,
   palette: {
-    type: 'dark',
+    mode: 'dark',
     primary: {
       light: colors.grey[700],
       main: colors.grey[800],

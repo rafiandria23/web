@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Container, Grid, Typography } from '@mui/material';
 import moment from 'moment';
 
 const Footer: FC = () => {
@@ -15,13 +15,15 @@ const Footer: FC = () => {
       alignItems='center'
     >
       <Grid item>
-        <Typography
-          className={classes.copyright}
-          variant='subtitle1'
-          component='p'
-        >
-          Copyright &copy; {moment().format('YYYY')} Adam Rafiandri.
-        </Typography>
+        <Container>
+          <Typography
+            className={classes.copyright}
+            variant='subtitle1'
+            component='p'
+          >
+            Copyright &copy; {moment().format('YYYY')} Adam Rafiandri.
+          </Typography>
+        </Container>
       </Grid>
     </Grid>
   );
@@ -29,7 +31,7 @@ const Footer: FC = () => {
 
 export default Footer;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(1, 0),

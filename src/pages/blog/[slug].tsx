@@ -7,8 +7,8 @@ import {
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Grid, Typography, Chip } from '@material-ui/core';
+import { makeStyles, createStyles } from '@mui/styles';
+import { Theme, Grid, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
@@ -73,7 +73,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                 align={`left`}
                 color='textSecondary'
               >
-                {moment(article.createdAt).format('MMMM D, YYYY')}
+                {moment(article.published_at).format('MMMM D, YYYY')}
               </Typography>
             </Grid>
           </Grid>
@@ -179,7 +179,7 @@ export const getStaticProps: GetStaticProps<
 
 export default ArticlePage;
 
-const useStyles = makeStyles((theme) =>
+const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(2, 4),
