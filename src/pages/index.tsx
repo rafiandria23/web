@@ -14,6 +14,7 @@ import {
 import clsx from 'clsx';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Company } from '@/types/company';
 import { SkillType } from '@/types/skill';
 import { Education } from '@/types/education';
@@ -182,61 +183,93 @@ const HomePage: NextPage<HomePageProps> = ({
 
 export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
   const { data } = await client.query<{
-    companies: Company[];
-    skillTypes: SkillType[];
-    educations: Education[];
+    companies: GraphQLModelResponse<Company[]>;
+    skillTypes: GraphQLModelResponse<SkillType[]>;
+    educations: GraphQLModelResponse<Education[]>;
   }>({
     query: gql`
       query {
         companies {
-          _id
-          name
-          logo {
-            url
-            width
-            height
-          }
-          link
-          workExperiences {
-            _id
-            title
-            employmentType
-            company {
-              _id
+          data {
+            id
+            attributes {
+              name
+              logo {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              link
+              work_experiences {
+                data {
+                  id
+                  attributes {
+                    position
+                    type
+                    location
+                    is_current
+                    start_date
+                    end_date
+                    description
+                  }
+                }
+              }
             }
-            location
-            current
-            startDate
-            endDate
-            description
           }
         }
 
         skillTypes {
-          _id
-          name
-          skills {
-            _id
-            name
-            level
+          data {
+            id
+            attributes {
+              name
+              skills {
+                data {
+                  id
+                  attributes {
+                    name
+                    level
+                    slug
+                  }
+                }
+              }
+            }
           }
         }
 
         educations {
-          _id
-          degree
-          field
-          startDate
-          endDate
-          grade
-          description
-          school {
-            _id
-            name
-            logo {
-              url
-              width
-              height
+          data {
+            id
+            attributes {
+              degree
+              field
+              start_date
+              end_date
+              grade
+              description
+              school {
+                data {
+                  id
+                  attributes {
+                    name
+                    logo {
+                      data {
+                        id
+                        attributes {
+                          url
+                          width
+                          height
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -246,9 +279,9 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 
   return {
     props: {
-      companies: data.companies,
-      skillTypes: data.skillTypes,
-      educations: data.educations,
+      companies: data.companies.data,
+      skillTypes: data.skillTypes.data,
+      educations: data.educations.data,
     },
     revalidate: 1,
   };

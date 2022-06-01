@@ -36,10 +36,10 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
   const classes = useStyles();
 
   const renderEducationPeriod = (education: Education): string => {
-    const startDate = moment(education.startDate).format('YYYY');
-    const endDate = moment(education.endDate).format('YYYY');
+    const start_date = moment(education.attributes.start_date).format('YYYY');
+    const endDate = moment(education.attributes.end_date).format('YYYY');
 
-    return `${startDate} - ${endDate}`;
+    return `${start_date} - ${endDate}`;
   };
 
   return (
@@ -49,7 +49,7 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
     >
       {sortEducations(educations).map((education, idx) => {
         return (
-          <TimelineItem className={classes.item} key={education._id}>
+          <TimelineItem className={classes.item} key={education.id}>
             <TimelineSeparator>
               <TimelineDot
                 variant='outlined'
@@ -80,7 +80,8 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
                   justifyContent='flex-start'
                   alignItems='center'
                 >
-                  {education.school.logo !== null && (
+                  {education.attributes.school.data.attributes.logo.data !==
+                    null && (
                     <Grid
                       item
                       className={
@@ -92,13 +93,17 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
                       }
                     >
                       <Image
-                        src={getPublicID(education.school.logo.url)}
-                        alt={education.school.name}
+                        src={getPublicID(
+                          education.attributes.school.data.attributes.logo.data
+                            .attributes.url,
+                        )}
+                        alt={education.attributes.school.data.attributes.name}
                         width={40}
                         height={40}
                         placeholder='blur'
                         blurDataURL={getBlurredImageURL(
-                          education.school.logo.url,
+                          education.attributes.school.data.attributes.logo.data
+                            .attributes.url,
                         )}
                       />
                     </Grid>
@@ -106,21 +111,23 @@ const EducationTimeline: FC<EducationTimelineProps> = ({ educations }) => {
 
                   <Grid item>
                     <Typography className={classes.name} variant='subtitle1'>
-                      {education.school.name}
+                      {education.attributes.school.data.attributes.name}
                     </Typography>
                   </Grid>
                 </Grid>
 
                 <Grid item>
                   <Typography className={classes.degree} variant='subtitle2'>
-                    {education.degree}
+                    {education.attributes.degree}
                   </Typography>
 
-                  <Typography variant='subtitle2'>{education.field}</Typography>
+                  <Typography variant='subtitle2'>
+                    {education.attributes.field}
+                  </Typography>
 
-                  {education.grade !== null && (
+                  {education.attributes.grade !== null && (
                     <Typography variant='subtitle2'>
-                      {education.grade}
+                      {education.attributes.grade}
                     </Typography>
                   )}
 

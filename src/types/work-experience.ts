@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 
 // Types
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
 import { Company } from './company';
 
 export enum EmploymentTypes {
@@ -14,14 +15,15 @@ export enum EmploymentTypes {
   SEASONAL = 'seasonal',
 }
 
-export interface WorkExperience {
-  _id: string;
-  title: string;
-  employmentType: EmploymentTypes;
-  company: Company;
+interface BaseWorkExperience {
+  position: string;
+  type: EmploymentTypes;
+  company: GraphQLModelResponse<Company>;
   location: string;
-  current: boolean;
-  startDate: Moment | Date | string;
-  endDate: Moment | Date | string;
+  is_current: boolean;
+  start_date: Moment | Date | string;
+  end_date: Moment | Date | string;
   description: string;
 }
+
+export interface WorkExperience extends GraphQLModel<BaseWorkExperience> {}

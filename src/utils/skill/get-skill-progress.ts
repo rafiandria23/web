@@ -2,7 +2,7 @@
 import { SkillLevels, Skill } from '@/types/skill';
 
 export default function getSkillProgress(skill: Skill): number {
-  switch (skill.level) {
+  switch (skill.attributes.level) {
     case SkillLevels.NOVICE:
       return 20;
 

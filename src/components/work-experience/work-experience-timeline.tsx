@@ -70,15 +70,19 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   };
 
   const renderEmploymentPeriod = (workExperience: WorkExperience): string => {
-    const startDate = moment(workExperience.startDate).format('MMM YYYY');
+    const start_date = moment(workExperience.attributes.start_date).format(
+      'MMM YYYY',
+    );
 
-    if (workExperience.current) {
-      return `${startDate} - Present`;
+    if (workExperience.attributes.is_current) {
+      return `${start_date} - Present`;
     }
 
-    const endDate = moment(workExperience.endDate).format('MMM YYYY');
+    const endDate = moment(workExperience.attributes.end_date).format(
+      'MMM YYYY',
+    );
 
-    return `${startDate} - ${endDate}`;
+    return `${start_date} - ${endDate}`;
   };
 
   return (
@@ -88,7 +92,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
     >
       {sortWorkExperiences(companies).map((company, idx) => {
         return (
-          <TimelineItem className={classes.item} key={company._id}>
+          <TimelineItem className={classes.item} key={company.id}>
             <TimelineSeparator>
               <TimelineDot
                 variant='outlined'
@@ -119,7 +123,7 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                   justifyContent='flex-start'
                   alignItems='center'
                 >
-                  {company.logo && (
+                  {company.attributes.logo.data !== null && (
                     <Grid
                       item
                       className={
@@ -131,44 +135,50 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
                       }
                     >
                       <Image
-                        src={getPublicID(company.logo.url)}
-                        alt={company.name}
+                        src={getPublicID(
+                          company.attributes.logo.data.attributes.url,
+                        )}
+                        alt={company.attributes.name}
                         width={40}
                         height={40}
                         placeholder='blur'
-                        blurDataURL={getBlurredImageURL(company.logo.url)}
+                        blurDataURL={getBlurredImageURL(
+                          company.attributes.logo.data.attributes.url,
+                        )}
                       />
                     </Grid>
                   )}
 
                   <Grid item>
                     <Typography className={classes.name} variant='subtitle1'>
-                      {company.name}
+                      {company.attributes.name}
                     </Typography>
                   </Grid>
                 </Grid>
-                {company.workExperiences.map((workExperience) => (
-                  <Grid
-                    className={classes.workExperience}
-                    key={workExperience._id}
-                    item
-                  >
-                    <Typography
-                      className={classes.position}
-                      variant='subtitle2'
+                {company.attributes.work_experiences.data.map(
+                  (workExperience) => (
+                    <Grid
+                      className={classes.workExperience}
+                      key={workExperience.id}
+                      item
                     >
-                      {workExperience.title}
-                    </Typography>
+                      <Typography
+                        className={classes.position}
+                        variant='subtitle2'
+                      >
+                        {workExperience.attributes.position}
+                      </Typography>
 
-                    <Typography variant='subtitle2'>
-                      {renderEmploymentType(workExperience.employmentType)}
-                    </Typography>
+                      <Typography variant='subtitle2'>
+                        {renderEmploymentType(workExperience.attributes.type)}
+                      </Typography>
 
-                    <Typography variant='subtitle2'>
-                      {renderEmploymentPeriod(workExperience)}
-                    </Typography>
-                  </Grid>
-                ))}
+                      <Typography variant='subtitle2'>
+                        {renderEmploymentPeriod(workExperience)}
+                      </Typography>
+                    </Grid>
+                  ),
+                )}
               </Grid>
             </TimelineContent>
           </TimelineItem>

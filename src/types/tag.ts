@@ -1,10 +1,13 @@
+// Types
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
 import { Project } from './project';
 import { Article } from './article';
 
-export interface Tag {
-  _id: string;
+interface BaseTag {
   name: string;
   slug: string;
-  projects: Project[];
-  articles: Article[];
+  projects: GraphQLModelResponse<Project[]>;
+  articles: GraphQLModelResponse<Article[]>;
 }
+
+export interface Tag extends GraphQLModel<BaseTag> {}

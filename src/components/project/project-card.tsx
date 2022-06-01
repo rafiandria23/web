@@ -19,7 +19,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 
   return (
     <div className={classes.wrapper}>
-      <NextLink href={`/projects/${project.slug}`} passHref>
+      <NextLink href={`/projects/${project.attributes.slug}`} passHref>
         <ButtonBase
           focusRipple
           className={classes.image}
@@ -31,17 +31,19 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           {/* <span
           className={classes.imageSrc}
           style={{
-            backgroundImage: `url(${project.cover.url})`,
+            backgroundImage: `url(${project.attributes.cover.data.attributes.url})`,
           }}
         /> */}
           <Image
             className={classes.imageSrc}
-            src={getPublicID(project.cover.url)}
-            alt={project.title}
-            width={project.cover.width}
-            height={project.cover.height}
+            src={getPublicID(project.attributes.cover.data.attributes.url)}
+            alt={project.attributes.title}
+            width={project.attributes.cover.data.attributes.width}
+            height={project.attributes.cover.data.attributes.height}
             placeholder='blur'
-            blurDataURL={getBlurredImageURL(project.cover.url)}
+            blurDataURL={getBlurredImageURL(
+              project.attributes.cover.data.attributes.url,
+            )}
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
@@ -52,10 +54,10 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
               color='inherit'
               align='center'
             >
-              {project.title}
+              {project.attributes.title}
               <br />
               <Typography component='span' variant='caption' color='inherit'>
-                {project.overview}
+                {project.attributes.overview}
               </Typography>
               <span className={classes.imageMarked} />
             </Typography>

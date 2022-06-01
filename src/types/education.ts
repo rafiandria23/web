@@ -1,15 +1,17 @@
 import { Moment } from 'moment';
 
 // Types
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
 import { School } from './school';
 
-export interface Education {
-  _id: string;
-  school: School;
+interface BaseEducation {
+  school: GraphQLModelResponse<School>;
   degree: string | null;
   field: string;
-  startDate: Moment | Date | string;
-  endDate: Moment | Date | string;
+  start_date: Moment | Date | string;
+  end_date: Moment | Date | string;
   grade: string;
   description: string;
 }
+
+export interface Education extends GraphQLModel<BaseEducation> {}

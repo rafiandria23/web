@@ -7,6 +7,7 @@ import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Hidden, Grid, Typography, Divider, Chip } from '@mui/material';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Article } from '@/types/article';
 import { Tag } from '@/types/tag';
 
@@ -65,7 +66,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles, tags }) => {
               {articles !== undefined && articles.length > 0
                 ? articles.map((article) => {
                     return (
-                      <Grid item key={article._id}>
+                      <Grid item key={article.id}>
                         <ArticleCard article={article} />
                       </Grid>
                     );
@@ -81,7 +82,6 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles, tags }) => {
             container
             direction='row'
             wrap='nowrap'
-            md={12}
           >
             <Grid
               className={classes.listContainer}
@@ -112,7 +112,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles, tags }) => {
                 {articles !== undefined && articles.length > 0
                   ? articles.map((article) => {
                       return (
-                        <Grid item key={article._id}>
+                        <Grid item key={article.id}>
                           <ArticleCard article={article} />
                         </Grid>
                       );
@@ -146,13 +146,16 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles, tags }) => {
               <Grid className={classes.tags} item container>
                 {tags.length > 0 &&
                   tags.map((tag) => (
-                    <Grid item key={tag._id}>
-                      <NextLink href={`/blog/tags/${tag.slug}`} passHref>
+                    <Grid item key={tag.id}>
+                      <NextLink
+                        href={`/blog/tags/${tag.attributes.slug}`}
+                        passHref
+                      >
                         <Chip
                           className={classes.tag}
                           component='a'
                           clickable
-                          label={tag.name}
+                          label={tag.attributes.name}
                         />
                       </NextLink>
                     </Grid>
@@ -167,29 +170,51 @@ const BlogPage: NextPage<BlogPageProps> = ({ articles, tags }) => {
 };
 
 export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
-  const { data } = await client.query<{ articles: Article[]; tags: Tag[] }>({
+  const { data } = await client.query<{
+    articles: GraphQLModelResponse<Article[]>;
+    tags: GraphQLModelResponse<Tag[]>;
+  }>({
     query: gql`
       query {
         articles {
-          _id
-          title
-          slug
-          summary
-          cover {
-            url
-            width
-            height
+          data {
+            id
+            attributes {
+              title
+              slug
+              summary
+              cover {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              tags {
+                data {
+                  id
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+              createdAt
+            }
           }
-          tags {
-            _id
-            name
-          }
-          published_at
         }
 
         tags {
-          _id
-          name
+          data {
+            id
+            attributes {
+              name
+              slug
+            }
+          }
         }
       }
     `,
@@ -197,8 +222,8 @@ export const getStaticProps: GetStaticProps<BlogPageProps> = async () => {
 
   return {
     props: {
-      articles: data.articles,
-      tags: data.tags,
+      articles: data.articles.data,
+      tags: data.tags.data,
     },
     revalidate: 1,
   };

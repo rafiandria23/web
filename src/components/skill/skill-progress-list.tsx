@@ -26,7 +26,7 @@ const SkillProgressList: FC<SkillProgressListProps> = ({ skillTypes }) => {
     >
       {sortSkills(skillTypes).map((skillType) => (
         <Grid
-          key={skillType._id}
+          key={skillType.id}
           className={classes.skillTypeWrapper}
           item
           container
@@ -41,13 +41,13 @@ const SkillProgressList: FC<SkillProgressListProps> = ({ skillTypes }) => {
               component='h3'
               align='center'
             >
-              {skillType.name}
+              {skillType.attributes.name}
             </Typography>
           </Grid>
 
           <Grid item container>
-            {skillType.skills.map((skill) => (
-              <Grid key={skill._id} item container direction='column'>
+            {skillType.attributes.skills.data.map((skill) => (
+              <Grid key={skill.id} item container direction='column'>
                 <Grid item>
                   <Typography
                     className={clsx(classes.text, classes.title)}
@@ -55,7 +55,7 @@ const SkillProgressList: FC<SkillProgressListProps> = ({ skillTypes }) => {
                     align='left'
                     gutterBottom
                   >
-                    {skill.name}
+                    {skill.attributes.name}
                   </Typography>
                 </Grid>
 

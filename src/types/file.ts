@@ -1,0 +1,19 @@
+// Types
+import { GraphQLModel } from './graphql';
+
+interface BaseFileUpload {
+  name: string;
+  alternativeText: string;
+  caption: string;
+  width: number;
+  height: number;
+  hash: string;
+  ext: string;
+  mime: string;
+  size: string;
+  url: string;
+  previewUrl: string;
+  provider: string;
+}
+
+export interface FileUpload extends GraphQLModel<BaseFileUpload> {}

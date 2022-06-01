@@ -89,7 +89,11 @@ const ThemeSwitcher: FC = () => {
           return <NightsStayIcon className={classes.icon} />;
 
         case 'system':
-          return <ComputerIcon className={classes.icon} />;
+          return prefersDarkMode ? (
+            <NightsStayIcon className={classes.icon} />
+          ) : (
+            <WbSunnyIcon className={classes.icon} />
+          );
 
         default:
           return null;

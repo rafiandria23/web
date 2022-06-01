@@ -25,17 +25,17 @@ export interface SkillTabsProps {
 
 const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
   const classes = useStyles();
-  const [tabValue, setTabValue] = useState<SkillType['name']>('');
+  const [tabValue, setTabValue] = useState<SkillType['attributes']['name']>('');
 
   useEffect(() => {
     if (skillTypes.length > 0) {
-      setTabValue(skillTypes[0].name);
+      setTabValue(skillTypes[0].attributes.name);
     }
   }, [skillTypes]);
 
   const handleChangeTab = (
     _: ChangeEvent<{}>,
-    newTabValue: SkillType['name'],
+    newTabValue: SkillType['attributes']['name'],
   ) => {
     setTabValue(newTabValue);
   };
@@ -54,12 +54,12 @@ const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
       >
         {sortedSkills.map((skillType) => (
           <Tab
-            key={skillType._id}
+            key={skillType.id}
             classes={{
               root: classes.tab,
             }}
-            value={skillType.name}
-            label={skillType.name}
+            value={skillType.attributes.name}
+            label={skillType.attributes.name}
           />
         ))}
       </Tabs>
@@ -67,13 +67,13 @@ const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
       {sortedSkills.map((skillType) => (
         <TabPanel
           className={classes.tabPanel}
-          key={skillType._id}
-          index={skillType.name}
+          key={skillType.id}
+          index={skillType.attributes.name}
           value={tabValue}
         >
           <Grid item container>
-            {skillType.skills.map((skill) => (
-              <Grid key={skill._id} item container direction='column'>
+            {skillType.attributes.skills.data.map((skill) => (
+              <Grid key={skill.id} item container direction='column'>
                 <Grid item>
                   <Typography
                     className={clsx(classes.text, classes.title)}
@@ -81,7 +81,7 @@ const SkillTabs: FC<SkillTabsProps> = ({ skillTypes }) => {
                     align='left'
                     gutterBottom
                   >
-                    {skill.name}
+                    {skill.attributes.name}
                   </Typography>
                 </Grid>
 
