@@ -26,6 +26,7 @@ import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Project } from '@/types/project';
 
 // GraphQL
@@ -39,7 +40,7 @@ import markdownComponents from '@/components/markdown';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
 interface ProjectPageProps {
-  project: Project;
+  project: Project | null;
 }
 
 const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
@@ -47,15 +48,15 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.up('md'));
 
-  return (
+  return project !== null ? (
     <>
       <NextSeo
-        title={project.title}
-        description={project.overview}
+        title={project.attributes.title}
+        description={project.attributes.overview}
         openGraph={{
           images: [
             {
-              url: project.cover.url,
+              url: project.attributes.cover.data.attributes.url,
             },
           ],
         }}
@@ -73,12 +74,14 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
           <Grid item container justifyContent='center' md={4}>
             <Grid item>
               <Image
-                src={getPublicID(project.cover.url)}
-                alt={project.title}
-                width={project.cover.width}
-                height={project.cover.height}
+                src={getPublicID(project.attributes.cover.data.attributes.url)}
+                alt={project.attributes.title}
+                width={project.attributes.cover.data.attributes.width}
+                height={project.attributes.cover.data.attributes.height}
                 placeholder='blur'
-                blurDataURL={getBlurredImageURL(project.cover.url)}
+                blurDataURL={getBlurredImageURL(
+                  project.attributes.cover.data.attributes.url,
+                )}
               />
             </Grid>
           </Grid>
@@ -91,12 +94,12 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
               align={matchesMD ? 'left' : 'center'}
               gutterBottom
             >
-              {project.title}{' '}
+              {project.attributes.title}{' '}
               <Hidden smDown>
                 <Tooltip title='Visit Project'>
                   <IconButton
                     className={classes.button}
-                    href={project.link}
+                    href={project.attributes.link}
                     target={`_blank`}
                   >
                     <OpenInNewIcon />
@@ -112,7 +115,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
               align={matchesMD ? 'left' : 'center'}
               paragraph
             >
-              {project.overview}
+              {project.attributes.overview}
             </Typography>
           </Grid>
 
@@ -123,7 +126,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
                 fullWidth
                 variant={`outlined`}
                 endIcon={<OpenInNewIcon />}
-                href={project.link}
+                href={project.attributes.link}
                 target={`_blank`}
               >{`Visit Project`}</Button>
             </Grid>
@@ -134,18 +137,21 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
           className={classes.description}
           components={markdownComponents}
         >
-          {project.description}
+          {project.attributes.description}
         </ReactMarkdown>
 
         <Grid className={classes.tags} container>
-          {project.tags.length > 0 &&
-            project.tags.map((tag) => (
-              <Grid item key={tag._id}>
-                <NextLink href={`/projects/tags/${tag.slug}`} passHref>
+          {project.attributes.tags.length > 0 &&
+            project.attributes.tags.map((tag) => (
+              <Grid item key={tag.id}>
+                <NextLink
+                  href={`/projects/tags/${tag.attributes.slug}`}
+                  passHref
+                >
                   <Chip
                     className={classes.tag}
                     component='a'
-                    label={tag.name}
+                    label={tag.attributes.name}
                     clickable
                   />
                 </NextLink>
@@ -154,25 +160,36 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
         </Grid>
       </Layout>
     </>
+  ) : (
+    <></>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ projects: Project[] }>({
+  const { data } = await client.query<{
+    projects: GraphQLModelResponse<Project[]>;
+  }>({
     query: gql`
       query {
         projects {
-          slug
+          data {
+            id
+            attributes {
+              slug
+            }
+          }
         }
       }
     `,
   });
 
-  const slugs: GetStaticPathsResult['paths'] = data.projects.map((project) => ({
-    params: {
-      slug: project.slug,
-    },
-  }));
+  const slugs: GetStaticPathsResult['paths'] = data.projects.data.map(
+    (project) => ({
+      params: {
+        slug: project.attributes.slug,
+      },
+    }),
+  );
 
   return {
     paths: slugs,
@@ -182,40 +199,59 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<
   ProjectPageProps,
-  { slug: Project['slug'] }
+  { slug: Project['attributes']['slug'] }
 > = async ({ params }) => {
-  const slug = params?.slug;
-  const { data } = await client.query<{ projects: Project[] }>({
+  const slug = String(params?.slug);
+  const { data } = await client.query<
+    { projects: GraphQLModelResponse<Project[]> },
+    { slug: Project['attributes']['slug'] }
+  >({
+    variables: {
+      slug,
+    },
     query: gql`
       query ($slug: String!) {
-        projects(where: { slug: $slug }) {
-          _id
-          title
-          slug
-          overview
-          link
-          cover {
-            url
-            width
-            height
-          }
-          description
-          tags {
-            _id
-            name
-            slug
+        projects(filters: { slug: { eq: $slug } }) {
+          data {
+            id
+            attributes {
+              title
+              slug
+              overview
+              link
+              cover {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              description
+              tags {
+                data {
+                  id
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
           }
         }
       }
     `,
-    variables: {
-      slug,
-    },
   });
 
   return {
     props: {
-      project: data.projects[0],
+      project:
+        data.projects.data && data.projects.data[0]
+          ? data.projects.data[0]
+          : null,
     },
     revalidate: 1,
   };

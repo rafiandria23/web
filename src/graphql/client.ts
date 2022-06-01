@@ -1,9 +1,9 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // Config
-import { CMS_API_URL } from '@/config';
+import { CMS_URI } from '@/config';
 
 export default new ApolloClient({
-  uri: `${CMS_API_URL}/gql`,
+  uri: CMS_URI,
   cache: new InMemoryCache(),
 });

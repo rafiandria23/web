@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Tag } from '@/types/tag';
 
 // GraphQL
@@ -27,7 +28,7 @@ import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
 interface ProjectTagsPageProps {
-  tag: Tag;
+  tag: Tag | null;
 }
 
 const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
@@ -35,11 +36,11 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
   const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
   const classes = useStyles();
 
-  return (
+  return tag !== null ? (
     <>
       <NextSeo
-        title={tag.name}
-        description={`Projects that are made with ${tag.name}`}
+        title={tag.attributes.name}
+        description={`Projects that are made with ${tag.attributes.name}`}
       />
 
       <Layout>
@@ -57,7 +58,7 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
               variant='h5'
               gutterBottom
             >
-              {`${tag.name} Projects`}
+              {`${tag.attributes.name} Projects`}
             </Typography>
           </Grid>
 
@@ -75,10 +76,11 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
             alignItems={matchesSM ? 'center' : 'stretch'}
             spacing={2}
           >
-            {tag.projects !== undefined && tag.projects.length > 0
-              ? tag.projects.map((project) => {
+            {tag.attributes.projects !== undefined &&
+            tag.attributes.projects.data.length > 0
+              ? tag.attributes.projects.data.map((project) => {
                   return (
-                    <Grid item key={project._id}>
+                    <Grid item key={project.id}>
                       <ProjectCard project={project} />
                     </Grid>
                   );
@@ -88,23 +90,30 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
         </Grid>
       </Layout>
     </>
+  ) : (
+    <></>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: Tag[] }>({
+  const { data } = await client.query<{ tags: GraphQLModelResponse<Tag[]> }>({
     query: gql`
       query {
         tags {
-          slug
+          data {
+            id
+            attributes {
+              slug
+            }
+          }
         }
       }
     `,
   });
 
-  const slugs: GetStaticPathsResult['paths'] = data.tags.map((tag) => ({
+  const slugs: GetStaticPathsResult['paths'] = data.tags.data.map((tag) => ({
     params: {
-      slug: tag.slug,
+      slug: tag.attributes.slug,
     },
   }));
 
@@ -116,36 +125,53 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<
   ProjectTagsPageProps,
-  { slug: Tag['slug'] }
+  { slug: Tag['attributes']['slug'] }
 > = async ({ params }) => {
-  const slug = params?.slug;
-  const { data } = await client.query<{ tags: Tag[] }>({
+  const slug = String(params?.slug);
+  const { data } = await client.query<
+    { tags: GraphQLModelResponse<Tag[]> },
+    { slug: Tag['attributes']['slug'] }
+  >({
+    variables: {
+      slug,
+    },
     query: gql`
       query ($slug: String!) {
-        tags(where: { slug: $slug }) {
-          name
-          projects {
-            _id
-            title
-            slug
-            overview
-            cover {
-              url
-              width
-              height
+        tags(filters: { slug: { eq: $slug } }) {
+          data {
+            id
+            attributes {
+              name
+              projects {
+                data {
+                  id
+                  attributes {
+                    title
+                    slug
+                    overview
+                    cover {
+                      data {
+                        id
+                        attributes {
+                          url
+                          width
+                          height
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
     `,
-    variables: {
-      slug,
-    },
   });
 
   return {
     props: {
-      tag: data.tags[0],
+      tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
     },
     revalidate: 1,
   };

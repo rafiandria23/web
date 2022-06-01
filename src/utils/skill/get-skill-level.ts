@@ -2,7 +2,7 @@
 import { SkillLevels, Skill } from '@/types/skill';
 
 export default function getSkillLevel(skill: Skill): string {
-  switch (skill.level) {
+  switch (skill.attributes.level) {
     case SkillLevels.NOVICE:
       return 'Novice';
 

@@ -1,3 +1,6 @@
+// Types
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
+
 export enum SkillLevels {
   NOVICE = 'novice',
   ADVANCED_BEGINNER = 'advanced_beginner',
@@ -6,14 +9,16 @@ export enum SkillLevels {
   EXPERT = 'expert',
 }
 
-export interface Skill {
-  _id: string;
+interface BaseSkill {
   name: string;
   level: SkillLevels;
 }
 
-export interface SkillType {
-  _id: string;
+export interface Skill extends GraphQLModel<BaseSkill> {}
+
+interface BaseSkillType {
   name: string;
-  skills: Skill[];
+  skills: GraphQLModelResponse<Skill[]>;
 }
+
+export interface SkillType extends GraphQLModel<BaseSkillType> {}

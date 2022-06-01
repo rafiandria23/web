@@ -6,7 +6,7 @@ import { Education } from '@/types/education';
 
 export default function sortEducations(educations: Education[]): Education[] {
   return [...educations].sort((e1, e2) => {
-    if (moment(e1.startDate).isBefore(moment(e2.startDate))) {
+    if (moment(e1.start_date).isBefore(moment(e2.start_date))) {
       return 1;
     }
 

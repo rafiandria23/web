@@ -1,14 +1,16 @@
 // Types
-import { UploadFile } from './';
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
+import { FileUpload } from './file';
 import { Tag } from './tag';
 
-export interface Project {
-  _id: string;
+interface BaseProject {
   title: string;
   slug: string;
   overview: string;
   link: string;
   description: string;
-  cover: UploadFile;
+  cover: GraphQLModelResponse<FileUpload>;
   tags: Tag[];
 }
+
+export interface Project extends GraphQLModel<BaseProject> {}

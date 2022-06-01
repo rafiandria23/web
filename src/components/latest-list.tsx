@@ -38,13 +38,13 @@ const LatestList: FC<LatestListProps> = ({ title, data, type }) => {
       >
         {type === `article` && (data as Article[]).length > 0
           ? (data as Article[]).map((article) => (
-              <Grid key={article._id} item>
+              <Grid key={article.id} item>
                 <LatestCard data={article} type={type} />
               </Grid>
             ))
           : type === `project` && (data as Project[]).length > 0
           ? (data as Project[]).map((project) => (
-              <Grid key={project._id} item>
+              <Grid key={project.id} item>
                 <LatestCard data={project} type={type} />
               </Grid>
             ))

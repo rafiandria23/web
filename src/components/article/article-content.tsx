@@ -4,7 +4,7 @@ import { Theme, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 
 // Config
-import { CMS_API_URL } from '@/config';
+import { CMS_URI } from '@/config';
 
 interface PostContentProps {
   content: string;
@@ -14,7 +14,7 @@ const PostContent: FC<PostContentProps> = ({ content }: PostContentProps) => {
   const classes = useStyles();
 
   useEffect(() => {
-    content.split('/uploads/').join(`${CMS_API_URL}/uploads/`);
+    content.split('/uploads/').join(`${CMS_URI}/uploads/`);
   }, [content]);
 
   return (

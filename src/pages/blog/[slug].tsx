@@ -13,6 +13,7 @@ import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { PageInitialProps } from '@/types';
 import { Article } from '@/types/article';
 
@@ -33,12 +34,12 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
   return article !== null ? (
     <>
       <NextSeo
-        title={article.title}
-        description={article.summary}
+        title={article.attributes.title}
+        description={article.attributes.summary}
         openGraph={{
           images: [
             {
-              url: article.cover.url,
+              url: article.attributes.cover.data.attributes.url,
             },
           ],
         }}
@@ -52,6 +53,8 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
           direction={`column`}
           justifyContent={`space-between`}
           alignItems={`stretch`}
+          // Microsoft Clarity
+          data-clarity-region={`article`}
         >
           <Grid className={classes.header} item container direction='column'>
             <Grid item>
@@ -62,7 +65,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                 align={`left`}
                 gutterBottom
               >
-                {article.title}
+                {article.attributes.title}
               </Typography>
             </Grid>
 
@@ -73,14 +76,14 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
                 align={`left`}
                 color='textSecondary'
               >
-                {moment(article.published_at).format('MMMM D, YYYY')}
+                {moment(article.attributes.createdAt).format('MMMM D, YYYY')}
               </Typography>
             </Grid>
           </Grid>
 
           <Grid className={classes.content} item>
             <ReactMarkdown components={markdownComponents}>
-              {article.content}
+              {article.attributes.content}
             </ReactMarkdown>
           </Grid>
 
@@ -92,14 +95,14 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
             wrap={`wrap`}
             justifyContent={`flex-start`}
           >
-            {article.tags.length > 0 &&
-              article.tags.map((tag) => (
-                <Grid item key={tag._id}>
-                  <NextLink href={`/blog/tags/${tag.slug}`} passHref>
+            {article.attributes.tags.data.length > 0 &&
+              article.attributes.tags.data.map((tag) => (
+                <Grid item key={tag.id}>
+                  <NextLink href={`/blog/tags/${tag.attributes.slug}`} passHref>
                     <Chip
                       className={classes.tag}
                       component='a'
-                      label={tag.name}
+                      label={tag.attributes.name}
                       clickable
                     />
                   </NextLink>
@@ -115,21 +118,30 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ articles: Article[] }>({
+  const { data } = await client.query<{
+    articles: GraphQLModelResponse<Article[]>;
+  }>({
     query: gql`
       query {
         articles {
-          slug
+          data {
+            id
+            attributes {
+              slug
+            }
+          }
         }
       }
     `,
   });
 
-  const slugs: GetStaticPathsResult['paths'] = data.articles.map((article) => ({
-    params: {
-      slug: article.slug,
-    },
-  }));
+  const slugs: GetStaticPathsResult['paths'] = data.articles.data.map(
+    (article) => ({
+      params: {
+        slug: article.attributes.slug,
+      },
+    }),
+  );
 
   return {
     paths: slugs,
@@ -139,40 +151,59 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<
   ArticlePageProps,
-  { slug: Article['slug'] }
+  { slug: Article['attributes']['slug'] }
 > = async ({ params }) => {
-  const slug = params?.slug;
-  const { data } = await client.query<{ articles: Article[] }>({
-    query: gql`
-      query ($slug: String!) {
-        articles(where: { slug: $slug }) {
-          _id
-          title
-          slug
-          summary
-          cover {
-            url
-            width
-            height
-          }
-          content
-          tags {
-            _id
-            name
-            slug
-          }
-          published_at
-        }
-      }
-    `,
+  const slug = String(params?.slug);
+  const { data } = await client.query<
+    { articles: GraphQLModelResponse<Article[]> },
+    { slug: Article['attributes']['slug'] }
+  >({
     variables: {
       slug,
     },
+    query: gql`
+      query ($slug: String!) {
+        articles(filters: { slug: { eq: $slug } }) {
+          data {
+            id
+            attributes {
+              title
+              slug
+              summary
+              cover {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              content
+              tags {
+                data {
+                  id
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+              createdAt
+            }
+          }
+        }
+      }
+    `,
   });
 
   return {
     props: {
-      article: data.articles[0],
+      article:
+        data.articles.data && data.articles.data[0]
+          ? data.articles.data[0]
+          : null,
     },
   };
 };

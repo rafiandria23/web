@@ -1,16 +1,16 @@
-import { Moment } from 'moment';
-
 // Types
-import { UploadFile } from '.';
+import { GraphQLModel, GraphQLModelResponse } from './graphql';
+import { FileUpload } from './file';
 import { Tag } from './tag';
 
-export interface Article {
-  _id: string;
+interface BaseArticle {
   title: string;
   slug: string;
   summary: string;
   content: string;
-  cover: UploadFile;
-  tags: Tag[];
-  published_at: Moment | Date | string;
+  thumbnail: GraphQLModelResponse<FileUpload>;
+  cover: GraphQLModelResponse<FileUpload>;
+  tags: GraphQLModelResponse<Tag[]>;
 }
+
+export interface Article extends GraphQLModel<BaseArticle> {}

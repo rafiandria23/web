@@ -11,6 +11,7 @@ import { Theme, Grid, Typography, Divider } from '@mui/material';
 
 // Types
 import { PageInitialProps } from '@/types';
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Tag } from '@/types/tag';
 
 // GraphQL
@@ -21,17 +22,17 @@ import { Layout } from '@/components';
 import { ArticleCard } from '@/components/article';
 
 interface ArticleTagsPageProps extends PageInitialProps {
-  tag: Tag;
+  tag: Tag | null;
 }
 
 const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
   const classes = useStyles();
 
-  return (
+  return tag !== null ? (
     <>
       <NextSeo
-        title={tag.name}
-        description={`Articles that are related to ${tag.name}`}
+        title={tag.attributes.name}
+        description={`Articles that are related to ${tag.attributes.name}`}
       />
 
       <Layout>
@@ -49,7 +50,7 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
               variant='h5'
               gutterBottom
             >
-              {`${tag.name} Articles`}
+              {`${tag.attributes.name} Articles`}
             </Typography>
           </Grid>
 
@@ -66,10 +67,11 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
             alignItems='stretch'
             spacing={4}
           >
-            {tag.articles !== undefined && tag.articles.length > 0
-              ? tag.articles.map((article) => {
+            {tag.attributes.articles !== undefined &&
+            tag.attributes.articles.data.length > 0
+              ? tag.attributes.articles.data.map((article) => {
                   return (
-                    <Grid item key={article._id}>
+                    <Grid item key={article.id}>
                       <ArticleCard article={article} />
                     </Grid>
                   );
@@ -79,23 +81,30 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
         </Grid>
       </Layout>
     </>
+  ) : (
+    <></>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: Tag[] }>({
+  const { data } = await client.query<{ tags: GraphQLModelResponse<Tag[]> }>({
     query: gql`
       query {
         tags {
-          slug
+          data {
+            id
+            attributes {
+              slug
+            }
+          }
         }
       }
     `,
   });
 
-  const slugs: GetStaticPathsResult['paths'] = data.tags.map((tag) => ({
+  const slugs: GetStaticPathsResult['paths'] = data.tags.data.map((tag) => ({
     params: {
-      slug: tag.slug,
+      slug: tag.attributes.slug,
     },
   }));
 
@@ -107,37 +116,54 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps<
   ArticleTagsPageProps,
-  { slug: Tag['slug'] }
+  { slug: Tag['attributes']['slug'] }
 > = async ({ params }) => {
-  const slug = params?.slug;
-  const { data } = await client.query<{ tags: Tag[] }>({
+  const slug = String(params?.slug);
+  const { data } = await client.query<
+    { tags: GraphQLModelResponse<Tag[]> },
+    { slug: Tag['attributes']['slug'] }
+  >({
+    variables: {
+      slug,
+    },
     query: gql`
       query ($slug: String!) {
-        tags(where: { slug: $slug }) {
-          name
-          articles {
-            _id
-            title
-            slug
-            summary
-            cover {
-              url
-              width
-              height
+        tags(filters: { slug: { eq: $slug } }) {
+          data {
+            id
+            attributes {
+              name
+              articles {
+                data {
+                  id
+                  attributes {
+                    title
+                    slug
+                    summary
+                    cover {
+                      data {
+                        id
+                        attributes {
+                          url
+                          width
+                          height
+                        }
+                      }
+                    }
+                    createdAt
+                  }
+                }
+              }
             }
-            published_at
           }
         }
       }
     `,
-    variables: {
-      slug,
-    },
   });
 
   return {
     props: {
-      tag: data.tags[0],
+      tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
     },
     revalidate: 1,
   };

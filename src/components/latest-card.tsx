@@ -86,7 +86,7 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
         <CardContent>
           {data.tags.length &&
             data.tags.map((tag: Tag) => (
-              <NextLink key={tag._id} href={`/tags/${tag.slug}`} passHref>
+              <NextLink key={tag.id} href={`/tags/${tag.slug}`} passHref>
                 <Chip
                   classes={{ root: classes.tagChip }}
                   component='a'

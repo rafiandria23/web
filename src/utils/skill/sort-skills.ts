@@ -14,20 +14,26 @@ export default function sortSkills(skillTypes: SkillType[]): SkillType[] {
   );
 
   const result = skillTypes.map((skillType) => {
-    const sortedSkills = [...skillType.skills].sort((s1, s2) => {
-      const s1Number = levelNumbers.find(
-        (levelNumber) => levelNumber.level === s1.level,
-      )!.number;
-      const s2Number = levelNumbers.find(
-        (levelNumber) => levelNumber.level === s2.level,
-      )!.number;
+    const sortedSkills = [...skillType.attributes.skills.data].sort(
+      (s1, s2) => {
+        const s1Number = levelNumbers.find(
+          (levelNumber) => levelNumber.level === s1.attributes.level,
+        )!.number;
+        const s2Number = levelNumbers.find(
+          (levelNumber) => levelNumber.level === s2.attributes.level,
+        )!.number;
 
-      return s2Number - s1Number;
-    });
+        return s2Number - s1Number;
+      },
+    );
 
     return update(skillType, {
-      skills: {
-        $set: sortedSkills,
+      attributes: {
+        skills: {
+          data: {
+            $set: sortedSkills,
+          },
+        },
       },
     });
   });

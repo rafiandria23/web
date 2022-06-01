@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 
 // Types
+import { GraphQLModelResponse } from '@/types/graphql';
 import { Project } from '@/types/project';
 
 // GraphQL
@@ -74,7 +75,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             {projects !== undefined && projects.length > 0
               ? projects.map((project) => {
                   return (
-                    <Grid item key={project._id}>
+                    <Grid item key={project.id}>
                       <ProjectCard project={project} />
                     </Grid>
                   );
@@ -88,23 +89,38 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
 };
 
 export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
-  const { data } = await client.query<{ projects: Project[] }>({
+  const { data } = await client.query<{
+    projects: GraphQLModelResponse<Project[]>;
+  }>({
     query: gql`
       query {
         projects {
-          _id
-          title
-          slug
-          overview
-          cover {
-            url
-            width
-            height
-          }
-          tags {
-            _id
-            name
-            slug
+          data {
+            id
+            attributes {
+              title
+              slug
+              overview
+              cover {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              tags {
+                data {
+                  id
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -113,7 +129,7 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
 
   return {
     props: {
-      projects: data.projects,
+      projects: data.projects.data,
     },
     revalidate: 1,
   };
