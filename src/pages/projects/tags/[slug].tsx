@@ -17,7 +17,7 @@ import {
 } from '@mui/material';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
+import { IGraphQLModelResponse } from '@/types/graphql';
 import { Tag } from '@/types/tag';
 
 // GraphQL
@@ -27,13 +27,13 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
-interface ProjectTagsPageProps {
+interface IProjectTagsPageProps {
   tag: Tag | null;
 }
 
-const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
+const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
 
   return tag !== null ? (
@@ -72,8 +72,8 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={matchesSM ? 'flex-start' : 'space-evenly'}
-            alignItems={matchesSM ? 'center' : 'stretch'}
+            justifyContent={isSmallScreen ? 'flex-start' : 'space-evenly'}
+            alignItems={isSmallScreen ? 'center' : 'stretch'}
             spacing={2}
           >
             {tag.attributes.projects !== undefined &&
@@ -96,7 +96,7 @@ const ProjectTagsPage: NextPage<ProjectTagsPageProps> = ({ tag }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: GraphQLModelResponse<Tag[]> }>({
+  const { data } = await client.query<{ tags: IGraphQLModelResponse<Tag[]> }>({
     query: gql`
       query {
         tags {
@@ -129,7 +129,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { tags: GraphQLModelResponse<Tag[]> },
+    { tags: IGraphQLModelResponse<Tag[]> },
     { slug: Tag['attributes']['slug'] }
   >({
     variables: {
@@ -173,7 +173,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 

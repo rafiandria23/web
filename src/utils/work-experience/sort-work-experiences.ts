@@ -53,25 +53,25 @@ export default function sortWorkExperiences(companies: Company[]): Company[] {
     });
   });
 
-  // return result.sort((c1, c2) => {
-  //   if (
-  //     moment(
-  //       c1.attributes.work_experiences.data[
-  //         c1.attributes.work_experiences.data.length - 1
-  //       ].attributes.start_date,
-  //     ).isBefore(
-  //       moment(
-  //         c2.attributes.work_experiences.data[
-  //           c2.attributes.work_experiences.data.length - 1
-  //         ].attributes.start_date,
-  //       ),
-  //     )
-  //   ) {
-  //     return 1;
-  //   }
+  return result.sort((c1, c2) => {
+    if (
+      moment(
+        c1.attributes.work_experiences.data[
+          c1.attributes.work_experiences.data.length - 1
+        ]?.attributes.start_date,
+      ).isBefore(
+        moment(
+          c2.attributes.work_experiences.data[
+            c2.attributes.work_experiences.data.length - 1
+          ]?.attributes.start_date,
+        ),
+      )
+    ) {
+      return 1;
+    }
 
-  //   return -1;
-  // });
+    return -1;
+  });
 
   return result;
 }

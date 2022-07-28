@@ -1,103 +1,80 @@
 import { FC } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   // useMediaQuery,
   useTheme,
-  Theme,
-  ButtonBase,
-  Grid,
-  Hidden,
   Typography,
+  CardActionArea,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
 } from '@mui/material';
 import moment from 'moment';
 
 // Types
-import { Article } from '@/types/article';
+import { IArticle } from '@/types/article';
 
 //  Utils
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
-interface ArticleCardProps {
-  article: Article;
+interface IArticleCardProps {
+  article: IArticle;
 }
 
-const ArticleCard: FC<ArticleCardProps> = ({ article }) => {
+const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
   const theme = useTheme();
-  // const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
-  const classes = useStyles();
+  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <NextLink href={`/blog/${article.slug}`} passHref>
-      <ButtonBase className={classes.wrapper}>
-        <Grid container wrap='nowrap'>
-          <Grid item container direction='column'>
-            <Grid item>
-              <Typography
-                className={classes.title}
-                variant='h6'
-                component='h2'
-                align='left'
-                gutterBottom
-              >
-                {article.title}
-              </Typography>
+    <NextLink href={`/blog/${article.attributes.slug}`} passHref>
+      <CardActionArea>
+        <Card>
+          <CardMedia>
+            <Image
+              src={getPublicID(article.attributes.cover.data.attributes.url)}
+              alt={article.attributes.title}
+              width={article.attributes.cover.data.attributes.width}
+              height={article.attributes.cover.data.attributes.height}
+              objectFit='contain'
+              placeholder='blur'
+              blurDataURL={getBlurredImageURL(
+                article.attributes.cover.data.attributes.url,
+              )}
+            />
+          </CardMedia>
 
-              <Hidden xsDown>
-                <Typography
-                  className={classes.summary}
-                  variant='caption'
-                  align='left'
-                  paragraph
-                >
-                  {article.summary}
-                </Typography>
-              </Hidden>
-            </Grid>
+          <CardContent>
+            <Typography variant='h5' gutterBottom>
+              {article.attributes.title}
+            </Typography>
+            <Typography variant='body2' color={theme.palette.text.secondary}>
+              {article.attributes.summary}
+            </Typography>
+          </CardContent>
 
-            <Grid item>
-              <Typography
-                className={classes.date}
-                variant={`overline`}
-                component={`p`}
-                align={`left`}
-              >
-                {moment(article.published_at).format('MMM D')}
-              </Typography>
-            </Grid>
-          </Grid>
-
-          <Grid item xs={3} container justifyContent='flex-end'>
-            <Grid item>
-              <Image
-                src={getPublicID(article.cover.url)}
-                alt={article.title}
-                width={article.cover.width}
-                height={article.cover.width}
-                placeholder='blur'
-                blurDataURL={getBlurredImageURL(article.cover.url)}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </ButtonBase>
+          <CardActions
+            sx={{
+              px: theme.spacing(2),
+            }}
+          >
+            <Typography
+              variant='overline'
+              component='p'
+              align='left'
+              sx={{
+                textTransform: 'none',
+                color: theme.palette.text.secondary,
+              }}
+            >
+              {moment(article.attributes.updatedAt).format('MMM D, YYYY')}
+            </Typography>
+          </CardActions>
+        </Card>
+      </CardActionArea>
     </NextLink>
   );
 };
 
 export default ArticleCard;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {
-      width: '100%',
-    },
-    title: {},
-    summary: {},
-    date: {
-      textTransform: 'none',
-      color: theme.palette.text.secondary,
-    },
-  }),
-);

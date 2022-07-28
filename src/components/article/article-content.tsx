@@ -6,11 +6,11 @@ import ReactMarkdown from 'react-markdown';
 // Config
 import { CMS_URI } from '@/config';
 
-interface PostContentProps {
+interface IPostContentProps {
   content: string;
 }
 
-const PostContent: FC<PostContentProps> = ({ content }: PostContentProps) => {
+const PostContent: FC<IPostContentProps> = ({ content }: PostContentProps) => {
   const classes = useStyles();
 
   useEffect(() => {
@@ -21,10 +21,10 @@ const PostContent: FC<PostContentProps> = ({ content }: PostContentProps) => {
     <Grid
       container
       classes={{ container: classes.wrapper }}
-      direction={`column`}
-      justifyContent={`space-around`}
-      alignItems={`stretch`}
-      component={`section`}
+      direction='column'
+      justifyContent='space-around'
+      alignItems='stretch'
+      component='section'
     >
       <ReactMarkdown>{content}</ReactMarkdown>
     </Grid>

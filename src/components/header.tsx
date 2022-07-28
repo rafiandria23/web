@@ -1,6 +1,5 @@
 import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
 import NextLink from 'next/link';
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   useTheme,
   Theme,
@@ -24,25 +23,23 @@ import {
   LinkedIn as LinkedInLogo,
   GitHub as GitHubLogo,
 } from '@mui/icons-material';
-import clsx from 'clsx';
 
 // Components
 import { ThemeSwitcher } from '@/components';
 
 const Transition = forwardRef(
-  (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => {
-    return <Slide direction={`right`} ref={ref} {...props} />;
-  },
+  (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => (
+    <Slide direction='right' ref={ref} {...props} />
+  ),
 );
 Transition.displayName = 'Transition';
 
-export interface HeaderProps {
+export interface IHeaderProps {
   elevate?: boolean;
 }
 
-const Header: FC<HeaderProps> = ({ elevate = false }) => {
+const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const theme = useTheme();
-  const classes = useStyles();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
@@ -59,48 +56,67 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
   return (
     <>
       <AppBar
-        className={clsx({
-          [classes.transparentHeader]: elevate && !scrollTriggered,
-        })}
         position='fixed'
         elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
+        sx={{
+          ...(elevate &&
+            !scrollTriggered && {
+              bgcolor: 'transparent',
+            }),
+        }}
       >
         <Container>
-          <Toolbar style={{ paddingLeft: 0, paddingRight: 0 }}>
+          <Toolbar sx={{ pl: 0, pr: 0 }}>
             <Hidden smUp>
               <IconButton
-                className={classes.menuButton}
-                edge={`start`}
+                edge='start'
                 onClick={handleOpen}
+                sx={{
+                  mr: theme.spacing(2),
+                }}
               >
-                <MenuIcon className={classes.menuIcon} />
+                <MenuIcon
+                  sx={{
+                    color: theme.palette.primary.contrastText,
+                  }}
+                />
               </IconButton>
 
-              <Typography className={classes.title} variant='h6'>
+              <Typography
+                variant='h6'
+                sx={{
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
                 rafiandria23.me
               </Typography>
 
-              <div className={classes.grow} />
-
-              {/* <Button
-            variant={`outlined`}
-            style={{
-              borderColor: theme.palette.primary.contrastText,
-              color: theme.palette.primary.contrastText,
-            }}
-          >{`Hire me`}</Button> */}
+              <div
+                style={{
+                  flexGrow: 1,
+                }}
+              />
 
               <ThemeSwitcher />
             </Hidden>
 
-            <Hidden xsDown>
-              <Typography className={classes.title} variant='h6'>
+            <Hidden smDown>
+              <Typography
+                variant='h6'
+                sx={{
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
                 rafiandria23.me
               </Typography>
 
               <ThemeSwitcher />
 
-              <div className={classes.grow} />
+              <div
+                style={{
+                  flexGrow: 1,
+                }}
+              />
 
               <NextLink href='/' passHref>
                 <Button variant='text'>Home</Button>
@@ -133,7 +149,6 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
       </AppBar>
 
       <Dialog
-        className={classes.menu}
         fullScreen
         open={open}
         onClose={handleClose}
@@ -141,46 +156,38 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
       >
         <Toolbar>
           <IconButton
-            edge={`start`}
+            edge='start'
             color={theme.palette.mode === 'light' ? 'primary' : undefined}
             onClick={handleClose}
           >
             <CloseIcon />
           </IconButton>
 
-          <div className={classes.grow} />
-
-          {/* <Button
-            variant={`outlined`}
-            color={theme.palette.mode === 'light' ? 'primary' : undefined}
+          <div
             style={{
-              borderColor:
-                theme.palette.mode === 'light'
-                  ? theme.palette.primary.main
-                  : theme.palette.primary.contrastText,
-              color:
-                theme.palette.mode === 'light'
-                  ? theme.palette.primary.main
-                  : theme.palette.primary.contrastText,
+              flexGrow: 1,
             }}
-          >
-            Hire Me
-          </Button> */}
+          />
         </Toolbar>
 
         <Grid
-          className={classes.wrapper}
           container
-          direction={`column`}
-          justifyContent={`space-between`}
-          alignItems={`stretch`}
+          direction='column'
+          justifyContent='space-between'
+          alignItems='stretch'
+          sx={{
+            p: theme.spacing(0, 4),
+            '& > *': {
+              m: theme.spacing(1, 0),
+            },
+          }}
         >
           <Grid
             item
             container
-            direction={`column`}
-            justifyContent={`space-between`}
-            alignItems={`stretch`}
+            direction='column'
+            justifyContent='space-between'
+            alignItems='stretch'
           >
             <Grid item>
               <NextLink href='/' passHref>
@@ -222,9 +229,9 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
           <Grid
             item
             container
-            direction={`row`}
-            justifyContent={`center`}
-            alignItems={`center`}
+            direction='row'
+            justifyContent='center'
+            alignItems='center'
           >
             <Grid item>
               <ButtonGroup
@@ -234,6 +241,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 <IconButton
                   href='https://linkedin.com/in/rafiandria23'
                   target='_blank'
+                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
                   <LinkedInLogo />
                 </IconButton>
@@ -241,6 +249,7 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
                 <IconButton
                   href='https://github.com/rafiandria23'
                   target='_blank'
+                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
                   <GitHubLogo />
                 </IconButton>
@@ -254,30 +263,3 @@ const Header: FC<HeaderProps> = ({ elevate = false }) => {
 };
 
 export default Header;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {
-      padding: theme.spacing(0, 4),
-      '& > *': {
-        margin: theme.spacing(1, 0),
-      },
-    },
-    transparentHeader: {
-      backgroundColor: 'transparent',
-    },
-    grow: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    menuIcon: {
-      color: theme.palette.primary.contrastText,
-    },
-    menu: {},
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-  }),
-);

@@ -1,13 +1,6 @@
-import { FC, CSSProperties } from 'react';
+import { FC } from 'react';
 import Image from 'next/image';
-import { makeStyles, createStyles } from '@mui/styles';
-import {
-  useMediaQuery,
-  useTheme,
-  Theme,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { useTheme, useMediaQuery, Grid, Typography } from '@mui/material';
 import {
   Timeline,
   TimelineItem,
@@ -27,16 +20,15 @@ import { isOdd } from '@/utils';
 import { sortWorkExperiences } from '@/utils/work-experience';
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
-interface WorkExperienceTimelineProps {
+interface IWorkExperienceTimelineProps {
   companies: Company[];
 }
 
-const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
+const WorkExperienceTimeline: FC<IWorkExperienceTimelineProps> = ({
   companies,
 }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
-  const classes = useStyles();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const renderEmploymentType = (type: EmploymentTypes): string => {
     switch (type) {
@@ -86,156 +78,136 @@ const WorkExperienceTimeline: FC<WorkExperienceTimelineProps> = ({
   };
 
   return (
-    <Timeline
-      className={classes.wrapper}
-      position={matchesSM ? 'alternate' : 'left'}
-    >
-      {sortWorkExperiences(companies).map((company, idx) => {
-        return (
-          <TimelineItem className={classes.item} key={company.id}>
-            <TimelineSeparator>
-              <TimelineDot
-                variant='outlined'
-                color={theme.palette.mode === 'light' ? 'primary' : 'inherit'}
-              />
-              {idx !== companies.length - 1 ? <TimelineConnector /> : null}
-            </TimelineSeparator>
-            <TimelineContent>
+    <Timeline position={isSmallScreen ? 'right' : 'alternate'}>
+      {sortWorkExperiences(companies).map((company, idx) => (
+        <TimelineItem
+          key={company.id}
+          sx={{
+            ...(isSmallScreen && {
+              '&::before': {
+                content: 'none',
+              },
+            }),
+          }}
+        >
+          <TimelineSeparator>
+            <TimelineDot
+              variant='outlined'
+              color={theme.palette.mode === 'light' ? 'primary' : undefined}
+            />
+            {idx !== companies.length - 1 ? <TimelineConnector /> : null}
+          </TimelineSeparator>
+          <TimelineContent>
+            <Grid
+              container
+              direction='column'
+              justifyContent='center'
+              alignItems='stretch'
+              sx={{
+                mt: theme.spacing(-1.5),
+                mb: theme.spacing(3),
+              }}
+            >
               <Grid
-                className={classes.content}
+                item
                 container
-                direction='column'
-                justifyContent='center'
-                alignItems='stretch'
+                direction={
+                  isSmallScreen ? 'row' : isOdd(idx + 1) ? 'row' : 'row-reverse'
+                }
+                wrap='nowrap'
+                justifyContent='flex-start'
+                alignItems='center'
+                sx={{
+                  height: 60,
+                  mb: theme.spacing(1),
+                }}
               >
-                <Grid
-                  className={classes.company}
-                  item
-                  container
-                  direction={
-                    matchesSM
-                      ? isOdd(idx + 1)
-                        ? 'row'
-                        : 'row-reverse'
-                      : undefined
-                  }
-                  wrap='nowrap'
-                  justifyContent='flex-start'
-                  alignItems='center'
-                >
-                  {company.attributes.logo.data !== null && (
-                    <Grid
-                      item
-                      className={
-                        matchesSM
-                          ? isOdd(idx + 1)
-                            ? classes.logoOdd
-                            : classes.logoEven
-                          : classes.logo
-                      }
-                    >
-                      <Image
-                        src={getPublicID(
-                          company.attributes.logo.data.attributes.url,
-                        )}
-                        alt={company.attributes.name}
-                        width={40}
-                        height={40}
-                        placeholder='blur'
-                        blurDataURL={getBlurredImageURL(
-                          company.attributes.logo.data.attributes.url,
-                        )}
-                      />
-                    </Grid>
-                  )}
+                {company.attributes.logo.data !== null && (
+                  <Grid
+                    item
+                    sx={{
+                      ...(isSmallScreen && {
+                        '&::after': {
+                          marginLeft: theme.spacing(2),
+                          content: `""`,
+                        },
+                      }),
+                      ...(!isSmallScreen &&
+                        isOdd(idx + 1) && {
+                          '&::after': {
+                            marginLeft: theme.spacing(2),
+                            content: `""`,
+                          },
+                        }),
+                      ...(!isSmallScreen &&
+                        !isOdd(idx + 1) && {
+                          '&::before': {
+                            marginRight: theme.spacing(2),
+                            content: `""`,
+                          },
+                        }),
+                    }}
+                  >
+                    <Image
+                      src={getPublicID(
+                        company.attributes.logo.data.attributes.url,
+                      )}
+                      alt={company.attributes.name}
+                      width={60}
+                      height={60}
+                      placeholder='blur'
+                      blurDataURL={getBlurredImageURL(
+                        company.attributes.logo.data.attributes.url,
+                      )}
+                    />
+                  </Grid>
+                )}
 
-                  <Grid item>
-                    <Typography className={classes.name} variant='subtitle1'>
-                      {company.attributes.name}
+                <Grid item>
+                  <Typography
+                    variant='subtitle1'
+                    sx={{
+                      fontWeight: theme.typography.fontWeightBold,
+                    }}
+                  >
+                    {company.attributes.name}
+                  </Typography>
+                </Grid>
+              </Grid>
+              {company.attributes.work_experiences.data.map(
+                (workExperience) => (
+                  <Grid
+                    key={workExperience.id}
+                    item
+                    sx={{
+                      m: theme.spacing(1, 0),
+                    }}
+                  >
+                    <Typography
+                      variant='subtitle2'
+                      sx={{
+                        fontWeight: theme.typography.fontWeightBold,
+                      }}
+                    >
+                      {workExperience.attributes.position}
+                    </Typography>
+
+                    <Typography variant='subtitle2'>
+                      {renderEmploymentType(workExperience.attributes.type)}
+                    </Typography>
+
+                    <Typography variant='subtitle2'>
+                      {renderEmploymentPeriod(workExperience)}
                     </Typography>
                   </Grid>
-                </Grid>
-                {company.attributes.work_experiences.data.map(
-                  (workExperience) => (
-                    <Grid
-                      className={classes.workExperience}
-                      key={workExperience.id}
-                      item
-                    >
-                      <Typography
-                        className={classes.position}
-                        variant='subtitle2'
-                      >
-                        {workExperience.attributes.position}
-                      </Typography>
-
-                      <Typography variant='subtitle2'>
-                        {renderEmploymentType(workExperience.attributes.type)}
-                      </Typography>
-
-                      <Typography variant='subtitle2'>
-                        {renderEmploymentPeriod(workExperience)}
-                      </Typography>
-                    </Grid>
-                  ),
-                )}
-              </Grid>
-            </TimelineContent>
-          </TimelineItem>
-        );
-      })}
+                ),
+              )}
+            </Grid>
+          </TimelineContent>
+        </TimelineItem>
+      ))}
     </Timeline>
   );
 };
 
 export default WorkExperienceTimeline;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {
-      // width: '100%',
-    },
-    content: {
-      marginTop: theme.spacing(-1.5),
-      marginBottom: theme.spacing(3),
-    },
-    company: {
-      height: 40,
-      marginBottom: theme.spacing(1),
-    },
-    name: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    item: {
-      [theme.breakpoints.down('xs')]: {
-        '&::before': {
-          content: 'none',
-        } as CSSProperties,
-      },
-    },
-    workExperience: {
-      margin: theme.spacing(1, 0),
-    },
-    position: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    logo: {
-      '&::after': {
-        marginLeft: theme.spacing(2),
-        content: `""`,
-      } as CSSProperties,
-    },
-    logoOdd: {
-      '&::after': {
-        marginLeft: theme.spacing(2),
-        content: `""`,
-      } as CSSProperties,
-    },
-    logoEven: {
-      '&::before': {
-        marginRight: theme.spacing(2),
-        content: `""`,
-      } as CSSProperties,
-    },
-  }),
-);

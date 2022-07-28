@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 
 // Types
-import { GraphQLModel, GraphQLModelResponse } from './graphql';
+import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
 import { Company } from './company';
 
 export enum EmploymentTypes {
@@ -15,10 +15,10 @@ export enum EmploymentTypes {
   SEASONAL = 'seasonal',
 }
 
-interface BaseWorkExperience {
+interface IBaseWorkExperience {
   position: string;
   type: EmploymentTypes;
-  company: GraphQLModelResponse<Company>;
+  company: IGraphQLModelResponse<Company>;
   location: string;
   is_current: boolean;
   start_date: Moment | Date | string;
@@ -26,4 +26,4 @@ interface BaseWorkExperience {
   description: string;
 }
 
-export interface WorkExperience extends GraphQLModel<BaseWorkExperience> {}
+export interface IWorkExperience extends IGraphQLModel<BaseWorkExperience> {}

@@ -1,11 +1,11 @@
 // Types
-import { GraphQLModel, GraphQLModelResponse } from './graphql';
+import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
 import { FileUpload } from './file';
 
-interface BaseSchool {
+interface IBaseSchool {
   name: string;
-  logo: GraphQLModelResponse<FileUpload | null>;
+  logo: IGraphQLModelResponse<FileUpload | null>;
   link: string;
 }
 
-export interface School extends GraphQLModel<BaseSchool> {}
+export interface ISchool extends IGraphQLModel<BaseSchool> {}

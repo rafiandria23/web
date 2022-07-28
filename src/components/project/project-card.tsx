@@ -10,11 +10,11 @@ import { Project } from '@/types/project';
 // Utils
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
-interface ProjectCardProps {
+interface IProjectCardProps {
   project: Project;
 }
 
-const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
   const classes = useStyles();
 
   return (

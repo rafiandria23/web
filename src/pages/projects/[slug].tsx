@@ -26,7 +26,7 @@ import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import ReactMarkdown from 'react-markdown';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
+import { IGraphQLModelResponse } from '@/types/graphql';
 import { Project } from '@/types/project';
 
 // GraphQL
@@ -39,11 +39,11 @@ import markdownComponents from '@/components/markdown';
 // Utils
 import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
 
-interface ProjectPageProps {
+interface IProjectPageProps {
   project: Project | null;
 }
 
-const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
+const ProjectPage: NextPage<IProjectPageProps> = ({ project }) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.up('md'));
@@ -100,7 +100,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
                   <IconButton
                     className={classes.button}
                     href={project.attributes.link}
-                    target={`_blank`}
+                    target='_blank'
                   >
                     <OpenInNewIcon />
                   </IconButton>
@@ -124,11 +124,13 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
               <Button
                 className={classes.button}
                 fullWidth
-                variant={`outlined`}
+                variant='outlined'
                 endIcon={<OpenInNewIcon />}
                 href={project.attributes.link}
-                target={`_blank`}
-              >{`Visit Project`}</Button>
+                target='_blank'
+              >
+                Visit Project
+              </Button>
             </Grid>
           </Hidden>
         </Grid>
@@ -141,22 +143,18 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
         </ReactMarkdown>
 
         <Grid className={classes.tags} container>
-          {project.attributes.tags.length > 0 &&
-            project.attributes.tags.map((tag) => (
-              <Grid item key={tag.id}>
-                <NextLink
-                  href={`/projects/tags/${tag.attributes.slug}`}
-                  passHref
-                >
-                  <Chip
-                    className={classes.tag}
-                    component='a'
-                    label={tag.attributes.name}
-                    clickable
-                  />
-                </NextLink>
-              </Grid>
-            ))}
+          {project.attributes.tags.data.map((tag) => (
+            <Grid item key={tag.id}>
+              <NextLink href={`/projects/tags/${tag.attributes.slug}`} passHref>
+                <Chip
+                  className={classes.tag}
+                  component='a'
+                  label={tag.attributes.name}
+                  clickable
+                />
+              </NextLink>
+            </Grid>
+          ))}
         </Grid>
       </Layout>
     </>
@@ -167,7 +165,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ project }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query<{
-    projects: GraphQLModelResponse<Project[]>;
+    projects: IGraphQLModelResponse<Project[]>;
   }>({
     query: gql`
       query {
@@ -203,7 +201,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { projects: GraphQLModelResponse<Project[]> },
+    { projects: IGraphQLModelResponse<Project[]> },
     { slug: Project['attributes']['slug'] }
   >({
     variables: {
@@ -253,7 +251,7 @@ export const getStaticProps: GetStaticProps<
           ? data.projects.data[0]
           : null,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 

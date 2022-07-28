@@ -28,7 +28,7 @@ export default class Document extends NextDocument {
       return {
         ...initialProps,
         styles: [
-          <Fragment key={`styles`}>
+          <Fragment key='styles'>
             {initialProps.styles}
             {materialUiSheets.getStyleElement()}
           </Fragment>,

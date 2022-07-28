@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
+import { IGraphQLModelResponse } from '@/types/graphql';
 import { Project } from '@/types/project';
 
 // GraphQL
@@ -23,20 +23,20 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
-interface ProjectsPageProps {
+interface IProjectsPageProps {
   projects: Project[];
 }
 
-const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
+const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
 
   return (
     <>
       <NextSeo
         title='My Projects'
-        description={`All the projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack`}
+        description="Projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack"
       />
 
       <Layout>
@@ -68,8 +68,8 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={matchesSM ? 'flex-start' : 'space-evenly'}
-            alignItems={matchesSM ? 'center' : 'stretch'}
+            justifyContent={isSmallScreen ? 'flex-start' : 'space-evenly'}
+            alignItems={isSmallScreen ? 'center' : 'stretch'}
             spacing={2}
           >
             {projects !== undefined && projects.length > 0
@@ -90,7 +90,7 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
 
 export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
   const { data } = await client.query<{
-    projects: GraphQLModelResponse<Project[]>;
+    projects: IGraphQLModelResponse<Project[]>;
   }>({
     query: gql`
       query {
@@ -131,7 +131,7 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
     props: {
       projects: data.projects.data,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 

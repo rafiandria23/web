@@ -1,23 +1,19 @@
-import { CSSProperties } from 'react';
 import { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   useMediaQuery,
   useTheme,
-  Theme,
   Container,
   Grid,
   Typography,
 } from '@mui/material';
-import clsx from 'clsx';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
-import { Company } from '@/types/company';
-import { SkillType } from '@/types/skill';
-import { Education } from '@/types/education';
+import { IGraphQLModelResponse } from '@/types/graphql';
+import { ICompany } from '@/types/company';
+import { ISkillType } from '@/types/skill';
+import { IEducation } from '@/types/education';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -25,88 +21,102 @@ import { client } from '@/graphql';
 // Components
 import { Layout } from '@/components';
 import { WorkExperienceTimeline } from '@/components/work-experience';
-import { SkillProgressList, SkillTabs } from '@/components/skill';
+import { SkillTabs } from '@/components/skill';
 import { EducationTimeline } from '@/components/education';
 
-interface HomePageProps {
-  companies: Company[];
-  skillTypes: SkillType[];
-  educations: Education[];
+interface IHomePageProps {
+  companies: ICompany[];
+  skillTypes: ISkillType[];
+  educations: IEducation[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({
+const HomePage: NextPage<IHomePageProps> = ({
   companies,
   skillTypes,
   educations,
 }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
-  const classes = useStyles();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
       <NextSeo
-        title={`Adam Rafiandri's Personal Web`}
-        description={`Adam Rafiandri is a Software Engineer who's passionate about Computer Science`}
+        title="Adam Rafiandri's Personal Web"
+        description="Adam Rafiandri is a Software Engineer who's passionate about science and technology."
       />
 
       <Layout elevate>
         {/* Introduction */}
         <Grid
-          className={clsx(
-            classes.banner,
-            classes.coloredBanner,
-            classes.introductionBanner,
-          )}
           container
           direction='column'
           justifyContent='space-evenly'
           alignItems='stretch'
+          component={Container}
+          sx={{
+            bgcolor: theme.palette.primary.light,
+            p: theme.spacing(2, 1),
+            [theme.breakpoints.up('md')]: {
+              p: theme.spacing(4, 8),
+            },
+            '& > *': {
+              width: '100%',
+            },
+          }}
         >
           <Grid item>
-            <Container>
-              <Typography
-                className={clsx(classes.title, classes.text)}
-                variant='h2'
-                component='h1'
-                gutterBottom
-              >
-                Hey, I&apos;m Adam
-              </Typography>
-            </Container>
+            <Typography
+              variant='h2'
+              component='h1'
+              gutterBottom
+              color={theme.palette.primary.contrastText}
+              sx={{
+                fontWeight: theme.typography.fontWeightBold,
+              }}
+            >
+              Hey, I&apos;m Adam.
+            </Typography>
           </Grid>
 
           <Grid item>
-            <Container>
-              <Typography
-                className={classes.text}
-                variant='h6'
-                component='p'
-                paragraph
-              >
-                Software engineer from Bogor, Indonesia. I develop web, mobile,
-                and desktop applications to help businesses grow online.
-              </Typography>
-            </Container>
+            <Typography
+              variant='h6'
+              component='p'
+              paragraph
+              color={theme.palette.primary.contrastText}
+            >
+              Software Engineer from Bogor, Indonesia. I develop web, mobile,
+              and desktop applications to help businesses grow online.
+            </Typography>
           </Grid>
         </Grid>
 
         {/* Work Experiences */}
         <Grid
-          className={clsx(classes.banner, classes.workExperienceBanner)}
           container
           component={Container}
           direction='column'
-          justifyContent='center'
-          alignItems='center'
+          justifyContent='space-between'
+          alignItems='start'
+          sx={{
+            p: theme.spacing(2, 1),
+            [theme.breakpoints.up('md')]: {
+              p: theme.spacing(4, 8),
+            },
+            '& > *': {
+              width: '100%',
+            },
+          }}
         >
           <Grid item>
             <Typography
-              className={classes.title}
               variant='h5'
               component='h2'
-              align={matchesSM ? 'center' : 'left'}
+              align={isSmallScreen ? 'left' : 'center'}
               gutterBottom
+              sx={{
+                fontWeight: theme.typography.fontWeightBold,
+              }}
             >
               Work Experiences
             </Typography>
@@ -117,56 +127,32 @@ const HomePage: NextPage<HomePageProps> = ({
           </Grid>
         </Grid>
 
-        {/* Skills */}
-        <Grid
-          className={clsx(
-            classes.banner,
-            classes.coloredBanner,
-            classes.skillsBanner,
-          )}
-          container
-          component={Container}
-          direction={`column`}
-          justifyContent={`space-evenly`}
-          alignItems={`flex-start`}
-        >
-          <Grid item>
-            <Typography
-              className={clsx(classes.title, classes.text)}
-              variant='h5'
-              component='h2'
-              align={matchesSM ? 'center' : 'left'}
-              gutterBottom
-            >
-              Skills
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            {matchesSM ? (
-              <SkillTabs skillTypes={skillTypes} />
-            ) : (
-              <SkillProgressList skillTypes={skillTypes} />
-            )}
-          </Grid>
-        </Grid>
-
         {/* Educations */}
         <Grid
-          className={clsx(classes.banner, classes.educationBanner)}
           container
           component={Container}
-          direction={`column`}
-          justifyContent={`space-evenly`}
-          alignItems={`flex-start`}
+          direction='column'
+          justifyContent='space-between'
+          alignItems='start'
+          sx={{
+            p: theme.spacing(2, 1),
+            [theme.breakpoints.up('md')]: {
+              p: theme.spacing(4, 8),
+            },
+            '& > *': {
+              width: '100%',
+            },
+          }}
         >
           <Grid item>
             <Typography
-              className={clsx(classes.title)}
               variant='h5'
               component='h2'
-              align={matchesSM ? 'center' : 'left'}
+              align={isSmallScreen ? 'left' : 'center'}
               gutterBottom
+              sx={{
+                fontWeight: theme.typography.fontWeightBold,
+              }}
             >
               Educations
             </Typography>
@@ -176,16 +162,52 @@ const HomePage: NextPage<HomePageProps> = ({
             <EducationTimeline educations={educations} />
           </Grid>
         </Grid>
+
+        {/* Skills */}
+        <Grid
+          container
+          component={Container}
+          direction='column'
+          justifyContent='space-evenly'
+          alignItems='flex-start'
+          sx={{
+            p: theme.spacing(2, 1),
+            [theme.breakpoints.up('md')]: {
+              p: theme.spacing(4, 8),
+            },
+            '& > *': {
+              width: '100%',
+            },
+          }}
+        >
+          <Grid item>
+            <Typography
+              variant='h5'
+              component='h2'
+              align={isSmallScreen ? 'left' : 'center'}
+              gutterBottom
+              sx={{
+                fontWeight: theme.typography.fontWeightBold,
+              }}
+            >
+              Skills
+            </Typography>
+          </Grid>
+
+          <Grid item>
+            <SkillTabs skillTypes={skillTypes} />
+          </Grid>
+        </Grid>
       </Layout>
     </>
   );
 };
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
+export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
   const { data } = await client.query<{
-    companies: GraphQLModelResponse<Company[]>;
-    skillTypes: GraphQLModelResponse<SkillType[]>;
-    educations: GraphQLModelResponse<Education[]>;
+    companies: IGraphQLModelResponse<ICompany[]>;
+    skillTypes: IGraphQLModelResponse<ISkillType[]>;
+    educations: IGraphQLModelResponse<IEducation[]>;
   }>({
     query: gql`
       query {
@@ -283,39 +305,8 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
       skillTypes: data.skillTypes.data,
       educations: data.educations.data,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 
 export default HomePage;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    text: {
-      color: theme.palette.primary.contrastText,
-    },
-    banner: {
-      padding: theme.spacing(2, 1),
-      [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(4, 8),
-      } as CSSProperties,
-      '& > *': {
-        width: '100%',
-      },
-    },
-    coloredBanner: {
-      backgroundColor: theme.palette.primary.light,
-    },
-    introductionBanner: {
-      [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(8),
-      } as CSSProperties,
-    },
-    workExperienceBanner: {},
-    skillsBanner: {},
-    educationBanner: {},
-  }),
-);

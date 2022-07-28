@@ -10,8 +10,8 @@ import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Grid, Typography, Divider } from '@mui/material';
 
 // Types
-import { PageInitialProps } from '@/types';
-import { GraphQLModelResponse } from '@/types/graphql';
+import { IPageInitialProps } from '@/types';
+import { IGraphQLModelResponse } from '@/types/graphql';
 import { Tag } from '@/types/tag';
 
 // GraphQL
@@ -21,11 +21,11 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { ArticleCard } from '@/components/article';
 
-interface ArticleTagsPageProps extends PageInitialProps {
+interface IArticleTagsPageProps extends PageInitialProps {
   tag: Tag | null;
 }
 
-const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
+const ArticleTagsPage: NextPage<IArticleTagsPageProps> = ({ tag }) => {
   const classes = useStyles();
 
   return tag !== null ? (
@@ -87,7 +87,7 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: GraphQLModelResponse<Tag[]> }>({
+  const { data } = await client.query<{ tags: IGraphQLModelResponse<Tag[]> }>({
     query: gql`
       query {
         tags {
@@ -120,7 +120,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { tags: GraphQLModelResponse<Tag[]> },
+    { tags: IGraphQLModelResponse<Tag[]> },
     { slug: Tag['attributes']['slug'] }
   >({
     variables: {
@@ -165,7 +165,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
     },
-    revalidate: 1,
+    revalidate: 60,
   };
 };
 

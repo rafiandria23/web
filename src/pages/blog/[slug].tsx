@@ -13,9 +13,9 @@ import ReactMarkdown from 'react-markdown';
 import moment from 'moment';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
-import { PageInitialProps } from '@/types';
-import { Article } from '@/types/article';
+import { IGraphQLModelResponse } from '@/types/graphql';
+import { IPageInitialProps } from '@/types';
+import { IArticle } from '@/types/article';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -24,11 +24,11 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import markdownComponents from '@/components/markdown';
 
-interface ArticlePageProps extends PageInitialProps {
-  article: Article | null;
+interface IArticlePageProps extends IPageInitialProps {
+  article: IArticle | null;
 }
 
-const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
+const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
   const classes = useStyles();
 
   return article !== null ? (
@@ -50,19 +50,19 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
           className={classes.wrapper}
           component='article'
           container
-          direction={`column`}
-          justifyContent={`space-between`}
-          alignItems={`stretch`}
+          direction='column'
+          justifyContent='space-between'
+          alignItems='stretch'
           // Microsoft Clarity
-          data-clarity-region={`article`}
+          data-clarity-region='article'
         >
           <Grid className={classes.header} item container direction='column'>
             <Grid item>
               <Typography
                 className={classes.title}
-                variant={`h4`}
-                component={`h1`}
-                align={`left`}
+                variant='h4'
+                component='h1'
+                align='left'
                 gutterBottom
               >
                 {article.attributes.title}
@@ -71,12 +71,12 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
             <Grid item>
               <Typography
-                variant={`caption`}
-                component={`p`}
-                align={`left`}
+                variant='caption'
+                component='p'
+                align='left'
                 color='textSecondary'
               >
-                {moment(article.attributes.createdAt).format('MMMM D, YYYY')}
+                {moment(article.attributes.updatedAt).format('MMMM D, YYYY')}
               </Typography>
             </Grid>
           </Grid>
@@ -91,9 +91,9 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
             className={classes.tags}
             item
             container
-            direction={`row`}
-            wrap={`wrap`}
-            justifyContent={`flex-start`}
+            direction='row'
+            wrap='wrap'
+            justifyContent='flex-start'
           >
             {article.attributes.tags.data.length > 0 &&
               article.attributes.tags.data.map((tag) => (
@@ -119,7 +119,7 @@ const ArticlePage: NextPage<ArticlePageProps> = ({ article }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const { data } = await client.query<{
-    articles: GraphQLModelResponse<Article[]>;
+    articles: IGraphQLModelResponse<IArticle[]>;
   }>({
     query: gql`
       query {
@@ -150,13 +150,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps<
-  ArticlePageProps,
-  { slug: Article['attributes']['slug'] }
+  IArticlePageProps,
+  { slug: IArticle['attributes']['slug'] }
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { articles: GraphQLModelResponse<Article[]> },
-    { slug: Article['attributes']['slug'] }
+    { articles: IGraphQLModelResponse<IArticle[]> },
+    { slug: IArticle['attributes']['slug'] }
   >({
     variables: {
       slug,

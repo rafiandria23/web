@@ -8,7 +8,7 @@ export const pageview = (url: string) => {
   });
 };
 
-interface GtagEventParams {
+interface IGtagEventParams {
   action: Gtag.EventNames;
   category: Gtag.EventParams['event_category'];
   label: Gtag.EventParams['event_label'];

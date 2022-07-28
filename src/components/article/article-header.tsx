@@ -6,29 +6,33 @@ import { Theme, Grid, Typography } from '@mui/material';
 // Types
 import { Article } from '@/types/article';
 
-interface ArticleHeaderProps {
+interface IArticleHeaderProps {
   article: Article;
 }
 
-const ArticleHeader: FC<ArticleHeaderProps> = ({ article }) => {
+const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
   const classes = useStyles();
 
   return (
     <Grid
       container
       classes={{ container: classes.projectPageWrapper }}
-      direction={`column`}
-      justifyContent={`space-around`}
-      alignItems={`center`}
-      component={`section`}
+      direction='column'
+      justifyContent='space-around'
+      alignItems='center'
+      component='section'
     >
       <Grid item>
-        <Typography variant={`h2`} classes={{ root: classes.projectName }}>
-          {article.title}
+        <Typography variant='h2' classes={{ root: classes.projectName }}>
+          {article.attributes.title}
         </Typography>
       </Grid>
       <Grid item>
-        <Image src={article.cover.url} alt={article.title} layout='fill' />
+        <Image
+          src={article.attributes.cover.data.attributes.url}
+          alt={article.attributes.title}
+          layout='fill'
+        />
       </Grid>
     </Grid>
   );

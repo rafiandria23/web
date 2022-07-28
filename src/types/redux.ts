@@ -1,12 +1,12 @@
-export interface Action<T = unknown> {
+export interface IAction<T = unknown> {
   type: string;
   payload: T;
 }
 
-export interface RootState {
+export interface IRootState {
   theme: ThemeReducer;
 }
 
-export interface ThemeReducer {
+export interface IThemeReducer {
   mode: 'light' | 'dark';
 }

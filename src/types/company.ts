@@ -1,13 +1,13 @@
 // Types
-import { GraphQLModel, GraphQLModelResponse } from './graphql';
+import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
 import { FileUpload } from './file';
 import { WorkExperience } from './work-experience';
 
-interface BaseCompany {
+interface IBaseCompany {
   name: string;
-  logo: GraphQLModelResponse<FileUpload | null>;
+  logo: IGraphQLModelResponse<FileUpload | null>;
   link: string;
-  work_experiences: GraphQLModelResponse<WorkExperience[]>;
+  work_experiences: IGraphQLModelResponse<WorkExperience[]>;
 }
 
-export interface Company extends GraphQLModel<BaseCompany> {}
+export interface ICompany extends IGraphQLModel<BaseCompany> {}

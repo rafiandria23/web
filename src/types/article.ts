@@ -1,16 +1,16 @@
 // Types
-import { GraphQLModel, GraphQLModelResponse } from './graphql';
-import { FileUpload } from './file';
-import { Tag } from './tag';
+import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
+import { IFileUpload } from './file';
+import { ITag } from './tag';
 
-interface BaseArticle {
+interface IBaseArticle {
   title: string;
   slug: string;
   summary: string;
   content: string;
-  thumbnail: GraphQLModelResponse<FileUpload>;
-  cover: GraphQLModelResponse<FileUpload>;
-  tags: GraphQLModelResponse<Tag[]>;
+  thumbnail: IGraphQLModelResponse<IFileUpload>;
+  cover: IGraphQLModelResponse<IFileUpload>;
+  tags: IGraphQLModelResponse<ITag[]>;
 }
 
-export interface Article extends GraphQLModel<BaseArticle> {}
+export interface IArticle extends IGraphQLModel<IBaseArticle> {}

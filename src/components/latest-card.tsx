@@ -22,36 +22,36 @@ import { Article } from '@/types/article';
 import { Project } from '@/types/project';
 import { Tag } from '@/types/tag';
 
-interface LatestCardProps {
+interface ILatestCardProps {
   data: Article | Project;
   type: 'article' | 'project';
 }
 
-const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
+const LatestCard: FC<ILatestCardProps> = ({ data, type }) => {
   const classes = useStyles();
   const [showTags, setShowTags] = useState<boolean>(false);
 
   return (
     <Card classes={{ root: classes.latestCardWrapper }}>
       <CardActionArea>
-        {data.cover && (
+        {data.attributes.cover && (
           <CardMedia
             classes={{ root: classes.latestCardCover }}
-            image={data.cover.url}
+            image={data.attributes.cover.data.attributes.url}
             title={
               type === 'article'
-                ? (data as Article).title
-                : (data as Project).title
+                ? (data as Article).attributes.title
+                : (data as Project).attributes.title
             }
-            component={`img`}
+            component='img'
           />
         )}
 
         <CardContent>
-          <Typography gutterBottom variant={`h4`} component={`h2`}>
+          <Typography gutterBottom variant='h4' component='h2'>
             {type === `article`
-              ? (data as Article).title
-              : (data as Project).title}
+              ? (data as Article).attributes.title
+              : (data as Project).attributes.title}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -59,12 +59,12 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
         <NextLink
           href={
             type === 'article'
-              ? `/blog/${(data as Article).slug}`
-              : `/projects/${(data as Project).slug}`
+              ? `/blog/${(data as Article).attributes.slug}`
+              : `/projects/${(data as Project).attributes.slug}`
           }
           passHref
         >
-          <Button size={`medium`} color={`primary`} variant={`outlined`}>
+          <Button size='medium' color='primary' variant='outlined'>
             {type === `article` ? `Read More` : `Explore!`}
           </Button>
         </NextLink>
@@ -79,22 +79,25 @@ const LatestCard: FC<LatestCardProps> = ({ data, type }) => {
       </CardActions>
       <Collapse
         in={showTags}
-        timeout={`auto`}
+        timeout='auto'
         unmountOnExit
         classes={{ entered: classes.showTagsCollapseEntered }}
       >
         <CardContent>
-          {data.tags.length &&
-            data.tags.map((tag: Tag) => (
-              <NextLink key={tag.id} href={`/tags/${tag.slug}`} passHref>
-                <Chip
-                  classes={{ root: classes.tagChip }}
-                  component='a'
-                  label={tag.name.toUpperCase()}
-                  clickable
-                />
-              </NextLink>
-            ))}
+          {data.attributes.tags.data.map((tag) => (
+            <NextLink
+              key={tag.id}
+              href={`/tags/${tag.attributes.slug}`}
+              passHref
+            >
+              <Chip
+                classes={{ root: classes.tagChip }}
+                component='a'
+                label={tag.attributes.name.toUpperCase()}
+                clickable
+              />
+            </NextLink>
+          ))}
         </CardContent>
       </Collapse>
     </Card>

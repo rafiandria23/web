@@ -1,16 +1,26 @@
 import { FC, ReactNode, HTMLProps } from 'react';
-import { Box } from '@mui/material';
+import { useTheme, Box } from '@mui/material';
 
-export interface TabPanelProps extends HTMLProps<HTMLDivElement> {
+export interface ITabPanelProps extends HTMLProps<HTMLDivElement> {
   children?: ReactNode;
   index: string | number;
   value: TabPanelProps['index'];
 }
 
-const TabPanel: FC<TabPanelProps> = ({ children, index, value, ...rest }) => {
+const TabPanel: FC<ITabPanelProps> = ({ children, index, value, ...rest }) => {
+  const theme = useTheme();
+
   return (
     <div role='tabpanel' hidden={index !== value} {...rest}>
-      {index === value && <Box p={3}>{children}</Box>}
+      {index === value && (
+        <Box
+          sx={{
+            p: theme.spacing(4),
+          }}
+        >
+          {children}
+        </Box>
+      )}
     </div>
   );
 };

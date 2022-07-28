@@ -8,22 +8,22 @@ import { Project } from '@/types/project';
 // Components
 import { LatestCard } from '@/components';
 
-interface LatestListProps {
+interface ILatestListProps {
   title: string;
   data: Article[] | Project[];
   type: 'article' | 'project';
 }
 
-const LatestList: FC<LatestListProps> = ({ title, data, type }) => {
+const LatestList: FC<ILatestListProps> = ({ title, data, type }) => {
   return (
     <Grid
       container
-      direction={`column`}
-      justifyContent={`space-between`}
-      alignItems={`center`}
+      direction='column'
+      justifyContent='space-between'
+      alignItems='center'
     >
       <Grid item>
-        <Typography gutterBottom variant={`h3`} component={`h3`}>
+        <Typography gutterBottom variant='h3' component='h3'>
           {title}
         </Typography>
       </Grid>
@@ -31,10 +31,10 @@ const LatestList: FC<LatestListProps> = ({ title, data, type }) => {
       <Grid
         item
         container
-        direction={`row`}
-        justifyContent={`center`}
-        alignItems={`center`}
-        component={`div`}
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+        component='div'
       >
         {type === `article` && (data as Article[]).length > 0
           ? (data as Article[]).map((article) => (

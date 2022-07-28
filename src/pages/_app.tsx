@@ -17,7 +17,7 @@ import { CloseOutlined } from '@mui/icons-material';
 import { SnackbarProvider, SnackbarKey, SnackbarAction } from 'notistack';
 
 // Types
-import { PageInitialProps } from '@/types';
+import { IPageInitialProps } from '@/types';
 
 // Utils
 import * as gtag from '@/utils/gtag';
@@ -114,7 +114,7 @@ const App: NextComponentType<
   };
 
   const snackbarAction: SnackbarAction = (key) => (
-    <IconButton color={`inherit`} onClick={() => handleCloseSnackbar(key)}>
+    <IconButton color='inherit' onClick={() => handleCloseSnackbar(key)}>
       <CloseOutlined />
     </IconButton>
   );

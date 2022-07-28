@@ -1,15 +1,23 @@
 import { Moment } from 'moment';
 
-export interface GraphQLModelBaseAttributes {
+// Types
+import { IPagination } from '@/types';
+
+export interface IGraphQLModelBaseAttributes {
   createdAt: Moment | Date | string;
   updatedAt: Moment | Date | string;
 }
 
-export interface GraphQLModel<T> {
+export interface IGraphQLModel<T> {
   id: string;
-  attributes: T & GraphQLModelBaseAttributes;
+  attributes: T & IGraphQLModelBaseAttributes;
 }
 
-export interface GraphQLModelResponse<T> {
+export interface IGraphQLModelResponseMeta {
+  pagination: IPagination;
+}
+
+export interface IGraphQLModelResponse<T> {
+  meta: IGraphQLModelResponseMeta;
   data: T;
 }

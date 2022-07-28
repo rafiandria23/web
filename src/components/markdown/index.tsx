@@ -6,7 +6,7 @@ const Anchor: Components['a'] = ({ href, children }) => {
   const theme = useTheme();
 
   return (
-    <Link color='secondary' href={href} target={`_blank`}>
+    <Link color='secondary' href={href} target='_blank'>
       {children}
     </Link>
   );
@@ -86,12 +86,12 @@ const Heading6: Components['h6'] = (props) => {
   return (
     <Typography
       // classes={{ root: classes.markdownParagraph }}
-      variant={`h6`}
-      component={`p`}
-      align={`left`}
+      variant='h6'
+      component='p'
+      align='left'
       gutterBottom
       paragraph
-      color={`textPrimary`}
+      color='textPrimary'
     >
       {props.children}
     </Typography>
