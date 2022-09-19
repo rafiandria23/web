@@ -251,7 +251,7 @@ export const getStaticProps: GetStaticProps<
           ? data.projects.data[0]
           : null,
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 };
 

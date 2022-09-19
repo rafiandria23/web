@@ -1,7 +1,7 @@
 // Types
 import { IGraphQLModel } from './graphql';
 
-interface IBaseFileUpload {
+interface IBaseFile {
   name: string;
   alternativeText: string;
   caption: string;
@@ -16,4 +16,4 @@ interface IBaseFileUpload {
   provider: string;
 }
 
-export interface IFileUpload extends IGraphQLModel<IBaseFileUpload> {}
+export interface IFileUpload extends IGraphQLModel<IBaseFile> {}

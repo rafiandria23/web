@@ -212,7 +212,7 @@ export const getStaticProps: GetStaticProps<
       articles: data.articles.data,
       tags: data.tags.data,
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 };
 

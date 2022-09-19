@@ -5,7 +5,7 @@ import moment from 'moment';
 const HOST = 'https://rafiandria23.me';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const fileds: ISitemapField[] = [
+  const fields: ISitemapField[] = [
     {
       loc: HOST,
       lastmod: moment().toISOString(),
@@ -28,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   ];
 
-  return getServerSideSitemap(ctx, fileds);
+  return getServerSideSitemap(ctx, fields);
 };
 
 // eslint-disable-next-line

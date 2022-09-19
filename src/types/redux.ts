@@ -4,7 +4,7 @@ export interface IAction<T = unknown> {
 }
 
 export interface IRootState {
-  theme: ThemeReducer;
+  theme: IThemeReducer;
 }
 
 export interface IThemeReducer {

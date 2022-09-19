@@ -11,38 +11,28 @@ import {
 
 // Types
 import { IGraphQLModelResponse } from '@/types/graphql';
-import { ICompany } from '@/types/company';
-import { ISkillType } from '@/types/skill';
-import { IEducation } from '@/types/education';
+import { ISkillCategory } from '@/types/skill';
 
 // GraphQL
 import { client } from '@/graphql';
 
 // Components
 import { Layout } from '@/components';
-import { WorkExperienceTimeline } from '@/components/work-experience';
 import { SkillTabs } from '@/components/skill';
-import { EducationTimeline } from '@/components/education';
 
 interface IHomePageProps {
-  companies: ICompany[];
-  skillTypes: ISkillType[];
-  educations: IEducation[];
+  skillCategories: ISkillCategory[];
 }
 
-const HomePage: NextPage<IHomePageProps> = ({
-  companies,
-  skillTypes,
-  educations,
-}) => {
+const HomePage: NextPage<IHomePageProps> = ({ skillCategories }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
       <NextSeo
-        title="Adam Rafiandri's Personal Web"
-        description="Adam Rafiandri is a Software Engineer who's passionate about science and technology."
+        title='Adam Rafiandri'
+        description='Software Engineer & Lifetime Learner'
       />
 
       <Layout elevate>
@@ -91,78 +81,6 @@ const HomePage: NextPage<IHomePageProps> = ({
           </Grid>
         </Grid>
 
-        {/* Work Experiences */}
-        <Grid
-          container
-          component={Container}
-          direction='column'
-          justifyContent='space-between'
-          alignItems='start'
-          sx={{
-            p: theme.spacing(2, 1),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
-          }}
-        >
-          <Grid item>
-            <Typography
-              variant='h5'
-              component='h2'
-              align={isSmallScreen ? 'left' : 'center'}
-              gutterBottom
-              sx={{
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              Work Experiences
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            <WorkExperienceTimeline companies={companies} />
-          </Grid>
-        </Grid>
-
-        {/* Educations */}
-        <Grid
-          container
-          component={Container}
-          direction='column'
-          justifyContent='space-between'
-          alignItems='start'
-          sx={{
-            p: theme.spacing(2, 1),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
-          }}
-        >
-          <Grid item>
-            <Typography
-              variant='h5'
-              component='h2'
-              align={isSmallScreen ? 'left' : 'center'}
-              gutterBottom
-              sx={{
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              Educations
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            <EducationTimeline educations={educations} />
-          </Grid>
-        </Grid>
-
         {/* Skills */}
         <Grid
           container
@@ -195,7 +113,7 @@ const HomePage: NextPage<IHomePageProps> = ({
           </Grid>
 
           <Grid item>
-            <SkillTabs skillTypes={skillTypes} />
+            <SkillTabs skillCategories={skillCategories} />
           </Grid>
         </Grid>
       </Layout>
@@ -205,47 +123,11 @@ const HomePage: NextPage<IHomePageProps> = ({
 
 export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
   const { data } = await client.query<{
-    companies: IGraphQLModelResponse<ICompany[]>;
-    skillTypes: IGraphQLModelResponse<ISkillType[]>;
-    educations: IGraphQLModelResponse<IEducation[]>;
+    skillCategories: IGraphQLModelResponse<ISkillCategory[]>;
   }>({
     query: gql`
       query {
-        companies {
-          data {
-            id
-            attributes {
-              name
-              logo {
-                data {
-                  id
-                  attributes {
-                    url
-                    width
-                    height
-                  }
-                }
-              }
-              link
-              work_experiences {
-                data {
-                  id
-                  attributes {
-                    position
-                    type
-                    location
-                    is_current
-                    start_date
-                    end_date
-                    description
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        skillTypes {
+        skillCategories {
           data {
             id
             attributes {
@@ -255,40 +137,7 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
                   id
                   attributes {
                     name
-                    level
                     slug
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        educations {
-          data {
-            id
-            attributes {
-              degree
-              field
-              start_date
-              end_date
-              grade
-              description
-              school {
-                data {
-                  id
-                  attributes {
-                    name
-                    logo {
-                      data {
-                        id
-                        attributes {
-                          url
-                          width
-                          height
-                        }
-                      }
-                    }
                   }
                 }
               }
@@ -301,11 +150,9 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
 
   return {
     props: {
-      companies: data.companies.data,
-      skillTypes: data.skillTypes.data,
-      educations: data.educations.data,
+      skillCategories: data.skillCategories.data,
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 };
 

@@ -165,7 +165,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
     },
-    revalidate: 60,
+    revalidate: 1,
   };
 };
 

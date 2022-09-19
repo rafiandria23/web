@@ -1,24 +1,15 @@
 // Types
 import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
 
-export enum SkillLevels {
-  NOVICE = 'novice',
-  ADVANCED_BEGINNER = 'advanced_beginner',
-  COMPETENT = 'competent',
-  PROFICIENT = 'proficient',
-  EXPERT = 'expert',
-}
-
 interface IBaseSkill {
   name: string;
-  level: SkillLevels;
 }
 
-export interface ISkill extends IGraphQLModel<BaseSkill> {}
+export interface ISkill extends IGraphQLModel<IBaseSkill> {}
 
-interface IBaseSkillType {
+interface IBaseSkillCategory {
   name: string;
-  skills: IGraphQLModelResponse<Skill[]>;
+  skills: IGraphQLModelResponse<ISkill[]>;
 }
 
-export interface ISkillType extends IGraphQLModel<BaseSkillType> {}
+export interface ISkillCategory extends IGraphQLModel<IBaseSkillCategory> {}

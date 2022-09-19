@@ -1,46 +1,33 @@
 import { FC, useState, useEffect, ChangeEvent } from 'react';
-import {
-  useTheme,
-  Theme,
-  Box,
-  Grid,
-  Tabs,
-  Tab,
-  Typography,
-  LinearProgress,
-} from '@mui/material';
+import { useTheme, Box, Grid, Tabs, Tab, Typography } from '@mui/material';
 
 // Types
-import { SkillType } from '@/types/skill';
-
-// Utils
-import { sortSkills, getSkillProgress, getSkillLevel } from '@/utils/skill';
+import { ISkillCategory } from '@/types/skill';
 
 // Components
 import { TabPanel } from '@/components';
 
 export interface ISkillTabsProps {
-  skillTypes: SkillType[];
+  skillCategories: ISkillCategory[];
 }
 
-const SkillTabs: FC<ISkillTabsProps> = ({ skillTypes }) => {
+const SkillTabs: FC<ISkillTabsProps> = ({ skillCategories }) => {
   const theme = useTheme();
-  const [tabValue, setTabValue] = useState<SkillType['attributes']['name']>('');
+  const [tabValue, setTabValue] =
+    useState<ISkillCategory['attributes']['name']>('Front-End');
 
   useEffect(() => {
-    if (skillTypes.length > 0) {
-      setTabValue(skillTypes[0].attributes.name);
+    if (skillCategories.length > 0) {
+      setTabValue(skillCategories[0].attributes.name);
     }
-  }, [skillTypes]);
+  }, [skillCategories]);
 
   const handleChangeTab = (
     _: ChangeEvent<{}>,
-    newTabValue: SkillType['attributes']['name'],
+    newTabValue: ISkillCategory['attributes']['name'],
   ) => {
     setTabValue(newTabValue);
   };
-
-  const sortedSkills = sortSkills(skillTypes);
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -52,11 +39,11 @@ const SkillTabs: FC<ISkillTabsProps> = ({ skillTypes }) => {
           value={tabValue}
           onChange={handleChangeTab}
         >
-          {sortedSkills.map((skillType) => (
+          {skillCategories.map((skillCategory) => (
             <Tab
-              key={skillType.id}
-              value={skillType.attributes.name}
-              label={skillType.attributes.name}
+              key={skillCategory.id}
+              value={skillCategory.attributes.name}
+              label={skillCategory.attributes.name}
               sx={{
                 ':root': {
                   color: theme.palette.primary.contrastText,
@@ -67,14 +54,14 @@ const SkillTabs: FC<ISkillTabsProps> = ({ skillTypes }) => {
         </Tabs>
       </Box>
 
-      {sortedSkills.map((skillType) => (
+      {skillCategories.map((skillCategory) => (
         <TabPanel
-          key={skillType.id}
-          index={skillType.attributes.name}
+          key={skillCategory.id}
+          index={skillCategory.attributes.name}
           value={tabValue}
         >
           <Grid item container>
-            {skillType.attributes.skills.data.map((skill) => (
+            {skillCategory.attributes.skills.data.map((skill) => (
               <Grid key={skill.id} item container direction='column'>
                 <Grid item>
                   <Typography
@@ -86,29 +73,6 @@ const SkillTabs: FC<ISkillTabsProps> = ({ skillTypes }) => {
                     }
                   >
                     {skill.attributes.name}
-                  </Typography>
-                </Grid>
-
-                <Grid item>
-                  <LinearProgress
-                    variant='determinate'
-                    color='primary'
-                    value={getSkillProgress(skill)}
-                    sx={{
-                      height: theme.spacing(1.25),
-                    }}
-                  />
-                </Grid>
-
-                <Grid item container wrap='nowrap' justifyContent='flex-end'>
-                  <Typography
-                    variant='subtitle2'
-                    align='right'
-                    color={
-                      theme.palette.mode === 'light' ? 'primary' : undefined
-                    }
-                  >
-                    {getSkillLevel(skill)}
                   </Typography>
                 </Grid>
               </Grid>

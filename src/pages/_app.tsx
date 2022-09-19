@@ -38,7 +38,7 @@ import ErrorPage from './_error';
 const App: NextComponentType<
   AppContext,
   AppInitialProps,
-  AppProps<PageInitialProps>
+  AppProps<IPageInitialProps>
 > = ({ Component, pageProps }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -124,7 +124,7 @@ const App: NextComponentType<
       return (
         <ErrorPage
           statusCode={pageProps.errorStatus}
-          title={pageProps.statusMessage}
+          title={pageProps.errorMessage}
         />
       );
     }
@@ -142,7 +142,7 @@ const App: NextComponentType<
         action={snackbarAction}
       >
         <DefaultSeo
-          titleTemplate='%s | rafiandria23.me'
+          titleTemplate='%s | Adam Rafiandri'
           openGraph={{
             type: 'website',
             locale: 'en_US',
