@@ -1,0 +1,35 @@
+{
+  "name": "@rafiandria23/cms",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CMS for rafiandria23.tech",
+  "scripts": {
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
+    "@strapi/plugin-color-picker": "^4.10.6",
+    "@strapi/plugin-graphql": "^4.10.7",
+    "@strapi/plugin-i18n": "4.10.6",
+    "@strapi/plugin-open-ai": "^1.0.1",
+    "@strapi/plugin-seo": "^1.9.0",
+    "@strapi/plugin-users-permissions": "4.10.6",
+    "@strapi/strapi": "4.10.6",
+    "pg": "8.8.0",
+    "strapi-provider-upload-minio-ce": "^1.0.5"
+  },
+  "author": {
+    "name": "Adam Rafiandri"
+  },
+  "strapi": {
+    "uuid": "37505947-6fe2-4af9-b109-b8fa50750ddf"
+  },
+  "engines": {
+    "node": ">=14.19.1 <=18.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
