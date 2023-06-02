@@ -27,7 +27,7 @@ export default ({ env }) => ({
       endpoint: '/gql',
       shadowCRUD: true,
       playgroundAlways: env('NODE_ENV') !== 'production',
-      depthLimit: 7,
+      depthLimit: 100,
       amountLimit: 100,
       apolloServer: {
         tracing: env('NODE_ENV') !== 'production',
