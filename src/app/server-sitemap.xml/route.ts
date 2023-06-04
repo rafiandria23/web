@@ -1,10 +1,10 @@
-import type { GetServerSideProps } from 'next';
-import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
+import type { ISitemapField } from 'next-sitemap';
+import { getServerSideSitemap } from 'next-sitemap';
 import dayjs from 'dayjs';
 
 const HOST = 'https://rafiandria23.tech';
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export async function GET() {
   const now = dayjs().toISOString();
 
   const fields: ISitemapField[] = [
@@ -30,8 +30,5 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     },
   ];
 
-  return getServerSideSitemap(ctx, fields);
-};
-
-// eslint-disable-next-line
-export default () => {};
+  return getServerSideSitemap(fields);
+}
