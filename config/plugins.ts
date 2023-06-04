@@ -1,3 +1,5 @@
+import newrelic from '@newrelic/apollo-server-plugin';
+
 export default ({ env }) => ({
   'open-ai': {
     enabled: true,
@@ -31,6 +33,7 @@ export default ({ env }) => ({
       amountLimit: 100,
       apolloServer: {
         tracing: env('NODE_ENV') !== 'production',
+        plugins: [newrelic],
       },
     },
   },
