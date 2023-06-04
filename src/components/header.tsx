@@ -1,8 +1,15 @@
-import { FC, useState, forwardRef, Ref, ReactElement } from 'react';
+import {
+  FC,
+  useState,
+  useCallback,
+  forwardRef,
+  memo,
+  Ref,
+  ReactElement,
+} from 'react';
 import NextLink from 'next/link';
 import {
   useTheme,
-  Theme,
   Container,
   Hidden,
   AppBar,
@@ -45,13 +52,12 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   });
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleOpen = (): void => {
+  const handleOpen = useCallback(() => {
     setOpen(true);
-  };
-
-  const handleClose = (): void => {
+  }, [setOpen]);
+  const handleClose = useCallback(() => {
     setOpen(false);
-  };
+  }, [setOpen]);
 
   return (
     <>
@@ -66,7 +72,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         }}
       >
         <Container>
-          <Toolbar sx={{ pl: 0, pr: 0 }}>
+          <Toolbar>
             <Hidden smUp>
               <IconButton
                 edge='start'
@@ -88,7 +94,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
-                rafiandria23.me
+                rafiandria23.tech
               </Typography>
 
               <div
@@ -107,7 +113,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                   fontWeight: theme.typography.fontWeightBold,
                 }}
               >
-                rafiandria23.me
+                rafiandria23.tech
               </Typography>
 
               <ThemeSwitcher />
@@ -262,4 +268,4 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   );
 };
 
-export default Header;
+export default memo(Header);

@@ -7,7 +7,6 @@ module.exports = {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
   images: {
-    loader: 'cloudinary',
-    path: 'https://res.cloudinary.com/rafiandria23/image/upload/',
+    domains: ['assets.rafiandria23.tech'],
   },
 };

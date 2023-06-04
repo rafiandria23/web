@@ -1,9 +1,10 @@
-import {
+import type {
   NextPage,
   GetStaticPaths,
   GetStaticPathsResult,
   GetStaticProps,
 } from 'next';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
@@ -17,8 +18,8 @@ import {
 } from '@mui/material';
 
 // Types
-import { IGraphQLModelResponse } from '@/types/graphql';
-import { Tag } from '@/types/tag';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { ITag } from '@/types/tag';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -28,15 +29,24 @@ import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectTagsPageProps {
-  tag: Tag | null;
+  tag: ITag;
 }
 
 const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
+  const router = useRouter();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
 
-  return tag !== null ? (
+  if (router.isFallback) {
+    return (
+      <Layout>
+        <Typography>Loading...</Typography>
+      </Layout>
+    );
+  }
+
+  return (
     <>
       <NextSeo
         title={tag.attributes.name}
@@ -90,13 +100,11 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
         </Grid>
       </Layout>
     </>
-  ) : (
-    <></>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: IGraphQLModelResponse<Tag[]> }>({
+  const { data } = await client.query<{ tags: IGraphQLModelResponse<ITag[]> }>({
     query: gql`
       query {
         tags {
@@ -118,19 +126,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 
   return {
-    paths: slugs,
-    fallback: false,
+    // paths: slugs,
+    paths: [],
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps<
-  ProjectTagsPageProps,
-  { slug: Tag['attributes']['slug'] }
+  IProjectTagsPageProps,
+  { slug: ITag['attributes']['slug'] }
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { tags: IGraphQLModelResponse<Tag[]> },
-    { slug: Tag['attributes']['slug'] }
+    { tags: IGraphQLModelResponse<ITag[]> },
+    { slug: ITag['attributes']['slug'] }
   >({
     variables: {
       slug,
@@ -147,9 +156,8 @@ export const getStaticProps: GetStaticProps<
                   id
                   attributes {
                     title
-                    slug
                     overview
-                    cover {
+                    thumbnail {
                       data {
                         id
                         attributes {
@@ -169,9 +177,15 @@ export const getStaticProps: GetStaticProps<
     `,
   });
 
+  if (!data.tags.data.length) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
+      tag: data.tags.data[0],
     },
     revalidate: 1,
   };

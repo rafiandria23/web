@@ -1,21 +1,22 @@
-import {
+import type {
   NextPage,
   GetStaticPaths,
   GetStaticPathsResult,
   GetStaticProps,
 } from 'next';
+import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Grid, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // Types
-import { IGraphQLModelResponse } from '@/types/graphql';
-import { IPageInitialProps } from '@/types';
-import { IArticle } from '@/types/article';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IPageInitialProps } from '@/types/page';
+import type { IArticle } from '@/types/article';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -25,17 +26,26 @@ import { Layout } from '@/components';
 import markdownComponents from '@/components/markdown';
 
 interface IArticlePageProps extends IPageInitialProps {
-  article: IArticle | null;
+  article: IArticle;
 }
 
 const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
+  const router = useRouter();
   const classes = useStyles();
 
-  return article !== null ? (
+  if (router.isFallback) {
+    return (
+      <Layout>
+        <Typography>Loading...</Typography>
+      </Layout>
+    );
+  }
+
+  return (
     <>
       <NextSeo
         title={article.attributes.title}
-        description={article.attributes.summary}
+        description={article.attributes.overview}
         openGraph={{
           images: [
             {
@@ -53,8 +63,6 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
           direction='column'
           justifyContent='space-between'
           alignItems='stretch'
-          // Microsoft Clarity
-          data-clarity-region='article'
         >
           <Grid className={classes.header} item container direction='column'>
             <Grid item>
@@ -76,7 +84,7 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
                 align='left'
                 color='textSecondary'
               >
-                {moment(article.attributes.updatedAt).format('MMMM D, YYYY')}
+                {dayjs(article.attributes.updatedAt).format('MMMM D, YYYY')}
               </Typography>
             </Grid>
           </Grid>
@@ -112,8 +120,6 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
         </Grid>
       </Layout>
     </>
-  ) : (
-    <></>
   );
 };
 
@@ -145,7 +151,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: slugs,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -169,7 +175,7 @@ export const getStaticProps: GetStaticProps<
             attributes {
               title
               slug
-              summary
+              overview
               cover {
                 data {
                   id
@@ -190,7 +196,7 @@ export const getStaticProps: GetStaticProps<
                   }
                 }
               }
-              createdAt
+              publishedAt
             }
           }
         }
@@ -198,13 +204,17 @@ export const getStaticProps: GetStaticProps<
     `,
   });
 
+  if (!data.articles.data) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      article:
-        data.articles.data && data.articles.data[0]
-          ? data.articles.data[0]
-          : null,
+      article: data.articles.data[0],
     },
+    revalidate: 1,
   };
 };
 

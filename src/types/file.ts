@@ -1,5 +1,4 @@
-// Types
-import { IGraphQLModel } from './graphql';
+import type { IGraphQLModel } from './graphql';
 
 interface IBaseFile {
   name: string;

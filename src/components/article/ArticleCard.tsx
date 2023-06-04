@@ -1,8 +1,7 @@
-import { FC } from 'react';
+import type { FC } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
 import {
-  // useMediaQuery,
   useTheme,
   Typography,
   CardActionArea,
@@ -11,13 +10,10 @@ import {
   CardContent,
   CardActions,
 } from '@mui/material';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 // Types
-import { IArticle } from '@/types/article';
-
-//  Utils
-import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
+import type { IArticle } from '@/types/article';
 
 interface IArticleCardProps {
   article: IArticle;
@@ -25,7 +21,6 @@ interface IArticleCardProps {
 
 const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
   const theme = useTheme();
-  // const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <NextLink href={`/blog/${article.attributes.slug}`} passHref>
@@ -33,15 +28,13 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
         <Card>
           <CardMedia>
             <Image
-              src={getPublicID(article.attributes.cover.data.attributes.url)}
+              src={article.attributes.thumbnail.data.attributes.url}
               alt={article.attributes.title}
-              width={article.attributes.cover.data.attributes.width}
-              height={article.attributes.cover.data.attributes.height}
+              width={article.attributes.thumbnail.data.attributes.width}
+              height={article.attributes.thumbnail.data.attributes.height}
               objectFit='contain'
               placeholder='blur'
-              blurDataURL={getBlurredImageURL(
-                article.attributes.cover.data.attributes.url,
-              )}
+              blurDataURL={article.attributes.thumbnail.data.attributes.url}
             />
           </CardMedia>
 
@@ -50,7 +43,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
               {article.attributes.title}
             </Typography>
             <Typography variant='body2' color={theme.palette.text.secondary}>
-              {article.attributes.summary}
+              {article.attributes.overview}
             </Typography>
           </CardContent>
 
@@ -68,7 +61,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
                 color: theme.palette.text.secondary,
               }}
             >
-              {moment(article.attributes.updatedAt).format('MMM D, YYYY')}
+              {dayjs(article.attributes.updatedAt).format('MMM D, YYYY')}
             </Typography>
           </CardActions>
         </Card>

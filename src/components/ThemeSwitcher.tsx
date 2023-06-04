@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, useRef } from 'react';
+import { memo, FC, useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles, createStyles } from '@mui/styles';
 import {
@@ -179,7 +179,7 @@ const ThemeSwitcher: FC = () => {
   );
 };
 
-export default ThemeSwitcher;
+export default memo(ThemeSwitcher);
 
 const useStyles = makeStyles<Theme>((theme) =>
   createStyles({

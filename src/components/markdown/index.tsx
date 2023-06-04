@@ -3,7 +3,7 @@ import { useTheme, Theme, Link, Typography } from '@mui/material';
 import { Components } from 'react-markdown/lib/ast-to-react';
 
 const Anchor: Components['a'] = ({ href, children }) => {
-  const theme = useTheme();
+  // const theme = useTheme();
 
   return (
     <Link color='secondary' href={href} target='_blank'>

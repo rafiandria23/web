@@ -1,7 +1,6 @@
-// Types
-import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
-import { IProject } from './project';
-import { IArticle } from './article';
+import type { IGraphQLModel, IGraphQLModelResponse } from './graphql';
+import type { IProject } from './project';
+import type { IArticle } from './article';
 
 interface IBaseTag {
   name: string;

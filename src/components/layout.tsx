@@ -1,5 +1,5 @@
-import { FC, ReactNode, CSSProperties } from 'react';
-import { useTheme, Container, SxProps } from '@mui/material';
+import { memo, FC, ReactNode } from 'react';
+import { useTheme, Grid } from '@mui/material';
 
 // Components
 import { Header, Footer } from '@/components';
@@ -23,12 +23,15 @@ const Layout: FC<ILayoutProps> = ({
     <>
       {header && <Header elevate={elevate} />}
 
-      <Container
+      <Grid
         component='main'
+        container
+        justifyContent='center'
+        alignItems='center'
         sx={{
-          minHeight: '100vh',
-          p: 0,
-          '& > :first-child': {
+          '& > :first-of-type': {
+            width: '100%',
+            height: '100%',
             pt: `calc(${Number(
               theme.mixins.toolbar.minHeight,
             )}px + ${theme.spacing(2)})`,
@@ -38,14 +41,17 @@ const Layout: FC<ILayoutProps> = ({
               )}px + ${theme.spacing(4)})`,
             },
           },
+          '& > *:not(:first-of-type)': {
+            my: theme.spacing(4),
+          },
         }}
       >
         {children}
-      </Container>
+      </Grid>
 
       {footer && <Footer />}
     </>
   );
 };
 
-export default Layout;
+export default memo(Layout);

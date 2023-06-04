@@ -1,4 +1,4 @@
-import { compose } from 'redux';
+import type { compose } from 'redux';
 
 declare global {
   interface Window {

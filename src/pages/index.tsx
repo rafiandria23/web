@@ -1,79 +1,70 @@
-import { NextPage, GetStaticProps } from 'next';
+import { memo } from 'react';
+import type { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import {
-  useMediaQuery,
-  useTheme,
-  Container,
-  Grid,
-  Typography,
-} from '@mui/material';
+import { useTheme, Grid, Container, Typography } from '@mui/material';
+// import dayjs from 'dayjs';
 
 // Types
-import { IGraphQLModelResponse } from '@/types/graphql';
-import { ISkillCategory } from '@/types/skill';
+import type { IPagination } from '@/types/page';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IArticle } from '@/types/article';
+import type { IProject } from '@/types/project';
+
+// Constants
+import { PaginationDefaults } from '@/constants';
 
 // GraphQL
 import { client } from '@/graphql';
 
 // Components
 import { Layout } from '@/components';
-import { SkillTabs } from '@/components/skill';
+import { ArticleList } from '@/components/article';
+import { ProjectList } from '@/components/project';
 
 interface IHomePageProps {
-  skillCategories: ISkillCategory[];
+  articles: IArticle[];
+  projects: IProject[];
 }
 
-const HomePage: NextPage<IHomePageProps> = ({ skillCategories }) => {
+const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <>
       <NextSeo
-        title='Adam Rafiandri'
+        title='Welcome!'
         description='Software Engineer & Lifetime Learner'
       />
 
       <Layout elevate>
-        {/* Introduction */}
+        {/* Introduction Section */}
         <Grid
+          item
           container
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='stretch'
-          component={Container}
+          justifyContent='center'
           sx={{
             bgcolor: theme.palette.primary.light,
-            p: theme.spacing(2, 1),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
           }}
         >
-          <Grid item>
+          <Grid item component={Container}>
             <Typography
               variant='h2'
               component='h1'
               gutterBottom
               color={theme.palette.primary.contrastText}
-              sx={{
-                fontWeight: theme.typography.fontWeightBold,
-              }}
+              fontWeight={theme.typography.fontWeightBold}
+              textAlign='center'
             >
               Hey, I&apos;m Adam.
             </Typography>
-          </Grid>
 
-          <Grid item>
             <Typography
               variant='h6'
               component='p'
               paragraph
               color={theme.palette.primary.contrastText}
+              textAlign='center'
             >
               Software Engineer from Bogor, Indonesia. I develop web, mobile,
               and desktop applications to help businesses grow online.
@@ -81,39 +72,20 @@ const HomePage: NextPage<IHomePageProps> = ({ skillCategories }) => {
           </Grid>
         </Grid>
 
-        {/* Skills */}
-        <Grid
-          container
-          component={Container}
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='flex-start'
-          sx={{
-            p: theme.spacing(2, 1),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
-          }}
-        >
-          <Grid item>
-            <Typography
-              variant='h5'
-              component='h2'
-              align={isSmallScreen ? 'left' : 'center'}
-              gutterBottom
-              sx={{
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              Skills
-            </Typography>
-          </Grid>
+        {/* Latest Articles Section */}
+        <Grid item container component={Container}>
+          <ArticleList articles={articles} />
+        </Grid>
 
-          <Grid item>
-            <SkillTabs skillCategories={skillCategories} />
+        {/* Latest Projects Section */}
+        <Grid
+          item
+          container
+          justifyContent='center'
+          sx={{ bgcolor: theme.palette.primary.light }}
+        >
+          <Grid item container component={Container}>
+            <ProjectList projects={projects} />
           </Grid>
         </Grid>
       </Layout>
@@ -122,17 +94,40 @@ const HomePage: NextPage<IHomePageProps> = ({ skillCategories }) => {
 };
 
 export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
-  const { data } = await client.query<{
-    skillCategories: IGraphQLModelResponse<ISkillCategory[]>;
-  }>({
+  const { data } = await client.query<
+    {
+      articles: IGraphQLModelResponse<IArticle[]>;
+      projects: IGraphQLModelResponse<IProject[]>;
+    },
+    IPagination
+  >({
+    variables: {
+      pageSize: PaginationDefaults.PAGE_SIZE,
+      page: PaginationDefaults.PAGE,
+    },
     query: gql`
-      query {
-        skillCategories {
+      query ($pageSize: Int!, $page: Int!) {
+        articles(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
           data {
             id
             attributes {
-              name
-              skills {
+              title
+              overview
+              thumbnail {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              slug
+              tags {
                 data {
                   id
                   attributes {
@@ -141,6 +136,42 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
                   }
                 }
               }
+              publishedAt
+            }
+          }
+        }
+
+        projects(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
+          data {
+            id
+            attributes {
+              title
+              overview
+              link
+              thumbnail {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              tags {
+                data {
+                  id
+                  attributes {
+                    name
+                    slug
+                  }
+                }
+              }
+              status
+              publishedAt
             }
           }
         }
@@ -150,10 +181,11 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
 
   return {
     props: {
-      skillCategories: data.skillCategories.data,
+      articles: data.articles.data,
+      projects: data.projects.data,
     },
     revalidate: 1,
   };
 };
 
-export default HomePage;
+export default memo(HomePage);

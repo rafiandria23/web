@@ -1,11 +1,11 @@
-import { Moment } from 'moment';
+import type { Dayjs } from 'dayjs';
 
-// Types
-import { IPagination } from '@/types';
+import type { IPagination } from '@/types/page';
 
 export interface IGraphQLModelBaseAttributes {
-  createdAt: Moment | Date | string;
-  updatedAt: Moment | Date | string;
+  publishedAt: Dayjs | Date | string;
+  createdAt: Dayjs | Date | string;
+  updatedAt: Dayjs | Date | string;
 }
 
 export interface IGraphQLModel<T> {

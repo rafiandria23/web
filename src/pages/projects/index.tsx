@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import { NextPage, GetStaticProps } from 'next';
+import type { CSSProperties } from 'react';
+import type { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 
 // Types
-import { IGraphQLModelResponse } from '@/types/graphql';
-import { Project } from '@/types/project';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IProject } from '@/types/project';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -24,7 +24,7 @@ import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectsPageProps {
-  projects: Project[];
+  projects: IProject[];
 }
 
 const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
@@ -88,9 +88,9 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
+export const getStaticProps: GetStaticProps<IProjectsPageProps> = async () => {
   const { data } = await client.query<{
-    projects: IGraphQLModelResponse<Project[]>;
+    projects: IGraphQLModelResponse<IProject[]>;
   }>({
     query: gql`
       query {
@@ -99,9 +99,9 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
             id
             attributes {
               title
-              slug
               overview
-              cover {
+              link
+              thumbnail {
                 data {
                   id
                   attributes {
@@ -111,6 +111,7 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
                   }
                 }
               }
+              status
               tags {
                 data {
                   id

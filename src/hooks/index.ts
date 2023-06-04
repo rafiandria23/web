@@ -1,1 +1,1 @@
-export { default as useThemeReducer } from './use-theme-reducer';
+export { default as useThemeReducer } from './useThemeReducer';

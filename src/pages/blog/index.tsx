@@ -1,4 +1,4 @@
-import { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
@@ -11,14 +11,17 @@ import {
   PaginationItem,
 } from '@mui/material';
 
-// Types
-import { IPagination } from '@/types';
-import { IGraphQLModelResponse } from '@/types/graphql';
-import { IArticle } from '@/types/article';
-import { ITag } from '@/types/tag';
-
 // GraphQL
 import { client } from '@/graphql';
+
+// Types
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IPagination } from '@/types/page';
+import type { IArticle } from '@/types/article';
+import type { ITag } from '@/types/tag';
+
+// Constants
+import { PaginationDefaults } from '@/constants';
 
 // Components
 import { Layout } from '@/components';
@@ -30,7 +33,7 @@ interface IBlogPageProps {
   tags: ITag[];
 }
 
-const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
+const BlogPage: NextPage<IBlogPageProps> = ({ articles }) => {
   const theme = useTheme();
 
   return (
@@ -123,8 +126,8 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
           <Grid item>
             <Pagination
               color='primary'
-              count={pagination.total}
-              page={pagination.page}
+              // count={PaginationDefaults.total}
+              page={PaginationDefaults.PAGE}
               renderItem={(props) => (
                 <NextLink href={`/blog?page=${props.page}`} passHref>
                   <PaginationItem {...props} />
@@ -142,18 +145,20 @@ export const getStaticProps: GetStaticProps<
   IBlogPageProps,
   { page: string }
 > = async ({ params }) => {
-  const page = parseInt(String(params?.page)) || 1;
-
-  const { data } = await client.query<{
-    articles: IGraphQLModelResponse<IArticle[]>;
-    tags: IGraphQLModelResponse<ITag[]>;
-  }>({
+  const { data } = await client.query<
+    {
+      articles: IGraphQLModelResponse<IArticle[]>;
+      tags: IGraphQLModelResponse<ITag[]>;
+    },
+    IPagination
+  >({
     variables: {
-      page,
+      pageSize: PaginationDefaults.PAGE_SIZE,
+      page: parseInt(String(params?.page)) || PaginationDefaults.PAGE,
     },
     query: gql`
-      query ($page: Int!) {
-        articles(pagination: { page: $page }) {
+      query ($pageSize: Int!, $page: Int!) {
+        articles(pagination: { pageSize: $pageSize, page: $page }) {
           meta {
             pagination {
               total
@@ -167,8 +172,17 @@ export const getStaticProps: GetStaticProps<
             id
             attributes {
               title
-              slug
-              summary
+              overview
+              thumbnail {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
               cover {
                 data {
                   id
@@ -179,6 +193,7 @@ export const getStaticProps: GetStaticProps<
                   }
                 }
               }
+              slug
               tags {
                 data {
                   id
@@ -188,7 +203,8 @@ export const getStaticProps: GetStaticProps<
                   }
                 }
               }
-              createdAt
+              content
+              publishedAt
             }
           }
         }

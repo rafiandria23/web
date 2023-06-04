@@ -1,15 +1,16 @@
-// Types
-import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
-import { IFileUpload } from './file';
-import { ITag } from './tag';
+// Constants
+import { ProjectStatus } from '@/constants/project';
+
+import type { IGraphQLModel, IGraphQLModelResponse } from './graphql';
+import type { IFileUpload } from './file';
+import type { ITag } from './tag';
 
 interface IBaseProject {
   title: string;
-  slug: string;
   overview: string;
   link: string;
-  description: string;
-  cover: IGraphQLModelResponse<IFileUpload>;
+  thumbnail: IGraphQLModelResponse<IFileUpload>;
+  status: ProjectStatus;
   tags: IGraphQLModelResponse<ITag[]>;
 }
 

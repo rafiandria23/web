@@ -4,10 +4,10 @@ import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Grid, Typography } from '@mui/material';
 
 // Types
-import { Article } from '@/types/article';
+import type { IArticle } from '@/types/article';
 
 interface IArticleHeaderProps {
-  article: Article;
+  article: IArticle;
 }
 
 const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {

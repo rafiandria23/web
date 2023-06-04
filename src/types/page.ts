@@ -4,8 +4,8 @@ export interface IPageInitialProps {
 }
 
 export interface IPagination {
-  total: number;
-  pageSize: number;
-  pageCount: number;
-  page: number;
+  total?: number;
+  pageSize?: number;
+  pageCount?: number;
+  page?: number;
 }

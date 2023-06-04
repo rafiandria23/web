@@ -1,12 +1,11 @@
-// Types
-import { IGraphQLModel, IGraphQLModelResponse } from './graphql';
-import { IFileUpload } from './file';
-import { ITag } from './tag';
+import type { IGraphQLModel, IGraphQLModelResponse } from './graphql';
+import type { IFileUpload } from './file';
+import type { ITag } from './tag';
 
 interface IBaseArticle {
   title: string;
   slug: string;
-  summary: string;
+  overview: string;
   content: string;
   thumbnail: IGraphQLModelResponse<IFileUpload>;
   cover: IGraphQLModelResponse<IFileUpload>;
