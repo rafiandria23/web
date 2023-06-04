@@ -53,7 +53,8 @@
         "output": "Markdown",
         "preset": "standard"
       },
-      "customField": "plugin::ckeditor.CKEditor"
+      "customField": "plugin::ckeditor.CKEditor",
+      "required": true
     }
   }
 }
