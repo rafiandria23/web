@@ -50,10 +50,9 @@
     "content": {
       "type": "customField",
       "options": {
-        "output": "HTML",
-        "preset": "rich"
+        "output": "Markdown",
+        "preset": "standard"
       },
-      "required": true,
       "customField": "plugin::ckeditor.CKEditor"
     }
   }
