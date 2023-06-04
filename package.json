@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
+    "@newrelic/apollo-server-plugin": "^3.0.0",
     "@strapi/plugin-color-picker": "^4.10.7",
     "@strapi/plugin-graphql": "^4.10.7",
     "@strapi/plugin-i18n": "4.10.7",
