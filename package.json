@@ -26,7 +26,8 @@
     "name": "Adam Rafiandri"
   },
   "strapi": {
-    "uuid": "37505947-6fe2-4af9-b109-b8fa50750ddf"
+    "uuid": "37505947-6fe2-4af9-b109-b8fa50750ddf",
+    "telemetryDisabled": true
   },
   "engines": {
     "node": ">=14.19.1 <=18.x.x",
