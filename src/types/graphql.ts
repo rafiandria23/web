@@ -1,15 +1,23 @@
-import { Moment } from 'moment';
+import type { Dayjs } from 'dayjs';
 
-export interface GraphQLModelBaseAttributes {
-  createdAt: Moment | Date | string;
-  updatedAt: Moment | Date | string;
+import type { IPagination } from '@/types/page';
+
+export interface IGraphQLModelBaseAttributes {
+  publishedAt: Dayjs | Date | string;
+  createdAt: Dayjs | Date | string;
+  updatedAt: Dayjs | Date | string;
 }
 
-export interface GraphQLModel<T> {
+export interface IGraphQLModel<T> {
   id: string;
-  attributes: T & GraphQLModelBaseAttributes;
+  attributes: T & IGraphQLModelBaseAttributes;
 }
 
-export interface GraphQLModelResponse<T> {
+export interface IGraphQLModelResponseMeta {
+  pagination: IPagination;
+}
+
+export interface IGraphQLModelResponse<T> {
+  meta: IGraphQLModelResponseMeta;
   data: T;
 }

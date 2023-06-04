@@ -2,7 +2,7 @@ import { Store, AnyAction, compose, createStore } from 'redux';
 import { MakeStore, createWrapper } from 'next-redux-wrapper';
 
 // Types
-import { RootState } from '@/types/redux';
+import type { IRootState } from '@/types/redux';
 
 // Reducers
 import reducers from './reducers';
@@ -14,7 +14,7 @@ const store = createStore(
   process.env.NODE_ENV !== 'production' ? composeEnhancers() : undefined,
 );
 
-const makeStore: MakeStore<Store<RootState, AnyAction>> = () => store;
+const makeStore: MakeStore<Store<IRootState, AnyAction>> = () => store;
 
 export const wrapper = createWrapper(makeStore);
 

@@ -5,9 +5,9 @@ import { NextSeo } from 'next-seo';
 // Components
 import { Layout } from '@/components';
 
-interface ErrorPageProps extends ErrorProps {}
+interface IErrorPageProps extends ErrorProps {}
 
-const ErrorPage: NextPage<ErrorPageProps> = ({ statusCode }) => {
+const ErrorPage: NextPage<IErrorPageProps> = ({ statusCode }) => {
   switch (statusCode) {
     case 404:
       return (

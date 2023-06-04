@@ -1,56 +1,57 @@
-import { FC, ReactNode, CSSProperties } from 'react';
-import { makeStyles, createStyles } from '@mui/styles';
-import { Theme } from '@mui/material';
+import { memo, FC, ReactNode } from 'react';
+import { useTheme, Grid } from '@mui/material';
 
 // Components
 import { Header, Footer } from '@/components';
 
-interface LayoutProps {
+interface ILayoutProps {
   children: ReactNode;
   header?: boolean;
   elevate?: boolean;
   footer?: boolean;
 }
 
-const Layout: FC<LayoutProps> = ({
+const Layout: FC<ILayoutProps> = ({
   children,
   header = true,
   elevate = false,
   footer = true,
 }) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <>
       {header && <Header elevate={elevate} />}
 
-      <main className={classes.main}>{children}</main>
+      <Grid
+        component='main'
+        container
+        justifyContent='center'
+        alignItems='center'
+        sx={{
+          '& > :first-of-type': {
+            width: '100%',
+            height: '100%',
+            pt: `calc(${Number(
+              theme.mixins.toolbar.minHeight,
+            )}px + ${theme.spacing(2)})`,
+            [theme.breakpoints.down('sm')]: {
+              pt: `calc(${Number(
+                theme.mixins.toolbar.minHeight,
+              )}px + ${theme.spacing(4)})`,
+            },
+          },
+          '& > *:not(:first-of-type)': {
+            my: theme.spacing(4),
+          },
+        }}
+      >
+        {children}
+      </Grid>
 
       {footer && <Footer />}
     </>
   );
 };
 
-export default Layout;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    main: {
-      minHeight: '100vh',
-      '& > :first-child': {
-        paddingTop:
-          `${Number(theme.mixins.toolbar.minHeight)}px` + theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-          paddingTop:
-            `${Number(theme.mixins.toolbar.minHeight)}px` + theme.spacing(4),
-        } as CSSProperties,
-      } as CSSProperties,
-      '& > *': {
-        padding: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-          padding: theme.spacing(2, 4),
-        } as CSSProperties,
-      } as CSSProperties,
-    },
-  }),
-);
+export default memo(Layout);

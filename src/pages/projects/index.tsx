@@ -1,5 +1,5 @@
-import { CSSProperties } from 'react';
-import { NextPage, GetStaticProps } from 'next';
+import type { CSSProperties } from 'react';
+import type { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
@@ -13,8 +13,8 @@ import {
 } from '@mui/material';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
-import { Project } from '@/types/project';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IProject } from '@/types/project';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -23,20 +23,20 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { ProjectCard } from '@/components/project';
 
-interface ProjectsPageProps {
-  projects: Project[];
+interface IProjectsPageProps {
+  projects: IProject[];
 }
 
-const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
+const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
   const classes = useStyles();
 
   return (
     <>
       <NextSeo
         title='My Projects'
-        description={`All the projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack`}
+        description="Projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack"
       />
 
       <Layout>
@@ -68,8 +68,8 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={matchesSM ? 'flex-start' : 'space-evenly'}
-            alignItems={matchesSM ? 'center' : 'stretch'}
+            justifyContent={isSmallScreen ? 'flex-start' : 'space-evenly'}
+            alignItems={isSmallScreen ? 'center' : 'stretch'}
             spacing={2}
           >
             {projects !== undefined && projects.length > 0
@@ -88,9 +88,9 @@ const ProjectsPage: NextPage<ProjectsPageProps> = ({ projects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
+export const getStaticProps: GetStaticProps<IProjectsPageProps> = async () => {
   const { data } = await client.query<{
-    projects: GraphQLModelResponse<Project[]>;
+    projects: IGraphQLModelResponse<IProject[]>;
   }>({
     query: gql`
       query {
@@ -99,9 +99,9 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
             id
             attributes {
               title
-              slug
               overview
-              cover {
+              link
+              thumbnail {
                 data {
                   id
                   attributes {
@@ -111,6 +111,7 @@ export const getStaticProps: GetStaticProps<ProjectsPageProps> = async () => {
                   }
                 }
               }
+              status
               tags {
                 data {
                   id

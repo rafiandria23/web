@@ -1,37 +1,33 @@
-import { FC, useEffect } from 'react';
+import { memo, FC } from 'react';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Grid } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 
-// Config
-import { CMS_URI } from '@/config';
+// Components
+import markdownComponents from '@/components/markdown';
 
-interface PostContentProps {
+interface IArticleContentProps {
   content: string;
 }
 
-const PostContent: FC<PostContentProps> = ({ content }: PostContentProps) => {
+const ArticleContent: FC<IArticleContentProps> = ({ content }) => {
   const classes = useStyles();
-
-  useEffect(() => {
-    content.split('/uploads/').join(`${CMS_URI}/uploads/`);
-  }, [content]);
 
   return (
     <Grid
       container
       classes={{ container: classes.wrapper }}
-      direction={`column`}
-      justifyContent={`space-around`}
-      alignItems={`stretch`}
-      component={`section`}
+      direction='column'
+      justifyContent='space-around'
+      alignItems='stretch'
+      component='section'
     >
-      <ReactMarkdown>{content}</ReactMarkdown>
+      <ReactMarkdown components={markdownComponents}>{content}</ReactMarkdown>
     </Grid>
   );
 };
 
-export default PostContent;
+export default memo(ArticleContent);
 
 const useStyles = makeStyles<Theme>((theme) =>
   createStyles({

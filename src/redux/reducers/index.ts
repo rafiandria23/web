@@ -2,18 +2,18 @@ import { Reducer, AnyAction, combineReducers } from 'redux';
 import { HYDRATE } from 'next-redux-wrapper';
 
 // Types
-import { RootState, Action } from '@/types/redux';
+import { IRootState, IAction } from '@/types/redux';
 
 // Reducers
 import themeReducer from './theme';
 
-const reducers: Reducer<RootState, AnyAction> = (state, action): RootState => {
+const reducers: Reducer<IRootState, IAction> = (state, action): IRootState => {
   switch (action.type) {
     case HYDRATE:
-      return action.payload as RootState;
+      return action.payload as IRootState;
 
     default:
-      return combineReducers<RootState>({
+      return combineReducers<IRootState>({
         theme: themeReducer,
       })(state, action);
   }

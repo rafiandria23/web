@@ -1,34 +1,36 @@
-import { GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import { getServerSideSitemap, ISitemapField } from 'next-sitemap';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
-const HOST = 'https://rafiandria23.me';
+const HOST = 'https://rafiandria23.tech';
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const fileds: ISitemapField[] = [
+  const now = dayjs().toISOString();
+
+  const fields: ISitemapField[] = [
     {
       loc: HOST,
-      lastmod: moment().toISOString(),
+      lastmod: now,
     },
     {
       loc: `${HOST}/projects`,
-      lastmod: moment().toISOString(),
+      lastmod: now,
     },
     {
       loc: `${HOST}/projects/tags`,
-      lastmod: moment().toISOString(),
+      lastmod: now,
     },
     {
       loc: `${HOST}/blog`,
-      lastmod: moment().toISOString(),
+      lastmod: now,
     },
     {
       loc: `${HOST}/blog/tags`,
-      lastmod: moment().toISOString(),
+      lastmod: now,
     },
   ];
 
-  return getServerSideSitemap(ctx, fileds);
+  return getServerSideSitemap(ctx, fields);
 };
 
 // eslint-disable-next-line

@@ -1,25 +1,21 @@
 import { FC } from 'react';
-import NextLink from 'next/link';
 import Image from 'next/image';
 import { makeStyles, createStyles } from '@mui/styles';
-import { Theme, ButtonBase, Typography } from '@mui/material';
+import { Theme, ButtonBase, Typography, Link } from '@mui/material';
 
 // Types
-import { Project } from '@/types/project';
+import type { IProject } from '@/types/project';
 
-// Utils
-import { getPublicID, getBlurredImageURL } from '@/utils/cloudinary';
-
-interface ProjectCardProps {
-  project: Project;
+interface IProjectCardProps {
+  project: IProject;
 }
 
-const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
+const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
   const classes = useStyles();
 
   return (
     <div className={classes.wrapper}>
-      <NextLink href={`/projects/${project.attributes.slug}`} passHref>
+      <Link href={project.attributes.link} target='_blank'>
         <ButtonBase
           focusRipple
           className={classes.image}
@@ -31,19 +27,17 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
           {/* <span
           className={classes.imageSrc}
           style={{
-            backgroundImage: `url(${project.attributes.cover.data.attributes.url})`,
+            backgroundImage: `url(${project.attributes.thumbnail.data.attributes.url})`,
           }}
         /> */}
           <Image
-            className={classes.imageSrc}
-            src={getPublicID(project.attributes.cover.data.attributes.url)}
+            // className={classes.imageSrc}
+            src={project.attributes.thumbnail.data.attributes.url}
             alt={project.attributes.title}
-            width={project.attributes.cover.data.attributes.width}
-            height={project.attributes.cover.data.attributes.height}
+            width={project.attributes.thumbnail.data.attributes.width}
+            height={project.attributes.thumbnail.data.attributes.height}
             placeholder='blur'
-            blurDataURL={getBlurredImageURL(
-              project.attributes.cover.data.attributes.url,
-            )}
+            blurDataURL={project.attributes.thumbnail.data.attributes.url}
           />
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
@@ -63,7 +57,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
             </Typography>
           </span>
         </ButtonBase>
-      </NextLink>
+      </Link>
     </div>
   );
 };

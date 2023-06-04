@@ -1,16 +1,17 @@
-// Types
-import { GraphQLModel, GraphQLModelResponse } from './graphql';
-import { FileUpload } from './file';
-import { Tag } from './tag';
+// Constants
+import { ProjectStatus } from '@/constants/project';
 
-interface BaseProject {
+import type { IGraphQLModel, IGraphQLModelResponse } from './graphql';
+import type { IFileUpload } from './file';
+import type { ITag } from './tag';
+
+interface IBaseProject {
   title: string;
-  slug: string;
   overview: string;
   link: string;
-  description: string;
-  cover: GraphQLModelResponse<FileUpload>;
-  tags: Tag[];
+  thumbnail: IGraphQLModelResponse<IFileUpload>;
+  status: ProjectStatus;
+  tags: IGraphQLModelResponse<ITag[]>;
 }
 
-export interface Project extends GraphQLModel<BaseProject> {}
+export interface IProject extends IGraphQLModel<IBaseProject> {}

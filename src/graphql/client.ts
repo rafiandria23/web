@@ -1,9 +1,13 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // Config
-import { CMS_URI } from '@/config';
+import { AppConfig } from '@/constants';
 
-export default new ApolloClient({
-  uri: CMS_URI,
-  cache: new InMemoryCache(),
+const cache = new InMemoryCache();
+
+const client = new ApolloClient({
+  uri: AppConfig.CMS_URL,
+  cache,
 });
+
+export default client;

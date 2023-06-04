@@ -23,11 +23,13 @@ export const light = createTheme({
       light: colors.blue[300],
       main: colors.blue[500],
       dark: colors.blue[700],
+      contrastText: colors.common.white,
     },
     secondary: {
       light: colors.pink[300],
       main: colors.pink[500],
       dark: colors.pink[700],
+      contrastText: colors.common.white,
     },
   },
 });
@@ -40,11 +42,13 @@ export const dark = createTheme({
       light: colors.grey[700],
       main: colors.grey[800],
       dark: colors.grey[900],
+      contrastText: colors.common.white,
     },
     secondary: {
       light: colors.pink[300],
       main: colors.pink[500],
       dark: colors.pink[700],
+      contrastText: colors.common.white,
     },
   },
 });

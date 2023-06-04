@@ -1,24 +1,24 @@
 import update from 'immutability-helper';
 
 // Types
-import { Action, ThemeReducer } from '@/types/redux';
+import { IAction, IThemeReducer } from '@/types/redux';
 
 // Constants
 import { SET_THEME_MODE } from '@/constants/redux';
 
-const initialState: ThemeReducer = {
+const initialState: IThemeReducer = {
   mode: 'light',
 };
 
 export default function themeReducer(
   state = initialState,
-  action: Action,
-): ThemeReducer {
+  action: IAction,
+): IThemeReducer {
   switch (action.type) {
     case SET_THEME_MODE:
       return update(state, {
         mode: {
-          $set: (action as Action<ThemeReducer['mode']>).payload,
+          $set: (action as IAction<IThemeReducer['mode']>).payload,
         },
       });
 

@@ -1,18 +1,19 @@
-import {
+import type {
   NextPage,
   GetStaticPaths,
   GetStaticPathsResult,
   GetStaticProps,
 } from 'next';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
 import { Theme, Grid, Typography, Divider } from '@mui/material';
 
 // Types
-import { PageInitialProps } from '@/types';
-import { GraphQLModelResponse } from '@/types/graphql';
-import { Tag } from '@/types/tag';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IPageInitialProps } from '@/types/page';
+import type { ITag } from '@/types/tag';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -21,14 +22,23 @@ import { client } from '@/graphql';
 import { Layout } from '@/components';
 import { ArticleCard } from '@/components/article';
 
-interface ArticleTagsPageProps extends PageInitialProps {
-  tag: Tag | null;
+interface IArticleTagsPageProps extends IPageInitialProps {
+  tag: ITag;
 }
 
-const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
+const ArticleTagsPage: NextPage<IArticleTagsPageProps> = ({ tag }) => {
+  const router = useRouter();
   const classes = useStyles();
 
-  return tag !== null ? (
+  if (router.isFallback) {
+    return (
+      <Layout>
+        <Typography>Loading...</Typography>
+      </Layout>
+    );
+  }
+
+  return (
     <>
       <NextSeo
         title={tag.attributes.name}
@@ -81,13 +91,11 @@ const ArticleTagsPage: NextPage<ArticleTagsPageProps> = ({ tag }) => {
         </Grid>
       </Layout>
     </>
-  ) : (
-    <></>
   );
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: GraphQLModelResponse<Tag[]> }>({
+  const { data } = await client.query<{ tags: IGraphQLModelResponse<ITag[]> }>({
     query: gql`
       query {
         tags {
@@ -110,18 +118,18 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths: slugs,
-    fallback: false,
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps<
-  ArticleTagsPageProps,
-  { slug: Tag['attributes']['slug'] }
+  IArticleTagsPageProps,
+  { slug: ITag['attributes']['slug'] }
 > = async ({ params }) => {
   const slug = String(params?.slug);
   const { data } = await client.query<
-    { tags: GraphQLModelResponse<Tag[]> },
-    { slug: Tag['attributes']['slug'] }
+    { tags: IGraphQLModelResponse<ITag[]> },
+    { slug: ITag['attributes']['slug'] }
   >({
     variables: {
       slug,
@@ -139,8 +147,8 @@ export const getStaticProps: GetStaticProps<
                   attributes {
                     title
                     slug
-                    summary
-                    cover {
+                    overview
+                    thumbnail {
                       data {
                         id
                         attributes {
@@ -150,7 +158,7 @@ export const getStaticProps: GetStaticProps<
                         }
                       }
                     }
-                    createdAt
+                    publishedAt
                   }
                 }
               }
@@ -161,9 +169,15 @@ export const getStaticProps: GetStaticProps<
     `,
   });
 
+  if (!data.tags.data.length) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
-      tag: data.tags.data && data.tags.data[0] ? data.tags.data[0] : null,
+      tag: data.tags.data[0],
     },
     revalidate: 1,
   };

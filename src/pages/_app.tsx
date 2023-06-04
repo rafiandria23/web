@@ -2,8 +2,9 @@ import '@fontsource/roboto';
 import '@/styles/global.scss';
 
 import { useEffect, useCallback, useMemo, createRef } from 'react';
-import { NextComponentType } from 'next';
-import NextApp, { AppContext, AppInitialProps, AppProps } from 'next/app';
+import type { NextComponentType } from 'next';
+import type { AppContext, AppInitialProps, AppProps } from 'next/app';
+import NextApp from 'next/app';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import { useDispatch } from 'react-redux';
@@ -17,7 +18,7 @@ import { CloseOutlined } from '@mui/icons-material';
 import { SnackbarProvider, SnackbarKey, SnackbarAction } from 'notistack';
 
 // Types
-import { PageInitialProps } from '@/types';
+import type { IPageInitialProps } from '@/types/page';
 
 // Utils
 import * as gtag from '@/utils/gtag';
@@ -38,12 +39,12 @@ import ErrorPage from './_error';
 const App: NextComponentType<
   AppContext,
   AppInitialProps,
-  AppProps<PageInitialProps>
+  AppProps<IPageInitialProps>
 > = ({ Component, pageProps }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const { mode } = useThemeReducer();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const isDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const notistackRef = createRef<SnackbarProvider>();
 
   const handleRouteChange = (url: string) => {
@@ -66,7 +67,7 @@ const App: NextComponentType<
           break;
 
         case 'system':
-          if (prefersDarkMode) {
+          if (isDarkMode) {
             dispatch(setThemeMode('dark'));
           } else {
             dispatch(setThemeMode('light'));
@@ -78,7 +79,7 @@ const App: NextComponentType<
           break;
       }
     }
-  }, [dispatch, prefersDarkMode]);
+  }, [dispatch, isDarkMode]);
 
   useEffect(() => {
     checkThemeConfigInLS();
@@ -92,13 +93,13 @@ const App: NextComponentType<
     const themeFromLS = localStorage.getItem('theme');
 
     if (themeFromLS === 'system') {
-      if (prefersDarkMode) {
+      if (isDarkMode) {
         dispatch(setThemeMode('dark'));
       } else {
         dispatch(setThemeMode('light'));
       }
     }
-  }, [dispatch, prefersDarkMode]);
+  }, [dispatch, isDarkMode]);
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -114,7 +115,7 @@ const App: NextComponentType<
   };
 
   const snackbarAction: SnackbarAction = (key) => (
-    <IconButton color={`inherit`} onClick={() => handleCloseSnackbar(key)}>
+    <IconButton color='inherit' onClick={() => handleCloseSnackbar(key)}>
       <CloseOutlined />
     </IconButton>
   );
@@ -124,7 +125,7 @@ const App: NextComponentType<
       return (
         <ErrorPage
           statusCode={pageProps.errorStatus}
-          title={pageProps.statusMessage}
+          title={pageProps.errorMessage}
         />
       );
     }
@@ -142,11 +143,11 @@ const App: NextComponentType<
         action={snackbarAction}
       >
         <DefaultSeo
-          titleTemplate='%s | rafiandria23.me'
+          titleTemplate='%s | rafiandria23.tech'
           openGraph={{
             type: 'website',
             locale: 'en_US',
-            url: 'https://rafiandria23.me',
+            url: 'https://rafiandria23.tech',
           }}
         />
         {handleRender()}

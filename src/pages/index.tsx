@@ -1,179 +1,91 @@
-import { CSSProperties } from 'react';
-import { NextPage, GetStaticProps } from 'next';
+import { memo } from 'react';
+import type { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@mui/styles';
-import {
-  useMediaQuery,
-  useTheme,
-  Theme,
-  Container,
-  Grid,
-  Typography,
-} from '@mui/material';
-import clsx from 'clsx';
+import { useTheme, Grid, Container, Typography } from '@mui/material';
+// import dayjs from 'dayjs';
 
 // Types
-import { GraphQLModelResponse } from '@/types/graphql';
-import { Company } from '@/types/company';
-import { SkillType } from '@/types/skill';
-import { Education } from '@/types/education';
+import type { IPagination } from '@/types/page';
+import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IArticle } from '@/types/article';
+import type { IProject } from '@/types/project';
+
+// Constants
+import { PaginationDefaults } from '@/constants';
 
 // GraphQL
 import { client } from '@/graphql';
 
 // Components
 import { Layout } from '@/components';
-import { WorkExperienceTimeline } from '@/components/work-experience';
-import { SkillProgressList, SkillTabs } from '@/components/skill';
-import { EducationTimeline } from '@/components/education';
+import { ArticleList } from '@/components/article';
+import { ProjectList } from '@/components/project';
 
-interface HomePageProps {
-  companies: Company[];
-  skillTypes: SkillType[];
-  educations: Education[];
+interface IHomePageProps {
+  articles: IArticle[];
+  projects: IProject[];
 }
 
-const HomePage: NextPage<HomePageProps> = ({
-  companies,
-  skillTypes,
-  educations,
-}) => {
+const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
   const theme = useTheme();
-  const matchesSM = useMediaQuery(theme.breakpoints.up('sm'));
-  const classes = useStyles();
 
   return (
     <>
       <NextSeo
-        title={`Adam Rafiandri's Personal Web`}
-        description={`Adam Rafiandri is a Software Engineer who's passionate about Computer Science`}
+        title='Welcome!'
+        description='Software Engineer & Lifetime Learner'
       />
 
       <Layout elevate>
-        {/* Introduction */}
+        {/* Introduction Section */}
         <Grid
-          className={clsx(
-            classes.banner,
-            classes.coloredBanner,
-            classes.introductionBanner,
-          )}
+          item
           container
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='stretch'
-        >
-          <Grid item>
-            <Container>
-              <Typography
-                className={clsx(classes.title, classes.text)}
-                variant='h2'
-                component='h1'
-                gutterBottom
-              >
-                Hey, I&apos;m Adam
-              </Typography>
-            </Container>
-          </Grid>
-
-          <Grid item>
-            <Container>
-              <Typography
-                className={classes.text}
-                variant='h6'
-                component='p'
-                paragraph
-              >
-                Software engineer from Bogor, Indonesia. I develop web, mobile,
-                and desktop applications to help businesses grow online.
-              </Typography>
-            </Container>
-          </Grid>
-        </Grid>
-
-        {/* Work Experiences */}
-        <Grid
-          className={clsx(classes.banner, classes.workExperienceBanner)}
-          container
-          component={Container}
-          direction='column'
           justifyContent='center'
-          alignItems='center'
+          sx={{
+            bgcolor: theme.palette.primary.light,
+          }}
         >
-          <Grid item>
+          <Grid item component={Container}>
             <Typography
-              className={classes.title}
-              variant='h5'
-              component='h2'
-              align={matchesSM ? 'center' : 'left'}
+              variant='h2'
+              component='h1'
               gutterBottom
+              color={theme.palette.primary.contrastText}
+              fontWeight={theme.typography.fontWeightBold}
+              textAlign='center'
             >
-              Work Experiences
+              Hey, I&apos;m Adam.
             </Typography>
-          </Grid>
 
-          <Grid item>
-            <WorkExperienceTimeline companies={companies} />
+            <Typography
+              variant='h6'
+              component='p'
+              paragraph
+              color={theme.palette.primary.contrastText}
+              textAlign='center'
+            >
+              Software Engineer from Bogor, Indonesia. I develop web, mobile,
+              and desktop applications to help businesses grow online.
+            </Typography>
           </Grid>
         </Grid>
 
-        {/* Skills */}
-        <Grid
-          className={clsx(
-            classes.banner,
-            classes.coloredBanner,
-            classes.skillsBanner,
-          )}
-          container
-          component={Container}
-          direction={`column`}
-          justifyContent={`space-evenly`}
-          alignItems={`flex-start`}
-        >
-          <Grid item>
-            <Typography
-              className={clsx(classes.title, classes.text)}
-              variant='h5'
-              component='h2'
-              align={matchesSM ? 'center' : 'left'}
-              gutterBottom
-            >
-              Skills
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            {matchesSM ? (
-              <SkillTabs skillTypes={skillTypes} />
-            ) : (
-              <SkillProgressList skillTypes={skillTypes} />
-            )}
-          </Grid>
+        {/* Latest Articles Section */}
+        <Grid item container component={Container}>
+          <ArticleList articles={articles} />
         </Grid>
 
-        {/* Educations */}
+        {/* Latest Projects Section */}
         <Grid
-          className={clsx(classes.banner, classes.educationBanner)}
+          item
           container
-          component={Container}
-          direction={`column`}
-          justifyContent={`space-evenly`}
-          alignItems={`flex-start`}
+          justifyContent='center'
+          sx={{ bgcolor: theme.palette.primary.light }}
         >
-          <Grid item>
-            <Typography
-              className={clsx(classes.title)}
-              variant='h5'
-              component='h2'
-              align={matchesSM ? 'center' : 'left'}
-              gutterBottom
-            >
-              Educations
-            </Typography>
-          </Grid>
-
-          <Grid item>
-            <EducationTimeline educations={educations} />
+          <Grid item container component={Container}>
+            <ProjectList projects={projects} />
           </Grid>
         </Grid>
       </Layout>
@@ -181,20 +93,30 @@ const HomePage: NextPage<HomePageProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
-  const { data } = await client.query<{
-    companies: GraphQLModelResponse<Company[]>;
-    skillTypes: GraphQLModelResponse<SkillType[]>;
-    educations: GraphQLModelResponse<Education[]>;
-  }>({
+export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
+  const { data } = await client.query<
+    {
+      articles: IGraphQLModelResponse<IArticle[]>;
+      projects: IGraphQLModelResponse<IProject[]>;
+    },
+    IPagination
+  >({
+    variables: {
+      pageSize: PaginationDefaults.PAGE_SIZE,
+      page: PaginationDefaults.PAGE,
+    },
     query: gql`
-      query {
-        companies {
+      query ($pageSize: Int!, $page: Int!) {
+        articles(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
           data {
             id
             attributes {
-              name
-              logo {
+              title
+              overview
+              thumbnail {
                 data {
                   id
                   attributes {
@@ -204,72 +126,52 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
                   }
                 }
               }
-              link
-              work_experiences {
-                data {
-                  id
-                  attributes {
-                    position
-                    type
-                    location
-                    is_current
-                    start_date
-                    end_date
-                    description
-                  }
-                }
-              }
-            }
-          }
-        }
-
-        skillTypes {
-          data {
-            id
-            attributes {
-              name
-              skills {
+              slug
+              tags {
                 data {
                   id
                   attributes {
                     name
-                    level
                     slug
                   }
                 }
               }
+              publishedAt
             }
           }
         }
 
-        educations {
+        projects(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
           data {
             id
             attributes {
-              degree
-              field
-              start_date
-              end_date
-              grade
-              description
-              school {
+              title
+              overview
+              link
+              thumbnail {
+                data {
+                  id
+                  attributes {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+              tags {
                 data {
                   id
                   attributes {
                     name
-                    logo {
-                      data {
-                        id
-                        attributes {
-                          url
-                          width
-                          height
-                        }
-                      }
-                    }
+                    slug
                   }
                 }
               }
+              status
+              publishedAt
             }
           }
         }
@@ -279,43 +181,11 @@ export const getStaticProps: GetStaticProps<HomePageProps> = async () => {
 
   return {
     props: {
-      companies: data.companies.data,
-      skillTypes: data.skillTypes.data,
-      educations: data.educations.data,
+      articles: data.articles.data,
+      projects: data.projects.data,
     },
     revalidate: 1,
   };
 };
 
-export default HomePage;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    text: {
-      color: theme.palette.primary.contrastText,
-    },
-    banner: {
-      padding: theme.spacing(2, 1),
-      [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(4, 8),
-      } as CSSProperties,
-      '& > *': {
-        width: '100%',
-      },
-    },
-    coloredBanner: {
-      backgroundColor: theme.palette.primary.light,
-    },
-    introductionBanner: {
-      [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(8),
-      } as CSSProperties,
-    },
-    workExperienceBanner: {},
-    skillsBanner: {},
-    educationBanner: {},
-  }),
-);
+export default memo(HomePage);
