@@ -204,7 +204,7 @@ export const getStaticProps: GetStaticProps<
     `,
   });
 
-  if (!data.articles.data) {
+  if (!data.articles.data.length) {
     return {
       notFound: true,
     };
