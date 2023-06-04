@@ -1,12 +1,12 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // Config
-import { CMS_URI } from '@/config';
+import { AppConfig } from '@/constants';
 
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  uri: CMS_URI,
+  uri: AppConfig.CMS_URL,
   cache,
 });
 

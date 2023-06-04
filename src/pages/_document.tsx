@@ -8,8 +8,8 @@ import NextDocument, {
 } from 'next/document';
 import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@mui/styles';
 
-// Config
-import { GOOGLE_ANALYTICS_TRACKING_ID } from '@/config';
+// Constants
+import { AppConfig } from '@/constants';
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
@@ -65,7 +65,7 @@ export default class Document extends NextDocument {
           {/* Global Site Tag (gtag.js) - Google Analytics */}
           <script
             async
-            src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_TRACKING_ID}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${AppConfig.GA_MEASUREMENT_ID}`}
           />
           <script
             dangerouslySetInnerHTML={{
@@ -73,7 +73,7 @@ export default class Document extends NextDocument {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${GOOGLE_ANALYTICS_TRACKING_ID}', {
+            gtag('config', '${AppConfig.GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
             });
           `,

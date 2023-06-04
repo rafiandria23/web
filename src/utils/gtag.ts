@@ -1,12 +1,12 @@
 // Config
-import { GOOGLE_ANALYTICS_TRACKING_ID } from '@/config';
+import { AppConfig } from '@/constants';
 
 // Types
 import type { IGTagEventParams } from '@/types/google';
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: string) => {
-  window.gtag('config', GOOGLE_ANALYTICS_TRACKING_ID, {
+  window.gtag('config', AppConfig.GA_MEASUREMENT_ID, {
     page_path: url,
   });
 };
