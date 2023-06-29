@@ -1,5 +1,5 @@
 pipeline {
-    node any
+    agent node
 
     stages {
         stage('Build') {
