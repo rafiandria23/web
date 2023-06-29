@@ -12,7 +12,7 @@ pipeline {
       def scannerHome = tool 'SonarScanner';
 
       steps {
-        withSonarQubeEnv() {
+        withSonarQubeEnv('rafiandria23') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
       }
