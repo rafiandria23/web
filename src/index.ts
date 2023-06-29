@@ -18,3 +18,5 @@
 //    */
 //   bootstrap(/*{ strapi }*/) {},
 // };
+
+console.log(starpi)
