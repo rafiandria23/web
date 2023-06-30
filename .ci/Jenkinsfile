@@ -12,8 +12,8 @@ pipeline {
           def scannerHome = tool 'SonarQube Scanner 4.8';
 
           withSonarQubeEnv('rafiandria23') {
-            sh "${scannerHome}/bin/sonar-scanner"
-          } // submitted SonarQube taskId is automatically attached to the pipeline context
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.qualitygate.wait=true"
+          }
         }
       }
     }
