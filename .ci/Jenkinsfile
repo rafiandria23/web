@@ -1,21 +1,21 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
+  tools {
+    nodejs 'NodeJS 18.16'
+  }
+
+  stages {
+    stage('SonarQube Analysis') {
+      steps {
+        script {
+          def scannerHome = tool 'SonarQube Scanner 4.8';
+
+          withSonarQubeEnv('rafiandria23') {
+            sh "${scannerHome}/bin/sonar-scanner -Dsonar.qualitygate.wait=true"
+          }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+      }
     }
+  }
 }
