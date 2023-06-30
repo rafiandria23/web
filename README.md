@@ -1,6 +1,7 @@
 # CMS
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/rafiandria23/cms/tree/main.svg?style=svg&circle-token=a3e2dbe9b10c872f738d73a37720aa046cdb9ceb)](https://dl.circleci.com/status-badge/redirect/gh/rafiandria23/cms/tree/main)
+[![Build Status](https://jenkins.rafiandria23.tech/job/rafiandria23/job/web/job/main/badge/icon)](https://jenkins.rafiandria23.tech/job/rafiandria23/job/web/job/main/)
+[![Quality Gate Status](https://sonarqube.rafiandria23.tech/api/project_badges/measure?project=rafiandria23_web&metric=alert_status&token=sqb_4a601b211e52700bab334300266d050d2ed0089d)](https://sonarqube.rafiandria23.tech/dashboard?id=rafiandria23_web)
 
 Web for [rafiandria23.tech](https://rafiandria23.tech)
 
