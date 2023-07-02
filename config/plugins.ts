@@ -17,10 +17,11 @@ export default ({ env }) => ({
         accessKey: env('MINIO_ACCESS_KEY'),
         secretKey: env('MINIO_SECRET_KEY'),
         bucket: env('MINIO_BUCKET', 'cms'),
-        endPoint: env('MINIO_ENDPOINT', 'assets.rafiandria23.tech'),
+        endPoint: env('MINIO_ENDPOINT', 'storage.rafiandria23.tech'),
         port: env('MINIO_PORT', '443'),
         useSSL: env('MINIO_USE_SSL', 'true'),
-        host: env('MINIO_HOST', 'assets.rafiandria23.tech'),
+        host: env('MINIO_HOST', 'storage.rafiandria23.tech'),
+        folder: env('MINIO_FOLDER', 'uploads')
       },
     },
   },
