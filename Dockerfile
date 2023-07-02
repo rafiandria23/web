@@ -5,7 +5,7 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY ./package.json ./package-lock.json ./
 ENV PATH /app/node_modules/.bin:$PATH
-RUN npm install
+RUN npm ci
 WORKDIR /app
 COPY ./ ./
 RUN npm run build
