@@ -11,17 +11,17 @@
   },
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
-    "@newrelic/apollo-server-plugin": "^3.0.0",
-    "@strapi/plugin-color-picker": "^4.10.7",
-    "@strapi/plugin-graphql": "^4.10.7",
-    "@strapi/plugin-i18n": "4.10.7",
+    "@newrelic/apollo-server-plugin": "^3.1.0",
+    "@strapi/plugin-color-picker": "^4.11.7",
+    "@strapi/plugin-graphql": "^4.11.7",
+    "@strapi/plugin-i18n": "4.11.7",
     "@strapi/plugin-open-ai": "^1.0.1",
-    "@strapi/plugin-seo": "^1.9.0",
-    "@strapi/plugin-users-permissions": "4.10.7",
-    "@strapi/strapi": "4.10.7",
-    "newrelic": "^10.1.2",
-    "pg": "8.11.0",
-    "strapi-provider-upload-minio-ce": "^1.0.5"
+    "@strapi/plugin-seo": "^1.9.2",
+    "@strapi/plugin-users-permissions": "^4.11.7",
+    "@strapi/strapi": "^4.11.7",
+    "newrelic": "^10.5.0",
+    "pg": "^8.11.1",
+    "strapi-provider-upload-minio-ce": "^1.2.0"
   },
   "author": {
     "name": "Adam Rafiandri"
