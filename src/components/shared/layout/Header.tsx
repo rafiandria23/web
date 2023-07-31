@@ -1,12 +1,6 @@
-import {
-  FC,
-  useState,
-  useCallback,
-  forwardRef,
-  memo,
-  Ref,
-  ReactElement,
-} from 'react';
+import type { FC, Ref, ReactElement } from 'react';
+import { useState, useCallback, useMemo, forwardRef, memo } from 'react';
+import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import {
   useTheme,
@@ -27,12 +21,12 @@ import { TransitionProps } from '@mui/material/transitions';
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
-  LinkedIn as LinkedInLogo,
-  GitHub as GitHubLogo,
+  LinkedIn as LinkedInIcon,
+  GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
 // Components
-import { ThemeSwitcher } from '@/components';
+import { ThemeSwitcher } from '@/components/shared/theme';
 
 const Transition = forwardRef(
   (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => (
@@ -46,24 +40,41 @@ export interface IHeaderProps {
 }
 
 const Header: FC<IHeaderProps> = ({ elevate = false }) => {
+  const router = useRouter();
   const theme = useTheme();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
   const [open, setOpen] = useState<boolean>(false);
 
+  const calculatedElevation = useMemo(() => {
+    if (elevate) {
+      return scrollTriggered ? 4 : 0;
+    }
+
+    return undefined;
+  }, [elevate, scrollTriggered]);
+
   const handleOpen = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
+
   const handleClose = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
+
+  const handleNavigate = useCallback(
+    (url: string) => {
+      router.push(url);
+    },
+    [router],
+  );
 
   return (
     <>
       <AppBar
         position='fixed'
-        elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
+        elevation={calculatedElevation}
         sx={{
           ...(elevate &&
             !scrollTriggered && {
@@ -72,7 +83,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         }}
       >
         <Container>
-          <Toolbar>
+          <Toolbar color='inherit'>
             <Hidden smUp>
               <IconButton
                 edge='start'
@@ -124,30 +135,33 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 }}
               />
 
-              <NextLink href='/' passHref>
-                <Button variant='text'>Home</Button>
-              </NextLink>
+              <Button variant='text' onClick={() => handleNavigate('/')}>
+                Home
+              </Button>
 
-              <NextLink href='/projects' passHref>
-                <Button variant='text'>Projects</Button>
-              </NextLink>
+              <Button
+                variant='text'
+                onClick={() => handleNavigate('/projects')}
+              >
+                Projects
+              </Button>
 
-              <NextLink href='/blog' passHref>
-                <Button variant='text'>Blog</Button>
-              </NextLink>
+              <Button variant='text' onClick={() => handleNavigate('/blog')}>
+                Blog
+              </Button>
 
               <IconButton
                 href='https://linkedin.com/in/rafiandria23'
                 target='_blank'
               >
-                <LinkedInLogo />
+                <LinkedInIcon />
               </IconButton>
 
               <IconButton
                 href='https://github.com/rafiandria23'
                 target='_blank'
               >
-                <GitHubLogo />
+                <GitHubIcon />
               </IconButton>
             </Hidden>
           </Toolbar>
@@ -161,11 +175,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         TransitionComponent={Transition}
       >
         <Toolbar>
-          <IconButton
-            edge='start'
-            color={theme.palette.mode === 'light' ? 'primary' : undefined}
-            onClick={handleClose}
-          >
+          <IconButton edge='start' onClick={handleClose}>
             <CloseIcon />
           </IconButton>
 
@@ -196,39 +206,33 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems='stretch'
           >
             <Grid item>
-              <NextLink href='/' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
-                  Home
-                </Button>
-              </NextLink>
+              <Button
+                fullWidth
+                variant='text'
+                onClick={() => handleNavigate('/')}
+              >
+                Home
+              </Button>
             </Grid>
 
             <Grid item>
-              <NextLink href='/projects' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
-                  Projects
-                </Button>
-              </NextLink>
+              <Button
+                fullWidth
+                variant='text'
+                onClick={() => handleNavigate('/projects')}
+              >
+                Projects
+              </Button>
             </Grid>
 
             <Grid item>
-              <NextLink href='/blog' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
-                  Blog
-                </Button>
-              </NextLink>
+              <Button
+                fullWidth
+                variant='text'
+                onClick={() => handleNavigate('/blog')}
+              >
+                Blog
+              </Button>
             </Grid>
           </Grid>
 
@@ -240,24 +244,19 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems='center'
           >
             <Grid item>
-              <ButtonGroup
-                variant='text'
-                color={theme.palette.mode === 'light' ? 'primary' : undefined}
-              >
+              <ButtonGroup>
                 <IconButton
                   href='https://linkedin.com/in/rafiandria23'
                   target='_blank'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
-                  <LinkedInLogo />
+                  <LinkedInIcon />
                 </IconButton>
 
                 <IconButton
                   href='https://github.com/rafiandria23'
                   target='_blank'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
-                  <GitHubLogo />
+                  <GitHubIcon />
                 </IconButton>
               </ButtonGroup>
             </Grid>

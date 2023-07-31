@@ -19,7 +19,7 @@ import type { ITag } from '@/types/tag';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ArticleCard } from '@/components/article';
 
 interface IArticleTagsPageProps extends IPageInitialProps {

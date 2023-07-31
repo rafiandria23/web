@@ -3,13 +3,13 @@ import type { NextPage, GetStaticProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { useTheme, Grid, Container, Typography } from '@mui/material';
-// import dayjs from 'dayjs';
 
 // Types
 import type { IPagination } from '@/types/page';
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IArticle } from '@/types/article';
 import type { IProject } from '@/types/project';
+import type { ITag } from '@/types/tag';
 
 // Constants
 import { PaginationDefaults } from '@/constants';
@@ -18,13 +18,14 @@ import { PaginationDefaults } from '@/constants';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
-import { ArticleList } from '@/components/article';
-import { ProjectList } from '@/components/project';
+import { Layout } from '@/components/shared/layout';
+import { ArticleCard } from '@/components/article';
+import { ProjectCard } from '@/components/project';
 
 interface IHomePageProps {
   articles: IArticle[];
   projects: IProject[];
+  tags: ITag[];
 }
 
 const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
@@ -73,8 +74,17 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
         </Grid>
 
         {/* Latest Articles Section */}
-        <Grid item container component={Container}>
-          <ArticleList articles={articles} />
+        <Grid item container component={Container} spacing={2}>
+          {articles.map((article) => (
+            <Grid key={article.id} item>
+              <ArticleCard
+                article={article}
+                sx={{
+                  maxWidth: 345,
+                }}
+              />
+            </Grid>
+          ))}
         </Grid>
 
         {/* Latest Projects Section */}
@@ -85,7 +95,11 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
           sx={{ bgcolor: theme.palette.primary.light }}
         >
           <Grid item container component={Container}>
-            <ProjectList projects={projects} />
+            {projects.map((project) => (
+              <Grid key={project.id} item>
+                <ProjectCard project={project} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Layout>
@@ -98,11 +112,12 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
     {
       articles: IGraphQLModelResponse<IArticle[]>;
       projects: IGraphQLModelResponse<IProject[]>;
+      tags: IGraphQLModelResponse<ITag[]>;
     },
     IPagination
   >({
     variables: {
-      pageSize: PaginationDefaults.PAGE_SIZE,
+      pageSize: 5,
       page: PaginationDefaults.PAGE,
     },
     query: gql`
@@ -175,6 +190,19 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
             }
           }
         }
+
+        tags(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
+          data {
+            id
+            attributes {
+              name
+              slug
+            }
+          }
+        }
       }
     `,
   });
@@ -183,6 +211,7 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
     props: {
       articles: data.articles.data,
       projects: data.projects.data,
+      tags: data.tags.data,
     },
     revalidate: 1,
   };

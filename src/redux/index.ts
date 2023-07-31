@@ -1,29 +1,51 @@
-import { Store, AnyAction, compose, createStore } from 'redux';
-import { MakeStore, createWrapper } from 'next-redux-wrapper';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { createWrapper } from 'next-redux-wrapper';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 
 // Types
 import type { IRootState } from '@/types/redux';
 
-// Reducers
-import reducers from './reducers';
+// Slices
+import { themeSlice } from './theme';
 
-const composeEnhancers = getComposeEnhancers();
+// Storage
+import storage from './storage';
 
-const store = createStore(
-  reducers,
-  process.env.NODE_ENV !== 'production' ? composeEnhancers() : undefined,
+const rootReducer = combineReducers<IRootState>({
+  theme: themeSlice.reducer,
+});
+
+const persistedReducer = persistReducer(
+  {
+    key: 'state',
+    whitelist: ['theme'],
+    storage,
+  },
+  rootReducer,
 );
 
-const makeStore: MakeStore<Store<IRootState, AnyAction>> = () => store;
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
 
+const makeStore = () => {
+  return store;
+};
+
+export const persistor = persistStore(store);
 export const wrapper = createWrapper(makeStore);
-
-export default store;
-
-function getComposeEnhancers(): typeof compose {
-  if (typeof window !== 'undefined') {
-    return window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-  }
-
-  return compose;
-}

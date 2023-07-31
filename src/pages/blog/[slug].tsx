@@ -22,7 +22,7 @@ import type { IArticle } from '@/types/article';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import markdownComponents from '@/components/markdown';
 
 interface IArticlePageProps extends IPageInitialProps {

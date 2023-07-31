@@ -25,7 +25,7 @@ import type { ITag } from '@/types/tag';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectTagsPageProps {
@@ -126,8 +126,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }));
 
   return {
-    // paths: slugs,
-    paths: [],
+    paths: slugs,
     fallback: true,
   };
 };

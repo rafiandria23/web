@@ -20,7 +20,7 @@ import type { IProject } from '@/types/project';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectsPageProps {

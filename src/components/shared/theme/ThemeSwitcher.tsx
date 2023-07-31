@@ -1,8 +1,7 @@
-import { memo, FC, useState, useEffect, useRef } from 'react';
+import { memo, FC, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles, createStyles } from '@mui/styles';
 import {
-  useMediaQuery,
   Theme,
   Tooltip,
   IconButton,
@@ -21,20 +20,22 @@ import {
   Computer as ComputerIcon,
 } from '@mui/icons-material';
 
-// Redux Actions
-import { setThemeMode } from '@/redux/actions/theme';
+// Constants
+import { ThemeMode } from '@/constants/theme';
+
+// Redux
+import { setThemeMode } from '@/redux/theme';
+
+// Custom Hooks
+import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
 
 const ThemeSwitcher: FC = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [init, setInit] = useState<boolean>(false);
+  const { mode } = useThemeState();
+  const prefersDarkMode = usePrefersDarkMode();
   const [open, setOpen] = useState<boolean>(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    setInit(true);
-  }, []);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,79 +44,36 @@ const ThemeSwitcher: FC = () => {
     setOpen(false);
   };
 
-  const handleChangeTheme = (target: 'light' | 'dark' | 'system') => {
-    switch (target) {
-      case 'light':
-        localStorage.setItem('theme', 'light');
-        dispatch(setThemeMode('light'));
-        break;
-
-      case 'dark':
-        localStorage.setItem('theme', 'dark');
-        dispatch(setThemeMode('dark'));
-        break;
-
-      case 'system':
-        localStorage.setItem('theme', 'system');
-        if (prefersDarkMode) {
-          dispatch(setThemeMode('dark'));
-        } else {
-          dispatch(setThemeMode('light'));
-        }
-        break;
-
-      default:
-        localStorage.setItem('theme', 'system');
-        if (prefersDarkMode) {
-          dispatch(setThemeMode('dark'));
-        } else {
-          dispatch(setThemeMode('light'));
-        }
-        break;
-    }
-
+  const handleChangeTheme = (target: ThemeMode) => {
+    dispatch(setThemeMode(target));
     handleClose();
   };
 
   const handleRenderIcon = () => {
-    const themeFromLS = localStorage.getItem('theme');
+    switch (mode) {
+      case ThemeMode.LIGHT:
+        return <WbSunnyIcon className={classes.icon} />;
 
-    if (themeFromLS) {
-      switch (themeFromLS) {
-        case 'light':
-          return <WbSunnyIcon className={classes.icon} />;
+      case ThemeMode.DARK:
+        return <NightsStayIcon className={classes.icon} />;
 
-        case 'dark':
-          return <NightsStayIcon className={classes.icon} />;
+      case ThemeMode.SYSTEM:
+        return prefersDarkMode ? (
+          <NightsStayIcon className={classes.icon} />
+        ) : (
+          <WbSunnyIcon className={classes.icon} />
+        );
 
-        case 'system':
-          return prefersDarkMode ? (
-            <NightsStayIcon className={classes.icon} />
-          ) : (
-            <WbSunnyIcon className={classes.icon} />
-          );
-
-        default:
-          return null;
-      }
+      default:
+        return null;
     }
   };
 
-  const getSelectedTheme = (target: 'light' | 'dark' | 'system') => {
-    const themeFromLS = localStorage.getItem('theme');
-
-    if (themeFromLS === 'light' && target === 'light') {
-      return true;
-    } else if (themeFromLS === 'dark' && target === 'dark') {
-      return true;
-    } else if (themeFromLS === 'system' && target === 'system') {
-      return true;
-    }
-
-    return false;
+  const getSelectedTheme = (target: ThemeMode) => {
+    return mode === target;
   };
 
-  return init ? (
+  return (
     <>
       <Tooltip title='Switch theme'>
         <IconButton
@@ -141,8 +99,8 @@ const ThemeSwitcher: FC = () => {
               <ClickAwayListener onClickAway={handleClose}>
                 <MenuList id='theme-menu' autoFocusItem={open}>
                   <MenuItem
-                    onClick={() => handleChangeTheme('light')}
-                    selected={getSelectedTheme('light')}
+                    onClick={() => handleChangeTheme(ThemeMode.LIGHT)}
+                    selected={getSelectedTheme(ThemeMode.LIGHT)}
                   >
                     <ListItemIcon>
                       <WbSunnyIcon />
@@ -150,8 +108,8 @@ const ThemeSwitcher: FC = () => {
                     <ListItemText primary='Light' />
                   </MenuItem>
                   <MenuItem
-                    onClick={() => handleChangeTheme('dark')}
-                    selected={getSelectedTheme('dark')}
+                    onClick={() => handleChangeTheme(ThemeMode.DARK)}
+                    selected={getSelectedTheme(ThemeMode.DARK)}
                   >
                     <ListItemIcon>
                       <NightsStayIcon />
@@ -159,8 +117,8 @@ const ThemeSwitcher: FC = () => {
                     <ListItemText primary='Dark' />
                   </MenuItem>
                   <MenuItem
-                    onClick={() => handleChangeTheme('system')}
-                    selected={getSelectedTheme('system')}
+                    onClick={() => handleChangeTheme(ThemeMode.SYSTEM)}
+                    selected={getSelectedTheme(ThemeMode.SYSTEM)}
                   >
                     <ListItemIcon>
                       <ComputerIcon />
@@ -174,8 +132,6 @@ const ThemeSwitcher: FC = () => {
         )}
       </Popper>
     </>
-  ) : (
-    <></>
   );
 };
 

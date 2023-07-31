@@ -2,7 +2,8 @@ import { memo, FC, ReactNode } from 'react';
 import { useTheme, Grid } from '@mui/material';
 
 // Components
-import { Header, Footer } from '@/components';
+import Header from './Header';
+import Footer from './Footer';
 
 interface ILayoutProps {
   children: ReactNode;

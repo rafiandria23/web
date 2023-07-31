@@ -1,37 +1,39 @@
 import '@fontsource/roboto';
 import '@/styles/global.scss';
 
-import { useEffect, useCallback, useMemo, createRef } from 'react';
+import { useEffect, useMemo } from 'react';
 import type { NextComponentType } from 'next';
 import type { AppContext, AppInitialProps, AppProps } from 'next/app';
 import NextApp from 'next/app';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
-import { useDispatch } from 'react-redux';
-import {
-  useMediaQuery,
-  ThemeProvider,
-  CssBaseline,
-  IconButton,
-} from '@mui/material';
-import { CloseOutlined } from '@mui/icons-material';
-import { SnackbarProvider, SnackbarKey, SnackbarAction } from 'notistack';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import type { Theme } from '@mui/material';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import type { SnackbarKey } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 
 // Types
 import type { IPageInitialProps } from '@/types/page';
+
+// Constnats
+import { ThemeMode } from '@/constants/theme';
 
 // Utils
 import * as gtag from '@/utils/gtag';
 
 // Redux
-import { wrapper } from '@/redux';
-import { setThemeMode } from '@/redux/actions/theme';
+import { wrapper, persistor } from '@/redux';
 
 // Custom Hooks
-import { useThemeReducer } from '@/hooks';
+import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
 
 // Styles
-import { light, dark } from '@/styles/theme';
+import { LightTheme, DarkTheme } from '@/styles/theme';
+
+// Components
+import { SnackbarAction } from '@/components/shared/snackbar';
 
 // Pages
 import ErrorPage from './_error';
@@ -42,64 +44,12 @@ const App: NextComponentType<
   AppProps<IPageInitialProps>
 > = ({ Component, pageProps }) => {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const { mode } = useThemeReducer();
-  const isDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const notistackRef = createRef<SnackbarProvider>();
+  const { mode } = useThemeState();
+  const prefersDarkMode = usePrefersDarkMode();
 
   const handleRouteChange = (url: string) => {
     gtag.pageview(url);
   };
-
-  const checkThemeConfigInLS = useCallback(() => {
-    const themeFromLS = localStorage.getItem('theme');
-
-    if (!themeFromLS) {
-      localStorage.setItem('theme', 'system');
-    } else {
-      switch (themeFromLS) {
-        case 'light':
-          dispatch(setThemeMode('light'));
-          break;
-
-        case 'dark':
-          dispatch(setThemeMode('dark'));
-          break;
-
-        case 'system':
-          if (isDarkMode) {
-            dispatch(setThemeMode('dark'));
-          } else {
-            dispatch(setThemeMode('light'));
-          }
-          break;
-
-        default:
-          localStorage.setItem('theme', 'system');
-          break;
-      }
-    }
-  }, [dispatch, isDarkMode]);
-
-  useEffect(() => {
-    checkThemeConfigInLS();
-    window.addEventListener('storage', checkThemeConfigInLS);
-    return () => {
-      window.removeEventListener('storage', checkThemeConfigInLS);
-    };
-  }, [checkThemeConfigInLS]);
-
-  useEffect(() => {
-    const themeFromLS = localStorage.getItem('theme');
-
-    if (themeFromLS === 'system') {
-      if (isDarkMode) {
-        dispatch(setThemeMode('dark'));
-      } else {
-        dispatch(setThemeMode('light'));
-      }
-    }
-  }, [dispatch, isDarkMode]);
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -108,55 +58,60 @@ const App: NextComponentType<
     };
   }, [router.events]);
 
-  const theme = useMemo(() => (mode === 'light' ? light : dark), [mode]);
-
-  const handleCloseSnackbar = (key: SnackbarKey) => {
-    notistackRef.current?.closeSnackbar(key);
-  };
-
-  const snackbarAction: SnackbarAction = (key) => (
-    <IconButton color='inherit' onClick={() => handleCloseSnackbar(key)}>
-      <CloseOutlined />
-    </IconButton>
-  );
-
-  const handleRender = () => {
-    if (pageProps.errorStatus) {
-      return (
-        <ErrorPage
-          statusCode={pageProps.errorStatus}
-          title={pageProps.errorMessage}
-        />
-      );
+  const theme = useMemo<Theme>(() => {
+    if (!mode || mode === ThemeMode.SYSTEM) {
+      return prefersDarkMode ? DarkTheme : LightTheme;
     }
 
-    return <Component {...pageProps} />;
+    return mode === ThemeMode.LIGHT ? LightTheme : DarkTheme;
+  }, [mode, prefersDarkMode]);
+
+  const handleSnackbarAction = (key: SnackbarKey) => {
+    return <SnackbarAction key={key} />;
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <SnackbarProvider
-        ref={notistackRef}
-        maxSnack={1}
-        autoHideDuration={3000}
-        action={snackbarAction}
-      >
-        <DefaultSeo
-          titleTemplate='%s | rafiandria23.tech'
-          openGraph={{
-            type: 'website',
-            locale: 'en_US',
-            url: 'https://rafiandria23.tech',
-          }}
-        />
-        {handleRender()}
-      </SnackbarProvider>
-    </ThemeProvider>
+    <PersistGate persistor={persistor}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <SnackbarProvider action={handleSnackbarAction}>
+          <DefaultSeo
+            titleTemplate='%s | rafiandria23.tech'
+            openGraph={{
+              type: 'website',
+              locale: 'en_US',
+              url: 'https://rafiandria23.tech',
+            }}
+          />
+          {pageProps.errorStatus ? (
+            <ErrorPage
+              statusCode={pageProps.errorStatus}
+              title={pageProps.errorMessage}
+            />
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </SnackbarProvider>
+      </ThemeProvider>
+    </PersistGate>
   );
 };
 
-export default wrapper.withRedux(App);
+const WrappedApp: NextComponentType<
+  AppContext,
+  AppInitialProps,
+  AppProps<IPageInitialProps>
+> = ({ ...rest }) => {
+  const { store, props } = wrapper.useWrappedStore(rest);
+
+  return (
+    <Provider store={store}>
+      <App {...props} />
+    </Provider>
+  );
+};
+
+export default WrappedApp;
 
 App.getInitialProps = async (appCtx) => {
   const { res } = appCtx.ctx;

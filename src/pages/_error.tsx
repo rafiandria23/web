@@ -3,7 +3,7 @@ import { ErrorProps } from 'next/error';
 import { NextSeo } from 'next-seo';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 
 interface IErrorPageProps extends ErrorProps {}
 

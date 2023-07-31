@@ -24,7 +24,7 @@ import type { ITag } from '@/types/tag';
 import { PaginationDefaults } from '@/constants';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ArticleCard } from '@/components/article';
 
 interface IBlogPageProps {
