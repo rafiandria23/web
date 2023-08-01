@@ -1,15 +1,14 @@
-import { memo } from 'react';
-import type { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { useTheme, Grid, Container, Typography } from '@mui/material';
-// import dayjs from 'dayjs';
 
 // Types
 import type { IPagination } from '@/types/page';
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IArticle } from '@/types/article';
 import type { IProject } from '@/types/project';
+import type { ITag } from '@/types/tag';
 
 // Constants
 import { PaginationDefaults } from '@/constants';
@@ -18,13 +17,14 @@ import { PaginationDefaults } from '@/constants';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
-import { ArticleList } from '@/components/article';
-import { ProjectList } from '@/components/project';
+import { Layout } from '@/components/shared/layout';
+import { ArticleCard } from '@/components/article';
+import { ProjectCard } from '@/components/project';
 
 interface IHomePageProps {
   articles: IArticle[];
   projects: IProject[];
+  tags: ITag[];
 }
 
 const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
@@ -43,6 +43,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
           item
           container
           justifyContent='center'
+          alignItems='center'
           sx={{
             bgcolor: theme.palette.primary.light,
           }}
@@ -66,15 +67,31 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               color={theme.palette.primary.contrastText}
               textAlign='center'
             >
-              Software Engineer from Bogor, Indonesia. I develop web, mobile,
-              and desktop applications to help businesses grow online.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+              vulputate ex id quam malesuada efficitur. Ut id nisi eget sapien
+              iaculis laoreet. Cras sit amet rhoncus augue, vel vestibulum est.
+              Sed ut dolor at metus tempus faucibus eget in lorem. Maecenas
+              placerat luctus justo, id blandit diam congue sit amet. Donec
+              vitae tortor vel nisi hendrerit commodo nec nec sem. Vivamus sem
+              eros, mattis gravida enim sit amet, blandit varius felis. Nam
+              mollis ultricies ante ut tempus. In non commodo orci. Cras et nisi
+              sit amet risus cursus eleifend. Donec ut suscipit lacus, id
+              volutpat nibh. Pellentesque sed rutrum dui. Proin magna est,
+              maximus ut mauris nec, suscipit semper dolor. In facilisis ipsum a
+              mollis fringilla. Quisque vel ipsum tincidunt, varius velit ac,
+              aliquam nibh. Nam imperdiet, risus eu pharetra hendrerit, massa
+              lectus laoreet ipsum, ut molestie velit felis in ex.
             </Typography>
           </Grid>
         </Grid>
 
         {/* Latest Articles Section */}
-        <Grid item container component={Container}>
-          <ArticleList articles={articles} />
+        <Grid item container component={Container} spacing={2}>
+          {articles.map((article) => (
+            <Grid key={article.id} item>
+              <ArticleCard article={article} />
+            </Grid>
+          ))}
         </Grid>
 
         {/* Latest Projects Section */}
@@ -85,7 +102,11 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
           sx={{ bgcolor: theme.palette.primary.light }}
         >
           <Grid item container component={Container}>
-            <ProjectList projects={projects} />
+            {projects.map((project) => (
+              <Grid key={project.id} item>
+                <ProjectCard project={project} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Layout>
@@ -93,16 +114,19 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  IHomePageProps
+> = async () => {
   const { data } = await client.query<
     {
       articles: IGraphQLModelResponse<IArticle[]>;
       projects: IGraphQLModelResponse<IProject[]>;
+      tags: IGraphQLModelResponse<ITag[]>;
     },
     IPagination
   >({
     variables: {
-      pageSize: PaginationDefaults.PAGE_SIZE,
+      pageSize: PaginationDefaults.PAGE_SIZE / 2,
       page: PaginationDefaults.PAGE,
     },
     query: gql`
@@ -175,6 +199,19 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
             }
           }
         }
+
+        tags(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
+          data {
+            id
+            attributes {
+              name
+              slug
+            }
+          }
+        }
       }
     `,
   });
@@ -183,9 +220,9 @@ export const getStaticProps: GetStaticProps<IHomePageProps> = async () => {
     props: {
       articles: data.articles.data,
       projects: data.projects.data,
+      tags: data.tags.data,
     },
-    revalidate: 1,
   };
 };
 
-export default memo(HomePage);
+export default HomePage;

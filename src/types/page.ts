@@ -1,4 +1,4 @@
-export interface IPageInitialProps {
+export interface IPageProps {
   errorStatus?: number;
   errorMessage?: string;
 }

@@ -1,15 +1,12 @@
-import {
-  FC,
-  useState,
-  useCallback,
-  forwardRef,
-  memo,
-  Ref,
-  ReactElement,
-} from 'react';
+import type { ReactElement, Ref, FC } from 'react';
+import { forwardRef, useState, useCallback, useMemo, memo } from 'react';
+import { useDispatch } from 'react-redux';
 import NextLink from 'next/link';
+import type { TransitionProps } from '@mui/material/transitions';
 import {
   useTheme,
+  useScrollTrigger,
+  Slide,
   Container,
   Hidden,
   AppBar,
@@ -20,50 +17,72 @@ import {
   IconButton,
   Grid,
   Dialog,
-  Slide,
-  useScrollTrigger,
 } from '@mui/material';
-import { TransitionProps } from '@mui/material/transitions';
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
-  LinkedIn as LinkedInLogo,
-  GitHub as GitHubLogo,
+  LinkedIn as LinkedInIcon,
+  GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
-// Components
-import { ThemeSwitcher } from '@/components';
+// Redux
+import { setMode as setThemeMode } from '@/redux/theme';
 
-const Transition = forwardRef(
+// Custom Hooks
+import { useThemeState } from '@/hooks/theme';
+
+// Components
+import type { IThemeSwitcherProps } from '@/components/shared/theme/ThemeSwitcher';
+import { ThemeSwitcher } from '@/components/shared/theme';
+
+const HeaderTransition = forwardRef(
   (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => (
     <Slide direction='right' ref={ref} {...props} />
   ),
 );
-Transition.displayName = 'Transition';
+HeaderTransition.displayName = 'HeaderTransition';
 
 export interface IHeaderProps {
   elevate?: boolean;
 }
 
 const Header: FC<IHeaderProps> = ({ elevate = false }) => {
+  const dispatch = useDispatch();
+  const { mode } = useThemeState();
   const theme = useTheme();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
   const [open, setOpen] = useState<boolean>(false);
 
+  const calculatedElevation = useMemo(() => {
+    if (elevate) {
+      return scrollTriggered ? 4 : 0;
+    }
+
+    return undefined;
+  }, [elevate, scrollTriggered]);
+
   const handleOpen = useCallback(() => {
     setOpen(true);
   }, [setOpen]);
+
   const handleClose = useCallback(() => {
     setOpen(false);
   }, [setOpen]);
+
+  const handleChangeTheme = useCallback<IThemeSwitcherProps['onChange']>(
+    (target) => {
+      dispatch(setThemeMode(target));
+    },
+    [dispatch],
+  );
 
   return (
     <>
       <AppBar
         position='fixed'
-        elevation={elevate ? (scrollTriggered ? 4 : 0) : undefined}
+        elevation={calculatedElevation}
         sx={{
           ...(elevate &&
             !scrollTriggered && {
@@ -71,9 +90,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             }),
         }}
       >
-        <Container>
+        <Container component='header'>
           <Toolbar>
-            <Hidden smUp>
+            <Hidden xlUp>
               <IconButton
                 edge='start'
                 onClick={handleOpen}
@@ -88,14 +107,16 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 />
               </IconButton>
 
-              <Typography
-                variant='h6'
-                sx={{
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                rafiandria23.tech
-              </Typography>
+              <NextLink href='/' passHref>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    fontWeight: theme.typography.fontWeightBold,
+                  }}
+                >
+                  rafiandria23.tech
+                </Typography>
+              </NextLink>
 
               <div
                 style={{
@@ -103,20 +124,22 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 }}
               />
 
-              <ThemeSwitcher />
+              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
             </Hidden>
 
-            <Hidden smDown>
-              <Typography
-                variant='h6'
-                sx={{
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                rafiandria23.tech
-              </Typography>
+            <Hidden xlDown>
+              <NextLink href='/' passHref>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    fontWeight: theme.typography.fontWeightBold,
+                  }}
+                >
+                  rafiandria23.tech
+                </Typography>
+              </NextLink>
 
-              <ThemeSwitcher />
+              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
 
               <div
                 style={{
@@ -140,14 +163,14 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 href='https://linkedin.com/in/rafiandria23'
                 target='_blank'
               >
-                <LinkedInLogo />
+                <LinkedInIcon />
               </IconButton>
 
               <IconButton
                 href='https://github.com/rafiandria23'
                 target='_blank'
               >
-                <GitHubLogo />
+                <GitHubIcon />
               </IconButton>
             </Hidden>
           </Toolbar>
@@ -158,14 +181,10 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
+        TransitionComponent={HeaderTransition}
       >
         <Toolbar>
-          <IconButton
-            edge='start'
-            color={theme.palette.mode === 'light' ? 'primary' : undefined}
-            onClick={handleClose}
-          >
+          <IconButton edge='start' onClick={handleClose}>
             <CloseIcon />
           </IconButton>
 
@@ -197,11 +216,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
           >
             <Grid item>
               <NextLink href='/' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
+                <Button fullWidth variant='text'>
                   Home
                 </Button>
               </NextLink>
@@ -209,11 +224,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
 
             <Grid item>
               <NextLink href='/projects' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
+                <Button fullWidth variant='text'>
                   Projects
                 </Button>
               </NextLink>
@@ -221,11 +232,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
 
             <Grid item>
               <NextLink href='/blog' passHref>
-                <Button
-                  fullWidth
-                  variant='text'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
-                >
+                <Button fullWidth variant='text'>
                   Blog
                 </Button>
               </NextLink>
@@ -240,24 +247,19 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems='center'
           >
             <Grid item>
-              <ButtonGroup
-                variant='text'
-                color={theme.palette.mode === 'light' ? 'primary' : undefined}
-              >
+              <ButtonGroup variant='text'>
                 <IconButton
                   href='https://linkedin.com/in/rafiandria23'
                   target='_blank'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
-                  <LinkedInLogo />
+                  <LinkedInIcon />
                 </IconButton>
 
                 <IconButton
                   href='https://github.com/rafiandria23'
                   target='_blank'
-                  color={theme.palette.mode === 'light' ? 'primary' : undefined}
                 >
-                  <GitHubLogo />
+                  <GitHubIcon />
                 </IconButton>
               </ButtonGroup>
             </Grid>

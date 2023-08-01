@@ -1,3 +1,5 @@
+import { ThemeMode } from '@/constants/theme';
+
 export interface IAction<T = unknown> {
   type: string;
   payload: T;
@@ -8,5 +10,5 @@ export interface IRootState {
 }
 
 export interface IThemeReducer {
-  mode: 'light' | 'dark';
+  mode: ThemeMode;
 }

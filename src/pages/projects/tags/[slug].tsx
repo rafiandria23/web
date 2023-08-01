@@ -1,9 +1,4 @@
-import type {
-  NextPage,
-  GetStaticPaths,
-  GetStaticPathsResult,
-  GetStaticProps,
-} from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
@@ -25,10 +20,10 @@ import type { ITag } from '@/types/tag';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ProjectCard } from '@/components/project';
 
-interface IProjectTagsPageProps {
+export interface IProjectTagsPageProps {
   tag: ITag;
 }
 
@@ -103,36 +98,7 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{ tags: IGraphQLModelResponse<ITag[]> }>({
-    query: gql`
-      query {
-        tags {
-          data {
-            id
-            attributes {
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
-
-  const slugs: GetStaticPathsResult['paths'] = data.tags.data.map((tag) => ({
-    params: {
-      slug: tag.attributes.slug,
-    },
-  }));
-
-  return {
-    // paths: slugs,
-    paths: [],
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IProjectTagsPageProps,
   { slug: ITag['attributes']['slug'] }
 > = async ({ params }) => {
@@ -187,7 +153,6 @@ export const getStaticProps: GetStaticProps<
     props: {
       tag: data.tags.data[0],
     },
-    revalidate: 1,
   };
 };
 

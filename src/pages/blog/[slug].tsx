@@ -1,37 +1,35 @@
-import type {
-  NextPage,
-  GetStaticPaths,
-  GetStaticPathsResult,
-  GetStaticProps,
-} from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@mui/styles';
-import { Theme, Grid, Typography, Chip } from '@mui/material';
+import { useTheme, Container, Grid, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import dayjs from 'dayjs';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
-import type { IPageInitialProps } from '@/types/page';
+import type { IPageProps } from '@/types/page';
 import type { IArticle } from '@/types/article';
 
 // GraphQL
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
-import markdownComponents from '@/components/markdown';
+import { Layout } from '@/components/shared/layout';
+import {
+  components as mdComponents,
+  remarkPlugins,
+  rehypePlugins,
+} from '@/components/markdown';
 
-interface IArticlePageProps extends IPageInitialProps {
+export interface IArticlePageProps extends IPageProps {
   article: IArticle;
 }
 
 const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
   const router = useRouter();
-  const classes = useStyles();
+  const theme = useTheme();
 
   if (router.isFallback) {
     return (
@@ -56,106 +54,74 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
       />
 
       <Layout>
-        <Grid
-          className={classes.wrapper}
-          component='article'
-          container
-          direction='column'
-          justifyContent='space-between'
-          alignItems='stretch'
-        >
-          <Grid className={classes.header} item container direction='column'>
-            <Grid item>
-              <Typography
-                className={classes.title}
-                variant='h4'
-                component='h1'
-                align='left'
-                gutterBottom
-              >
-                {article.attributes.title}
-              </Typography>
-            </Grid>
-
-            <Grid item>
-              <Typography
-                variant='caption'
-                component='p'
-                align='left'
-                color='textSecondary'
-              >
-                {dayjs(article.attributes.updatedAt).format('MMMM D, YYYY')}
-              </Typography>
-            </Grid>
-          </Grid>
-
-          <Grid className={classes.content} item>
-            <ReactMarkdown components={markdownComponents}>
-              {article.attributes.content}
-            </ReactMarkdown>
-          </Grid>
-
+        <Container component='article'>
           <Grid
-            className={classes.tags}
-            item
             container
-            direction='row'
-            wrap='wrap'
-            justifyContent='flex-start'
+            direction='column'
+            justifyContent='space-between'
+            alignItems='stretch'
           >
-            {article.attributes.tags.data.length > 0 &&
-              article.attributes.tags.data.map((tag) => (
-                <Grid item key={tag.id}>
-                  <NextLink href={`/blog/tags/${tag.attributes.slug}`} passHref>
-                    <Chip
-                      className={classes.tag}
-                      component='a'
-                      label={tag.attributes.name}
-                      clickable
-                    />
-                  </NextLink>
-                </Grid>
-              ))}
+            <Grid item container direction='column'>
+              <Grid item>
+                <Typography
+                  variant='h3'
+                  component='h1'
+                  fontWeight={theme.typography.fontWeightBold}
+                >
+                  {article.attributes.title}
+                </Typography>
+              </Grid>
+
+              <Grid item>
+                <Typography
+                  variant='caption'
+                  component='p'
+                  align='left'
+                  color='textSecondary'
+                  gutterBottom
+                >
+                  {dayjs(article.attributes.updatedAt).format('MMMM D, YYYY')}
+                </Typography>
+              </Grid>
+            </Grid>
+
+            <Grid item>
+              <ReactMarkdown
+                components={mdComponents}
+                remarkPlugins={remarkPlugins}
+                rehypePlugins={rehypePlugins}
+              >
+                {article.attributes.content}
+              </ReactMarkdown>
+            </Grid>
+
+            <Grid
+              item
+              container
+              direction='row'
+              wrap='wrap'
+              justifyContent='flex-start'
+            >
+              {article.attributes.tags.data.length > 0 &&
+                article.attributes.tags.data.map((tag) => (
+                  <Grid item key={tag.id}>
+                    <NextLink
+                      href={`/blog/tags/${tag.attributes.slug}`}
+                      passHref
+                    >
+                      <Chip label={tag.attributes.name} clickable />
+                    </NextLink>
+                  </Grid>
+                ))}
+            </Grid>
           </Grid>
-        </Grid>
+        </Container>
       </Layout>
     </>
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await client.query<{
-    articles: IGraphQLModelResponse<IArticle[]>;
-  }>({
-    query: gql`
-      query {
-        articles {
-          data {
-            id
-            attributes {
-              slug
-            }
-          }
-        }
-      }
-    `,
-  });
-
-  const slugs: GetStaticPathsResult['paths'] = data.articles.data.map(
-    (article) => ({
-      params: {
-        slug: article.attributes.slug,
-      },
-    }),
-  );
-
-  return {
-    paths: slugs,
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IArticlePageProps,
   { slug: IArticle['attributes']['slug'] }
 > = async ({ params }) => {
@@ -214,37 +180,7 @@ export const getStaticProps: GetStaticProps<
     props: {
       article: data.articles.data[0],
     },
-    revalidate: 1,
   };
 };
 
 export default ArticlePage;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {
-      padding: theme.spacing(2, 4),
-      '& > *': {
-        margin: theme.spacing(0.8, 0),
-      },
-    },
-    header: {
-      '& > *': {
-        margin: theme.spacing(0.4, 0),
-      },
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
-    content: {},
-    tags: {
-      '& > *': {
-        marginBottom: theme.spacing(1),
-        marginRight: theme.spacing(1),
-      },
-    },
-    tag: {
-      color: theme.palette.text.secondary,
-    },
-  }),
-);

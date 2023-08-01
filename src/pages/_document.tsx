@@ -16,26 +16,23 @@ export default class Document extends NextDocument {
     const materialUiSheets = new MaterialUiServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
 
-    try {
-      ctx.renderPage = () =>
-        originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            materialUiSheets.collect(<App {...props} />),
-        });
+    ctx.renderPage = () =>
+      originalRenderPage({
+        enhanceApp: (App) => (props) =>
+          materialUiSheets.collect(<App {...props} />),
+      });
 
-      const initialProps = await NextDocument.getInitialProps(ctx);
+    const initialProps = await NextDocument.getInitialProps(ctx);
 
-      return {
-        ...initialProps,
-        styles: [
-          <Fragment key='styles'>
-            {initialProps.styles}
-            {materialUiSheets.getStyleElement()}
-          </Fragment>,
-        ],
-      };
-    } finally {
-    }
+    return {
+      ...initialProps,
+      styles: [
+        <Fragment key='styles'>
+          {initialProps.styles}
+          {materialUiSheets.getStyleElement()}
+        </Fragment>,
+      ],
+    };
   }
 
   render() {

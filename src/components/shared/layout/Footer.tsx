@@ -1,6 +1,5 @@
 import { memo, FC, useMemo } from 'react';
-import { useTheme } from '@mui/material';
-import { Container, Grid, Typography, Link } from '@mui/material';
+import { useTheme, Container, Grid, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 const Footer: FC = () => {
@@ -25,14 +24,7 @@ const Footer: FC = () => {
             component='p'
             color={theme.palette.primary.contrastText}
           >
-            &copy; {now.format('YYYY')}{' '}
-            <Link
-              color='secondary'
-              href='https://github.com/rafiandria23'
-              target='_blank'
-            >
-              rafiandria23
-            </Link>
+            &copy; {now.format('YYYY')}. All rights reserved.
           </Typography>
         </Container>
       </Grid>

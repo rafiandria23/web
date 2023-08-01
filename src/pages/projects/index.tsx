@@ -1,12 +1,13 @@
 import type { CSSProperties } from 'react';
-import type { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { makeStyles, createStyles } from '@mui/styles';
+import type { Theme } from '@mui/material';
 import {
   useMediaQuery,
   useTheme,
-  Theme,
+  Container,
   Grid,
   Typography,
   Divider,
@@ -20,7 +21,7 @@ import type { IProject } from '@/types/project';
 import { client } from '@/graphql';
 
 // Components
-import { Layout } from '@/components';
+import { Layout } from '@/components/shared/layout';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectsPageProps {
@@ -42,6 +43,7 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
       <Layout>
         <Grid
           className={classes.wrapper}
+          component={Container}
           container
           direction='column'
           justifyContent='flex-start'
@@ -88,7 +90,9 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IProjectsPageProps> = async () => {
+export const getServerSideProps: GetServerSideProps<
+  IProjectsPageProps
+> = async () => {
   const { data } = await client.query<{
     projects: IGraphQLModelResponse<IProject[]>;
   }>({
@@ -132,7 +136,6 @@ export const getStaticProps: GetStaticProps<IProjectsPageProps> = async () => {
     props: {
       projects: data.projects.data,
     },
-    revalidate: 1,
   };
 };
 
