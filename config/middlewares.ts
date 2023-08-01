@@ -15,7 +15,7 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          upgradeInsecureRequests: process.env.NODE_ENV !== 'production' ? null : true,
+          upgradeInsecureRequests: [],
           'connect-src': ["'self'", 'https:'],
           'style-src': [
             "'self'",
