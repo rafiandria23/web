@@ -15,28 +15,31 @@ export default [
       contentSecurityPolicy: {
         useDefaults: true,
         directives: {
-          upgradeInsecureRequests: null,
+          upgradeInsecureRequests: process.env.NODE_ENV !== 'production' ? null : true,
           'connect-src': ["'self'", 'https:'],
           'style-src': [
             "'self'",
             "'unsafe-inline'",
             'https:',
-            'cdn.jsdelivr.net',
           ],
           'img-src': [
             "'self'",
             'data:',
             'blob:',
-            'market-assets.strapi.io',
-            'storage.rafiandria23.tech',
+            'https:',
           ],
           'media-src': [
             "'self'",
             'data:',
             'blob:',
-            'market-assets.strapi.io',
-            'storage.rafiandria23.tech',
+            'https:'
           ],
+          'script-src': [
+            "'self'",
+            "'unsafe-inline'",
+            "'unsafe-eval'",
+            'https:',
+          ]
         },
       },
     },
