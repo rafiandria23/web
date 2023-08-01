@@ -4,7 +4,7 @@ import Image from 'next/image';
 import {
   useTheme,
   useMediaQuery,
-  Hidden,
+  // Hidden,
   Typography,
   CardActionArea,
   Card,

@@ -65,8 +65,8 @@ const MarkdownImg: Components['img'] = ({ src, alt }) => {
 
   return (
     <Image
-      src={src!}
-      alt={alt!}
+      src={src as string}
+      alt={alt as string}
       width={0}
       height={0}
       sizes='100vw'

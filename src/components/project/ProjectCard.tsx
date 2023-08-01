@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import NextLink from 'next/link';
 import Image from 'next/image';
-import type { SxProps, Theme } from '@mui/material';
 import {
   useTheme,
   Typography,
@@ -9,7 +8,7 @@ import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
+  // CardActions,
   Box,
 } from '@mui/material';
 import dayjs from 'dayjs';
