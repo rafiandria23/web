@@ -1,9 +1,6 @@
-import { memo, FC, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
-import { makeStyles, createStyles } from '@mui/styles';
+import type { FC } from 'react';
+import { useState, useRef } from 'react';
 import {
-  Theme,
-  Tooltip,
   IconButton,
   Popper,
   Grow,
@@ -15,24 +12,26 @@ import {
   ListItemText,
 } from '@mui/material';
 import {
-  WbSunny as WbSunnyIcon,
-  NightsStay as NightsStayIcon,
-  Computer as ComputerIcon,
+  LightModeOutlined as LightModeIcon,
+  DarkModeOutlined as DarkModeIcon,
+  ComputerOutlined as SystemModeIcon,
 } from '@mui/icons-material';
 
 // Constants
 import { ThemeMode } from '@/constants/theme';
 
-// Redux
-import { setThemeMode } from '@/redux/theme';
-
 // Custom Hooks
-import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
+import { usePrefersDarkMode } from '@/hooks/theme';
 
-const ThemeSwitcher: FC = () => {
-  const dispatch = useDispatch();
-  const classes = useStyles();
-  const { mode } = useThemeState();
+export interface IThemeSwitcherProps {
+  mode: ThemeMode;
+  onChange: (target: ThemeMode) => void;
+}
+
+const ThemeSwitcher: FC<IThemeSwitcherProps> = ({
+  mode = ThemeMode.SYSTEM,
+  onChange,
+}) => {
   const prefersDarkMode = usePrefersDarkMode();
   const [open, setOpen] = useState<boolean>(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -45,24 +44,20 @@ const ThemeSwitcher: FC = () => {
   };
 
   const handleChangeTheme = (target: ThemeMode) => {
-    dispatch(setThemeMode(target));
+    onChange(target);
     handleClose();
   };
 
   const handleRenderIcon = () => {
     switch (mode) {
       case ThemeMode.LIGHT:
-        return <WbSunnyIcon className={classes.icon} />;
+        return <LightModeIcon />;
 
       case ThemeMode.DARK:
-        return <NightsStayIcon className={classes.icon} />;
+        return <DarkModeIcon />;
 
       case ThemeMode.SYSTEM:
-        return prefersDarkMode ? (
-          <NightsStayIcon className={classes.icon} />
-        ) : (
-          <WbSunnyIcon className={classes.icon} />
-        );
+        return prefersDarkMode ? <DarkModeIcon /> : <LightModeIcon />;
 
       default:
         return null;
@@ -75,16 +70,14 @@ const ThemeSwitcher: FC = () => {
 
   return (
     <>
-      <Tooltip title='Switch theme'>
-        <IconButton
-          ref={anchorRef}
-          aria-controls={open ? 'theme-menu' : undefined}
-          aria-haspopup='true'
-          onClick={handleOpen}
-        >
-          {handleRenderIcon()}
-        </IconButton>
-      </Tooltip>
+      <IconButton
+        ref={anchorRef}
+        aria-controls={open ? 'theme-menu' : undefined}
+        aria-haspopup='true'
+        onClick={handleOpen}
+      >
+        {handleRenderIcon()}
+      </IconButton>
 
       <Popper open={open} anchorEl={anchorRef.current} transition disablePortal>
         {({ TransitionProps, placement }) => (
@@ -103,7 +96,7 @@ const ThemeSwitcher: FC = () => {
                     selected={getSelectedTheme(ThemeMode.LIGHT)}
                   >
                     <ListItemIcon>
-                      <WbSunnyIcon />
+                      <LightModeIcon />
                     </ListItemIcon>
                     <ListItemText primary='Light' />
                   </MenuItem>
@@ -112,7 +105,7 @@ const ThemeSwitcher: FC = () => {
                     selected={getSelectedTheme(ThemeMode.DARK)}
                   >
                     <ListItemIcon>
-                      <NightsStayIcon />
+                      <DarkModeIcon />
                     </ListItemIcon>
                     <ListItemText primary='Dark' />
                   </MenuItem>
@@ -121,7 +114,7 @@ const ThemeSwitcher: FC = () => {
                     selected={getSelectedTheme(ThemeMode.SYSTEM)}
                   >
                     <ListItemIcon>
-                      <ComputerIcon />
+                      <SystemModeIcon />
                     </ListItemIcon>
                     <ListItemText primary='System' />
                   </MenuItem>
@@ -135,12 +128,4 @@ const ThemeSwitcher: FC = () => {
   );
 };
 
-export default memo(ThemeSwitcher);
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    icon: {
-      color: theme.palette.primary.contrastText,
-    },
-  }),
-);
+export default ThemeSwitcher;

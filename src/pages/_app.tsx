@@ -15,7 +15,7 @@ import type { SnackbarKey } from 'notistack';
 import { SnackbarProvider } from 'notistack';
 
 // Types
-import type { IPageInitialProps } from '@/types/page';
+import type { IPageProps } from '@/types/page';
 
 // Constnats
 import { ThemeMode } from '@/constants/theme';
@@ -41,7 +41,7 @@ import ErrorPage from './_error';
 const App: NextComponentType<
   AppContext,
   AppInitialProps,
-  AppProps<IPageInitialProps>
+  AppProps<IPageProps>
 > = ({ Component, pageProps }) => {
   const router = useRouter();
   const { mode } = useThemeState();
@@ -59,11 +59,15 @@ const App: NextComponentType<
   }, [router.events]);
 
   const theme = useMemo<Theme>(() => {
-    if (!mode || mode === ThemeMode.SYSTEM) {
-      return prefersDarkMode ? DarkTheme : LightTheme;
+    switch (mode) {
+      case ThemeMode.LIGHT:
+        return LightTheme;
+      case ThemeMode.DARK:
+        return DarkTheme;
+      case ThemeMode.SYSTEM:
+      default:
+        return prefersDarkMode ? DarkTheme : LightTheme;
     }
-
-    return mode === ThemeMode.LIGHT ? LightTheme : DarkTheme;
   }, [mode, prefersDarkMode]);
 
   const handleSnackbarAction = (key: SnackbarKey) => {
@@ -100,7 +104,7 @@ const App: NextComponentType<
 const WrappedApp: NextComponentType<
   AppContext,
   AppInitialProps,
-  AppProps<IPageInitialProps>
+  AppProps<IPageProps>
 > = ({ ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest);
 

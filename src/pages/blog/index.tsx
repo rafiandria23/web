@@ -1,7 +1,8 @@
-import type { NextPage, GetStaticProps } from 'next';
+import type { NextPage, GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
+import type { PaginationRenderItemParams } from '@mui/material';
 import {
   useTheme,
   Grid,
@@ -27,68 +28,63 @@ import { PaginationDefaults } from '@/constants';
 import { Layout } from '@/components/shared/layout';
 import { ArticleCard } from '@/components/article';
 
-interface IBlogPageProps {
+export interface IBlogPageProps {
   pagination: IPagination;
   articles: IArticle[];
   tags: ITag[];
 }
 
-const BlogPage: NextPage<IBlogPageProps> = ({ articles }) => {
+const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
   const theme = useTheme();
+
+  const additionalLinkTags = [
+    {
+      rel: 'canonical',
+      href: 'https://rafiandria23.tech/blog',
+    },
+    {
+      rel: 'next',
+      href: `https://rafiandria23.tech/blog?page=${pagination.page! + 1}`,
+    },
+  ];
+
+  if (pagination.page! > 1) {
+    additionalLinkTags.push({
+      rel: 'prev',
+      href: `https://rafiandria23.tech/blog?page=${pagination.page! - 1}`,
+    });
+  }
+
+  const paginationItem = (props: PaginationRenderItemParams) => (
+    <NextLink href={`/blog?page=${props.page}`} passHref>
+      <PaginationItem {...props} />
+    </NextLink>
+  );
 
   return (
     <>
-      <NextSeo
-        title='Blog'
-        additionalLinkTags={[
-          {
-            rel: 'canonical',
-            href: '',
-          },
-          {
-            rel: 'prev',
-            href: '',
-          },
-          {
-            rel: 'next',
-            href: '',
-          },
-        ]}
-      />
+      <NextSeo title='Blog' additionalLinkTags={additionalLinkTags} />
 
       <Layout elevate>
         <Grid
           container
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='stretch'
-          component={Container}
+          justifyContent='center'
+          alignItems='center'
           sx={{
             bgcolor: theme.palette.primary.light,
-            p: theme.spacing(4),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
           }}
         >
-          <Grid item>
+          <Grid component={Container} item>
             <Typography
-              variant='h2'
+              variant='h3'
               component='h1'
               gutterBottom
               color={theme.palette.primary.contrastText}
-              sx={{
-                fontWeight: theme.typography.fontWeightBold,
-              }}
+              fontWeight={theme.typography.fontWeightBold}
             >
               My Blog
             </Typography>
-          </Grid>
 
-          <Grid item>
             <Typography
               variant='h6'
               component='p'
@@ -104,18 +100,9 @@ const BlogPage: NextPage<IBlogPageProps> = ({ articles }) => {
           container
           direction='column'
           justifyContent='space-evenly'
-          alignItems='stretch'
+          alignItems='center'
           component={Container}
           gap={4}
-          sx={{
-            p: theme.spacing(4),
-            [theme.breakpoints.up('md')]: {
-              p: theme.spacing(4, 8),
-            },
-            '& > *': {
-              width: '100%',
-            },
-          }}
         >
           {articles.map((article) => (
             <Grid key={article.id} item>
@@ -125,14 +112,14 @@ const BlogPage: NextPage<IBlogPageProps> = ({ articles }) => {
 
           <Grid item>
             <Pagination
+              shape='rounded'
               color='primary'
-              // count={PaginationDefaults.total}
-              page={PaginationDefaults.PAGE}
-              renderItem={(props) => (
-                <NextLink href={`/blog?page=${props.page}`} passHref>
-                  <PaginationItem {...props} />
-                </NextLink>
-              )}
+              size='large'
+              count={pagination.pageCount}
+              page={pagination.page}
+              renderItem={paginationItem}
+              hidePrevButton={pagination.page === 1}
+              hideNextButton={pagination.page === pagination.pageCount}
             />
           </Grid>
         </Grid>
@@ -141,10 +128,12 @@ const BlogPage: NextPage<IBlogPageProps> = ({ articles }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<
+export const getServerSideProps: GetServerSideProps<
   IBlogPageProps,
-  { page: string }
-> = async ({ params }) => {
+  {
+    page?: string;
+  }
+> = async ({ query }) => {
   const { data } = await client.query<
     {
       articles: IGraphQLModelResponse<IArticle[]>;
@@ -154,7 +143,7 @@ export const getStaticProps: GetStaticProps<
   >({
     variables: {
       pageSize: PaginationDefaults.PAGE_SIZE,
-      page: parseInt(String(params?.page)) || PaginationDefaults.PAGE,
+      page: parseInt(String(query?.page ?? PaginationDefaults.PAGE)),
     },
     query: gql`
       query ($pageSize: Int!, $page: Int!) {
@@ -228,7 +217,6 @@ export const getStaticProps: GetStaticProps<
       articles: data.articles.data,
       tags: data.tags.data,
     },
-    revalidate: 1,
   };
 };
 

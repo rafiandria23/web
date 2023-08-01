@@ -4,6 +4,16 @@ import { createTheme, colors } from '@mui/material';
 
 const GlobalTheme: Partial<Theme> = {
   components: {
+    MuiToolbar: {
+      defaultProps: {
+        color: 'inherit',
+      },
+    },
+    MuiButtonGroup: {
+      defaultProps: {
+        color: 'inherit',
+      },
+    },
     MuiButton: {
       defaultProps: {
         color: 'inherit',

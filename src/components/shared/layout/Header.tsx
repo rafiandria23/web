@@ -1,9 +1,12 @@
-import type { FC, Ref, ReactElement } from 'react';
-import { useState, useCallback, useMemo, forwardRef, memo } from 'react';
-import { useRouter } from 'next/router';
+import type { ReactElement, Ref, FC } from 'react';
+import { forwardRef, useState, useCallback, useMemo, memo } from 'react';
+import { useDispatch } from 'react-redux';
 import NextLink from 'next/link';
+import type { TransitionProps } from '@mui/material/transitions';
 import {
   useTheme,
+  useScrollTrigger,
+  Slide,
   Container,
   Hidden,
   AppBar,
@@ -14,10 +17,7 @@ import {
   IconButton,
   Grid,
   Dialog,
-  Slide,
-  useScrollTrigger,
 } from '@mui/material';
-import { TransitionProps } from '@mui/material/transitions';
 import {
   Menu as MenuIcon,
   Close as CloseIcon,
@@ -25,22 +25,30 @@ import {
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
+// Redux
+import { setMode as setThemeMode } from '@/redux/theme';
+
+// Custom Hooks
+import { useThemeState } from '@/hooks/theme';
+
 // Components
+import type { IThemeSwitcherProps } from '@/components/shared/theme/ThemeSwitcher';
 import { ThemeSwitcher } from '@/components/shared/theme';
 
-const Transition = forwardRef(
+const HeaderTransition = forwardRef(
   (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => (
     <Slide direction='right' ref={ref} {...props} />
   ),
 );
-Transition.displayName = 'Transition';
+HeaderTransition.displayName = 'HeaderTransition';
 
 export interface IHeaderProps {
   elevate?: boolean;
 }
 
 const Header: FC<IHeaderProps> = ({ elevate = false }) => {
-  const router = useRouter();
+  const dispatch = useDispatch();
+  const { mode } = useThemeState();
   const theme = useTheme();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
@@ -63,11 +71,11 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
     setOpen(false);
   }, [setOpen]);
 
-  const handleNavigate = useCallback(
-    (url: string) => {
-      router.push(url);
+  const handleChangeTheme = useCallback<IThemeSwitcherProps['onChange']>(
+    (target) => {
+      dispatch(setThemeMode(target));
     },
-    [router],
+    [dispatch],
   );
 
   return (
@@ -82,9 +90,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             }),
         }}
       >
-        <Container>
-          <Toolbar color='inherit'>
-            <Hidden smUp>
+        <Container component='header'>
+          <Toolbar>
+            <Hidden xlUp>
               <IconButton
                 edge='start'
                 onClick={handleOpen}
@@ -99,14 +107,16 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 />
               </IconButton>
 
-              <Typography
-                variant='h6'
-                sx={{
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                rafiandria23.tech
-              </Typography>
+              <NextLink href='/' passHref>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    fontWeight: theme.typography.fontWeightBold,
+                  }}
+                >
+                  rafiandria23.tech
+                </Typography>
+              </NextLink>
 
               <div
                 style={{
@@ -114,20 +124,22 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 }}
               />
 
-              <ThemeSwitcher />
+              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
             </Hidden>
 
-            <Hidden smDown>
-              <Typography
-                variant='h6'
-                sx={{
-                  fontWeight: theme.typography.fontWeightBold,
-                }}
-              >
-                rafiandria23.tech
-              </Typography>
+            <Hidden xlDown>
+              <NextLink href='/' passHref>
+                <Typography
+                  variant='h6'
+                  sx={{
+                    fontWeight: theme.typography.fontWeightBold,
+                  }}
+                >
+                  rafiandria23.tech
+                </Typography>
+              </NextLink>
 
-              <ThemeSwitcher />
+              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
 
               <div
                 style={{
@@ -135,20 +147,17 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 }}
               />
 
-              <Button variant='text' onClick={() => handleNavigate('/')}>
-                Home
-              </Button>
+              <NextLink href='/' passHref>
+                <Button variant='text'>Home</Button>
+              </NextLink>
 
-              <Button
-                variant='text'
-                onClick={() => handleNavigate('/projects')}
-              >
-                Projects
-              </Button>
+              <NextLink href='/projects' passHref>
+                <Button variant='text'>Projects</Button>
+              </NextLink>
 
-              <Button variant='text' onClick={() => handleNavigate('/blog')}>
-                Blog
-              </Button>
+              <NextLink href='/blog' passHref>
+                <Button variant='text'>Blog</Button>
+              </NextLink>
 
               <IconButton
                 href='https://linkedin.com/in/rafiandria23'
@@ -172,7 +181,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
+        TransitionComponent={HeaderTransition}
       >
         <Toolbar>
           <IconButton edge='start' onClick={handleClose}>
@@ -206,33 +215,27 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems='stretch'
           >
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                onClick={() => handleNavigate('/')}
-              >
-                Home
-              </Button>
+              <NextLink href='/' passHref>
+                <Button fullWidth variant='text'>
+                  Home
+                </Button>
+              </NextLink>
             </Grid>
 
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                onClick={() => handleNavigate('/projects')}
-              >
-                Projects
-              </Button>
+              <NextLink href='/projects' passHref>
+                <Button fullWidth variant='text'>
+                  Projects
+                </Button>
+              </NextLink>
             </Grid>
 
             <Grid item>
-              <Button
-                fullWidth
-                variant='text'
-                onClick={() => handleNavigate('/blog')}
-              >
-                Blog
-              </Button>
+              <NextLink href='/blog' passHref>
+                <Button fullWidth variant='text'>
+                  Blog
+                </Button>
+              </NextLink>
             </Grid>
           </Grid>
 
@@ -244,7 +247,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems='center'
           >
             <Grid item>
-              <ButtonGroup>
+              <ButtonGroup variant='text'>
                 <IconButton
                   href='https://linkedin.com/in/rafiandria23'
                   target='_blank'
