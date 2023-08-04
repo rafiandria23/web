@@ -10,4 +10,5 @@ module.exports = {
   images: {
     domains: ['storage.rafiandria23.tech'],
   },
+  // publicRuntimeConfig:
 };

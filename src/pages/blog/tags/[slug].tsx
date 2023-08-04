@@ -49,12 +49,7 @@ const ArticleTagsPage: NextPage<IArticleTagsPageProps> = ({ tag }) => {
           alignItems='stretch'
         >
           <Grid item>
-            <Typography
-              className={classes.title}
-              component='h1'
-              variant='h5'
-              gutterBottom
-            >
+            <Typography component='h1' variant='h5' gutterBottom>
               {`${tag.attributes.name} Articles`}
             </Typography>
           </Grid>
@@ -155,9 +150,6 @@ const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {
       padding: theme.spacing(2),
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
     },
     list: {
       marginTop: theme.spacing(1),

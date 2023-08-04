@@ -80,7 +80,6 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
               component='h1'
               gutterBottom
               color={theme.palette.primary.contrastText}
-              fontWeight={theme.typography.fontWeightBold}
             >
               My Blog
             </Typography>

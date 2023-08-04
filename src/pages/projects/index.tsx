@@ -50,12 +50,7 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
           alignItems='stretch'
         >
           <Grid item>
-            <Typography
-              className={classes.title}
-              component='h1'
-              variant='h5'
-              gutterBottom
-            >
+            <Typography component='h1' variant='h5' gutterBottom>
               My Projects
             </Typography>
           </Grid>
@@ -147,9 +142,6 @@ const useStyles = makeStyles<Theme>((theme) =>
       [theme.breakpoints.up('md')]: {
         padding: theme.spacing(8),
       } as CSSProperties,
-    },
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
     },
     list: {
       marginTop: theme.spacing(2),
