@@ -100,12 +100,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             </IconButton>
 
             <NextLink href='/' passHref>
-              <Typography
-                variant='h6'
-                fontWeight={theme.typography.fontWeightBold}
-              >
-                rafiandria23.tech
-              </Typography>
+              <Typography variant='h6'>rafiandria23.tech</Typography>
             </NextLink>
 
             <Box flexGrow={1} />
@@ -115,12 +110,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
 
           <Hidden xlDown>
             <NextLink href='/' passHref>
-              <Typography
-                variant='h6'
-                fontWeight={theme.typography.fontWeightBold}
-              >
-                rafiandria23.tech
-              </Typography>
+              <Typography variant='h6'>rafiandria23.tech</Typography>
             </NextLink>
 
             <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />

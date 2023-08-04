@@ -57,12 +57,7 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
           alignItems='stretch'
         >
           <Grid item>
-            <Typography
-              className={classes.title}
-              component='h1'
-              variant='h5'
-              gutterBottom
-            >
+            <Typography component='h1' variant='h5' gutterBottom>
               {`${tag.attributes.name} Projects`}
             </Typography>
           </Grid>
@@ -161,9 +156,6 @@ export default ProjectTagsPage;
 const useStyles = makeStyles<Theme>((theme) =>
   createStyles({
     wrapper: {},
-    title: {
-      fontWeight: theme.typography.fontWeightBold,
-    },
     list: {
       marginTop: theme.spacing(2),
     },

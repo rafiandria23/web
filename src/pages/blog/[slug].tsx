@@ -63,11 +63,7 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
           >
             <Grid item container direction='column'>
               <Grid item>
-                <Typography
-                  variant='h3'
-                  component='h1'
-                  fontWeight={theme.typography.fontWeightBold}
-                >
+                <Typography variant='h3' component='h1'>
                   {article.attributes.title}
                 </Typography>
               </Grid>

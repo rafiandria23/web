@@ -54,7 +54,6 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               component='h1'
               gutterBottom
               color={theme.palette.primary.contrastText}
-              fontWeight={theme.typography.fontWeightBold}
               textAlign='center'
             >
               Hey, I&apos;m Adam.
@@ -69,18 +68,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
               vulputate ex id quam malesuada efficitur. Ut id nisi eget sapien
-              iaculis laoreet. Cras sit amet rhoncus augue, vel vestibulum est.
-              Sed ut dolor at metus tempus faucibus eget in lorem. Maecenas
-              placerat luctus justo, id blandit diam congue sit amet. Donec
-              vitae tortor vel nisi hendrerit commodo nec nec sem. Vivamus sem
-              eros, mattis gravida enim sit amet, blandit varius felis. Nam
-              mollis ultricies ante ut tempus. In non commodo orci. Cras et nisi
-              sit amet risus cursus eleifend. Donec ut suscipit lacus, id
-              volutpat nibh. Pellentesque sed rutrum dui. Proin magna est,
-              maximus ut mauris nec, suscipit semper dolor. In facilisis ipsum a
-              mollis fringilla. Quisque vel ipsum tincidunt, varius velit ac,
-              aliquam nibh. Nam imperdiet, risus eu pharetra hendrerit, massa
-              lectus laoreet ipsum, ut molestie velit felis in ex.
+              iaculis laoreet.
             </Typography>
           </Grid>
         </Grid>

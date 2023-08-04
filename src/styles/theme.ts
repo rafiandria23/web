@@ -3,6 +3,9 @@ import type { Theme } from '@mui/material';
 import { createTheme, colors } from '@mui/material';
 
 const GlobalTheme: Partial<Theme> = {
+  typography: {
+    fontFamily: ['"Lato"'].join(', '),
+  } as Theme['typography'],
   components: {
     MuiToolbar: {
       defaultProps: {
