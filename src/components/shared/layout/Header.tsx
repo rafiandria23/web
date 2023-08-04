@@ -11,16 +11,16 @@ import {
   Hidden,
   AppBar,
   Toolbar,
+  Stack,
+  Box,
   Typography,
-  ButtonGroup,
   Button,
   IconButton,
-  Grid,
   Dialog,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
-  Close as CloseIcon,
+  MenuOutlined as MenuIcon,
+  CloseOutlined as CloseIcon,
   LinkedIn as LinkedInIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
@@ -53,7 +53,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
-  const [open, setOpen] = useState<boolean>(false);
+  const [dialogVisible, setDialogVisibility] = useState<boolean>(false);
 
   const calculatedElevation = useMemo(() => {
     if (elevate) {
@@ -63,13 +63,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
     return undefined;
   }, [elevate, scrollTriggered]);
 
-  const handleOpen = useCallback(() => {
-    setOpen(true);
-  }, [setOpen]);
-
-  const handleClose = useCallback(() => {
-    setOpen(false);
-  }, [setOpen]);
+  const handleDialogVisibility = useCallback(() => {
+    setDialogVisibility(!dialogVisible);
+  }, [dialogVisible, setDialogVisibility]);
 
   const handleChangeTheme = useCallback<IThemeSwitcherProps['onChange']>(
     (target) => {
@@ -81,6 +77,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   return (
     <>
       <AppBar
+        component='header'
         position='fixed'
         elevation={calculatedElevation}
         sx={{
@@ -90,181 +87,130 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             }),
         }}
       >
-        <Container component='header'>
-          <Toolbar>
-            <Hidden xlUp>
-              <IconButton
-                edge='start'
-                onClick={handleOpen}
-                sx={{
-                  mr: theme.spacing(2),
-                }}
+        <Toolbar component={Container}>
+          <Hidden xlUp>
+            <IconButton
+              edge='start'
+              onClick={handleDialogVisibility}
+              sx={{
+                mr: theme.spacing(2),
+              }}
+            >
+              {dialogVisible ? <CloseIcon /> : <MenuIcon />}
+            </IconButton>
+
+            <NextLink href='/' passHref>
+              <Typography
+                variant='h6'
+                fontWeight={theme.typography.fontWeightBold}
               >
-                <MenuIcon
-                  sx={{
-                    color: theme.palette.primary.contrastText,
-                  }}
-                />
-              </IconButton>
+                rafiandria23.tech
+              </Typography>
+            </NextLink>
 
-              <NextLink href='/' passHref>
-                <Typography
-                  variant='h6'
-                  sx={{
-                    fontWeight: theme.typography.fontWeightBold,
-                  }}
-                >
-                  rafiandria23.tech
-                </Typography>
-              </NextLink>
+            <Box flexGrow={1} />
 
-              <div
-                style={{
-                  flexGrow: 1,
-                }}
-              />
+            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
+          </Hidden>
 
-              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
-            </Hidden>
-
-            <Hidden xlDown>
-              <NextLink href='/' passHref>
-                <Typography
-                  variant='h6'
-                  sx={{
-                    fontWeight: theme.typography.fontWeightBold,
-                  }}
-                >
-                  rafiandria23.tech
-                </Typography>
-              </NextLink>
-
-              <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
-
-              <div
-                style={{
-                  flexGrow: 1,
-                }}
-              />
-
-              <NextLink href='/' passHref>
-                <Button variant='text'>Home</Button>
-              </NextLink>
-
-              <NextLink href='/projects' passHref>
-                <Button variant='text'>Projects</Button>
-              </NextLink>
-
-              <NextLink href='/blog' passHref>
-                <Button variant='text'>Blog</Button>
-              </NextLink>
-
-              <IconButton
-                href='https://linkedin.com/in/rafiandria23'
-                target='_blank'
+          <Hidden xlDown>
+            <NextLink href='/' passHref>
+              <Typography
+                variant='h6'
+                fontWeight={theme.typography.fontWeightBold}
               >
-                <LinkedInIcon />
-              </IconButton>
+                rafiandria23.tech
+              </Typography>
+            </NextLink>
 
-              <IconButton
-                href='https://github.com/rafiandria23'
-                target='_blank'
-              >
-                <GitHubIcon />
-              </IconButton>
-            </Hidden>
-          </Toolbar>
-        </Container>
+            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
+
+            <div
+              style={{
+                flexGrow: 1,
+              }}
+            />
+
+            <Button LinkComponent={NextLink} href='/' variant='text'>
+              Home
+            </Button>
+            <Button LinkComponent={NextLink} href='/projects' variant='text'>
+              Projects
+            </Button>
+            <Button LinkComponent={NextLink} href='/blog' variant='text'>
+              Blog
+            </Button>
+
+            <IconButton
+              LinkComponent={NextLink}
+              href='https://linkedin.com/in/rafiandria23'
+              target='_blank'
+            >
+              <LinkedInIcon />
+            </IconButton>
+
+            <IconButton
+              LinkComponent={NextLink}
+              href='https://github.com/rafiandria23'
+              target='_blank'
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Hidden>
+        </Toolbar>
       </AppBar>
 
       <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
         TransitionComponent={HeaderTransition}
+        fullScreen
+        open={dialogVisible}
+        onClick={handleDialogVisibility}
+        sx={{
+          zIndex: theme.zIndex.appBar - 1,
+          mt: `${Number(theme.mixins.toolbar.minHeight)}px`,
+        }}
       >
-        <Toolbar>
-          <IconButton edge='start' onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
+        <Stack component={Container} pt={theme.spacing(4)} spacing={2}>
+          <Button LinkComponent={NextLink} href='/' fullWidth variant='text'>
+            Home
+          </Button>
 
-          <div
-            style={{
-              flexGrow: 1,
-            }}
-          />
-        </Toolbar>
-
-        <Grid
-          container
-          direction='column'
-          justifyContent='space-between'
-          alignItems='stretch'
-          sx={{
-            p: theme.spacing(0, 4),
-            '& > *': {
-              m: theme.spacing(1, 0),
-            },
-          }}
-        >
-          <Grid
-            item
-            container
-            direction='column'
-            justifyContent='space-between'
-            alignItems='stretch'
+          <Button
+            LinkComponent={NextLink}
+            href='/projects'
+            fullWidth
+            variant='text'
           >
-            <Grid item>
-              <NextLink href='/' passHref>
-                <Button fullWidth variant='text'>
-                  Home
-                </Button>
-              </NextLink>
-            </Grid>
+            Projects
+          </Button>
 
-            <Grid item>
-              <NextLink href='/projects' passHref>
-                <Button fullWidth variant='text'>
-                  Projects
-                </Button>
-              </NextLink>
-            </Grid>
-
-            <Grid item>
-              <NextLink href='/blog' passHref>
-                <Button fullWidth variant='text'>
-                  Blog
-                </Button>
-              </NextLink>
-            </Grid>
-          </Grid>
-
-          <Grid
-            item
-            container
-            direction='row'
-            justifyContent='center'
-            alignItems='center'
+          <Button
+            LinkComponent={NextLink}
+            href='/blog'
+            fullWidth
+            variant='text'
           >
-            <Grid item>
-              <ButtonGroup variant='text'>
-                <IconButton
-                  href='https://linkedin.com/in/rafiandria23'
-                  target='_blank'
-                >
-                  <LinkedInIcon />
-                </IconButton>
+            Blog
+          </Button>
 
-                <IconButton
-                  href='https://github.com/rafiandria23'
-                  target='_blank'
-                >
-                  <GitHubIcon />
-                </IconButton>
-              </ButtonGroup>
-            </Grid>
-          </Grid>
-        </Grid>
+          <Stack direction='row' justifyContent='center' spacing={2}>
+            <IconButton
+              LinkComponent={NextLink}
+              href='https://linkedin.com/in/rafiandria23'
+              target='_blank'
+            >
+              <LinkedInIcon />
+            </IconButton>
+
+            <IconButton
+              LinkComponent={NextLink}
+              href='https://github.com/rafiandria23'
+              target='_blank'
+            >
+              <GitHubIcon />
+            </IconButton>
+          </Stack>
+        </Stack>
       </Dialog>
     </>
   );

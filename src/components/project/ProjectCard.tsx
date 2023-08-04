@@ -105,7 +105,7 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
             </Box>
           </Box>
 
-          <CardMedia>
+          {/* <CardMedia>
             <Image
               src={project.attributes.thumbnail.data.attributes.url}
               alt={project.attributes.title}
@@ -120,7 +120,7 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
                 height: theme.spacing(40),
               }}
             />
-          </CardMedia>
+          </CardMedia> */}
         </CardActionArea>
       </Card>
     </NextLink>
