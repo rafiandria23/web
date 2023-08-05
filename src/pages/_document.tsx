@@ -8,9 +8,6 @@ import NextDocument, {
 } from 'next/document';
 import { ServerStyleSheets as MaterialUiServerStyleSheets } from '@mui/styles';
 
-// Constants
-import { AppConfig } from '@/constants';
-
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {
     const materialUiSheets = new MaterialUiServerStyleSheets();
@@ -57,24 +54,6 @@ export default class Document extends NextDocument {
             type='image/png'
             sizes='96x96'
             href='/favicon-96x96.png'
-          />
-
-          {/* Global Site Tag (gtag.js) - Google Analytics */}
-          <script
-            async
-            src={`https://www.googletagmanager.com/gtag/js?id=${AppConfig.GA_MEASUREMENT_ID}`}
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${AppConfig.GA_MEASUREMENT_ID}', {
-              page_path: window.location.pathname,
-            });
-          `,
-            }}
           />
         </Head>
 

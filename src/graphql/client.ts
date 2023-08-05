@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
 // Config
-import { AppConfig } from '@/constants';
+import { AppConfig } from '@/constants/app';
 
 const cache = new InMemoryCache();
 

@@ -13,10 +13,10 @@ import {
   Toolbar,
   Stack,
   Box,
-  Typography,
   Button,
   IconButton,
   Dialog,
+  Divider,
 } from '@mui/material';
 import {
   MenuOutlined as MenuIcon,
@@ -87,46 +87,69 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             }),
         }}
       >
-        <Toolbar component={Container}>
+        <Toolbar
+          component={Container}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
           <Hidden xlUp>
-            <IconButton
-              edge='start'
-              onClick={handleDialogVisibility}
-              sx={{
-                mr: theme.spacing(2),
-              }}
-            >
+            <IconButton edge='start' onClick={handleDialogVisibility}>
               {dialogVisible ? <CloseIcon /> : <MenuIcon />}
             </IconButton>
 
-            <NextLink href='/' passHref>
-              <Typography variant='h6'>rafiandria23.tech</Typography>
-            </NextLink>
+            <Button
+              LinkComponent={NextLink}
+              href='/'
+              variant='text'
+              size='large'
+              sx={{
+                textTransform: 'none',
+                fontWeight: theme.typography.fontWeightBold,
+              }}
+            >
+              rafiandria23.tech
+            </Button>
 
             <Box flexGrow={1} />
 
-            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
+            <ThemeSwitcher
+              mode={mode}
+              edge='end'
+              onChange={handleChangeTheme}
+            />
           </Hidden>
 
           <Hidden xlDown>
-            <NextLink href='/' passHref>
-              <Typography variant='h6'>rafiandria23.tech</Typography>
-            </NextLink>
-
-            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
-
-            <div
-              style={{
-                flexGrow: 1,
-              }}
+            <ThemeSwitcher
+              mode={mode}
+              edge='start'
+              onChange={handleChangeTheme}
             />
+
+            <Button
+              LinkComponent={NextLink}
+              href='/'
+              variant='text'
+              size='large'
+              sx={{
+                textTransform: 'none',
+                fontWeight: theme.typography.fontWeightBold,
+              }}
+            >
+              rafiandria23.tech
+            </Button>
+
+            <Box flexGrow={1} />
 
             <Button LinkComponent={NextLink} href='/' variant='text'>
               Home
             </Button>
+
             <Button LinkComponent={NextLink} href='/projects' variant='text'>
               Projects
             </Button>
+
             <Button LinkComponent={NextLink} href='/blog' variant='text'>
               Blog
             </Button>
@@ -183,7 +206,12 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             Blog
           </Button>
 
-          <Stack direction='row' justifyContent='center' spacing={2}>
+          <Stack
+            direction='row'
+            justifyContent='center'
+            spacing={2}
+            divider={<Divider orientation='vertical' flexItem />}
+          >
             <IconButton
               LinkComponent={NextLink}
               href='https://linkedin.com/in/rafiandria23'

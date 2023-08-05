@@ -19,6 +19,7 @@ import type { AppContext, AppInitialProps, AppProps } from 'next/app';
 import NextApp from 'next/app';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import type { Theme } from '@mui/material';
@@ -29,11 +30,9 @@ import { SnackbarProvider } from 'notistack';
 // Types
 import type { IPageProps } from '@/types/page';
 
-// Constnats
+// Constants
+import { AppConfig } from '@/constants/app';
 import { ThemeMode } from '@/constants/theme';
-
-// Utils
-import * as gtag from '@/utils/gtag';
 
 // Redux
 import { wrapper, persistor } from '@/redux';
@@ -59,16 +58,16 @@ const App: NextComponentType<
   const { mode } = useThemeState();
   const prefersDarkMode = usePrefersDarkMode();
 
-  const handleRouteChange = (url: string) => {
-    gtag.pageview(url);
-  };
+  // const handleRouteChange = (url: string) => {
+  //   gtag.pageview(url);
+  // };
 
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+  // useEffect(() => {
+  //   router.events.on('routeChangeComplete', handleRouteChange);
+  //   return () => {
+  //     router.events.off('routeChangeComplete', handleRouteChange);
+  //   };
+  // }, [router.events]);
 
   const theme = useMemo<Theme>(() => {
     switch (mode) {
@@ -99,14 +98,22 @@ const App: NextComponentType<
               url: 'https://rafiandria23.tech',
             }}
           />
-          {pageProps.errorStatus ? (
-            <ErrorPage
-              statusCode={pageProps.errorStatus}
-              title={pageProps.errorMessage}
+          <>
+            <GoogleAnalytics
+              gaMeasurementId={AppConfig.GA_MEASUREMENT_ID}
+              strategy='lazyOnload'
+              trackPageViews
             />
-          ) : (
-            <Component {...pageProps} />
-          )}
+
+            {pageProps.errorStatus ? (
+              <ErrorPage
+                statusCode={pageProps.errorStatus}
+                title={pageProps.errorMessage}
+              />
+            ) : (
+              <Component {...pageProps} />
+            )}
+          </>
         </SnackbarProvider>
       </ThemeProvider>
     </PersistGate>

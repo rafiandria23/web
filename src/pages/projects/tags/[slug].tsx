@@ -30,7 +30,7 @@ export interface IProjectTagsPageProps {
 const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
   const router = useRouter();
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isXS = useMediaQuery(theme.breakpoints.up('xs'));
   const classes = useStyles();
 
   if (router.isFallback) {
@@ -72,8 +72,8 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={isSmallScreen ? 'flex-start' : 'space-evenly'}
-            alignItems={isSmallScreen ? 'center' : 'stretch'}
+            justifyContent={isXS ? 'flex-start' : 'space-evenly'}
+            alignItems={isXS ? 'center' : 'stretch'}
             spacing={2}
           >
             {tag.attributes.projects !== undefined &&
