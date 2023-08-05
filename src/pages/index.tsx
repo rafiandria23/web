@@ -87,7 +87,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
         >
           {articles.map((article) => (
             <Grid key={article.id} item xs={12} xl={3.83}>
-              <ArticleCard article={article} />
+              <ArticleCard article={article} overview={false} />
             </Grid>
           ))}
         </Grid>

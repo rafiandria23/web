@@ -3,27 +3,33 @@ import NextLink from 'next/link';
 import Image from 'next/image';
 import {
   useTheme,
-  useMediaQuery,
-  // Hidden,
-  Typography,
-  CardActionArea,
   Card,
-  CardMedia,
+  CardActionArea,
   CardContent,
+  CardMedia,
+  Typography,
   Box,
+  Stack,
 } from '@mui/material';
 import dayjs from 'dayjs';
 
 // Types
 import type { IArticle } from '@/types/article';
 
+// Constants
+import { ScreenSize } from '@/constants/screen';
+
+// Custom Hooks
+import { useScreenSize } from '@/hooks/screen';
+
 interface IArticleCardProps {
   article: IArticle;
+  overview?: boolean;
 }
 
-const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
+const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
   const theme = useTheme();
-  const xlUp = useMediaQuery(theme.breakpoints.up('xl'));
+  const screenSize = useScreenSize();
 
   return (
     <Card>
@@ -31,19 +37,13 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
         LinkComponent={NextLink}
         href={`/blog/${article.attributes.slug}`}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'stretch',
-          }}
-        >
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography variant='h5' gutterBottom>
-                {article.attributes.title}
-              </Typography>
+        <Stack direction='row'>
+          <CardContent component={Stack}>
+            <Typography variant='h5' gutterBottom>
+              {article.attributes.title}
+            </Typography>
 
+            {overview && (
               <Typography
                 variant='body2'
                 gutterBottom
@@ -55,22 +55,22 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
               >
                 {article.attributes.overview}
               </Typography>
-            </CardContent>
+            )}
 
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-              <Typography
-                variant='overline'
-                component='p'
-                align='left'
-                sx={{
-                  textTransform: 'none',
-                  color: theme.palette.text.secondary,
-                }}
-              >
-                {dayjs(article.attributes.updatedAt).format('MMM D, YYYY')}
-              </Typography>
-            </Box>
-          </Box>
+            <Box flexGrow={1} />
+
+            <Typography
+              variant='overline'
+              component='p'
+              align='left'
+              sx={{
+                textTransform: 'none',
+                color: theme.palette.text.secondary,
+              }}
+            >
+              {dayjs(article.attributes.updatedAt).format('MMM D, YYYY')}
+            </Typography>
+          </CardContent>
 
           <CardMedia>
             <Image
@@ -81,12 +81,18 @@ const ArticleCard: FC<IArticleCardProps> = ({ article }) => {
               style={{
                 display: 'block',
                 objectFit: 'cover',
-                width: xlUp ? theme.spacing(40) : theme.spacing(15),
-                height: xlUp ? theme.spacing(40) : theme.spacing(15),
+                width:
+                  screenSize === ScreenSize.LARGE
+                    ? theme.spacing(40)
+                    : theme.spacing(15),
+                height:
+                  screenSize === ScreenSize.LARGE
+                    ? theme.spacing(40)
+                    : theme.spacing(15),
               }}
             />
           </CardMedia>
-        </Box>
+        </Stack>
       </CardActionArea>
     </Card>
   );

@@ -8,7 +8,6 @@ import {
   useScrollTrigger,
   Slide,
   Container,
-  Hidden,
   AppBar,
   Toolbar,
   Stack,
@@ -25,10 +24,14 @@ import {
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
+// Constants
+import { ScreenSize } from '@/constants/screen';
+
 // Redux
 import { setMode as setThemeMode } from '@/redux/theme';
 
 // Custom Hooks
+import { useScreenSize } from '@/hooks/screen';
 import { useThemeState } from '@/hooks/theme';
 
 // Components
@@ -50,6 +53,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const dispatch = useDispatch();
   const { mode } = useThemeState();
   const theme = useTheme();
+  const screenSize = useScreenSize();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
@@ -93,83 +97,87 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             alignItems: 'center',
           }}
         >
-          <Hidden xlUp>
-            <IconButton edge='start' onClick={handleDialogVisibility}>
-              {dialogVisible ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
+          {screenSize === ScreenSize.SMALL && (
+            <>
+              <IconButton edge='start' onClick={handleDialogVisibility}>
+                {dialogVisible ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
 
-            <Button
-              LinkComponent={NextLink}
-              href='/'
-              variant='text'
-              size='large'
-              sx={{
-                textTransform: 'none',
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              rafiandria23.tech
-            </Button>
+              <Button
+                LinkComponent={NextLink}
+                href='/'
+                variant='text'
+                size='large'
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
+                rafiandria23.tech
+              </Button>
 
-            <Box flexGrow={1} />
+              <Box flexGrow={1} />
 
-            <ThemeSwitcher
-              mode={mode}
-              edge='end'
-              onChange={handleChangeTheme}
-            />
-          </Hidden>
+              <ThemeSwitcher
+                mode={mode}
+                edge='end'
+                onChange={handleChangeTheme}
+              />
+            </>
+          )}
 
-          <Hidden xlDown>
-            <ThemeSwitcher
-              mode={mode}
-              edge='start'
-              onChange={handleChangeTheme}
-            />
+          {screenSize === ScreenSize.LARGE && (
+            <>
+              <ThemeSwitcher
+                mode={mode}
+                edge='start'
+                onChange={handleChangeTheme}
+              />
 
-            <Button
-              LinkComponent={NextLink}
-              href='/'
-              variant='text'
-              size='large'
-              sx={{
-                textTransform: 'none',
-                fontWeight: theme.typography.fontWeightBold,
-              }}
-            >
-              rafiandria23.tech
-            </Button>
+              <Button
+                LinkComponent={NextLink}
+                href='/'
+                variant='text'
+                size='large'
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
+                rafiandria23.tech
+              </Button>
 
-            <Box flexGrow={1} />
+              <Box flexGrow={1} />
 
-            <Button LinkComponent={NextLink} href='/' variant='text'>
-              Home
-            </Button>
+              <Button LinkComponent={NextLink} href='/' variant='text'>
+                Home
+              </Button>
 
-            <Button LinkComponent={NextLink} href='/projects' variant='text'>
-              Projects
-            </Button>
+              <Button LinkComponent={NextLink} href='/projects' variant='text'>
+                Projects
+              </Button>
 
-            <Button LinkComponent={NextLink} href='/blog' variant='text'>
-              Blog
-            </Button>
+              <Button LinkComponent={NextLink} href='/blog' variant='text'>
+                Blog
+              </Button>
 
-            <IconButton
-              LinkComponent={NextLink}
-              href='https://linkedin.com/in/rafiandria23'
-              target='_blank'
-            >
-              <LinkedInIcon />
-            </IconButton>
+              <IconButton
+                LinkComponent={NextLink}
+                href='https://linkedin.com/in/rafiandria23'
+                target='_blank'
+              >
+                <LinkedInIcon />
+              </IconButton>
 
-            <IconButton
-              LinkComponent={NextLink}
-              href='https://github.com/rafiandria23'
-              target='_blank'
-            >
-              <GitHubIcon />
-            </IconButton>
-          </Hidden>
+              <IconButton
+                LinkComponent={NextLink}
+                href='https://github.com/rafiandria23'
+                target='_blank'
+              >
+                <GitHubIcon />
+              </IconButton>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 
