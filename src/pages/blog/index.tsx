@@ -22,7 +22,7 @@ import type { IArticle } from '@/types/article';
 import type { ITag } from '@/types/tag';
 
 // Constants
-import { PaginationDefaults } from '@/constants';
+import { PaginationDefaults } from '@/constants/page';
 
 // Components
 import { Layout } from '@/components/shared/layout';
