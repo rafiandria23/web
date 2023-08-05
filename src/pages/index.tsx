@@ -1,7 +1,14 @@
 import type { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, Grid, Container, Typography } from '@mui/material';
+import {
+  useTheme,
+  Grid,
+  Stack,
+  Box,
+  Container,
+  Typography,
+} from '@mui/material';
 
 // Types
 import type { IPagination } from '@/types/page';
@@ -11,7 +18,7 @@ import type { IProject } from '@/types/project';
 import type { ITag } from '@/types/tag';
 
 // Constants
-import { PaginationDefaults } from '@/constants';
+import { PaginationDefaults } from '@/constants/page';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -39,16 +46,12 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
 
       <Layout elevate>
         {/* Introduction Section */}
-        <Grid
-          item
-          container
-          justifyContent='center'
-          alignItems='center'
+        <Box
           sx={{
             bgcolor: theme.palette.primary.light,
           }}
         >
-          <Grid item component={Container}>
+          <Stack component={Container} spacing={2}>
             <Typography
               variant='h2'
               component='h1'
@@ -70,33 +73,42 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               vulputate ex id quam malesuada efficitur. Ut id nisi eget sapien
               iaculis laoreet.
             </Typography>
-          </Grid>
-        </Grid>
+          </Stack>
+        </Box>
 
         {/* Latest Articles Section */}
-        <Grid item container component={Container} spacing={2}>
+        <Grid
+          component={Container}
+          container
+          gap={{
+            xs: 3,
+            xl: 3,
+          }}
+        >
           {articles.map((article) => (
-            <Grid key={article.id} item>
-              <ArticleCard article={article} />
+            <Grid key={article.id} item xs={12} xl={3.83}>
+              <ArticleCard article={article} overview={false} />
             </Grid>
           ))}
         </Grid>
 
         {/* Latest Projects Section */}
-        <Grid
-          item
-          container
-          justifyContent='center'
-          sx={{ bgcolor: theme.palette.primary.light }}
-        >
-          <Grid item container component={Container}>
+        <Box sx={{ bgcolor: theme.palette.primary.light }}>
+          <Grid
+            component={Container}
+            container
+            gap={{
+              xs: 3,
+              xl: 3,
+            }}
+          >
             {projects.map((project) => (
-              <Grid key={project.id} item>
+              <Grid key={project.id} item xs={12} xl={3.83}>
                 <ProjectCard project={project} />
               </Grid>
             ))}
           </Grid>
-        </Grid>
+        </Box>
       </Layout>
     </>
   );
@@ -114,7 +126,7 @@ export const getServerSideProps: GetServerSideProps<
     IPagination
   >({
     variables: {
-      pageSize: PaginationDefaults.PAGE_SIZE / 2,
+      pageSize: 6,
       page: PaginationDefaults.PAGE,
     },
     query: gql`

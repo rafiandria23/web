@@ -8,15 +8,14 @@ import {
   useScrollTrigger,
   Slide,
   Container,
-  Hidden,
   AppBar,
   Toolbar,
   Stack,
   Box,
-  Typography,
   Button,
   IconButton,
   Dialog,
+  Divider,
 } from '@mui/material';
 import {
   MenuOutlined as MenuIcon,
@@ -25,10 +24,14 @@ import {
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
+// Constants
+import { ScreenSize } from '@/constants/screen';
+
 // Redux
 import { setMode as setThemeMode } from '@/redux/theme';
 
 // Custom Hooks
+import { useScreenSize } from '@/hooks/screen';
 import { useThemeState } from '@/hooks/theme';
 
 // Components
@@ -50,6 +53,7 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const dispatch = useDispatch();
   const { mode } = useThemeState();
   const theme = useTheme();
+  const screenSize = useScreenSize();
   const scrollTriggered = useScrollTrigger({
     disableHysteresis: true,
   });
@@ -87,66 +91,93 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             }),
         }}
       >
-        <Toolbar component={Container}>
-          <Hidden xlUp>
-            <IconButton
-              edge='start'
-              onClick={handleDialogVisibility}
-              sx={{
-                mr: theme.spacing(2),
-              }}
-            >
-              {dialogVisible ? <CloseIcon /> : <MenuIcon />}
-            </IconButton>
+        <Toolbar
+          component={Container}
+          sx={{
+            alignItems: 'center',
+          }}
+        >
+          {screenSize === ScreenSize.SMALL && (
+            <>
+              <IconButton edge='start' onClick={handleDialogVisibility}>
+                {dialogVisible ? <CloseIcon /> : <MenuIcon />}
+              </IconButton>
 
-            <NextLink href='/' passHref>
-              <Typography variant='h6'>rafiandria23.tech</Typography>
-            </NextLink>
+              <Button
+                LinkComponent={NextLink}
+                href='/'
+                variant='text'
+                size='large'
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
+                rafiandria23.tech
+              </Button>
 
-            <Box flexGrow={1} />
+              <Box flexGrow={1} />
 
-            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
-          </Hidden>
+              <ThemeSwitcher
+                mode={mode}
+                edge='end'
+                onChange={handleChangeTheme}
+              />
+            </>
+          )}
 
-          <Hidden xlDown>
-            <NextLink href='/' passHref>
-              <Typography variant='h6'>rafiandria23.tech</Typography>
-            </NextLink>
+          {screenSize === ScreenSize.LARGE && (
+            <>
+              <ThemeSwitcher
+                mode={mode}
+                edge='start'
+                onChange={handleChangeTheme}
+              />
 
-            <ThemeSwitcher mode={mode} onChange={handleChangeTheme} />
+              <Button
+                LinkComponent={NextLink}
+                href='/'
+                variant='text'
+                size='large'
+                sx={{
+                  textTransform: 'none',
+                  fontWeight: theme.typography.fontWeightBold,
+                }}
+              >
+                rafiandria23.tech
+              </Button>
 
-            <div
-              style={{
-                flexGrow: 1,
-              }}
-            />
+              <Box flexGrow={1} />
 
-            <Button LinkComponent={NextLink} href='/' variant='text'>
-              Home
-            </Button>
-            <Button LinkComponent={NextLink} href='/projects' variant='text'>
-              Projects
-            </Button>
-            <Button LinkComponent={NextLink} href='/blog' variant='text'>
-              Blog
-            </Button>
+              <Button LinkComponent={NextLink} href='/' variant='text'>
+                Home
+              </Button>
 
-            <IconButton
-              LinkComponent={NextLink}
-              href='https://linkedin.com/in/rafiandria23'
-              target='_blank'
-            >
-              <LinkedInIcon />
-            </IconButton>
+              <Button LinkComponent={NextLink} href='/projects' variant='text'>
+                Projects
+              </Button>
 
-            <IconButton
-              LinkComponent={NextLink}
-              href='https://github.com/rafiandria23'
-              target='_blank'
-            >
-              <GitHubIcon />
-            </IconButton>
-          </Hidden>
+              <Button LinkComponent={NextLink} href='/blog' variant='text'>
+                Blog
+              </Button>
+
+              <IconButton
+                LinkComponent={NextLink}
+                href='https://linkedin.com/in/rafiandria23'
+                target='_blank'
+              >
+                <LinkedInIcon />
+              </IconButton>
+
+              <IconButton
+                LinkComponent={NextLink}
+                href='https://github.com/rafiandria23'
+                target='_blank'
+              >
+                <GitHubIcon />
+              </IconButton>
+            </>
+          )}
         </Toolbar>
       </AppBar>
 
@@ -183,7 +214,12 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
             Blog
           </Button>
 
-          <Stack direction='row' justifyContent='center' spacing={2}>
+          <Stack
+            direction='row'
+            justifyContent='center'
+            spacing={2}
+            divider={<Divider orientation='vertical' flexItem />}
+          >
             <IconButton
               LinkComponent={NextLink}
               href='https://linkedin.com/in/rafiandria23'

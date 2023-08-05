@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { useState, useRef } from 'react';
+import type { IconButtonProps } from '@mui/material';
 import {
   IconButton,
   Popper,
@@ -25,13 +26,11 @@ import { usePrefersDarkMode } from '@/hooks/theme';
 
 export interface IThemeSwitcherProps {
   mode: ThemeMode;
+  edge?: IconButtonProps['edge'];
   onChange: (target: ThemeMode) => void;
 }
 
-const ThemeSwitcher: FC<IThemeSwitcherProps> = ({
-  mode = ThemeMode.SYSTEM,
-  onChange,
-}) => {
+const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ mode, edge, onChange }) => {
   const prefersDarkMode = usePrefersDarkMode();
   const [open, setOpen] = useState<boolean>(false);
   const anchorRef = useRef<HTMLButtonElement>(null);
@@ -74,6 +73,7 @@ const ThemeSwitcher: FC<IThemeSwitcherProps> = ({
         ref={anchorRef}
         aria-controls={open ? 'theme-menu' : undefined}
         aria-haspopup='true'
+        edge={edge}
         onClick={handleOpen}
       >
         {handleRenderIcon()}

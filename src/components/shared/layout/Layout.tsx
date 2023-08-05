@@ -1,5 +1,5 @@
 import { memo, FC, ReactNode } from 'react';
-import { useTheme, Grid } from '@mui/material';
+import { useTheme, Stack } from '@mui/material';
 
 // Components
 import Header from './Header';
@@ -24,15 +24,11 @@ const Layout: FC<ILayoutProps> = ({
     <>
       {header && <Header elevate={elevate} />}
 
-      <Grid
+      <Stack
         component='main'
-        container
-        justifyContent='center'
-        alignItems='center'
         sx={{
           '& > :first-of-type': {
-            width: '100%',
-            height: '100%',
+            mb: theme.spacing(4),
             pt: {
               xs: `calc(${Number(
                 theme.mixins.toolbar.minHeight,
@@ -43,12 +39,21 @@ const Layout: FC<ILayoutProps> = ({
             },
           },
           '& > *:not(:first-of-type)': {
-            my: theme.spacing(4),
+            mb: theme.spacing(4),
           },
+          '& > *': {
+            width: '100%',
+            height: '100%',
+            py: {
+              xs: theme.spacing(4),
+              xl: theme.spacing(8),
+            },
+          },
+          overflowX: 'hidden',
         }}
       >
         {children}
-      </Grid>
+      </Stack>
 
       {footer && <Footer />}
     </>

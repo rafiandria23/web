@@ -30,7 +30,7 @@ interface IProjectsPageProps {
 
 const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isXS = useMediaQuery(theme.breakpoints.up('xs'));
   const classes = useStyles();
 
   return (
@@ -65,8 +65,8 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={isSmallScreen ? 'flex-start' : 'space-evenly'}
-            alignItems={isSmallScreen ? 'center' : 'stretch'}
+            justifyContent={isXS ? 'flex-start' : 'space-evenly'}
+            alignItems={isXS ? 'center' : 'stretch'}
             spacing={2}
           >
             {projects !== undefined && projects.length > 0
