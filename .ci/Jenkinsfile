@@ -139,11 +139,11 @@ pipeline {
                 echo 'Success!'
             }
         }
+    }
 
-        post {
-            cleanup {
-                cleanWs()
-            }
+    post {
+        cleanup {
+            cleanWs()
         }
     }
 }
