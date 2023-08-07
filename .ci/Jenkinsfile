@@ -46,7 +46,7 @@ pipeline {
         stage('Build and Push Image') {
             when {
                 expression {
-                    env.branchName ==~ /main/
+                    gitVars.branchName ==~ /main/
                 }
                 beforeAgent true
             }
@@ -64,7 +64,7 @@ pipeline {
         stage('Deployment Approval') {
             when {
                 expression {
-                    env.branchName ==~ /main/
+                    gitVars.branchName ==~ /main/
                 }
                 beforeAgent true
             }
@@ -79,7 +79,7 @@ pipeline {
         stage('Deployment Execution') {
             when {
                 expression {
-                    env.branchName ==~ /main/
+                    gitVars.branchName ==~ /main/
                 }
                 beforeAgent true
             }
