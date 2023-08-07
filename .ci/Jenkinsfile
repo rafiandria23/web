@@ -15,7 +15,11 @@ def initGitVars() {
 
 pipeline {
     agent {
-        label 'default'
+        kubernetes {
+            cloud 'kubernetes'
+            inheritFrom 'default'
+            defaultContainer 'dind'
+        }
     }
 
     // options {
