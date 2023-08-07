@@ -7,7 +7,9 @@ def initGitVars() {
 }
 
 pipeline {
-    agent any
+    agent {
+        label 'built-in'
+    }
 
     options {
         disableConcurrentBuilds(abortPrevious: true)
