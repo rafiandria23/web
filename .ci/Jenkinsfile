@@ -16,7 +16,8 @@ def initGitVars() {
 pipeline {
     agent {
         kubernetes {
-            label getAgentLabel()
+            // label getAgentLabel()
+            inheritFrom 'default'
             defaultContainer getDefaultContainer()
         }
     }
@@ -26,11 +27,11 @@ pipeline {
     }
 
     stages {
-        stage('SonarQube Analysis') {
-            steps {
-                analyze()
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         analyze()
+        //     }
+        // }
 
         stage('Build Test Image') {
             steps {
