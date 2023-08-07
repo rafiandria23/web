@@ -14,6 +14,10 @@ def initGitVars() {
 }
 
 pipeline {
+    agent {
+        name 'default'
+    }
+
     // options {
     //     disableConcurrentBuilds(abortPrevious: true)
     //     timeout(time: 20)
