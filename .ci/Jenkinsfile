@@ -24,7 +24,7 @@ pipeline {
     options {
         disableConcurrentBuilds(abortPrevious: true)
         timeout(time: 20)
-        copyArtifactPermission('*')
+        // copyArtifactPermission('*')
         // buildDiscarder(
         //     logRotator(
         //         numToKeepStr: '20',
