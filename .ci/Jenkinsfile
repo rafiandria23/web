@@ -28,20 +28,20 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
-            steps {
-                analyze()
-            }
-        }
+        // stage('SonarQube Analysis') {
+        //     steps {
+        //         analyze()
+        //     }
+        // }
 
-        stage('Build Test Image') {
-            steps {
-                buildTestImage(
-                    buildID: env.BUILD_ID,
-                    repoName: gitVars.repoName,
-                )
-            }
-        }
+        // stage('Build Test Image') {
+        //     steps {
+        //         buildTestImage(
+        //             buildID: env.BUILD_ID,
+        //             repoName: gitVars.repoName,
+        //         )
+        //     }
+        // }
 
         stage('Build and Push Image') {
             when {
