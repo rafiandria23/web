@@ -2,6 +2,10 @@
 
 gitVars = [:]
 
+def initGitVars() {
+    gitVars = parseGitVars()
+}
+
 pipeline {
     agent {
         kubernetes {
@@ -16,7 +20,7 @@ pipeline {
     stages {
         stage('Initialize Git Variables') {
             steps {
-                gitVars = parseGitVars()
+                initGitVars()
             }
         }
 
