@@ -13,18 +13,42 @@ def initGitVars() {
     ).trim()
 }
 
-podTemplate {
-    node('jenkins-jenkins-agent') {
+pipeline {
+    agent {
+        kubernetes {
+            inheritFrom 'default'
+            defaultContainer 'dind'
+        }
+    }
+
+    // options {
+    //     disableConcurrentBuilds(abortPrevious: true)
+    //     timeout(time: 20)
+    //     copyArtifactPermission('*')
+    //     buildDiscarder(
+    //         logRotator(
+    //             numToKeepStr: '20',
+    //             artifactNumToKeepStr: '10',
+    //             artifactDaysToKeepStr: '10'
+    //         )
+    //     )
+    // }
+
+    stages {
         stage('SonarQube Analysis') {
-            analyze()
+            steps {
+                analyze()
+            }
         }
 
         stage('Build Test Image') {
-            initGitVars()
-            buildTestImage(
-                buildID: env.BUILD_ID,
-                repoName: getRepoName(),
-            )
+            steps {
+                initGitVars()
+                buildTestImage(
+                    buildID: env.BUILD_ID,
+                    repoName: getRepoName(),
+                )
+            }
         }
 
         stage('Build and Push Image') {
@@ -35,13 +59,15 @@ podTemplate {
                 beforeAgent true
             }
 
-            initGitVars()
-            buildAndPushImage(
-                buildID: env.BUILD_ID,
-                repoName: getRepoName(),
-                branchName: branchName,
-                commitHash: commitHash,
-            )
+            steps {
+                initGitVars()
+                buildAndPushImage(
+                    buildID: env.BUILD_ID,
+                    repoName: getRepoName(),
+                    branchName: branchName,
+                    commitHash: commitHash,
+                )
+            }
         }
 
         stage('Deployment Approval') {
@@ -52,9 +78,11 @@ podTemplate {
                 beforeAgent true
             }
 
-            approveDeployment(
-                repoName: repoName,
-            )
+            steps {
+                approveDeployment(
+                    repoName: repoName
+                )
+            }
         }
 
         stage('Deployment Execution') {
@@ -81,26 +109,15 @@ podTemplate {
             //     )
             // }
 
-            echo 'Success!'
+            steps {
+                echo 'Success!'
+            }
+        }
+    }
+
+    post {
+        cleanup {
+            cleanWs()
         }
     }
 }
-
-    // options {
-    //     disableConcurrentBuilds(abortPrevious: true)
-    //     timeout(time: 20)
-    //     copyArtifactPermission('*')
-    //     buildDiscarder(
-    //         logRotator(
-    //             numToKeepStr: '20',
-    //             artifactNumToKeepStr: '10',
-    //             artifactDaysToKeepStr: '10'
-    //         )
-    //     )
-    // }
-
-    // post {
-    //     cleanup {
-    //         cleanWs()
-    //     }
-    // }
