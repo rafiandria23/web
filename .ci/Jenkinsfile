@@ -22,36 +22,33 @@ pipeline {
     }
 
     stages {
-        stage('Initialize Git Variables') {
+        stage('SonarQube Analysis') {
             steps {
                 initGitVars()
+                analyze()
             }
         }
 
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         analyze()
-        //     }
-        // }
-
-        // stage('Build Test Image') {
-        //     steps {
-        //         buildTestImage(
-        //             buildID: env.BUILD_ID,
-        //             repoName: gitVars.repoName,
-        //         )
-        //     }
-        // }
+        stage('Build Test Image') {
+            steps {
+                initGitVars()
+                buildTestImage(
+                    buildID: env.BUILD_ID,
+                    repoName: gitVars.repoName,
+                )
+            }
+        }
 
         stage('Build and Push Image') {
             when {
                 expression {
-                    gitVars.branchName ==~ /main/
+                    env.GIT_BRANCH ==~ /main/
                 }
                 beforeAgent true
             }
 
             steps {
+                initGitVars()
                 buildAndPushImage(
                     buildID: env.BUILD_ID,
                     repoName: gitVars.repoName,
@@ -64,12 +61,13 @@ pipeline {
         stage('Deployment Approval') {
             when {
                 expression {
-                    gitVars.branchName ==~ /main/
+                    env.GIT_BRANCH ==~ /main/
                 }
                 beforeAgent true
             }
 
             steps {
+                initGitVars()
                 approveDeployment(
                     repoName: gitVars.repoName
                 )
@@ -79,7 +77,7 @@ pipeline {
         stage('Deployment Execution') {
             when {
                 expression {
-                    gitVars.branchName ==~ /main/
+                    env.GIT_BRANCH ==~ /main/
                 }
                 beforeAgent true
             }
