@@ -17,6 +17,7 @@ pipeline {
     agent {
         kubernetes {
             inheritFrom 'default'
+            yaml ''
             defaultContainer 'dind'
         }
     }
