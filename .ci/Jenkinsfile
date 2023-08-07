@@ -7,14 +7,14 @@ def initGitVars() {
 }
 
 pipeline {
-    agent {
-        kubernetes {
-            label getAgentLabel()
-        }
-    }
+    agent any
 
     options {
         disableConcurrentBuilds(abortPrevious: true)
+    }
+
+    environment {
+        PATH = initTools()
     }
 
     stages {
@@ -24,11 +24,11 @@ pipeline {
             }
         }
 
-        // stage('SonarQube Analysis') {
-        //     steps {
-        //         analyze()
-        //     }
-        // }
+        stage('SonarQube Analysis') {
+            steps {
+                analyze()
+            }
+        }
 
         stage('Build Test Image') {
             steps {
