@@ -14,7 +14,7 @@ def initGitVars() {
 }
 
 pipeline {
-    agent any
+    agent kubernetes
 
     // options {
     //     disableConcurrentBuilds(abortPrevious: true)
