@@ -1,23 +1,11 @@
 @Library('damkins') _
 
-authorName = ''
-branchName = ''
-commitHash = ''
-
-def initGitVars() {
-    commitHash = env.GIT_COMMIT
-    branch = env.GIT_BRANCH
-    authorName = sh(
-        returnStdout: true,
-        script: "git show -s --pretty=%an || echo 'null'"
-    ).trim()
-}
+gitVars = [:]
 
 pipeline {
     agent {
         kubernetes {
             label getAgentLabel()
-            defaultContainer getDefaultContainer()
         }
     }
 
@@ -26,6 +14,12 @@ pipeline {
     }
 
     stages {
+        stage('Initialize Git Variables') {
+            steps {
+                gitVars = parseGitVars()
+            }
+        }
+
         // stage('SonarQube Analysis') {
         //     steps {
         //         analyze()
@@ -34,10 +28,9 @@ pipeline {
 
         stage('Build Test Image') {
             steps {
-                initGitVars()
                 buildTestImage(
                     buildID: env.BUILD_ID,
-                    repoName: getRepoName(),
+                    repoName: gitVars.repoName,
                 )
             }
         }
@@ -51,12 +44,11 @@ pipeline {
             }
 
             steps {
-                initGitVars()
                 buildAndPushImage(
                     buildID: env.BUILD_ID,
-                    repoName: getRepoName(),
-                    branchName: branchName,
-                    commitHash: commitHash,
+                    repoName: gitVars.repoName,
+                    branchName: gitVars.branchName,
+                    commitHash: gitVars.commitHash,
                 )
             }
         }
@@ -71,7 +63,7 @@ pipeline {
 
             steps {
                 approveDeployment(
-                    repoName: repoName
+                    repoName: gitVars.repoName
                 )
             }
         }
@@ -90,7 +82,6 @@ pipeline {
             // }
 
             // steps {
-            //     initGitVars()
             //     executeDeployment(
             //         branch: branch,
             //         commitHash: commitHash,
