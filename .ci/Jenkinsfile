@@ -16,7 +16,7 @@ def initGitVars() {
 pipeline {
     agent {
         kubernetes {
-            inheritFrom getAgentLabel()
+            label getAgentLabel()
             defaultContainer getDefaultContainer()
         }
     }
