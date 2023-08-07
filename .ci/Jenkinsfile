@@ -16,19 +16,15 @@ def initGitVars() {
 podTemplate {
     node('jenkins-jenkins-agent') {
         stage('SonarQube Analysis') {
-            steps {
-                analyze()
-            }
+            analyze()
         }
 
         stage('Build Test Image') {
-            steps {
-                initGitVars()
-                buildTestImage(
-            buildID: env.BUILD_ID,
-            repoName: getRepoName(),
-        )
-            }
+            initGitVars()
+            buildTestImage(
+                buildID: env.BUILD_ID,
+                repoName: getRepoName(),
+            )
         }
 
         stage('Build and Push Image') {
@@ -39,15 +35,13 @@ podTemplate {
                 beforeAgent true
             }
 
-            steps {
-                initGitVars()
-                buildAndPushImage(
-            buildID: env.BUILD_ID,
-            repoName: getRepoName(),
-            branchName: branchName,
-            commitHash: commitHash,
-        )
-            }
+            initGitVars()
+            buildAndPushImage(
+                buildID: env.BUILD_ID,
+                repoName: getRepoName(),
+                branchName: branchName,
+                commitHash: commitHash,
+            )
         }
 
         stage('Deployment Approval') {
@@ -58,11 +52,9 @@ podTemplate {
                 beforeAgent true
             }
 
-            steps {
-                approveDeployment(
-            repoName: repoName
-        )
-            }
+            approveDeployment(
+                repoName: repoName,
+            )
         }
 
         stage('Deployment Execution') {
@@ -73,25 +65,23 @@ podTemplate {
                 beforeAgent true
             }
 
-    // environment {
-    //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
-    //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
-    // }
+            // environment {
+            //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
+            //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
+            // }
 
-    // steps {
-    //     initGitVars()
-    //     executeDeployment(
-    //         branch: branch,
-    //         commitHash: commitHash,
-    //         repo_name: getRepoName(),
-    //         deployment_image: getDeploymentImage(),
-    //         target: 'production',
-    //     )
-    // }
+            // steps {
+            //     initGitVars()
+            //     executeDeployment(
+            //         branch: branch,
+            //         commitHash: commitHash,
+            //         repo_name: getRepoName(),
+            //         deployment_image: getDeploymentImage(),
+            //         target: 'production',
+            //     )
+            // }
 
-            steps {
-                echo 'Success!'
-            }
+            echo 'Success!'
         }
     }
 }
