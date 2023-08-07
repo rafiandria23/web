@@ -23,15 +23,6 @@ pipeline {
 
     options {
         disableConcurrentBuilds(abortPrevious: true)
-        timeout(time: 20)
-        // copyArtifactPermission('*')
-        // buildDiscarder(
-        //     logRotator(
-        //         numToKeepStr: '20',
-        //         artifactNumToKeepStr: '10',
-        //         artifactDaysToKeepStr: '10'
-        //     )
-        // )
     }
 
     stages {
