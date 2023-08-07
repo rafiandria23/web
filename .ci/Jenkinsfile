@@ -14,12 +14,7 @@ def initGitVars() {
 }
 
 pipeline {
-    agent {
-        kubernetes {
-            cloud 'kubernetes'
-            defaultContainer 'dnid'
-        }
-    }
+    agent any
 
     // options {
     //     disableConcurrentBuilds(abortPrevious: true)
