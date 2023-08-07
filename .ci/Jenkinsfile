@@ -15,84 +15,82 @@ def initGitVars() {
 
 podTemplate {
     node('jenkins-jenkins-agent') {
-        stages {
-            stage('SonarQube Analysis') {
-                steps {
-                    analyze()
+        stage('SonarQube Analysis') {
+            steps {
+                analyze()
+            }
+        }
+
+        stage('Build Test Image') {
+            steps {
+                initGitVars()
+                buildTestImage(
+            buildID: env.BUILD_ID,
+            repoName: getRepoName(),
+        )
+            }
+        }
+
+        stage('Build and Push Image') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
                 }
+                beforeAgent true
             }
 
-            stage('Build Test Image') {
-                steps {
-                    initGitVars()
-                    buildTestImage(
-                buildID: env.BUILD_ID,
-                repoName: getRepoName(),
-            )
+            steps {
+                initGitVars()
+                buildAndPushImage(
+            buildID: env.BUILD_ID,
+            repoName: getRepoName(),
+            branchName: branchName,
+            commitHash: commitHash,
+        )
+            }
+        }
+
+        stage('Deployment Approval') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
                 }
+                beforeAgent true
             }
 
-            stage('Build and Push Image') {
-                when {
-                    expression {
-                        env.branchName ==~ /main/
-                    }
-                    beforeAgent true
-                }
+            steps {
+                approveDeployment(
+            repoName: repoName
+        )
+            }
+        }
 
-                steps {
-                    initGitVars()
-                    buildAndPushImage(
-                buildID: env.BUILD_ID,
-                repoName: getRepoName(),
-                branchName: branchName,
-                commitHash: commitHash,
-            )
+        stage('Deployment Execution') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
                 }
+                beforeAgent true
             }
 
-            stage('Deployment Approval') {
-                when {
-                    expression {
-                        env.branchName ==~ /main/
-                    }
-                    beforeAgent true
-                }
+    // environment {
+    //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
+    //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
+    // }
 
-                steps {
-                    approveDeployment(
-                repoName: repoName
-            )
-                }
-            }
+    // steps {
+    //     initGitVars()
+    //     executeDeployment(
+    //         branch: branch,
+    //         commitHash: commitHash,
+    //         repo_name: getRepoName(),
+    //         deployment_image: getDeploymentImage(),
+    //         target: 'production',
+    //     )
+    // }
 
-            stage('Deployment Execution') {
-                when {
-                    expression {
-                        env.branchName ==~ /main/
-                    }
-                    beforeAgent true
-                }
-
-        // environment {
-        //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
-        //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
-        // }
-
-        // steps {
-        //     initGitVars()
-        //     executeDeployment(
-        //         branch: branch,
-        //         commitHash: commitHash,
-        //         repo_name: getRepoName(),
-        //         deployment_image: getDeploymentImage(),
-        //         target: 'production',
-        //     )
-        // }
-
-                steps {
-                    echo 'Success!'
-                }
+            steps {
+                echo 'Success!'
             }
         }
     }
