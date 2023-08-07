@@ -17,7 +17,7 @@ pipeline {
     agent {
         kubernetes {
             // label getAgentLabel()
-            inheritFrom 'default'
+            inheritFrom getAgentLabel()
             defaultContainer getDefaultContainer()
         }
     }
