@@ -3,13 +3,13 @@
 gitVars = [:]
 
 def initGitVars() {
-  gitVars = parseGitVars()
+    gitVars = parseGitVars()
 }
 
 pipeline {
     agent {
         kubernetes {
-      label getAgentLabel()
+            label getAgentLabel()
         }
     }
 
@@ -22,67 +22,65 @@ pipeline {
     }
 
     stages {
-        stage('Initialize Git Variables') {
-      steps {
-        initGitVars()
-      }
-        }
-
         stage('SonarQube Analysis') {
-      steps {
-        analyze()
-      }
+            steps {
+                initGitVars()
+                analyze()
+            }
         }
 
         stage('Build Test Image') {
-      steps {
-        buildTestImage(
+            steps {
+                initGitVars()
+                buildTestImage(
                     buildID: env.BUILD_ID,
                     repoName: gitVars.repoName,
                 )
-      }
+            }
         }
 
         stage('Build and Push Image') {
-      when {
-        expression {
-          gitVars.branchName ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-      steps {
-        buildAndPushImage(
+            steps {
+                initGitVars()
+                buildAndPushImage(
                     buildID: env.BUILD_ID,
                     repoName: gitVars.repoName,
                     branchName: gitVars.branchName,
                     commitHash: gitVars.commitHash,
                 )
-      }
+            }
         }
 
         stage('Deployment Approval') {
-      when {
-        expression {
-          gitVars.branchName ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-      steps {
-        approveDeployment(
+            steps {
+                initGitVars()
+                approveDeployment(
                     repoName: gitVars.repoName
                 )
-      }
+            }
         }
 
         stage('Deployment Execution') {
-      when {
-        expression {
-          gitVars.branchName ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
             // environment {
             //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
@@ -99,15 +97,15 @@ pipeline {
             //     )
             // }
 
-      steps {
-        echo 'Success!'
-      }
+            steps {
+                echo 'Success!'
+            }
         }
     }
 
     post {
         cleanup {
-      cleanWs()
+            cleanWs()
         }
     }
 }
