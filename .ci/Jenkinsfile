@@ -1,23 +1,113 @@
+@Library('damkins') _
+
+gitVars = [:]
+
+def initGitVars() {
+    gitVars = parseGitVars()
+}
+
 pipeline {
-  agent {
-    label 'built-in'
-  }
-
-  tools {
-    nodejs 'NodeJS 18.16'
-  }
-
-  stages {
-    stage('SonarQube Analysis') {
-      steps {
-        script {
-          def scannerHome = tool 'SonarQube Scanner 4.8';
-
-          withSonarQubeEnv('rafiandria23') {
-            sh "${scannerHome}/bin/sonar-scanner -Dsonar.qualitygate.wait=true"
-          }
+    agent {
+        kubernetes {
+            label getAgentLabel()
         }
-      }
     }
-  }
+
+    options {
+        disableConcurrentBuilds(abortPrevious: true)
+    }
+
+    environment {
+        PATH = initTools()
+    }
+
+    stages {
+        stage('Initialize Git Variables') {
+            steps {
+                initGitVars()
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                analyze()
+            }
+        }
+
+        stage('Build Test Image') {
+            steps {
+                buildTestImage(
+                    buildID: env.BUILD_ID,
+                    repoName: gitVars.repoName,
+                )
+            }
+        }
+
+        stage('Build and Push Image') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
+                }
+                beforeAgent true
+            }
+
+            steps {
+                buildAndPushImage(
+                    buildID: env.BUILD_ID,
+                    repoName: gitVars.repoName,
+                    branchName: gitVars.branchName,
+                    commitHash: gitVars.commitHash,
+                )
+            }
+        }
+
+        stage('Deployment Approval') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
+                }
+                beforeAgent true
+            }
+
+            steps {
+                approveDeployment(
+                    repoName: gitVars.repoName
+                )
+            }
+        }
+
+        stage('Deployment Execution') {
+            when {
+                expression {
+                    env.branchName ==~ /main/
+                }
+                beforeAgent true
+            }
+
+            // environment {
+            //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
+            //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
+            // }
+
+            // steps {
+            //     executeDeployment(
+            //         branch: branch,
+            //         commitHash: commitHash,
+            //         repo_name: getRepoName(),
+            //         deployment_image: getDeploymentImage(),
+            //         target: 'production',
+            //     )
+            // }
+
+            steps {
+                echo 'Success!'
+            }
+        }
+    }
+
+    post {
+        cleanup {
+            cleanWs()
+        }
+    }
 }
