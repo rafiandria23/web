@@ -58,25 +58,33 @@ pipeline {
         //     }
         // }
 
-        stage('Deployment Approval') {
-            when {
-                expression {
-                    env.GIT_BRANCH ==~ /main/
-                }
-                beforeAgent true
-            }
+        // stage('Deployment Approval') {
+        //     when {
+        //         expression {
+        //             env.GIT_BRANCH ==~ /main/
+        //         }
+        //         beforeAgent true
+        //     }
 
-            steps {
-                initGitVars()
-                approveDeployment(
-                    repoName: gitVars.repoName
-                )
-            }
-        }
+        //     steps {
+        //         initGitVars()
+        //         approveDeployment(
+        //             repoName: gitVars.repoName
+        //         )
+        //     }
+        // }
 
         stage('Experimental Deployment Execution') {
             steps {
-                sh 'kubectl --version'
+                path = env.PATH
+                sonarqubeScannerHome = tool 'sonarqube-scanner'
+                dockerHome = tool 'docker'
+                nodejsHome = tool 'node-js'
+                kubectlHome = tool 'kubectl'
+                argocdHome = tool 'argocd'
+
+                sh "ls ${kubectlHome}/bin"
+                sh "ls ${argocdHome}/bin"
             }
         }
 
