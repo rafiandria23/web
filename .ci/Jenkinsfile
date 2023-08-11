@@ -68,6 +68,8 @@ pipeline {
 
             steps {
                 initGitVars()
+                sh 'kubectl --version'
+                sh 'argocd --version'
                 approveDeployment(
                     repoName: gitVars.repoName
                 )
