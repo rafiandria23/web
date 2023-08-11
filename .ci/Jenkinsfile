@@ -58,21 +58,21 @@ pipeline {
         //     }
         // }
 
-        // stage('Deployment Approval') {
-        //     when {
-        //         expression {
-        //             env.GIT_BRANCH ==~ /main/
-        //         }
-        //         beforeAgent true
-        //     }
+        stage('Deployment Approval') {
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-        //     steps {
-        //         initGitVars()
-        //         approveDeployment(
-        //             repoName: gitVars.repoName
-        //         )
-        //     }
-        // }
+            steps {
+                initGitVars()
+                approveDeployment(
+                    repoName: gitVars.repoName
+                )
+            }
+        }
 
         // stage('Deployment Execution') {
         //     when {
