@@ -75,7 +75,9 @@ pipeline {
         }
 
         stage('Experimental Deployment Execution') {
-            sh 'kubectl --version'
+            steps {
+                sh 'kubectl --version'
+            }
         }
 
         // stage('Deployment Execution') {
