@@ -58,33 +58,19 @@ pipeline {
         //     }
         // }
 
-        // stage('Deployment Approval') {
-        //     when {
-        //         expression {
-        //             env.GIT_BRANCH ==~ /main/
-        //         }
-        //         beforeAgent true
-        //     }
-
-        //     steps {
-        //         initGitVars()
-        //         approveDeployment(
-        //             repoName: gitVars.repoName
-        //         )
-        //     }
-        // }
-
-        stage('Experimental Deployment Execution') {
-            path = env.PATH
-            sonarqubeScannerHome = tool 'sonarqube-scanner'
-            dockerHome = tool 'docker'
-            nodejsHome = tool 'node-js'
-            kubectlHome = tool 'kubectl'
-            argocdHome = tool 'argocd'
+        stage('Deployment Approval') {
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
             steps {
-                sh "ls ${kubectlHome}/bin"
-                sh "ls ${argocdHome}/bin"
+                initGitVars()
+                approveDeployment(
+                    repoName: gitVars.repoName
+                )
             }
         }
 
