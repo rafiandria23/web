@@ -75,14 +75,14 @@ pipeline {
         // }
 
         stage('Experimental Deployment Execution') {
-            steps {
-                path = env.PATH
-                sonarqubeScannerHome = tool 'sonarqube-scanner'
-                dockerHome = tool 'docker'
-                nodejsHome = tool 'node-js'
-                kubectlHome = tool 'kubectl'
-                argocdHome = tool 'argocd'
+            path = env.PATH
+            sonarqubeScannerHome = tool 'sonarqube-scanner'
+            dockerHome = tool 'docker'
+            nodejsHome = tool 'node-js'
+            kubectlHome = tool 'kubectl'
+            argocdHome = tool 'argocd'
 
+            steps {
                 sh "ls ${kubectlHome}/bin"
                 sh "ls ${argocdHome}/bin"
             }
@@ -96,15 +96,15 @@ pipeline {
         //         beforeAgent true
         //     }
 
-        //     steps {
-        //         initGitVars()
-        //         executeDeployment(
-        //             org: 'rafiandria23',
-        //             repoName: gitVars.repoName,
-        //             commitHash: gitVars.commitHash,
-        //         )
-        //     }
-        // }
+    //     steps {
+    //         initGitVars()
+    //         executeDeployment(
+    //             org: 'rafiandria23',
+    //             repoName: gitVars.repoName,
+    //             commitHash: gitVars.commitHash,
+    //         )
+    //     }
+    // }
     }
 
     post {
