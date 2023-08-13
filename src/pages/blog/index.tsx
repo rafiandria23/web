@@ -12,9 +12,6 @@ import {
   PaginationItem,
 } from '@mui/material';
 
-// GraphQL
-import { client } from '@/graphql';
-
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
@@ -23,6 +20,9 @@ import type { ITag } from '@/types/tag';
 
 // Constants
 import { PaginationDefaults } from '@/constants/page';
+
+// GraphQL
+import { client } from '@/graphql';
 
 // Components
 import { Layout } from '@/components/shared/layout';
@@ -76,8 +76,8 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
         >
           <Grid component={Container} item>
             <Typography
-              variant='h3'
               component='h1'
+              variant='h3'
               gutterBottom
               color={theme.palette.primary.contrastText}
             >
@@ -85,8 +85,8 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
             </Typography>
 
             <Typography
-              variant='h6'
               component='p'
+              variant='h6'
               paragraph
               color={theme.palette.primary.contrastText}
             >
@@ -96,11 +96,11 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
         </Grid>
 
         <Grid
+          component={Container}
           container
           direction='column'
           justifyContent='space-evenly'
           alignItems='center'
-          component={Container}
           gap={4}
         >
           {articles.map((article) => (

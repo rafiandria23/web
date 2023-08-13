@@ -1,21 +1,24 @@
-import type { CSSProperties } from 'react';
 import type { NextPage, GetServerSideProps } from 'next';
+import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@mui/styles';
-import type { Theme } from '@mui/material';
+import type { PaginationRenderItemParams } from '@mui/material';
 import {
-  useMediaQuery,
   useTheme,
-  Container,
   Grid,
+  Container,
   Typography,
-  Divider,
+  Pagination,
+  PaginationItem,
 } from '@mui/material';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
+import type { IPagination } from '@/types/page';
 import type { IProject } from '@/types/project';
+
+// Constants
+import { PaginationDefaults } from '@/constants/page';
 
 // GraphQL
 import { client } from '@/graphql';
@@ -25,59 +28,99 @@ import { Layout } from '@/components/shared/layout';
 import { ProjectCard } from '@/components/project';
 
 interface IProjectsPageProps {
+  pagination: IPagination;
   projects: IProject[];
 }
 
-const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
+const ProjectsPage: NextPage<IProjectsPageProps> = ({
+  pagination,
+  projects,
+}) => {
   const theme = useTheme();
-  const isXS = useMediaQuery(theme.breakpoints.up('xs'));
-  const classes = useStyles();
+
+  const additionalLinkTags = [
+    {
+      rel: 'canonical',
+      href: 'https://rafiandria23.tech/projects',
+    },
+    {
+      rel: 'next',
+      href: `https://rafiandria23.tech/projects?page=${pagination.page! + 1}`,
+    },
+  ];
+
+  if (pagination.page! > 1) {
+    additionalLinkTags.push({
+      rel: 'prev',
+      href: `https://rafiandria23.tech/projects?page=${pagination.page! - 1}`,
+    });
+  }
+
+  const paginationItem = (props: PaginationRenderItemParams) => (
+    <NextLink href={`/projects?page=${props.page}`} passHref>
+      <PaginationItem {...props} />
+    </NextLink>
+  );
 
   return (
     <>
-      <NextSeo
-        title='My Projects'
-        description="Projects I'm currently doing or already done, ranging from Back-End, Front-End, to Full-Stack"
-      />
+      <NextSeo title='Projects' additionalLinkTags={additionalLinkTags} />
 
-      <Layout>
+      <Layout elevate>
         <Grid
-          className={classes.wrapper}
+          container
+          justifyContent='center'
+          alignItems='center'
+          sx={{
+            bgcolor: theme.palette.primary.light,
+          }}
+        >
+          <Grid component={Container} item>
+            <Typography
+              component='h1'
+              variant='h3'
+              gutterBottom
+              color={theme.palette.primary.contrastText}
+            >
+              My Projects
+            </Typography>
+
+            <Typography
+              component='p'
+              variant='h6'
+              paragraph
+              color={theme.palette.primary.contrastText}
+            >
+              Check out my latest projects!
+            </Typography>
+          </Grid>
+        </Grid>
+
+        <Grid
           component={Container}
           container
           direction='column'
-          justifyContent='flex-start'
-          alignItems='stretch'
+          justifyContent='space-evenly'
+          alignItems='center'
+          gap={4}
         >
-          <Grid item>
-            <Typography component='h1' variant='h5' gutterBottom>
-              My Projects
-            </Typography>
-          </Grid>
+          {projects.map((project) => (
+            <Grid key={project.id} item>
+              <ProjectCard project={project} />
+            </Grid>
+          ))}
 
           <Grid item>
-            <Divider />
-          </Grid>
-
-          <Grid
-            className={classes.list}
-            item
-            container
-            direction='row'
-            wrap='wrap'
-            justifyContent={isXS ? 'flex-start' : 'space-evenly'}
-            alignItems={isXS ? 'center' : 'stretch'}
-            spacing={2}
-          >
-            {projects !== undefined && projects.length > 0
-              ? projects.map((project) => {
-                  return (
-                    <Grid item key={project.id}>
-                      <ProjectCard project={project} />
-                    </Grid>
-                  );
-                })
-              : ''}
+            <Pagination
+              shape='rounded'
+              color='primary'
+              size='large'
+              count={pagination.pageCount}
+              page={pagination.page}
+              renderItem={paginationItem}
+              hidePrevButton={pagination.page === 1}
+              hideNextButton={pagination.page === pagination.pageCount}
+            />
           </Grid>
         </Grid>
       </Layout>
@@ -86,14 +129,33 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({ projects }) => {
 };
 
 export const getServerSideProps: GetServerSideProps<
-  IProjectsPageProps
-> = async () => {
-  const { data } = await client.query<{
-    projects: IGraphQLModelResponse<IProject[]>;
-  }>({
+  IProjectsPageProps,
+  {
+    page?: string;
+  }
+> = async ({ query }) => {
+  const { data } = await client.query<
+    {
+      projects: IGraphQLModelResponse<IProject[]>;
+    },
+    IPagination
+  >({
+    variables: {
+      pageSize: PaginationDefaults.PAGE_SIZE,
+      page: parseInt(String(query?.page ?? PaginationDefaults.PAGE)),
+    },
     query: gql`
-      query {
-        projects {
+      query ($pageSize: Int!, $page: Int!) {
+        projects(pagination: { pageSize: $pageSize, page: $page }) {
+          meta {
+            pagination {
+              total
+              pageSize
+              pageCount
+              page
+            }
+          }
+
           data {
             id
             attributes {
@@ -129,22 +191,10 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
+      pagination: data.projects.meta.pagination,
       projects: data.projects.data,
     },
   };
 };
 
 export default ProjectsPage;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {
-      [theme.breakpoints.up('md')]: {
-        padding: theme.spacing(8),
-      } as CSSProperties,
-    },
-    list: {
-      marginTop: theme.spacing(2),
-    },
-  }),
-);
