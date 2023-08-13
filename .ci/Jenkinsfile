@@ -29,16 +29,6 @@ pipeline {
             }
         }
 
-        stage('Build Test Image') {
-            steps {
-                initGitVars()
-                buildTestImage(
-                    buildID: env.BUILD_ID,
-                    repoName: gitVars.repoName,
-                )
-            }
-        }
-
         stage('Build and Push Image') {
             when {
                 expression {
