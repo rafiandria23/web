@@ -29,6 +29,7 @@ export default {
       // 'zh',
     ],
   },
+  // @ts-ignore
   bootstrap(app) {
     console.log(app);
   },
