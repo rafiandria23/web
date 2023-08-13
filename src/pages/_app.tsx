@@ -13,11 +13,10 @@ import '@fontsource/lato/900-italic.css';
 // Global Styles
 import '@/styles/global.scss';
 
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import type { NextComponentType } from 'next';
 import type { AppContext, AppInitialProps, AppProps } from 'next/app';
 import NextApp from 'next/app';
-import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { Provider } from 'react-redux';
@@ -54,20 +53,8 @@ const App: NextComponentType<
   AppInitialProps,
   AppProps<IPageProps>
 > = ({ Component, pageProps }) => {
-  const router = useRouter();
   const { mode } = useThemeState();
   const prefersDarkMode = usePrefersDarkMode();
-
-  // const handleRouteChange = (url: string) => {
-  //   gtag.pageview(url);
-  // };
-
-  // useEffect(() => {
-  //   router.events.on('routeChangeComplete', handleRouteChange);
-  //   return () => {
-  //     router.events.off('routeChangeComplete', handleRouteChange);
-  //   };
-  // }, [router.events]);
 
   const theme = useMemo<Theme>(() => {
     switch (mode) {

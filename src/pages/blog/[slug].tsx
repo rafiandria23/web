@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, Container, Grid, Typography, Chip } from '@mui/material';
+import { Container, Grid, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import dayjs from 'dayjs';
 
@@ -29,7 +29,6 @@ export interface IArticlePageProps extends IPageProps {
 
 const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
   const router = useRouter();
-  const theme = useTheme();
 
   if (router.isFallback) {
     return (
