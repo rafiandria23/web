@@ -23,6 +23,12 @@ pipeline {
 
     stages {
         stage('SonarQube Analysis') {
+            when {
+                expression {
+                    env.GIT_BRANCH != ~ /main/
+                }
+            }
+
             steps {
                 initGitVars()
                 analyze()
@@ -30,6 +36,12 @@ pipeline {
         }
 
         stage('Build Test Image') {
+            when {
+                expression {
+                    env.GIT_BRANCH != ~ /main/
+                }
+            }
+
             steps {
                 initGitVars()
                 buildTestImage(
