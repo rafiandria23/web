@@ -23,6 +23,12 @@ pipeline {
 
     stages {
         stage('SonarQube Analysis') {
+            when {
+                expression {
+                    env.GIT_BRANCH != ~ /main/
+                }
+            }
+
             steps {
                 initGitVars()
                 analyze()
@@ -30,6 +36,12 @@ pipeline {
         }
 
         stage('Build Test Image') {
+            when {
+                expression {
+                    env.GIT_BRANCH != ~ /main/
+                }
+            }
+
             steps {
                 initGitVars()
                 buildTestImage(
@@ -82,23 +94,13 @@ pipeline {
                 beforeAgent true
             }
 
-            // environment {
-            //     ARGOCD_SERVER = getDeploymentURL(target: 'production')
-            //     ARGOCD_AUTH_TOKEN = credentials("${getDeploymentToken(target: 'production')}")
-            // }
-
-            // steps {
-            //     executeDeployment(
-            //         branch: branch,
-            //         commitHash: commitHash,
-            //         repo_name: getRepoName(),
-            //         deployment_image: getDeploymentImage(),
-            //         target: 'production',
-            //     )
-            // }
-
             steps {
-                echo 'Success!'
+                initGitVars()
+                executeDeployment(
+                    org: 'rafiandria23',
+                    repoName: gitVars.repoName,
+                    commitHash: gitVars.commitHash,
+                )
             }
         }
     }
