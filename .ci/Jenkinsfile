@@ -23,31 +23,9 @@ pipeline {
 
     stages {
         stage('SonarQube Analysis') {
-            when {
-                expression {
-                    env.GIT_BRANCH != ~ /main/
-                }
-            }
-
             steps {
                 initGitVars()
                 analyze()
-            }
-        }
-
-        stage('Build Test Image') {
-            when {
-                expression {
-                    env.GIT_BRANCH != ~ /main/
-                }
-            }
-
-            steps {
-                initGitVars()
-                buildTestImage(
-                    buildID: env.BUILD_ID,
-                    repoName: gitVars.repoName,
-                )
             }
         }
 
