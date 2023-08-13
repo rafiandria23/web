@@ -35,22 +35,6 @@ pipeline {
             }
         }
 
-        stage('Build Test Image') {
-            when {
-                expression {
-                    env.GIT_BRANCH != ~ /main/
-                }
-            }
-
-            steps {
-                initGitVars()
-                buildTestImage(
-                    buildID: env.BUILD_ID,
-                    repoName: gitVars.repoName,
-                )
-            }
-        }
-
         stage('Build and Push Image') {
             when {
                 expression {
