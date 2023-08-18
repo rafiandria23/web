@@ -82,7 +82,10 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
           <Typography
             variant='h3'
             component='h2'
-            textAlign='right'
+            textAlign={{
+              xs: 'left',
+              xl: 'right',
+            }}
             gutterBottom
           >
             Latest Articles
