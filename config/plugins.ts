@@ -38,10 +38,10 @@ export default ({ env }) => ({
       },
     },
   },
-  'strapi-blurhash': {
-      enabled: true,
-      config: {
-        regenerateOnUpdate: true
-      }
+  placeholder: {
+    enabled: true,
+    config: {
+      size: 10,
     },
+  },
 });
