@@ -1,7 +1,7 @@
-## Ticket :
+## Tickets
 
 - [R23-XX](https://rafiandria23.atlassian.net/browse/R23-XX)
 
-## Description :
+## Description
 
-- Added new feature...
+- add something revolutionary
