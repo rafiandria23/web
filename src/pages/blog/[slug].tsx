@@ -12,6 +12,9 @@ import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPageProps } from '@/types/page';
 import type { IArticle } from '@/types/article';
 
+// Constants
+import { DateTimeFormat } from '@/constants/datetime';
+
 // GraphQL
 import { client } from '@/graphql';
 
@@ -75,7 +78,9 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
                   color='textSecondary'
                   gutterBottom
                 >
-                  {dayjs(article.attributes.updatedAt).format('MMMM D, YYYY')}
+                  {dayjs(article.attributes.updatedAt).format(
+                    DateTimeFormat['MMM D, YYYY'],
+                  )}
                 </Typography>
               </Grid>
             </Grid>

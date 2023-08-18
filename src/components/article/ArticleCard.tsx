@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import NextLink from 'next/link';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import {
   useTheme,
   Card,
@@ -18,6 +18,7 @@ import type { IArticle } from '@/types/article';
 
 // Constants
 import { ScreenSize } from '@/constants/screen';
+import { DateTimeFormat } from '@/constants/datetime';
 
 // Custom Hooks
 import { useScreenSize } from '@/hooks/screen';
@@ -68,12 +69,16 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
                 color: theme.palette.text.secondary,
               }}
             >
-              {dayjs(article.attributes.updatedAt).format('MMM D, YYYY')}
+              {dayjs(article.attributes.updatedAt).format(
+                DateTimeFormat['MMM D, YYYY'],
+              )}
             </Typography>
           </CardContent>
 
+          <Box flexGrow={1} />
+
           <CardMedia>
-            <Image
+            <NextImage
               src={article.attributes.thumbnail.data.attributes.url}
               alt={article.attributes.title}
               width={article.attributes.thumbnail.data.attributes.width}
@@ -83,12 +88,12 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
                 objectFit: 'cover',
                 width:
                   screenSize === ScreenSize.LARGE
-                    ? theme.spacing(40)
-                    : theme.spacing(15),
+                    ? theme.spacing(15)
+                    : theme.spacing(10),
                 height:
                   screenSize === ScreenSize.LARGE
-                    ? theme.spacing(40)
-                    : theme.spacing(15),
+                    ? theme.spacing(15)
+                    : theme.spacing(10),
               }}
             />
           </CardMedia>

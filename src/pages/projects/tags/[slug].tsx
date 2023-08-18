@@ -2,10 +2,8 @@ import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { makeStyles, createStyles } from '@mui/styles';
 import {
   useMediaQuery,
-  Theme,
   useTheme,
   Grid,
   Typography,
@@ -31,7 +29,6 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
   const router = useRouter();
   const theme = useTheme();
   const isXS = useMediaQuery(theme.breakpoints.up('xs'));
-  const classes = useStyles();
 
   if (router.isFallback) {
     return (
@@ -50,7 +47,6 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
 
       <Layout>
         <Grid
-          className={classes.wrapper}
           container
           direction='column'
           justifyContent='flex-start'
@@ -67,7 +63,6 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
           </Grid>
 
           <Grid
-            className={classes.list}
             item
             container
             direction='row'
@@ -92,6 +87,8 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
     </>
   );
 };
+
+export default ProjectTagsPage;
 
 export const getServerSideProps: GetServerSideProps<
   IProjectTagsPageProps,
@@ -150,14 +147,3 @@ export const getServerSideProps: GetServerSideProps<
     },
   };
 };
-
-export default ProjectTagsPage;
-
-const useStyles = makeStyles<Theme>((theme) =>
-  createStyles({
-    wrapper: {},
-    list: {
-      marginTop: theme.spacing(2),
-    },
-  }),
-);

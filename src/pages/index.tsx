@@ -53,21 +53,22 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
         >
           <Stack component={Container} spacing={2}>
             <Typography
-              variant='h2'
               component='h1'
-              gutterBottom
-              color={theme.palette.primary.contrastText}
+              variant='h2'
               textAlign='center'
+              color={theme.palette.primary.contrastText}
+              fontWeight={theme.typography.fontWeightBold}
+              gutterBottom
             >
               Hey, I&apos;m Adam.
             </Typography>
 
             <Typography
-              variant='h6'
               component='p'
-              paragraph
-              color={theme.palette.primary.contrastText}
+              variant='h6'
               textAlign='center'
+              color={theme.palette.primary.contrastText}
+              paragraph
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
               vulputate ex id quam malesuada efficitur. Ut id nisi eget sapien
@@ -77,37 +78,57 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
         </Box>
 
         {/* Latest Articles Section */}
-        <Grid
-          component={Container}
-          container
-          gap={{
-            xs: 3,
-            xl: 3,
-          }}
-        >
-          {articles.map((article) => (
-            <Grid key={article.id} item xs={12} xl={3.83}>
-              <ArticleCard article={article} overview={false} />
-            </Grid>
-          ))}
-        </Grid>
+        <Stack component={Container} spacing={8}>
+          <Typography
+            variant='h3'
+            component='h2'
+            textAlign='right'
+            gutterBottom
+          >
+            Latest Articles
+          </Typography>
 
-        {/* Latest Projects Section */}
-        <Box sx={{ bgcolor: theme.palette.primary.light }}>
           <Grid
-            component={Container}
             container
             gap={{
               xs: 3,
               xl: 3,
             }}
           >
-            {projects.map((project) => (
-              <Grid key={project.id} item xs={12} xl={3.83}>
-                <ProjectCard project={project} />
+            {articles.map((article) => (
+              <Grid key={article.id} item xs={12} xl={3.83}>
+                <ArticleCard article={article} overview={false} />
               </Grid>
             ))}
           </Grid>
+        </Stack>
+
+        {/* Latest Projects Section */}
+        <Box sx={{ bgcolor: theme.palette.primary.light }}>
+          <Stack component={Container} spacing={8}>
+            <Typography
+              variant='h3'
+              component='h2'
+              textAlign='left'
+              gutterBottom
+            >
+              Latest Projects
+            </Typography>
+
+            <Grid
+              container
+              gap={{
+                xs: 3,
+                xl: 3,
+              }}
+            >
+              {projects.map((project) => (
+                <Grid key={project.id} item xs={12} xl={3.83}>
+                  <ProjectCard project={project} />
+                </Grid>
+              ))}
+            </Grid>
+          </Stack>
         </Box>
       </Layout>
     </>

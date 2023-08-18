@@ -13,6 +13,9 @@ import dayjs from 'dayjs';
 // Types
 import type { IProject } from '@/types/project';
 
+// Constants
+import { DateTimeFormat } from '@/constants/datetime';
+
 interface IProjectCardProps {
   project: IProject;
 }
@@ -52,7 +55,9 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
                 color: theme.palette.text.secondary,
               }}
             >
-              {dayjs(project.attributes.updatedAt).format('MMM D, YYYY')}
+              {dayjs(project.attributes.updatedAt).format(
+                DateTimeFormat['MMM D, YYYY'],
+              )}
             </Typography>
           </Box>
         </Box>
