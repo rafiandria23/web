@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { Components } from 'react-markdown';
 import type { PluggableList } from 'react-markdown/lib/react-markdown';
-import Image from 'next/image';
+import NextImage from 'next/image';
 import {
   useTheme,
   Box,
@@ -64,7 +64,7 @@ const MarkdownImg: Components['img'] = ({ src, alt }) => {
   const theme = useTheme();
 
   return (
-    <Image
+    <NextImage
       src={src as string}
       alt={alt as string}
       width={0}
