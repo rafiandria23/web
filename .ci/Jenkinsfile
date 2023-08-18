@@ -25,7 +25,7 @@ pipeline {
         stage('Dependency Installation') {
             steps {
                 initGitVars()
-                sh 'npm i'
+                sh 'npm i --force'
             }
         }
 
