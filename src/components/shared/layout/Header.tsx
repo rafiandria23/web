@@ -30,7 +30,7 @@ import { ScreenSize } from '@/constants/screen';
 // Redux
 import { setMode as setThemeMode } from '@/redux/theme';
 
-// Custom Hooks
+// Hooks
 import { useScreenSize } from '@/hooks/screen';
 import { useThemeState } from '@/hooks/theme';
 

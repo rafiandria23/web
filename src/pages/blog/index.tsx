@@ -5,8 +5,9 @@ import { gql } from '@apollo/client';
 import type { PaginationRenderItemParams } from '@mui/material';
 import {
   useTheme,
-  Grid,
   Container,
+  Grid,
+  Stack,
   Typography,
   Pagination,
   PaginationItem,
@@ -98,34 +99,36 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
         <Grid
           component={Container}
           container
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='center'
-          gap={4}
+          gap={{
+            xs: 3,
+            xl: 3,
+          }}
         >
           {articles.map((article) => (
-            <Grid key={article.id} item>
+            <Grid key={article.id} item xs={12} xl={5.87}>
               <ArticleCard article={article} />
             </Grid>
           ))}
-
-          <Grid item>
-            <Pagination
-              shape='rounded'
-              color='primary'
-              size='large'
-              count={pagination.pageCount}
-              page={pagination.page}
-              renderItem={paginationItem}
-              hidePrevButton={pagination.page === 1}
-              hideNextButton={pagination.page === pagination.pageCount}
-            />
-          </Grid>
         </Grid>
+
+        <Stack component={Container} direction='row' justifyContent='center'>
+          <Pagination
+            shape='rounded'
+            color='primary'
+            size='large'
+            count={pagination.pageCount}
+            page={pagination.page}
+            renderItem={paginationItem}
+            hidePrevButton={pagination.page === 1}
+            hideNextButton={pagination.page === pagination.pageCount}
+          />
+        </Stack>
       </Layout>
     </>
   );
 };
+
+export default BlogPage;
 
 export const getServerSideProps: GetServerSideProps<
   IBlogPageProps,
@@ -218,5 +221,3 @@ export const getServerSideProps: GetServerSideProps<
     },
   };
 };
-
-export default BlogPage;

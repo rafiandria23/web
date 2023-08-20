@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import type { IconButtonProps } from '@mui/material';
 import {
   IconButton,
@@ -21,7 +21,7 @@ import {
 // Constants
 import { ThemeMode } from '@/constants/theme';
 
-// Custom Hooks
+// Hooks
 import { usePrefersDarkMode } from '@/hooks/theme';
 
 export interface IThemeSwitcherProps {
@@ -128,4 +128,4 @@ const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ mode, edge, onChange }) => {
   );
 };
 
-export default ThemeSwitcher;
+export default memo(ThemeSwitcher);

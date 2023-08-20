@@ -113,6 +113,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               variant='h3'
               component='h2'
               textAlign='left'
+              color={theme.palette.primary.contrastText}
               gutterBottom
             >
               Latest Projects
@@ -137,6 +138,8 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
     </>
   );
 };
+
+export default HomePage;
 
 export const getServerSideProps: GetServerSideProps<
   IHomePageProps
@@ -248,5 +251,3 @@ export const getServerSideProps: GetServerSideProps<
     },
   };
 };
-
-export default HomePage;
