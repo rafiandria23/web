@@ -1,21 +1,20 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import {
-  useMediaQuery,
-  useTheme,
-  Grid,
-  Typography,
-  Divider,
-} from '@mui/material';
+import { useTheme, Grid, Typography, Divider } from '@mui/material';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { ITag } from '@/types/tag';
 
+// Constants
+import { ScreenSize } from '@/constants/screen';
+
 // GraphQL
 import { client } from '@/graphql';
+
+// Hooks
+import { useScreenSize } from '@/hooks/screen';
 
 // Components
 import { Layout } from '@/components/shared/layout';
@@ -26,17 +25,8 @@ export interface IProjectTagsPageProps {
 }
 
 const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
-  const router = useRouter();
   const theme = useTheme();
-  const isXS = useMediaQuery(theme.breakpoints.up('xs'));
-
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <Typography>Loading...</Typography>
-      </Layout>
-    );
-  }
+  const screenSize = useScreenSize();
 
   return (
     <>
@@ -67,8 +57,10 @@ const ProjectTagsPage: NextPage<IProjectTagsPageProps> = ({ tag }) => {
             container
             direction='row'
             wrap='wrap'
-            justifyContent={isXS ? 'flex-start' : 'space-evenly'}
-            alignItems={isXS ? 'center' : 'stretch'}
+            justifyContent={
+              screenSize === ScreenSize.SMALL ? 'flex-start' : 'space-evenly'
+            }
+            alignItems={screenSize === ScreenSize.SMALL ? 'center' : 'stretch'}
             spacing={2}
           >
             {tag.attributes.projects !== undefined &&
