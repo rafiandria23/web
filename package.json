@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='-r @newrelic/next' next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "next start",
+    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
     "lint": "lint-staged",
     "prepare": "husky install"
   },
@@ -17,10 +17,12 @@
     "@fontsource/lato": "^5.0.7",
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.5",
+    "@newrelic/next": "^0.6.0",
     "@reduxjs/toolkit": "^1.9.5",
     "dayjs": "^1.11.8",
     "graphql": "^16.8.0",
     "immutability-helper": "^3.1.1",
+    "newrelic": "^10.6.2",
     "next": "^13.4.18",
     "next-redux-wrapper": "^8.1.0",
     "next-seo": "^6.0.0",
@@ -36,9 +38,11 @@
     "rehype-raw": "^6.1.1",
     "remark-gfm": "^3.0.1",
     "remark-unwrap-images": "^3.0.1",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "sharp": "^0.32.5"
   },
   "devDependencies": {
+    "@types/newrelic": "^9.14.0",
     "@types/node": "^18.16.16",
     "@types/react": "^18.2.8",
     "@types/react-copy-to-clipboard": "^5.0.4",
