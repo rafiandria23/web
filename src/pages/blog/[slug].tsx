@@ -1,9 +1,16 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { Container, Grid, Typography, Chip } from '@mui/material';
+import {
+  useTheme,
+  Container,
+  Stack,
+  Grid,
+  Typography,
+  Divider,
+  Chip,
+} from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import dayjs from 'dayjs';
 
@@ -31,15 +38,7 @@ export interface IArticlePageProps extends IPageProps {
 }
 
 const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <Typography>Loading...</Typography>
-      </Layout>
-    );
-  }
+  const theme = useTheme();
 
   return (
     <>
@@ -57,46 +56,39 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
 
       <Layout>
         <Container component='article'>
-          <Grid
-            container
-            direction='column'
-            justifyContent='space-between'
-            alignItems='stretch'
-          >
-            <Grid item container direction='column'>
-              <Grid item>
-                <Typography variant='h3' component='h1'>
-                  {article.attributes.title}
-                </Typography>
-              </Grid>
-
-              <Grid item>
-                <Typography
-                  variant='caption'
-                  component='p'
-                  align='left'
-                  color='textSecondary'
-                  gutterBottom
-                >
-                  {dayjs(article.attributes.updatedAt).format(
-                    DateTimeFormat['MMM D, YYYY'],
-                  )}
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <Grid item>
-              <ReactMarkdown
-                components={mdComponents}
-                remarkPlugins={remarkPlugins}
-                rehypePlugins={rehypePlugins}
+          <Stack>
+            <Stack>
+              <Typography
+                component='h1'
+                variant='h3'
+                fontWeight={theme.typography.fontWeightBold}
+                gutterBottom
               >
-                {article.attributes.content}
-              </ReactMarkdown>
-            </Grid>
+                {article.attributes.title}
+              </Typography>
+
+              <Typography
+                variant='caption'
+                color={theme.palette.text.secondary}
+                paragraph
+              >
+                {dayjs(article.attributes.updatedAt).format(
+                  DateTimeFormat['MMM D, YYYY'],
+                )}
+              </Typography>
+            </Stack>
+
+            <Divider flexItem />
+
+            <ReactMarkdown
+              components={mdComponents}
+              remarkPlugins={remarkPlugins}
+              rehypePlugins={rehypePlugins}
+            >
+              {article.attributes.content}
+            </ReactMarkdown>
 
             <Grid
-              item
               container
               direction='row'
               wrap='wrap'
@@ -114,7 +106,7 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
                   </Grid>
                 ))}
             </Grid>
-          </Grid>
+          </Stack>
         </Container>
       </Layout>
     </>

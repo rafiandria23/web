@@ -1,19 +1,26 @@
 import { useState, useCallback } from 'react';
+import NextLink from 'next/link';
 import type { Components } from 'react-markdown';
 import type { PluggableList } from 'react-markdown/lib/react-markdown';
 import NextImage from 'next/image';
 import {
   useTheme,
   Box,
+  Paper,
+  Card,
+  CardMedia,
+  CardContent,
   Link,
   Typography,
-  Table,
   TableContainer,
+  Table,
   TableHead,
+  TableBody,
   TableRow,
   TableCell,
-  TableBody,
+  TableFooter,
   IconButton,
+  Divider,
 } from '@mui/material';
 import {
   ContentCopyOutlined as ContentCopyOutlinedIcon,
@@ -36,16 +43,17 @@ import python from 'react-syntax-highlighter/dist/cjs/languages/prism/python';
 import ruby from 'react-syntax-highlighter/dist/cjs/languages/prism/ruby';
 import typescript from 'react-syntax-highlighter/dist/cjs/languages/prism/typescript';
 
-// Themes
+// Syntax Highlighter Themes
 import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism/one-dark';
 
 // remark Plugins
 import remarkGFM from 'remark-gfm';
+import remarkUnwrapImages from 'remark-unwrap-images';
 
 // rehype Plugins
 import rehypeRaw from 'rehype-raw';
 
-// Register Languages
+// Register Syntax Highlighter Languages
 SyntaxHighlighter.registerLanguage('c', c);
 SyntaxHighlighter.registerLanguage('c#', csharp);
 SyntaxHighlighter.registerLanguage('c++', cpp);
@@ -64,26 +72,49 @@ const MarkdownImg: Components['img'] = ({ src, alt }) => {
   const theme = useTheme();
 
   return (
-    <NextImage
-      src={src as string}
-      alt={alt as string}
-      width={0}
-      height={0}
-      sizes='100vw'
-      style={{
-        display: 'block',
-        objectFit: 'contain',
-        width: '100%',
-        height: 'auto',
-        borderRadius: theme.shape.borderRadius,
-      }}
-    />
+    <Card>
+      <CardMedia>
+        <NextImage
+          src={src as string}
+          alt={alt as string}
+          width={0}
+          height={0}
+          sizes='100vw'
+          style={{
+            display: 'block',
+            objectFit: 'contain',
+            width: '100%',
+            height: 'auto',
+            borderRadius: theme.shape.borderRadius,
+          }}
+        />
+      </CardMedia>
+
+      {alt && (
+        <CardContent
+          sx={{
+            textAlign: 'center',
+          }}
+        >
+          <Typography variant='caption' color={theme.palette.text.secondary}>
+            {alt}
+          </Typography>
+        </CardContent>
+      )}
+    </Card>
   );
 };
 
 const MarkdownLink: Components['a'] = ({ href, children }) => {
   return (
-    <Link variant='body1' href={href} target='_blank'>
+    <Link
+      component={NextLink}
+      variant='body1'
+      href={href as string}
+      target='_blank'
+      rel='noopener'
+      underline='hover'
+    >
       {children}
     </Link>
   );
@@ -155,13 +186,13 @@ const MarkdownCaption: Components['caption'] = ({ children }) => {
 
 const MarkdownTable: Components['table'] = ({ children }) => {
   return (
-    <TableContainer>
+    <TableContainer component={Paper}>
       <Table>{children}</Table>
     </TableContainer>
   );
 };
 
-const MarkdownTableHead: Components['th'] = ({ children }) => {
+const MarkdownTableHead: Components['thead'] = ({ children }) => {
   return <TableHead>{children}</TableHead>;
 };
 
@@ -173,12 +204,16 @@ const MarkdownTableRow: Components['tr'] = ({ children }) => {
   return <TableRow>{children}</TableRow>;
 };
 
+const MarkdownTableHeaderCell: Components['th'] = ({ children }) => {
+  return <TableCell>{children}</TableCell>;
+};
+
 const MarkdownTableCell: Components['td'] = ({ children }) => {
-  return (
-    <TableCell>
-      <Typography>{children}</Typography>
-    </TableCell>
-  );
+  return <TableCell>{children}</TableCell>;
+};
+
+const MarkdownTableFooter: Components['tfoot'] = ({ children }) => {
+  return <TableFooter>{children}</TableFooter>;
 };
 
 const MarkdownCode: Components['code'] = ({ className, children }) => {
@@ -249,6 +284,28 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
   );
 };
 
+const MarkdownDivider: Components['hr'] = () => {
+  return <Divider />;
+};
+
+const MarkdownBlockquote: Components['blockquote'] = ({ children }) => {
+  const theme = useTheme();
+
+  return (
+    <Box
+      component='blockquote'
+      dir='auto'
+      borderColor={theme.palette.text.secondary}
+      sx={{
+        borderInlineStart: '3px solid',
+        paddingInlineStart: '1.5rem',
+      }}
+    >
+      {children}
+    </Box>
+  );
+};
+
 export const components: Components = {
   img: MarkdownImg,
   a: MarkdownLink,
@@ -261,13 +318,17 @@ export const components: Components = {
   p: MarkdownParagraph,
   caption: MarkdownCaption,
   table: MarkdownTable,
-  th: MarkdownTableHead,
+  thead: MarkdownTableHead,
+  th: MarkdownTableHeaderCell,
   tbody: MarkdownTableBody,
   tr: MarkdownTableRow,
   td: MarkdownTableCell,
+  tfoot: MarkdownTableFooter,
   code: MarkdownCode,
+  hr: MarkdownDivider,
+  blockquote: MarkdownBlockquote,
 };
 
-export const remarkPlugins: PluggableList = [remarkGFM];
+export const remarkPlugins: PluggableList = [remarkGFM, remarkUnwrapImages];
 
 export const rehypePlugins: PluggableList = [rehypeRaw];

@@ -27,6 +27,11 @@ const GlobalTheme: Partial<Theme> = {
         color: 'inherit',
       },
     },
+    MuiLink: {
+      defaultProps: {
+        color: colors.blue[500],
+      },
+    },
   },
 };
 

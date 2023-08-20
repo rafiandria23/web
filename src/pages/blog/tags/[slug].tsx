@@ -1,5 +1,4 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import { Grid, Typography, Divider } from '@mui/material';
@@ -21,16 +20,6 @@ export interface IArticleTagsPageProps extends IPageProps {
 }
 
 const ArticleTagsPage: NextPage<IArticleTagsPageProps> = ({ tag }) => {
-  const router = useRouter();
-
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <Typography>Loading...</Typography>
-      </Layout>
-    );
-  }
-
   return (
     <>
       <NextSeo
