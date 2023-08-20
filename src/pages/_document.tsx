@@ -1,6 +1,27 @@
+import newrelic from 'newrelic';
+import type { DocumentContext, DocumentInitialProps } from 'next/document';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
 
-export default class Document extends NextDocument {
+export type NewRelicProps = {
+  browserTimingHeader: string;
+};
+
+export default class Document extends NextDocument<NewRelicProps> {
+  static async getInitialProps(
+    ctx: DocumentContext,
+  ): Promise<DocumentInitialProps & { browserTimingHeader: string }> {
+    const initialProps = await NextDocument.getInitialProps(ctx);
+
+    const browserTimingHeader = newrelic.getBrowserTimingHeader({
+      hasToRemoveScriptWrapper: true,
+    });
+
+    return {
+      ...initialProps,
+      browserTimingHeader,
+    };
+  }
+
   render() {
     return (
       <Html lang='en-US'>
@@ -23,6 +44,12 @@ export default class Document extends NextDocument {
             type='image/png'
             sizes='96x96'
             href='/favicon-96x96.png'
+          />
+
+          {/* New Relic */}
+          <script
+            type='text/javascript'
+            dangerouslySetInnerHTML={{ __html: this.props.browserTimingHeader }}
           />
         </Head>
 
