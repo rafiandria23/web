@@ -36,7 +36,7 @@ import { ThemeMode } from '@/constants/theme';
 // Redux
 import { wrapper, persistor } from '@/redux';
 
-// Custom Hooks
+// Hooks
 import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
 
 // Styles

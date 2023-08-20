@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { memo } from 'react';
 import NextLink from 'next/link';
 import NextImage from 'next/image';
 import {
@@ -10,6 +11,7 @@ import {
   Typography,
   Box,
   Stack,
+  Tooltip,
 } from '@mui/material';
 import dayjs from 'dayjs';
 
@@ -20,7 +22,7 @@ import type { IArticle } from '@/types/article';
 import { ScreenSize } from '@/constants/screen';
 import { DateTimeFormat } from '@/constants/datetime';
 
-// Custom Hooks
+// Hooks
 import { useScreenSize } from '@/hooks/screen';
 
 interface IArticleCardProps {
@@ -33,74 +35,92 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
   const screenSize = useScreenSize();
 
   return (
-    <Card>
-      <CardActionArea
-        LinkComponent={NextLink}
-        href={`/blog/${article.attributes.slug}`}
-      >
-        <Stack direction='row'>
-          <CardContent component={Stack}>
-            <Typography variant='h5' gutterBottom>
-              {article.attributes.title}
-            </Typography>
-
-            {overview && (
+    <Tooltip title={article.attributes.title}>
+      <Card>
+        <CardActionArea
+          LinkComponent={NextLink}
+          href={`/blog/${article.attributes.slug}`}
+        >
+          <Stack direction='row'>
+            <CardContent component={Stack}>
               <Typography
-                variant='body2'
+                component='h2'
+                variant='h6'
                 gutterBottom
-                color={theme.palette.text.secondary}
                 sx={{
-                  textOverflow: 'ellipsis',
                   overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
                 }}
               >
-                {article.attributes.overview}
+                {article.attributes.title}
               </Typography>
-            )}
+
+              {overview && (
+                <Typography
+                  variant='body2'
+                  display='block'
+                  textAlign='justify'
+                  color={theme.palette.text.secondary}
+                  paragraph
+                  sx={{
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                  }}
+                >
+                  {article.attributes.overview}
+                </Typography>
+              )}
+
+              <Box flexGrow={1} />
+
+              <Typography
+                variant='overline'
+                align='left'
+                paragraph
+                sx={{
+                  textTransform: 'none',
+                  color: theme.palette.text.secondary,
+                }}
+              >
+                {dayjs(article.attributes.updatedAt).format(
+                  DateTimeFormat['MMM D, YYYY'],
+                )}
+              </Typography>
+            </CardContent>
 
             <Box flexGrow={1} />
 
-            <Typography
-              variant='overline'
-              component='p'
-              align='left'
-              sx={{
-                textTransform: 'none',
-                color: theme.palette.text.secondary,
-              }}
-            >
-              {dayjs(article.attributes.updatedAt).format(
-                DateTimeFormat['MMM D, YYYY'],
-              )}
-            </Typography>
-          </CardContent>
-
-          <Box flexGrow={1} />
-
-          <CardMedia>
-            <NextImage
-              src={article.attributes.thumbnail.data.attributes.url}
-              alt={article.attributes.title}
-              width={article.attributes.thumbnail.data.attributes.width}
-              height={article.attributes.thumbnail.data.attributes.height}
-              style={{
-                display: 'block',
-                objectFit: 'cover',
-                width:
-                  screenSize === ScreenSize.LARGE
-                    ? theme.spacing(15)
-                    : theme.spacing(10),
-                height:
-                  screenSize === ScreenSize.LARGE
-                    ? theme.spacing(15)
-                    : theme.spacing(10),
-              }}
-            />
-          </CardMedia>
-        </Stack>
-      </CardActionArea>
-    </Card>
+            <CardMedia>
+              <NextImage
+                src={article.attributes.thumbnail.data.attributes.url}
+                alt={article.attributes.title}
+                width={article.attributes.thumbnail.data.attributes.width}
+                height={article.attributes.thumbnail.data.attributes.height}
+                style={{
+                  display: 'block',
+                  objectFit: 'cover',
+                  width:
+                    screenSize === ScreenSize.LARGE
+                      ? theme.spacing(15)
+                      : theme.spacing(10),
+                  height:
+                    screenSize === ScreenSize.LARGE
+                      ? theme.spacing(15)
+                      : theme.spacing(10),
+                }}
+              />
+            </CardMedia>
+          </Stack>
+        </CardActionArea>
+      </Card>
+    </Tooltip>
   );
 };
 
-export default ArticleCard;
+export default memo(ArticleCard);
