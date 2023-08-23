@@ -1,6 +1,6 @@
 ## Tickets
 
-- [R23-XX](https://rafiandria23.atlassian.net/browse/R23-XX)
+- [RF-XX](https://rafiandria23.atlassian.net/browse/RF-XX)
 
 ## Description
 
