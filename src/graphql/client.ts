@@ -6,8 +6,6 @@ import { AppConfig } from '@/constants/app';
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
-  uri: AppConfig.CMS_URL,
-  cache,
   defaultOptions: {
     watchQuery: {
       fetchPolicy: 'no-cache',
@@ -18,6 +16,9 @@ const client = new ApolloClient({
       errorPolicy: 'all',
     },
   },
+  cache,
+  uri: AppConfig.CMS_URL,
+  connectToDevTools: true,
 });
 
 export default client;
