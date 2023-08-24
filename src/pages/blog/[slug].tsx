@@ -2,15 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import {
-  useTheme,
-  Container,
-  Stack,
-  Grid,
-  Typography,
-  Divider,
-  Chip,
-} from '@mui/material';
+import { useTheme, Container, Stack, Typography, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import dayjs from 'dayjs';
 
@@ -56,17 +48,8 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
 
       <Layout>
         <Container component='article'>
-          <Stack>
+          <Stack spacing={4}>
             <Stack>
-              <Typography
-                component='h1'
-                variant='h3'
-                fontWeight={theme.typography.fontWeightBold}
-                gutterBottom
-              >
-                {article.attributes.title}
-              </Typography>
-
               <Typography
                 variant='caption'
                 color={theme.palette.text.secondary}
@@ -76,9 +59,35 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
                   DateTimeFormat['MMM D, YYYY'],
                 )}
               </Typography>
-            </Stack>
 
-            <Divider flexItem />
+              <Typography
+                component='h1'
+                variant='h3'
+                fontWeight={theme.typography.fontWeightBold}
+                gutterBottom
+              >
+                {article.attributes.title}
+              </Typography>
+
+              {article.attributes.tags.data.length > 0 && (
+                <Stack direction='row' spacing={1}>
+                  {article.attributes.tags.data.map((tag) => (
+                    <NextLink
+                      key={tag.id}
+                      href={`/blog/tags/${tag.attributes.slug}`}
+                      passHref
+                    >
+                      <Chip
+                        variant='outlined'
+                        color='info'
+                        label={tag.attributes.name}
+                        clickable
+                      />
+                    </NextLink>
+                  ))}
+                </Stack>
+              )}
+            </Stack>
 
             <ReactMarkdown
               components={mdComponents}
@@ -87,25 +96,6 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
             >
               {article.attributes.content}
             </ReactMarkdown>
-
-            <Grid
-              container
-              direction='row'
-              wrap='wrap'
-              justifyContent='flex-start'
-            >
-              {article.attributes.tags.data.length > 0 &&
-                article.attributes.tags.data.map((tag) => (
-                  <Grid item key={tag.id}>
-                    <NextLink
-                      href={`/blog/tags/${tag.attributes.slug}`}
-                      passHref
-                    >
-                      <Chip label={tag.attributes.name} clickable />
-                    </NextLink>
-                  </Grid>
-                ))}
-            </Grid>
           </Stack>
         </Container>
       </Layout>

@@ -109,7 +109,6 @@ const MarkdownLink: Components['a'] = ({ href, children }) => {
   return (
     <Link
       component={NextLink}
-      variant='body1'
       href={href as string}
       target='_blank'
       rel='noopener'
@@ -170,7 +169,7 @@ const MarkdownHeading6: Components['h6'] = ({ children }) => {
 
 const MarkdownParagraph: Components['p'] = ({ children }) => {
   return (
-    <Typography variant='body1' component='p' paragraph>
+    <Typography component='p' paragraph>
       {children}
     </Typography>
   );
