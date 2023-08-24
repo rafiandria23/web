@@ -5,10 +5,10 @@ ENV NODE_ENV production
 WORKDIR /app
 COPY ./package.json ./package-lock.json ./
 ENV PATH /app/node_modules/.bin:$PATH
-RUN npm ci
+RUN yarn install --frozen-lockfile
 WORKDIR /app
 COPY ./ ./
-RUN npm run build
+RUN yarn build
 
 
 FROM node:18-alpine
@@ -21,4 +21,4 @@ COPY --from=build /app/node_modules ./node_modules
 ENV PATH /app/node_modules/.bin:$PATH
 COPY --from=build /app ./
 EXPOSE 1337
-CMD ["npm", "run", "start"]
+CMD ["yarn", "start"]
