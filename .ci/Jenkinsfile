@@ -3,13 +3,13 @@
 gitVars = [:]
 
 def initGitVars() {
-  gitVars = parseGitVars()
+    gitVars = parseGitVars()
 }
 
 pipeline {
     agent {
         kubernetes {
-      label getAgentLabel()
+            label getAgentLabel()
         }
     }
 
@@ -23,76 +23,76 @@ pipeline {
 
     stages {
         stage('Dependency Installation') {
-      steps {
-        initGitVars()
-        sh 'yarn install'
-      }
+            steps {
+                initGitVars()
+                sh 'yarn install --frozen-lockfile'
+            }
         }
 
         stage('SonarQube Analysis') {
-      steps {
-        initGitVars()
-        analyze()
-      }
+            steps {
+                initGitVars()
+                analyze()
+            }
         }
 
         stage('Build and Push Image') {
-      when {
-        expression {
-          env.GIT_BRANCH ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-      steps {
-        initGitVars()
-        buildAndPushImage(
+            steps {
+                initGitVars()
+                buildAndPushImage(
                     buildID: env.BUILD_ID,
                     repoName: gitVars.repoName,
                     branchName: gitVars.branchName,
                     commitHash: gitVars.commitHash,
                 )
-      }
+            }
         }
 
         stage('Deployment Approval') {
-      when {
-        expression {
-          env.GIT_BRANCH ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-      steps {
-        initGitVars()
-        approveDeployment(
+            steps {
+                initGitVars()
+                approveDeployment(
                     repoName: gitVars.repoName
                 )
-      }
+            }
         }
 
         stage('Deployment Execution') {
-      when {
-        expression {
-          env.GIT_BRANCH ==~ /main/
-        }
-        beforeAgent true
-      }
+            when {
+                expression {
+                    env.GIT_BRANCH ==~ /main/
+                }
+                beforeAgent true
+            }
 
-      steps {
-        initGitVars()
-        executeDeployment(
+            steps {
+                initGitVars()
+                executeDeployment(
                     org: 'rafiandria23',
                     repoName: gitVars.repoName,
                     commitHash: gitVars.commitHash,
                 )
-      }
+            }
         }
     }
 
     post {
         cleanup {
-      cleanWs()
+            cleanWs()
         }
     }
 }
