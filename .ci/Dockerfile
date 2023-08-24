@@ -3,7 +3,7 @@ FROM node:18-alpine AS build
 RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev && rm -rf /var/cache/apk/* > /dev/null 2>&1
 ENV NODE_ENV production
 WORKDIR /app
-COPY ./package.json ./package-lock.json ./
+COPY ./package.json ./yarn.lock ./
 ENV PATH /app/node_modules/.bin:$PATH
 RUN yarn install --frozen-lockfile
 WORKDIR /app
