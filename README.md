@@ -12,8 +12,8 @@ Available in .env.example
 ## Run Locally
 
 ```zsh
-npm i
-npm run dev
+yarn install
+yarn dev
 ```
 
 ## License

@@ -7,8 +7,8 @@ RUN apk add --no-cache libc6-compat git
 WORKDIR /app
 
 # Install dependencies based on the preferred package manager
-COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 
 # Rebuild the source code only when needed
@@ -22,10 +22,7 @@ COPY ./ ./
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN npm run build
-
-# If using npm comment out above and use below instead
-# RUN npm run build
+RUN yarn build
 
 # Production image, copy all the files and run next
 FROM base AS runner
