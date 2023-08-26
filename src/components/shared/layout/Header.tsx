@@ -1,6 +1,7 @@
 import type { ReactElement, Ref, FC } from 'react';
 import { forwardRef, useState, useCallback, useMemo, memo } from 'react';
 import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import type { TransitionProps } from '@mui/material/transitions';
 import {
@@ -51,6 +52,7 @@ export interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { mode } = useThemeState();
   const theme = useTheme();
   const screenSize = useScreenSize();
@@ -70,6 +72,15 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   const handleDialogVisibility = useCallback(() => {
     setDialogVisibility(!dialogVisible);
   }, [dialogVisible, setDialogVisibility]);
+
+  const handleNavigate = useCallback(
+    (url: string) => {
+      return async () => {
+        await router.push(url);
+      };
+    },
+    [router],
+  );
 
   const handleChangeTheme = useCallback<IThemeSwitcherProps['onChange']>(
     (target) => {
@@ -104,10 +115,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
               </IconButton>
 
               <Button
-                LinkComponent={NextLink}
-                href='/'
                 variant='text'
                 size='large'
+                onClick={handleNavigate('/')}
                 sx={{
                   textTransform: 'none',
                   fontWeight: theme.typography.fontWeightBold,
@@ -135,10 +145,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
               />
 
               <Button
-                LinkComponent={NextLink}
-                href='/'
                 variant='text'
                 size='large'
+                onClick={handleNavigate('/')}
                 sx={{
                   textTransform: 'none',
                   fontWeight: theme.typography.fontWeightBold,
@@ -149,15 +158,15 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
 
               <Box flexGrow={1} />
 
-              <Button LinkComponent={NextLink} href='/' variant='text'>
+              <Button variant='text' onClick={handleNavigate('/')}>
                 Home
               </Button>
 
-              <Button LinkComponent={NextLink} href='/projects' variant='text'>
+              <Button variant='text' onClick={handleNavigate('/projects')}>
                 Projects
               </Button>
 
-              <Button LinkComponent={NextLink} href='/blog' variant='text'>
+              <Button variant='text' onClick={handleNavigate('/blog')}>
                 Blog
               </Button>
 
@@ -192,25 +201,19 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         }}
       >
         <Stack component={Container} pt={theme.spacing(4)} spacing={2}>
-          <Button LinkComponent={NextLink} href='/' fullWidth variant='text'>
+          <Button fullWidth variant='text' onClick={handleNavigate('/')}>
             Home
           </Button>
 
           <Button
-            LinkComponent={NextLink}
-            href='/projects'
             fullWidth
             variant='text'
+            onClick={handleNavigate('/projects')}
           >
             Projects
           </Button>
 
-          <Button
-            LinkComponent={NextLink}
-            href='/blog'
-            fullWidth
-            variant='text'
-          >
+          <Button fullWidth variant='text' onClick={handleNavigate('/blog')}>
             Blog
           </Button>
 

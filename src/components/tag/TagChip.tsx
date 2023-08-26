@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import NextLink from 'next/link';
+import { memo, useCallback } from 'react';
+import { useRouter } from 'next/router';
 import { Chip } from '@mui/material';
 
 // Types
@@ -10,11 +11,26 @@ interface ITagChipProps {
 }
 
 const TagChip: FC<ITagChipProps> = ({ tag }) => {
+  const router = useRouter();
+
+  const handleNavigate = useCallback(
+    (url: string) => {
+      return async () => {
+        await router.push(url);
+      };
+    },
+    [router],
+  );
+
   return (
-    <NextLink href={`/blog/tags/${tag.attributes.slug}`} passHref>
-      <Chip label={tag.attributes.name} clickable />
-    </NextLink>
+    <Chip
+      variant='outlined'
+      color='info'
+      clickable
+      label={tag.attributes.name}
+      onClick={handleNavigate(`/blog/tags/${tag.attributes.slug}`)}
+    />
   );
 };
 
-export default TagChip;
+export default memo(TagChip);

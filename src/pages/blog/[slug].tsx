@@ -1,37 +1,25 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import NextLink from 'next/link';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
-import { useTheme, Container, Stack, Typography, Chip } from '@mui/material';
-import ReactMarkdown from 'react-markdown';
-import dayjs from 'dayjs';
+import { Container, Stack } from '@mui/material';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPageProps } from '@/types/page';
 import type { IArticle } from '@/types/article';
 
-// Constants
-import { DateTimeFormat } from '@/constants/datetime';
-
 // GraphQL
 import { client } from '@/graphql';
 
 // Components
 import { Layout } from '@/components/shared/layout';
-import {
-  components as mdComponents,
-  remarkPlugins,
-  rehypePlugins,
-} from '@/components/markdown';
+import { ArticleHeader, ArticleContent } from '@/components/article';
 
 export interface IArticlePageProps extends IPageProps {
   article: IArticle;
 }
 
 const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
-  const theme = useTheme();
-
   return (
     <>
       <NextSeo
@@ -49,53 +37,9 @@ const ArticlePage: NextPage<IArticlePageProps> = ({ article }) => {
       <Layout>
         <Container component='article'>
           <Stack spacing={4}>
-            <Stack>
-              <Typography
-                variant='caption'
-                color={theme.palette.text.secondary}
-                paragraph
-              >
-                {dayjs(article.attributes.updatedAt).format(
-                  DateTimeFormat['MMM D, YYYY'],
-                )}
-              </Typography>
+            <ArticleHeader article={article} />
 
-              <Typography
-                component='h1'
-                variant='h3'
-                fontWeight={theme.typography.fontWeightBold}
-                gutterBottom
-              >
-                {article.attributes.title}
-              </Typography>
-
-              {article.attributes.tags.data.length > 0 && (
-                <Stack direction='row' spacing={1}>
-                  {article.attributes.tags.data.map((tag) => (
-                    <NextLink
-                      key={tag.id}
-                      href={`/blog/tags/${tag.attributes.slug}`}
-                      passHref
-                    >
-                      <Chip
-                        variant='outlined'
-                        color='info'
-                        label={tag.attributes.name}
-                        clickable
-                      />
-                    </NextLink>
-                  ))}
-                </Stack>
-              )}
-            </Stack>
-
-            <ReactMarkdown
-              components={mdComponents}
-              remarkPlugins={remarkPlugins}
-              rehypePlugins={rehypePlugins}
-            >
-              {article.attributes.content}
-            </ReactMarkdown>
+            <ArticleContent article={article} />
           </Stack>
         </Container>
       </Layout>

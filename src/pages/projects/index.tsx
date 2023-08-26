@@ -1,5 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import NextLink from 'next/link';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import type { PaginationRenderItemParams } from '@mui/material';
@@ -36,7 +37,17 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
   pagination,
   projects,
 }) => {
+  const router = useRouter();
   const theme = useTheme();
+
+  const handleNavigate = useCallback(
+    (url: string) => {
+      return async () => {
+        await router.push(url);
+      };
+    },
+    [router],
+  );
 
   const additionalLinkTags = [
     {
@@ -57,9 +68,10 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
   }
 
   const paginationItem = (props: PaginationRenderItemParams) => (
-    <NextLink href={`/projects?page=${props.page}`} passHref>
-      <PaginationItem {...props} />
-    </NextLink>
+    <PaginationItem
+      onChange={handleNavigate(`/projects?page=${props.page}`)}
+      {...props}
+    />
   );
 
   return (
