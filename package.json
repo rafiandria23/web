@@ -12,13 +12,13 @@
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
     "@newrelic/apollo-server-plugin": "^3.1.2",
-    "@strapi/plugin-color-picker": "^4.12.6",
-    "@strapi/plugin-graphql": "^4.12.6",
-    "@strapi/plugin-i18n": "4.12.6",
+    "@strapi/plugin-color-picker": "^4.12.7",
+    "@strapi/plugin-graphql": "^4.12.7",
+    "@strapi/plugin-i18n": "4.12.7",
     "@strapi/plugin-open-ai": "^1.0.1",
     "@strapi/plugin-seo": "^1.9.2",
-    "@strapi/plugin-users-permissions": "^4.12.6",
-    "@strapi/strapi": "^4.12.6",
+    "@strapi/plugin-users-permissions": "^4.12.7",
+    "@strapi/strapi": "^4.12.7",
     "newrelic": "^10.6.2",
     "pg": "^8.11.3",
     "strapi-provider-upload-minio-ce": "^1.2.0"
