@@ -1,5 +1,6 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import NextLink from 'next/link';
+import { useCallback } from 'react';
+import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import type { PaginationRenderItemParams } from '@mui/material';
@@ -36,7 +37,17 @@ export interface IBlogPageProps {
 }
 
 const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
+  const router = useRouter();
   const theme = useTheme();
+
+  const handleNavigate = useCallback(
+    (url: string) => {
+      return async () => {
+        await router.push(url);
+      };
+    },
+    [router],
+  );
 
   const additionalLinkTags = [
     {
@@ -57,9 +68,10 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
   }
 
   const paginationItem = (props: PaginationRenderItemParams) => (
-    <NextLink href={`/blog?page=${props.page}`} passHref>
-      <PaginationItem {...props} />
-    </NextLink>
+    <PaginationItem
+      onChange={handleNavigate(`/blog?page=${props.page}`)}
+      {...props}
+    />
   );
 
   return (

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { memo } from 'react';
 import NextLink from 'next/link';
 import {
   useTheme,
@@ -66,4 +67,4 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
   );
 };
 
-export default ProjectCard;
+export default memo(ProjectCard);
