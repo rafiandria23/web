@@ -25,7 +25,7 @@ pipeline {
         stage('Dependency Installation') {
             steps {
                 initGitVars()
-                sh 'yarn install --frozen-lockfile'
+                sh 'yarn install --frozen-lockfile --ignore-engines'
             }
         }
 
