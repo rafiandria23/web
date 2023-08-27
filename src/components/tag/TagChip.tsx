@@ -14,9 +14,11 @@ const TagChip: FC<ITagChipProps> = ({ tag }) => {
   const router = useRouter();
 
   const handleNavigate = useCallback(
-    (url: string) => {
+    (slug: string) => {
       return async () => {
-        await router.push(url);
+        await router.push({
+          pathname: `/blogs/tags/${slug}`,
+        });
       };
     },
     [router],
@@ -28,7 +30,7 @@ const TagChip: FC<ITagChipProps> = ({ tag }) => {
       color='info'
       clickable
       label={tag.attributes.name}
-      onClick={handleNavigate(`/blog/tags/${tag.attributes.slug}`)}
+      onClick={handleNavigate(tag.attributes.slug)}
     />
   );
 };

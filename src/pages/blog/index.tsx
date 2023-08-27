@@ -40,10 +40,15 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
   const router = useRouter();
   const theme = useTheme();
 
-  const handleNavigate = useCallback(
-    (url: string) => {
+  const handlePaginationChange = useCallback(
+    (newPage: number | null) => {
       return async () => {
-        await router.push(url);
+        await router.push({
+          pathname: '/blog',
+          query: {
+            page: newPage ? newPage : 1,
+          },
+        });
       };
     },
     [router],
@@ -68,10 +73,7 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
   }
 
   const paginationItem = (props: PaginationRenderItemParams) => (
-    <PaginationItem
-      onChange={handleNavigate(`/blog?page=${props.page}`)}
-      {...props}
-    />
+    <PaginationItem onChange={handlePaginationChange(props.page)} {...props} />
   );
 
   return (

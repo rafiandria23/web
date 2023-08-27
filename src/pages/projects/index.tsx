@@ -40,10 +40,15 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
   const router = useRouter();
   const theme = useTheme();
 
-  const handleNavigate = useCallback(
-    (url: string) => {
+  const handlePaginationChange = useCallback(
+    (newPage: number | null) => {
       return async () => {
-        await router.push(url);
+        await router.push({
+          pathname: '/projects',
+          query: {
+            page: newPage ? newPage : 1,
+          },
+        });
       };
     },
     [router],
@@ -68,10 +73,7 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
   }
 
   const paginationItem = (props: PaginationRenderItemParams) => (
-    <PaginationItem
-      onChange={handleNavigate(`/projects?page=${props.page}`)}
-      {...props}
-    />
+    <PaginationItem onChange={handlePaginationChange(props.page)} {...props} />
   );
 
   return (
