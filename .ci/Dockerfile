@@ -7,6 +7,7 @@ COPY ./yarn.lock ./
 COPY ./ ./
 ENV NODE_ENV production
 ENV PATH /app/node_modules/.bin:$PATH
+RUN yarn global add node-gyp
 RUN yarn install --frozen-lockfile --ignore-engines
 RUN yarn build
 
