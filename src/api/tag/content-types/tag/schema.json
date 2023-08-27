@@ -15,6 +15,10 @@
       "type": "string",
       "required": true
     },
+    "overview": {
+      "type": "text",
+      "required": true
+    },
     "slug": {
       "type": "uid",
       "targetField": "name",
