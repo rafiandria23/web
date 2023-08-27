@@ -330,4 +330,6 @@ export const components: Components = {
 
 export const remarkPlugins: PluggableList = [remarkGFM, remarkUnwrapImages];
 
-export const rehypePlugins: PluggableList = [rehypeRaw];
+export const rehypePlugins: PluggableList = [
+  rehypeRaw as PluggableList[number],
+];
