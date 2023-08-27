@@ -1,7 +1,7 @@
 # CMS
 
-[![Build Status](https://jenkins.rafiandria23.tech/job/rafiandria23/job/cms/job/main/badge/icon)](https://jenkins.rafiandria23.tech/job/rafiandria23/job/cms/job/main/)
-[![Quality Gate Status](https://sonarqube.rafiandria23.tech/api/project_badges/measure?project=rafiandria23_cms&metric=alert_status&token=sqb_28c4c2518a1d510131d7bbd137257ea98d616f4f)](https://sonarqube.rafiandria23.tech/dashboard?id=rafiandria23_cms)
+[![Build Status](https://jenkins.rafiandria23.tech/buildStatus/icon?job=rafiandria23%2Fcms%2Fmain)](https://jenkins.rafiandria23.tech/job/rafiandria23/job/cms/job/main/)
+[![Quality Gate Status](https://sonarqube.rafiandria23.tech/api/project_badges/measure?project=rafiandria23_cms&metric=alert_status&token=sqb_c5b82b7bb87d4f407ba28c7bdd67bb4e9057999b)](https://sonarqube.rafiandria23.tech/dashboard?id=rafiandria23_cms)
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
 
