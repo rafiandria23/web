@@ -72,9 +72,7 @@ export const getServerSideProps: GetServerSideProps<
                 data {
                   id
                   attributes {
-                    url
-                    width
-                    height
+                    formats
                   }
                 }
               }
@@ -85,6 +83,7 @@ export const getServerSideProps: GetServerSideProps<
                   attributes {
                     name
                     slug
+                    color
                   }
                 }
               }

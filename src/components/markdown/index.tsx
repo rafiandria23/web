@@ -89,18 +89,6 @@ const MarkdownImg: Components['img'] = ({ src, alt }) => {
           }}
         />
       </CardMedia>
-
-      {alt && (
-        <CardContent
-          sx={{
-            textAlign: 'center',
-          }}
-        >
-          <Typography variant='caption' color={theme.palette.text.secondary}>
-            {alt}
-          </Typography>
-        </CardContent>
-      )}
     </Card>
   );
 };
@@ -185,7 +173,7 @@ const MarkdownCaption: Components['caption'] = ({ children }) => {
 
 const MarkdownTable: Components['table'] = ({ children }) => {
   return (
-    <TableContainer component={Paper}>
+    <TableContainer>
       <Table>{children}</Table>
     </TableContainer>
   );
@@ -230,6 +218,7 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
 
   return (
     <Box
+      component={Paper}
       sx={{
         position: 'relative',
         '& .linenumber': {
@@ -294,9 +283,10 @@ const MarkdownBlockquote: Components['blockquote'] = ({ children }) => {
     <Box
       component='blockquote'
       dir='auto'
-      borderColor={theme.palette.text.secondary}
       sx={{
-        borderInlineStart: '3px solid',
+        borderInlineStart: `${theme.spacing(0.5)} solid ${
+          theme.palette.primary.main
+        }`,
         paddingInlineStart: '1.5rem',
       }}
     >

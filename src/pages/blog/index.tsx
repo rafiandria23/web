@@ -1,5 +1,5 @@
-import type { NextPage, GetServerSideProps } from 'next';
 import { useCallback } from 'react';
+import type { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
@@ -32,8 +32,8 @@ import { ArticleCard } from '@/components/article';
 
 export interface IBlogPageProps {
   pagination: IPagination;
-  articles: IArticle[];
   tags: ITag[];
+  articles: IArticle[];
 }
 
 const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
@@ -46,7 +46,7 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
         await router.push({
           pathname: '/blog',
           query: {
-            page: newPage ? newPage : 1,
+            page: newPage ? newPage : PaginationDefaults.PAGE,
           },
         });
       };
@@ -93,8 +93,8 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
             <Typography
               component='h1'
               variant='h3'
-              gutterBottom
               color={theme.palette.primary.contrastText}
+              gutterBottom
             >
               My Blog
             </Typography>
@@ -102,8 +102,8 @@ const BlogPage: NextPage<IBlogPageProps> = ({ pagination, articles }) => {
             <Typography
               component='p'
               variant='h6'
-              paragraph
               color={theme.palette.primary.contrastText}
+              paragraph
             >
               Check out my latest articles!
             </Typography>
@@ -152,8 +152,8 @@ export const getServerSideProps: GetServerSideProps<
 > = async ({ query }) => {
   const { data } = await client.query<
     {
-      articles: IGraphQLModelResponse<IArticle[]>;
       tags: IGraphQLModelResponse<ITag[]>;
+      articles: IGraphQLModelResponse<IArticle[]>;
     },
     IPagination
   >({
@@ -163,7 +163,20 @@ export const getServerSideProps: GetServerSideProps<
     },
     query: gql`
       query ($pageSize: Int!, $page: Int!) {
-        articles(pagination: { pageSize: $pageSize, page: $page }) {
+        tags {
+          data {
+            id
+            attributes {
+              name
+              slug
+            }
+          }
+        }
+
+        articles(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
           meta {
             pagination {
               total
@@ -182,19 +195,7 @@ export const getServerSideProps: GetServerSideProps<
                 data {
                   id
                   attributes {
-                    url
-                    width
-                    height
-                  }
-                }
-              }
-              cover {
-                data {
-                  id
-                  attributes {
-                    url
-                    width
-                    height
+                    formats
                   }
                 }
               }
@@ -213,16 +214,6 @@ export const getServerSideProps: GetServerSideProps<
             }
           }
         }
-
-        tags {
-          data {
-            id
-            attributes {
-              name
-              slug
-            }
-          }
-        }
       }
     `,
   });
@@ -230,8 +221,8 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       pagination: data.articles.meta.pagination,
-      articles: data.articles.data,
       tags: data.tags.data,
+      articles: data.articles.data,
     },
   };
 };

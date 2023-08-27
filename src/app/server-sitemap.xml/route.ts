@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 const HOST = 'https://rafiandria23.tech';
 
-export async function GET() {
+export function GET() {
   const now = dayjs().toISOString();
 
   const fields: ISitemapField[] = [
@@ -13,19 +13,11 @@ export async function GET() {
       lastmod: now,
     },
     {
-      loc: `${HOST}/projects`,
-      lastmod: now,
-    },
-    {
-      loc: `${HOST}/projects/tags`,
-      lastmod: now,
-    },
-    {
       loc: `${HOST}/blog`,
       lastmod: now,
     },
     {
-      loc: `${HOST}/blog/tags`,
+      loc: `${HOST}/projects`,
       lastmod: now,
     },
   ];

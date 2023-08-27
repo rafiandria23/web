@@ -32,6 +32,11 @@ const GlobalTheme: Partial<Theme> = {
         color: colors.blue[500],
       },
     },
+    MuiPaper: {
+      defaultProps: {
+        elevation: 6,
+      },
+    },
   },
 };
 

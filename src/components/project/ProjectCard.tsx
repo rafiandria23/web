@@ -35,7 +35,10 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
           alignItems: 'stretch',
         }}
       >
-        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+        <Box
+          component='article'
+          sx={{ display: 'flex', flexDirection: 'column' }}
+        >
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography variant='h5' gutterBottom>
               {project.attributes.title}
@@ -49,12 +52,9 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
           <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
             <Typography
               variant='overline'
-              component='p'
               align='left'
-              sx={{
-                textTransform: 'none',
-                color: theme.palette.text.secondary,
-              }}
+              color={theme.palette.text.secondary}
+              paragraph
             >
               {dayjs(project.attributes.updatedAt).format(
                 DateTimeFormat['MMM D, YYYY'],
