@@ -1,5 +1,3 @@
-import type { Dayjs } from 'dayjs';
-
 import type { DateTime } from './datetime';
 import type { IPagination } from './page';
 

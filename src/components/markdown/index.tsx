@@ -9,7 +9,6 @@ import {
   Paper,
   Card,
   CardMedia,
-  CardContent,
   Link,
   Typography,
   TableContainer,
