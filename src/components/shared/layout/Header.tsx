@@ -74,9 +74,11 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   }, [dialogVisible, setDialogVisibility]);
 
   const handleNavigate = useCallback(
-    (url: string) => {
+    (pathname: string) => {
       return async () => {
-        await router.push(url);
+        await router.push({
+          pathname,
+        });
       };
     },
     [router],

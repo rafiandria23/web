@@ -36,9 +36,11 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
   const screenSize = useScreenSize();
 
   const handleNavigate = useCallback(
-    (url: string) => {
+    (slug: string) => {
       return async () => {
-        await router.push(url);
+        await router.push({
+          pathname: `/blog/${slug}`,
+        });
       };
     },
     [router],
@@ -47,9 +49,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
   return (
     <Tooltip title={article.attributes.title}>
       <Card>
-        <CardActionArea
-          onClick={handleNavigate(`/blog/${article.attributes.slug}`)}
-        >
+        <CardActionArea onClick={handleNavigate(article.attributes.slug)}>
           <Stack direction='row'>
             <CardContent component={Stack}>
               <Typography

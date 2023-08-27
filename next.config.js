@@ -4,7 +4,6 @@ const path = require('path');
 module.exports = {
   reactStrictMode: true,
   distDir: '.next',
-  output: 'standalone',
   sassOptions: {
     includePaths: [path.join(__dirname, 'src', 'styles')],
   },
