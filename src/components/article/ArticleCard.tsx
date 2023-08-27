@@ -50,7 +50,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
     <Tooltip title={article.attributes.title}>
       <Card>
         <CardActionArea onClick={handleNavigate(article.attributes.slug)}>
-          <Stack direction='row'>
+          <Stack component='article' direction='row'>
             <CardContent component={Stack}>
               <Typography
                 component='h2'
@@ -91,11 +91,8 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
               <Typography
                 variant='overline'
                 align='left'
+                color={theme.palette.text.secondary}
                 paragraph
-                sx={{
-                  textTransform: 'none',
-                  color: theme.palette.text.secondary,
-                }}
               >
                 {dayjs(article.attributes.updatedAt).format(
                   DateTimeFormat['MMM D, YYYY'],
@@ -107,10 +104,19 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
 
             <CardMedia>
               <NextImage
-                src={article.attributes.thumbnail.data.attributes.url}
+                src={
+                  article.attributes.thumbnail.data.attributes.formats.thumbnail
+                    .url
+                }
                 alt={article.attributes.title}
-                width={article.attributes.thumbnail.data.attributes.width}
-                height={article.attributes.thumbnail.data.attributes.height}
+                width={
+                  article.attributes.thumbnail.data.attributes.formats.thumbnail
+                    .width
+                }
+                height={
+                  article.attributes.thumbnail.data.attributes.formats.thumbnail
+                    .height
+                }
                 style={{
                   display: 'block',
                   objectFit: 'cover',

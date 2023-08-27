@@ -1,21 +1,22 @@
+import { useState, useMemo } from 'react';
 import type { NextPage, GetServerSideProps } from 'next';
 import { NextSeo } from 'next-seo';
 import { gql } from '@apollo/client';
 import {
   useTheme,
+  Container,
+  Box,
   Grid,
   Stack,
-  Box,
-  Container,
   Typography,
 } from '@mui/material';
 
 // Types
-import type { IPagination } from '@/types/page';
 import type { IGraphQLModelResponse } from '@/types/graphql';
-import type { IArticle } from '@/types/article';
-import type { IProject } from '@/types/project';
+import type { IPageProps, IPagination } from '@/types/page';
 import type { ITag } from '@/types/tag';
+import type { IProject } from '@/types/project';
+import type { IArticle } from '@/types/article';
 
 // Constants
 import { PaginationDefaults } from '@/constants/page';
@@ -28,24 +29,39 @@ import { Layout } from '@/components/shared/layout';
 import { ArticleCard } from '@/components/article';
 import { ProjectCard } from '@/components/project';
 
-interface IHomePageProps {
+export interface ITagsPageProps extends IPageProps {
+  tag: ITag;
   articles: IArticle[];
   projects: IProject[];
-  tags: ITag[];
 }
 
-const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
+const TagsPage: NextPage<ITagsPageProps> = (props) => {
+  const { tag } = props;
+
   const theme = useTheme();
+
+  const [articles] = useState(props.articles);
+  const [projects] = useState(props.projects);
+
+  const additionalLinkTags = useMemo(() => {
+    return [
+      {
+        rel: 'canonical',
+        href: `https://rafiandria23.tech/tags/${tag.attributes.slug}`,
+      },
+    ];
+  }, [tag]);
 
   return (
     <>
       <NextSeo
-        title='Welcome!'
-        description='Software Engineer & Lifetime Learner'
+        title={tag.attributes.name}
+        description={tag.attributes.overview}
+        additionalLinkTags={additionalLinkTags}
       />
 
       <Layout elevate>
-        {/* Introduction Section */}
+        {/* Tag Hero Section */}
         <Box
           sx={{
             bgcolor: theme.palette.primary.light,
@@ -55,29 +71,24 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
             <Typography
               component='h1'
               variant='h3'
-              textAlign='center'
               color={theme.palette.primary.contrastText}
-              fontWeight={theme.typography.fontWeightBold}
               gutterBottom
             >
-              Hey, I&apos;m Adam.
+              {tag.attributes.name}
             </Typography>
 
             <Typography
               component='p'
               variant='h6'
-              textAlign='center'
               color={theme.palette.primary.contrastText}
               paragraph
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-              vulputate ex id quam malesuada efficitur. Ut id nisi eget sapien
-              iaculis laoreet.
+              {tag.attributes.overview}
             </Typography>
           </Stack>
         </Box>
 
-        {/* Latest Articles Section */}
+        {/* Related Articles Section */}
         <Stack component={Container} spacing={8}>
           <Typography
             component='h2'
@@ -88,7 +99,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
             }}
             gutterBottom
           >
-            Latest Articles
+            {tag.attributes.name} Articles
           </Typography>
 
           <Grid
@@ -99,14 +110,14 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
             }}
           >
             {articles.map((article) => (
-              <Grid key={article.id} item xs={12} xl={3.83}>
-                <ArticleCard article={article} overview={false} />
+              <Grid key={article.id} item xs={12} xl={5.87}>
+                <ArticleCard article={article} />
               </Grid>
             ))}
           </Grid>
         </Stack>
 
-        {/* Latest Projects Section */}
+        {/* Related Projects Section */}
         <Box sx={{ bgcolor: theme.palette.primary.light }}>
           <Stack component={Container} spacing={8}>
             <Typography
@@ -116,7 +127,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               color={theme.palette.primary.contrastText}
               gutterBottom
             >
-              Latest Projects
+              {tag.attributes.name} Projects
             </Typography>
 
             <Grid
@@ -127,7 +138,7 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               }}
             >
               {projects.map((project) => (
-                <Grid key={project.id} item xs={12} xl={3.83}>
+                <Grid key={project.id} item xs={12} xl={5.87}>
                   <ProjectCard project={project} />
                 </Grid>
               ))}
@@ -139,29 +150,53 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
   );
 };
 
-export default HomePage;
+export default TagsPage;
 
 export const getServerSideProps: GetServerSideProps<
-  IHomePageProps
-> = async () => {
+  ITagsPageProps,
+  {
+    slug: ITag['attributes']['slug'];
+  }
+> = async ({ params }) => {
+  const slug = String(params?.slug);
   const { data } = await client.query<
     {
+      tags: IGraphQLModelResponse<ITag[]>;
       articles: IGraphQLModelResponse<IArticle[]>;
       projects: IGraphQLModelResponse<IProject[]>;
-      tags: IGraphQLModelResponse<ITag[]>;
     },
-    IPagination
+    { slug: ITag['attributes']['slug'] } & IPagination
   >({
     variables: {
-      pageSize: 6,
+      slug,
+      pageSize: PaginationDefaults.PAGE_SIZE,
       page: PaginationDefaults.PAGE,
     },
     query: gql`
-      query ($pageSize: Int!, $page: Int!) {
+      query ($slug: String!, $pageSize: Int!, $page: Int!) {
+        tags(filters: { slug: { eq: $slug } }) {
+          data {
+            id
+            attributes {
+              name
+              overview
+            }
+          }
+        }
+
         articles(
           pagination: { pageSize: $pageSize, page: $page }
           sort: ["publishedAt:DESC"]
         ) {
+          meta {
+            pagination {
+              total
+              pageSize
+              pageCount
+              page
+            }
+          }
+
           data {
             id
             attributes {
@@ -185,6 +220,7 @@ export const getServerSideProps: GetServerSideProps<
                   }
                 }
               }
+              content
               publishedAt
             }
           }
@@ -194,6 +230,15 @@ export const getServerSideProps: GetServerSideProps<
           pagination: { pageSize: $pageSize, page: $page }
           sort: ["publishedAt:DESC"]
         ) {
+          meta {
+            pagination {
+              total
+              pageSize
+              pageCount
+              page
+            }
+          }
+
           data {
             id
             attributes {
@@ -208,6 +253,7 @@ export const getServerSideProps: GetServerSideProps<
                   }
                 }
               }
+              status
               tags {
                 data {
                   id
@@ -217,21 +263,6 @@ export const getServerSideProps: GetServerSideProps<
                   }
                 }
               }
-              status
-              publishedAt
-            }
-          }
-        }
-
-        tags(
-          pagination: { pageSize: $pageSize, page: $page }
-          sort: ["publishedAt:DESC"]
-        ) {
-          data {
-            id
-            attributes {
-              name
-              slug
             }
           }
         }
@@ -239,11 +270,17 @@ export const getServerSideProps: GetServerSideProps<
     `,
   });
 
+  if (!data.tags.data.length) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
+      tag: data.tags.data[0],
       articles: data.articles.data,
       projects: data.projects.data,
-      tags: data.tags.data,
     },
   };
 };

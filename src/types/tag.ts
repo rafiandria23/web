@@ -1,12 +1,10 @@
-import type { IGraphQLModel, IGraphQLModelResponse } from './graphql';
-import type { IProject } from './project';
-import type { IArticle } from './article';
+import type { IGraphQLModel } from './graphql';
 
 interface IBaseTag {
   name: string;
+  overview: string;
   slug: string;
-  projects: IGraphQLModelResponse<IProject[]>;
-  articles: IGraphQLModelResponse<IArticle[]>;
+  color: string;
 }
 
 export interface ITag extends IGraphQLModel<IBaseTag> {}

@@ -12,17 +12,17 @@ import { DateTimeFormat } from '@/constants/datetime';
 // Components
 import { TagChip } from '@/components/tag';
 
-export interface IArticleHeaderProps {
+export interface IArticleCoverProps {
   article: IArticle;
 }
 
-const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
+const ArticleCover: FC<IArticleCoverProps> = ({ article }) => {
   const theme = useTheme();
 
   return (
     <Stack>
       <Typography
-        variant='overline'
+        variant='caption'
         color={theme.palette.text.secondary}
         paragraph
       >
@@ -41,14 +41,18 @@ const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
       </Typography>
 
       {article.attributes.tags.data.length > 0 && (
-        <Stack direction='row' spacing={2}>
+        <Stack direction='row' spacing={1}>
           {article.attributes.tags.data.map((tag) => (
             <TagChip key={tag.id} tag={tag} />
           ))}
         </Stack>
       )}
+
+      <Typography paragraph gutterBottom>
+        {article.attributes.overview}
+      </Typography>
     </Stack>
   );
 };
 
-export default memo(ArticleHeader);
+export default memo(ArticleCover);

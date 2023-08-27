@@ -6,8 +6,9 @@ import { gql } from '@apollo/client';
 import type { PaginationRenderItemParams } from '@mui/material';
 import {
   useTheme,
-  Grid,
   Container,
+  Grid,
+  Stack,
   Typography,
   Pagination,
   PaginationItem,
@@ -46,7 +47,7 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
         await router.push({
           pathname: '/projects',
           query: {
-            page: newPage ? newPage : 1,
+            page: newPage ? newPage : PaginationDefaults.PAGE,
           },
         });
       };
@@ -93,8 +94,8 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
             <Typography
               component='h1'
               variant='h3'
-              gutterBottom
               color={theme.palette.primary.contrastText}
+              gutterBottom
             >
               My Projects
             </Typography>
@@ -102,8 +103,8 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
             <Typography
               component='p'
               variant='h6'
-              paragraph
               color={theme.palette.primary.contrastText}
+              paragraph
             >
               Check out my latest projects!
             </Typography>
@@ -113,30 +114,30 @@ const ProjectsPage: NextPage<IProjectsPageProps> = ({
         <Grid
           component={Container}
           container
-          direction='column'
-          justifyContent='space-evenly'
-          alignItems='center'
-          gap={4}
+          gap={{
+            xs: 3,
+            xl: 3,
+          }}
         >
           {projects.map((project) => (
-            <Grid key={project.id} item>
+            <Grid key={project.id} item xs={12} xl={5.87}>
               <ProjectCard project={project} />
             </Grid>
           ))}
-
-          <Grid item>
-            <Pagination
-              shape='rounded'
-              color='primary'
-              size='large'
-              count={pagination.pageCount}
-              page={pagination.page}
-              renderItem={paginationItem}
-              hidePrevButton={pagination.page === 1}
-              hideNextButton={pagination.page === pagination.pageCount}
-            />
-          </Grid>
         </Grid>
+
+        <Stack component={Container} direction='row' justifyContent='center'>
+          <Pagination
+            shape='rounded'
+            color='primary'
+            size='large'
+            count={pagination.pageCount}
+            page={pagination.page}
+            renderItem={paginationItem}
+            hidePrevButton={pagination.page === 1}
+            hideNextButton={pagination.page === pagination.pageCount}
+          />
+        </Stack>
       </Layout>
     </>
   );
@@ -160,7 +161,10 @@ export const getServerSideProps: GetServerSideProps<
     },
     query: gql`
       query ($pageSize: Int!, $page: Int!) {
-        projects(pagination: { pageSize: $pageSize, page: $page }) {
+        projects(
+          pagination: { pageSize: $pageSize, page: $page }
+          sort: ["publishedAt:DESC"]
+        ) {
           meta {
             pagination {
               total
@@ -180,9 +184,7 @@ export const getServerSideProps: GetServerSideProps<
                 data {
                   id
                   attributes {
-                    url
-                    width
-                    height
+                    formats
                   }
                 }
               }
