@@ -71,7 +71,6 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
                 <Typography
                   variant='body2'
                   display='block'
-                  textAlign='justify'
                   color={theme.palette.text.secondary}
                   paragraph
                   sx={{

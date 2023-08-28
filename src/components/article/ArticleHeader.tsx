@@ -41,7 +41,15 @@ const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
       </Typography>
 
       {article.attributes.tags.data.length > 0 && (
-        <Stack direction='row' spacing={2}>
+        <Stack
+          direction='row'
+          flexWrap='wrap'
+          useFlexGap
+          spacing={{
+            xs: 1,
+            xl: 2,
+          }}
+        >
           {article.attributes.tags.data.map((tag) => (
             <TagChip key={tag.id} tag={tag} />
           ))}
