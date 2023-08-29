@@ -1,15 +1,3 @@
-// Fonts
-import '@fontsource/lato/100.css';
-import '@fontsource/lato/300.css';
-import '@fontsource/lato/400.css';
-import '@fontsource/lato/700.css';
-import '@fontsource/lato/900.css';
-import '@fontsource/lato/100-italic.css';
-import '@fontsource/lato/300-italic.css';
-import '@fontsource/lato/400-italic.css';
-import '@fontsource/lato/700-italic.css';
-import '@fontsource/lato/900-italic.css';
-
 // Global Styles
 import '@/styles/global.scss';
 
@@ -73,25 +61,26 @@ const App: NextComponentType<
   };
 
   return (
-    <PersistGate persistor={persistor}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <SnackbarProvider action={handleSnackbarAction}>
-          <DefaultSeo
-            titleTemplate='%s | rafiandria23.tech'
-            openGraph={{
-              type: 'website',
-              locale: 'en_US',
-              url: 'https://rafiandria23.tech',
-            }}
-          />
-          <>
-            <GoogleAnalytics
-              gaMeasurementId={AppConfig.GA_MEASUREMENT_ID}
-              strategy='lazyOnload'
-              trackPageViews
-            />
+    <>
+      <DefaultSeo
+        titleTemplate='%s | rafiandria23.tech'
+        openGraph={{
+          type: 'website',
+          locale: 'en_US',
+          url: 'https://rafiandria23.tech',
+        }}
+      />
 
+      <GoogleAnalytics
+        gaMeasurementId={AppConfig.GA_MEASUREMENT_ID}
+        strategy='worker'
+        trackPageViews
+      />
+
+      <PersistGate persistor={persistor}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <SnackbarProvider action={handleSnackbarAction}>
             {pageProps.errorStatus ? (
               <ErrorPage
                 statusCode={pageProps.errorStatus}
@@ -100,10 +89,10 @@ const App: NextComponentType<
             ) : (
               <Component {...pageProps} />
             )}
-          </>
-        </SnackbarProvider>
-      </ThemeProvider>
-    </PersistGate>
+          </SnackbarProvider>
+        </ThemeProvider>
+      </PersistGate>
+    </>
   );
 };
 

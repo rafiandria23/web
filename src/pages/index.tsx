@@ -57,7 +57,6 @@ const HomePage: NextPage<IHomePageProps> = ({ articles, projects }) => {
               variant='h3'
               textAlign='center'
               color={theme.palette.primary.contrastText}
-              fontWeight={theme.typography.fontWeightBold}
               gutterBottom
             >
               Hey, I&apos;m Adam.

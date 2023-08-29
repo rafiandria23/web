@@ -10,4 +10,7 @@ module.exports = {
   images: {
     domains: ['storage.rafiandria23.tech'],
   },
+  experimental: {
+    nextScriptWorkers: true,
+  },
 };

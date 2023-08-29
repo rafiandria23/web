@@ -4,7 +4,7 @@ import { createTheme, colors } from '@mui/material';
 
 const GlobalTheme: Partial<Theme> = {
   typography: {
-    fontFamily: ['"Lato"'].join(', '),
+    fontFamily: 'inherit',
   } as Theme['typography'],
   components: {
     MuiToolbar: {

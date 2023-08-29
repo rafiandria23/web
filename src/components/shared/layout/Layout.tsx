@@ -1,4 +1,5 @@
 import { memo, FC, ReactNode } from 'react';
+import { Roboto } from 'next/font/google';
 import { useTheme, Stack } from '@mui/material';
 
 // Components
@@ -12,6 +13,12 @@ interface ILayoutProps {
   footer?: boolean;
 }
 
+const roboto = Roboto({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['100', '300', '400', '500', '700', '900'],
+});
+
 const Layout: FC<ILayoutProps> = ({
   children,
   header = true,
@@ -21,7 +28,8 @@ const Layout: FC<ILayoutProps> = ({
   const theme = useTheme();
 
   return (
-    <>
+    // Migrate this!
+    <body className={roboto.className}>
       {header && <Header elevate={elevate} />}
 
       <Stack
@@ -56,7 +64,7 @@ const Layout: FC<ILayoutProps> = ({
       </Stack>
 
       {footer && <Footer />}
-    </>
+    </body>
   );
 };
 
