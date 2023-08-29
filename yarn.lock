@@ -1836,10 +1836,10 @@
   dependencies:
     chevrotain "^10.4.2"
 
-"@newrelic/apollo-server-plugin@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-3.1.2.tgz#c8853c4ea910267bfa3e787655dba544feb51fbc"
-  integrity sha512-zsv8ts6rYK+phE7/PA1IXAQvfSLtS1D3w6MkWh54fmWuwd3S3HW4YKXzhRs7rEZ+hHtQ9rqmDLjv0n+oS1ClAA==
+"@newrelic/apollo-server-plugin@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-4.0.0.tgz#32087e6a7939795cc0e7f55135420d977e9f7984"
+  integrity sha512-L3HMj+qnUs26QsEbLy4qDYEDYGKlJSaCDoZRrxiIj4rn6rs6hRAHw2mt6oEjwRdfUoF8diqiF6G/+yjhv57tWA==
 
 "@newrelic/aws-sdk@^6.0.0":
   version "6.0.0"
