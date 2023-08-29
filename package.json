@@ -19,7 +19,7 @@
     "@strapi/plugin-seo": "^1.9.2",
     "@strapi/plugin-users-permissions": "^4.12.7",
     "@strapi/strapi": "^4.12.7",
-    "newrelic": "^10.6.2",
+    "newrelic": "^11.0.0",
     "pg": "^8.11.3",
     "strapi-provider-upload-minio-ce": "^1.2.0"
   },
