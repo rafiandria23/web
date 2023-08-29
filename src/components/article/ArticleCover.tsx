@@ -31,12 +31,7 @@ const ArticleCover: FC<IArticleCoverProps> = ({ article }) => {
         )}
       </Typography>
 
-      <Typography
-        component='h1'
-        variant='h3'
-        fontWeight={theme.typography.fontWeightBold}
-        gutterBottom
-      >
+      <Typography component='h1' variant='h3' gutterBottom>
         {article.attributes.title}
       </Typography>
 

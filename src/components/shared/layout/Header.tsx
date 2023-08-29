@@ -122,7 +122,6 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 onClick={handleNavigate('/')}
                 sx={{
                   textTransform: 'none',
-                  fontWeight: theme.typography.fontWeightBold,
                 }}
               >
                 rafiandria23.tech
@@ -152,7 +151,6 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
                 onClick={handleNavigate('/')}
                 sx={{
                   textTransform: 'none',
-                  fontWeight: theme.typography.fontWeightBold,
                 }}
               >
                 rafiandria23.tech

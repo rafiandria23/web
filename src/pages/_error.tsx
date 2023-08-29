@@ -20,12 +20,7 @@ const ErrorPage: NextPage<IErrorPageProps> = ({ statusCode }) => {
 
         <Layout>
           <Container component={Stack}>
-            <Typography
-              component='h1'
-              variant='h3'
-              fontWeight={theme.typography.fontWeightBold}
-              gutterBottom
-            >
+            <Typography component='h1' variant='h3' gutterBottom>
               Not Found
             </Typography>
 
@@ -49,12 +44,7 @@ const ErrorPage: NextPage<IErrorPageProps> = ({ statusCode }) => {
 
       <Layout>
         <Container component={Stack}>
-          <Typography
-            component='h1'
-            variant='h3'
-            fontWeight={theme.typography.fontWeightBold}
-            gutterBottom
-          >
+          <Typography component='h1' variant='h3' gutterBottom>
             Internal Server Error
           </Typography>
         </Container>

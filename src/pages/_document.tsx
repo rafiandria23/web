@@ -1,6 +1,7 @@
 import newrelic from 'newrelic';
 import type { DocumentContext, DocumentInitialProps } from 'next/document';
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
 
 export type NewRelicProps = {
   browserTimingHeader: string;
@@ -47,9 +48,13 @@ export default class Document extends NextDocument<NewRelicProps> {
           />
 
           {/* New Relic */}
-          <script
+          <Script
+            id='newrelic'
             type='text/javascript'
-            dangerouslySetInnerHTML={{ __html: this.props.browserTimingHeader }}
+            strategy='worker'
+            dangerouslySetInnerHTML={{
+              __html: this.props.browserTimingHeader,
+            }}
           />
         </Head>
 
