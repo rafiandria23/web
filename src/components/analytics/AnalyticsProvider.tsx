@@ -15,7 +15,6 @@ const AnalyticsProvider: FC<IAnalyticsProviderProps> = ({ children }) => {
     <>
       <GoogleAnalytics
         gaMeasurementId={AppConfig.GA_MEASUREMENT_ID}
-        strategy='worker'
         trackPageViews
       />
 
