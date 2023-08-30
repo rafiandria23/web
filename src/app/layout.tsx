@@ -37,6 +37,7 @@ const RootLayout: FC<IRootLayoutProps> = ({ children }) => {
 export default RootLayout;
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rafiandria23.tech'),
   title: {
     default: 'Welcome!',
     template: '%s | rafiandria23.tech',
@@ -67,9 +68,23 @@ export const metadata: Metadata = {
     locale: 'en_US',
     title: 'Welcome!',
     description: 'My personal web.',
+    images: [
+      {
+        alt: 'rafiandria23.tech',
+        url: '/favicon-96x96.png',
+        secureUrl: '/favicon-96x96.png',
+      },
+    ],
   },
   twitter: {
     title: 'Welcome!',
     description: 'My personal web.',
+    images: [
+      {
+        alt: 'rafiandria23.tech',
+        url: '/favicon-96x96.png',
+        secureUrl: '/favicon-96x96.png',
+      },
+    ],
   },
 };
