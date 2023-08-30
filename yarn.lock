@@ -835,10 +835,10 @@
     nan "^2.17.0"
     semver "^7.5.2"
 
-"@newrelic/next@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/next/-/next-0.6.0.tgz#f7225c1ed3061d689448c20faba4b891d20e1669"
-  integrity sha512-jfSMVTLTpfUi9+YJEiLNXwP+hCPvMTsa6ZDrDZpdgRYmSvszWDkLnBJsdcYVMo1D7jF1JpoiPoHjsC/esmGbVQ==
+"@newrelic/next@^0.7.0":
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/next/-/next-0.7.0.tgz#de9baa26e34b3177a812ef7accacbdfcf36676a9"
+  integrity sha512-IM1CAwGcEzRqGdCue2GPPDGOxNjR1sp6eiRGfV/9yMH7LEIg7GaDTHy1+R1WnbofK5vuhJA5o87K+E4JmLw88w==
   dependencies:
     semver "^7.3.7"
 
