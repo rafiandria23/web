@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
 import {
   persistStore,
   persistReducer,
@@ -33,7 +32,7 @@ const persistedReducer = persistReducer(
   rootReducer,
 );
 
-const store = configureStore({
+export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -43,9 +42,4 @@ const store = configureStore({
     }),
 });
 
-const makeStore = () => {
-  return store;
-};
-
 export const persistor = persistStore(store);
-export const wrapper = createWrapper(makeStore);

@@ -1,36 +1,22 @@
+'use client';
+
 import { memo, FC, ReactNode } from 'react';
-import { Roboto } from 'next/font/google';
 import { useTheme, Stack } from '@mui/material';
 
 // Components
 import Header from './Header';
 import Footer from './Footer';
 
-interface ILayoutProps {
+export interface ILayoutProps {
   children: ReactNode;
-  header?: boolean;
-  elevate?: boolean;
-  footer?: boolean;
 }
 
-const roboto = Roboto({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['100', '300', '400', '500', '700', '900'],
-});
-
-const Layout: FC<ILayoutProps> = ({
-  children,
-  header = true,
-  elevate = false,
-  footer = true,
-}) => {
+const Layout: FC<ILayoutProps> = ({ children }) => {
   const theme = useTheme();
 
   return (
-    // Migrate this!
-    <body className={roboto.className}>
-      {header && <Header elevate={elevate} />}
+    <>
+      <Header />
 
       <Stack
         component='main'
@@ -63,8 +49,8 @@ const Layout: FC<ILayoutProps> = ({
         {children}
       </Stack>
 
-      {footer && <Footer />}
-    </body>
+      <Footer />
+    </>
   );
 };
 

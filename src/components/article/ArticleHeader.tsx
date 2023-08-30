@@ -1,6 +1,8 @@
+'use client';
+
 import type { FC } from 'react';
 import { memo } from 'react';
-import { useTheme, Stack, Typography } from '@mui/material';
+import { useTheme, Box, Stack, Container, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 // Types
@@ -20,37 +22,49 @@ const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
   const theme = useTheme();
 
   return (
-    <Stack>
-      <Typography
-        variant='overline'
-        color={theme.palette.text.secondary}
-        paragraph
-      >
-        {dayjs(article.attributes.updatedAt).format(
-          DateTimeFormat['MMM D, YYYY'],
-        )}
-      </Typography>
-
-      <Typography component='h1' variant='h3' gutterBottom>
-        {article.attributes.title}
-      </Typography>
-
-      {article.attributes.tags.data.length > 0 && (
-        <Stack
-          direction='row'
-          flexWrap='wrap'
-          useFlexGap
-          spacing={{
-            xs: 1,
-            xl: 2,
-          }}
+    <Box
+      component='section'
+      sx={{
+        bgcolor: theme.palette.primary.light,
+      }}
+    >
+      <Stack component={Container}>
+        <Typography
+          variant='overline'
+          color={theme.palette.primary.contrastText}
+          paragraph
         >
-          {article.attributes.tags.data.map((tag) => (
-            <TagChip key={tag.id} tag={tag} />
-          ))}
-        </Stack>
-      )}
-    </Stack>
+          {dayjs(article.attributes.updatedAt).format(
+            DateTimeFormat['MMM D, YYYY'],
+          )}
+        </Typography>
+
+        <Typography
+          component='h1'
+          variant='h3'
+          color={theme.palette.primary.contrastText}
+          gutterBottom
+        >
+          {article.attributes.title}
+        </Typography>
+
+        {article.attributes.tags.data.length > 0 && (
+          <Stack
+            direction='row'
+            flexWrap='wrap'
+            useFlexGap
+            spacing={{
+              xs: 1,
+              xl: 2,
+            }}
+          >
+            {article.attributes.tags.data.map((tag) => (
+              <TagChip key={tag.id} tag={tag} />
+            ))}
+          </Stack>
+        )}
+      </Stack>
+    </Box>
   );
 };
 

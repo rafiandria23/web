@@ -1,3 +1,5 @@
+'use client';
+
 import { memo, useState, useCallback } from 'react';
 import NextLink from 'next/link';
 import type { Components } from 'react-markdown';

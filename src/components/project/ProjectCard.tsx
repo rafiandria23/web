@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import { memo } from 'react';
 import NextLink from 'next/link';
@@ -40,11 +42,23 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
           sx={{ display: 'flex', flexDirection: 'column' }}
         >
           <CardContent sx={{ flex: '1 0 auto' }}>
-            <Typography variant='h5' gutterBottom>
+            <Typography component='h3' variant='h6' gutterBottom>
               {project.attributes.title}
             </Typography>
 
-            <Typography variant='body2' color={theme.palette.text.secondary}>
+            <Typography
+              variant='body2'
+              display='block'
+              color={theme.palette.text.secondary}
+              paragraph
+              sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+              }}
+            >
               {project.attributes.overview}
             </Typography>
           </CardContent>

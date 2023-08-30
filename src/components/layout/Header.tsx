@@ -1,7 +1,9 @@
+'use client';
+
 import type { ReactElement, Ref, FC } from 'react';
-import { forwardRef, useState, useCallback, useMemo, memo } from 'react';
+import { forwardRef, useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import NextLink from 'next/link';
 import type { TransitionProps } from '@mui/material/transitions';
 import {
@@ -36,8 +38,8 @@ import { useScreenSize } from '@/hooks/screen';
 import { useThemeState } from '@/hooks/theme';
 
 // Components
-import type { IThemeSwitcherProps } from '@/components/shared/theme/ThemeSwitcher';
-import { ThemeSwitcher } from '@/components/shared/theme';
+import type { IThemeSwitcherProps } from '@/components/theme/ThemeSwitcher';
+import { ThemeSwitcher } from '@/components/theme';
 
 const HeaderTransition = forwardRef(
   (props: TransitionProps & { children: ReactElement }, ref: Ref<unknown>) => (
@@ -46,11 +48,7 @@ const HeaderTransition = forwardRef(
 );
 HeaderTransition.displayName = 'HeaderTransition';
 
-export interface IHeaderProps {
-  elevate?: boolean;
-}
-
-const Header: FC<IHeaderProps> = ({ elevate = false }) => {
+const Header: FC = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { mode } = useThemeState();
@@ -61,24 +59,14 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   });
   const [dialogVisible, setDialogVisibility] = useState<boolean>(false);
 
-  const calculatedElevation = useMemo(() => {
-    if (elevate) {
-      return scrollTriggered ? 4 : 0;
-    }
-
-    return undefined;
-  }, [elevate, scrollTriggered]);
-
   const handleDialogVisibility = useCallback(() => {
     setDialogVisibility(!dialogVisible);
   }, [dialogVisible, setDialogVisibility]);
 
   const handleNavigate = useCallback(
-    (pathname: string) => {
-      return async () => {
-        await router.push({
-          pathname,
-        });
+    (url: string) => {
+      return () => {
+        router.push(url);
       };
     },
     [router],
@@ -91,6 +79,10 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
     [dispatch],
   );
 
+  const calculatedElevation = useMemo(() => {
+    return scrollTriggered ? 6 : 0;
+  }, [scrollTriggered]);
+
   return (
     <>
       <AppBar
@@ -98,10 +90,9 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
         position='fixed'
         elevation={calculatedElevation}
         sx={{
-          ...(elevate &&
-            !scrollTriggered && {
-              bgcolor: 'transparent',
-            }),
+          ...(!scrollTriggered && {
+            bgcolor: 'transparent',
+          }),
         }}
       >
         <Toolbar
@@ -245,4 +236,4 @@ const Header: FC<IHeaderProps> = ({ elevate = false }) => {
   );
 };
 
-export default memo(Header);
+export default Header;
