@@ -1,6 +1,8 @@
+'use client';
+
 import type { FC } from 'react';
 import { memo, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import NextImage from 'next/image';
 import {
   useTheme,
@@ -37,10 +39,8 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
 
   const handleNavigate = useCallback(
     (slug: string) => {
-      return async () => {
-        await router.push({
-          pathname: `/blog/${slug}`,
-        });
+      return () => {
+        router.push(`/blog/${slug}`);
       };
     },
     [router],
@@ -53,7 +53,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
           <Stack component='article' direction='row'>
             <CardContent component={Stack}>
               <Typography
-                component='h2'
+                component='h3'
                 variant='h6'
                 gutterBottom
                 sx={{

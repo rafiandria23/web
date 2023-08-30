@@ -1,3 +1,5 @@
+'use client';
+
 import { memo, FC, useMemo } from 'react';
 import { useTheme, Container, Box, Stack, Typography } from '@mui/material';
 import dayjs from 'dayjs';
