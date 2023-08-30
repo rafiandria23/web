@@ -14,7 +14,7 @@
     "@newrelic/apollo-server-plugin": "^4.0.0",
     "@strapi/plugin-color-picker": "^4.12.7",
     "@strapi/plugin-graphql": "^4.12.7",
-    "@strapi/plugin-i18n": "4.12.7",
+    "@strapi/plugin-i18n": "4.13.1",
     "@strapi/plugin-open-ai": "^1.0.1",
     "@strapi/plugin-seo": "^1.9.2",
     "@strapi/plugin-users-permissions": "^4.12.7",
