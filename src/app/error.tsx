@@ -16,7 +16,13 @@ export default function ErrorPage() {
       }}
     >
       <Stack component={Container} spacing={2}>
-        <Typography component='h1' variant='h3' gutterBottom>
+        <Typography
+          component='h1'
+          variant='h3'
+          textAlign='center'
+          color='primary.contrastText'
+          gutterBottom
+        >
           Oops! Something went wrong.
         </Typography>
       </Stack>
