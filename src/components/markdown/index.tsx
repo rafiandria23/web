@@ -4,7 +4,6 @@ import { memo, useState, useCallback } from 'react';
 import NextLink from 'next/link';
 import type { Components } from 'react-markdown';
 import type { PluggableList } from 'react-markdown/lib/react-markdown';
-import NextImage from 'next/image';
 import {
   useTheme,
   Box,
@@ -54,6 +53,9 @@ import remarkUnwrapImages from 'remark-unwrap-images';
 // rehype Plugins
 import rehypeRaw from 'rehype-raw';
 
+// Components
+import { Image } from '@/components/utils';
+
 // Register Syntax Highlighter Languages
 SyntaxHighlighter.registerLanguage('c', c);
 SyntaxHighlighter.registerLanguage('c#', csharp);
@@ -73,9 +75,13 @@ const MarkdownImg: Components['img'] = ({ src, alt }) => {
   const theme = useTheme();
 
   return (
-    <Card>
+    <Card
+      sx={{
+        my: theme.spacing(2),
+      }}
+    >
       <CardMedia>
-        <NextImage
+        <Image
           src={src as string}
           alt={alt as string}
           width={0}
@@ -173,8 +179,14 @@ const MarkdownCaption: Components['caption'] = ({ children }) => {
 };
 
 const MarkdownTable: Components['table'] = ({ children }) => {
+  const theme = useTheme();
+
   return (
-    <TableContainer>
+    <TableContainer
+      sx={{
+        my: theme.spacing(2),
+      }}
+    >
       <Table>{children}</Table>
     </TableContainer>
   );
@@ -225,6 +237,7 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
         '& .linenumber': {
           fontStyle: 'normal !important',
         },
+        my: theme.spacing(2),
       }}
     >
       <Box
@@ -285,6 +298,7 @@ const MarkdownBlockquote: Components['blockquote'] = ({ children }) => {
       component='blockquote'
       dir='auto'
       sx={{
+        my: theme.spacing(2),
         borderInlineStart: `${theme.spacing(0.5)} solid ${
           theme.palette.primary.main
         }`,

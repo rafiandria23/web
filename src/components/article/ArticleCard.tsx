@@ -3,7 +3,6 @@
 import type { FC } from 'react';
 import { memo, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
-import NextImage from 'next/image';
 import {
   useTheme,
   Card,
@@ -26,6 +25,9 @@ import { DateTimeFormat } from '@/constants/datetime';
 
 // Hooks
 import { useScreenSize } from '@/hooks/screen';
+
+// Components
+import { Image } from '@/components/utils';
 
 interface IArticleCardProps {
   article: IArticle;
@@ -102,7 +104,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
             <Box flexGrow={1} />
 
             <CardMedia>
-              <NextImage
+              <Image
                 src={
                   article.attributes.thumbnail.data.attributes.formats.thumbnail
                     .url

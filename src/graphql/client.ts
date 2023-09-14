@@ -1,8 +1,5 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-// Config
-import { AppConfig } from '@/constants/app';
-
 const cache = new InMemoryCache();
 
 const client = new ApolloClient({
@@ -17,7 +14,7 @@ const client = new ApolloClient({
     },
   },
   cache,
-  uri: AppConfig.CMS_URL,
+  uri: process.env.NEXT_PUBLIC_CMS_URL,
   connectToDevTools: true,
 });
 
