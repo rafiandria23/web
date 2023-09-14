@@ -115,7 +115,7 @@ const Header: FC = () => {
                   textTransform: 'none',
                 }}
               >
-                rafiandria23.tech
+                rafiandria23
               </Button>
 
               <Box flexGrow={1} />
@@ -144,7 +144,7 @@ const Header: FC = () => {
                   textTransform: 'none',
                 }}
               >
-                rafiandria23.tech
+                rafiandria23
               </Button>
 
               <Box flexGrow={1} />

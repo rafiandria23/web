@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import type { Metadata } from 'next';
 import { gql } from '@apollo/client';
+import { getCldOgImageUrl } from 'next-cloudinary';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
@@ -144,10 +145,14 @@ export async function generateMetadata({
       tags: article.attributes.tags.data.map((tag) => tag.attributes.name),
       images: [
         {
-          url: article.attributes.thumbnail.data.attributes.formats.thumbnail
-            .url,
-          secureUrl:
-            article.attributes.thumbnail.data.attributes.formats.thumbnail.url,
+          url: getCldOgImageUrl({
+            src: article.attributes.thumbnail.data.attributes.formats.thumbnail
+              .url,
+          }),
+          secureUrl: getCldOgImageUrl({
+            src: article.attributes.thumbnail.data.attributes.formats.thumbnail
+              .url,
+          }),
           alt: article.attributes.title,
           width:
             article.attributes.thumbnail.data.attributes.formats.thumbnail
@@ -163,10 +168,14 @@ export async function generateMetadata({
       description: article.attributes.overview,
       images: [
         {
-          url: article.attributes.thumbnail.data.attributes.formats.thumbnail
-            .url,
-          secureUrl:
-            article.attributes.thumbnail.data.attributes.formats.thumbnail.url,
+          url: getCldOgImageUrl({
+            src: article.attributes.thumbnail.data.attributes.formats.thumbnail
+              .url,
+          }),
+          secureUrl: getCldOgImageUrl({
+            src: article.attributes.thumbnail.data.attributes.formats.thumbnail
+              .url,
+          }),
           alt: article.attributes.title,
           width:
             article.attributes.thumbnail.data.attributes.formats.thumbnail

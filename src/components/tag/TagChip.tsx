@@ -24,11 +24,13 @@ const TagChip: FC<ITagChipProps> = ({ tag }) => {
     },
     [router],
   );
+
   return (
     <Chip
       clickable
+      color='primary'
       label={tag.attributes.name}
-      icon={<TagIcon htmlColor={tag.attributes.color} />}
+      icon={<TagIcon color='inherit' htmlColor={tag.attributes.color} />}
       onClick={handleNavigate(tag.attributes.slug)}
     />
   );
