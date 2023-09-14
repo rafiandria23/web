@@ -12,16 +12,20 @@ export default ({ env }) => ({
   },
   upload: {
     config: {
-      provider: 'strapi-provider-upload-minio-ce',
+      provider: 'cloudinary',
       providerOptions: {
-        accessKey: env('MINIO_ACCESS_KEY'),
-        secretKey: env('MINIO_SECRET_KEY'),
-        bucket: env('MINIO_BUCKET', 'cms'),
-        endPoint: env('MINIO_ENDPOINT', 'storage.rafiandria23.tech'),
-        port: env('MINIO_PORT', '443'),
-        useSSL: env('MINIO_USE_SSL', 'true'),
-        host: env('MINIO_HOST', 'storage.rafiandria23.tech'),
-        folder: env('MINIO_FOLDER', 'uploads')
+        api_key: env('CLOUDINARY_KEY'),
+        api_secret: env('CLOUDINARY_SECRET'),
+        cloud_name: env('CLOUDINARY_CLOUD', 'rafiandria23'),
+      },
+      actionOptions: {
+        upload: {
+          folder: env('CLOUDINARY_FOLDER', 'cms'),
+        },
+        uploadStream: {
+          folder: env('CLOUDINARY_FOLDER', 'cms'),
+        },
+        delete: {},
       },
     },
   },

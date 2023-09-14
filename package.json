@@ -18,10 +18,10 @@
     "@strapi/plugin-open-ai": "^1.0.1",
     "@strapi/plugin-seo": "^1.9.2",
     "@strapi/plugin-users-permissions": "^4.13.1",
+    "@strapi/provider-upload-cloudinary": "^4.13.6",
     "@strapi/strapi": "^4.13.1",
     "newrelic": "^11.0.0",
-    "pg": "^8.11.3",
-    "strapi-provider-upload-minio-ce": "^1.2.0"
+    "pg": "^8.11.3"
   },
   "author": {
     "name": "Adam Rafiandri"
