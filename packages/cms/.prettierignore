@@ -1,5 +1,3 @@
-.cache
-package.json
-yarn.lock
-public
-.ci
+.cache/
+dist/
+node_modules/

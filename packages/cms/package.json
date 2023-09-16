@@ -1,8 +1,7 @@
 {
-  "name": "@rafiandria23/cms",
-  "private": true,
+  "name": "cms",
   "version": "0.1.0",
-  "description": "CMS for rafiandria23.tech",
+  "private": true,
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",
@@ -33,5 +32,6 @@
   "engines": {
     "node": ">=16.x.x <=20.x.x",
     "npm": ">=6.x.x"
-  }
+  },
+  "license": "MIT"
 }
