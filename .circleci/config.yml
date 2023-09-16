@@ -1,0 +1,50 @@
+version: 2.1
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@2.0.0
+
+jobs:
+  install:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  build:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Build Packages
+          command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  analyze:
+    docker:
+      - image: cimg/node:lts
+    steps:
+      - attach_workspace:
+          at: .
+      - sonarcloud/scan
+
+workflows:
+  ci:
+    jobs:
+      - install
+      - build:
+          requires:
+            - install
+      - analyze:
+          context: sonarcloud
+          requires:
+            - install
