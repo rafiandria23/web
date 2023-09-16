@@ -1,14 +1,9 @@
 'use client';
 
-import type { Metadata } from 'next';
+import type { FC } from 'react';
 import { Box, Stack, Container, Typography } from '@mui/material';
 
-export const metadata: Metadata = {
-  title: 'Page not found!',
-  description: 'Page not found!',
-};
-
-export default function NotFoundPage() {
+const NotFoundPage: FC = () => {
   return (
     <Box bgcolor='primary.light'>
       <Stack component={Container} spacing={2}>
@@ -24,4 +19,6 @@ export default function NotFoundPage() {
       </Stack>
     </Box>
   );
-}
+};
+
+export default NotFoundPage;

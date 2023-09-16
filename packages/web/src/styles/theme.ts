@@ -37,6 +37,12 @@ const GlobalTheme: Partial<Theme> = {
         elevation: 6,
       },
     },
+    MuiSkeleton: {
+      defaultProps: {
+        animation: 'wave',
+        variant: 'rounded',
+      },
+    },
   },
 };
 

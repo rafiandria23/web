@@ -5,6 +5,7 @@ import { Roboto } from 'next/font/google';
 // Components
 import { AnalyticsProvider } from '@/components/analytics';
 import { ReduxProvider } from '@/components/redux';
+import { GraphQLProvider } from '@/components/graphql';
 import { ThemeRegistry } from '@/components/theme';
 import { Layout } from '@/components/layout';
 
@@ -24,9 +25,11 @@ const RootLayout: FC<IRootLayoutProps> = ({ children }) => {
       <body className={roboto.className}>
         <AnalyticsProvider>
           <ReduxProvider>
-            <ThemeRegistry options={{ key: 'mui' }}>
-              <Layout>{children}</Layout>
-            </ThemeRegistry>
+            <GraphQLProvider>
+              <ThemeRegistry options={{ key: 'mui' }}>
+                <Layout>{children}</Layout>
+              </ThemeRegistry>
+            </GraphQLProvider>
           </ReduxProvider>
         </AnalyticsProvider>
       </body>
@@ -39,8 +42,8 @@ export default RootLayout;
 export const metadata: Metadata = {
   metadataBase: new URL('https://rafiandria23.tech'),
   title: {
-    default: 'Welcome!',
     template: '%s | rafiandria23.tech',
+    default: 'Welcome!',
   },
   description: 'My personal web.',
   icons: [

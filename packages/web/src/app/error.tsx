@@ -1,14 +1,9 @@
 'use client';
 
-import type { Metadata } from 'next';
+import type { FC } from 'react';
 import { Box, Stack, Container, Typography } from '@mui/material';
 
-export const metadata: Metadata = {
-  title: 'Error',
-  description: 'Oops! Something went wrong.',
-};
-
-export default function ErrorPage() {
+const ErrorPage: FC = () => {
   return (
     <Box bgcolor='primary.light'>
       <Stack component={Container} spacing={2}>
@@ -24,4 +19,6 @@ export default function ErrorPage() {
       </Stack>
     </Box>
   );
-}
+};
+
+export default ErrorPage;
