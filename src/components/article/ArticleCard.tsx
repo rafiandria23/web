@@ -73,7 +73,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
                 <Typography
                   variant='body2'
                   display='block'
-                  color={theme.palette.text.secondary}
+                  color='text.secondary'
                   paragraph
                   sx={{
                     overflow: 'hidden',
@@ -92,7 +92,7 @@ const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
               <Typography
                 variant='overline'
                 align='left'
-                color={theme.palette.text.secondary}
+                color='text.secondary'
                 paragraph
               >
                 {dayjs(article.attributes.updatedAt).format(

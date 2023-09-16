@@ -32,12 +32,7 @@ const TagsPage: FC<ITagsPageProps> = async ({ params }) => {
   return (
     <>
       {/* Tag Hero Section */}
-      <Box
-        component='section'
-        sx={{
-          bgcolor: 'primary.light',
-        }}
-      >
+      <Box component='section' bgcolor='primary.light'>
         <Stack component={Container} spacing={2}>
           <Typography
             component='h1'
@@ -91,7 +86,7 @@ const TagsPage: FC<ITagsPageProps> = async ({ params }) => {
       </Container>
 
       {/* Projects Section */}
-      <Box component='section' sx={{ bgcolor: 'primary.light' }}>
+      <Box component='section' bgcolor='primary.light'>
         <Stack component={Container} spacing={8}>
           <Typography
             component='h2'

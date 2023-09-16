@@ -10,11 +10,7 @@ export const metadata: Metadata = {
 
 export default function NotFoundPage() {
   return (
-    <Box
-      sx={{
-        bgcolor: 'primary.light',
-      }}
-    >
+    <Box bgcolor='primary.light'>
       <Stack component={Container} spacing={2}>
         <Typography
           component='h1'

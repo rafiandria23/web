@@ -1,10 +1,7 @@
-'use client';
-
 import type { FC } from 'react';
 import { memo } from 'react';
 import NextLink from 'next/link';
 import {
-  useTheme,
   Typography,
   CardActionArea,
   Card,
@@ -24,8 +21,6 @@ interface IProjectCardProps {
 }
 
 const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
-  const theme = useTheme();
-
   return (
     <Card>
       <CardActionArea
@@ -37,10 +32,7 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
           alignItems: 'stretch',
         }}
       >
-        <Box
-          component='article'
-          sx={{ display: 'flex', flexDirection: 'column' }}
-        >
+        <Box component='article' display='flex' flexDirection='column'>
           <CardContent sx={{ flex: '1 0 auto' }}>
             <Typography component='h3' variant='h6' gutterBottom>
               {project.attributes.title}
@@ -49,7 +41,7 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
             <Typography
               variant='body2'
               display='block'
-              color={theme.palette.text.secondary}
+              color='text.secondary'
               paragraph
               sx={{
                 overflow: 'hidden',
@@ -63,11 +55,11 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
             </Typography>
           </CardContent>
 
-          <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+          <Box display='flex' alignItems='center' pl={1} pb={1}>
             <Typography
               variant='overline'
               align='left'
-              color={theme.palette.text.secondary}
+              color='text.secondary'
               paragraph
             >
               {dayjs(project.attributes.updatedAt).format(
