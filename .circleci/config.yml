@@ -11,7 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install
+          command: yarn install --frozen-lockfile
       - persist_to_workspace:
           root: .
           paths:
@@ -19,10 +19,6 @@ jobs:
   build:
     docker:
       - image: cimg/node:lts
-    environment:
-      NEXT_PUBLIC_GA_MEASUREMENT_ID: test
-      NEXT_PUBLIC_CMS_URL: test
-      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: test
     steps:
       - attach_workspace:
           at: .
