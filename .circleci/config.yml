@@ -48,4 +48,4 @@ workflows:
             - install
       - analyze:
           requires:
-            - build
+            - install
