@@ -47,5 +47,6 @@ workflows:
           requires:
             - install
       - analyze:
+          context: sonar
           requires:
             - install
