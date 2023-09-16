@@ -1,0 +1,6 @@
+{
+  "sonarlint.connectedMode.project": {
+    "connectionId": "sonarqube-rafiandria23",
+    "projectKey": "rafiandria23_web"
+  }
+}
