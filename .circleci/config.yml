@@ -38,12 +38,8 @@ jobs:
           command: sonarcloud/scan
 
 workflows:
-  install:
+  ci:
     jobs:
       - install
-  build:
-    jobs:
       - build
-  analyze:
-    jobs:
       - analyze
