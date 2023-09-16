@@ -1,0 +1,37 @@
+{
+  "name": "@rafiandria23/cms",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CMS for rafiandria23.tech",
+  "scripts": {
+    "dev": "strapi develop",
+    "start": "strapi start",
+    "build": "strapi build",
+    "strapi": "strapi"
+  },
+  "dependencies": {
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.7",
+    "@newrelic/apollo-server-plugin": "^4.0.0",
+    "@strapi/plugin-color-picker": "^4.13.1",
+    "@strapi/plugin-graphql": "^4.13.1",
+    "@strapi/plugin-i18n": "^4.13.1",
+    "@strapi/plugin-open-ai": "^1.0.1",
+    "@strapi/plugin-seo": "^1.9.2",
+    "@strapi/plugin-users-permissions": "^4.13.1",
+    "@strapi/provider-upload-cloudinary": "^4.13.6",
+    "@strapi/strapi": "^4.13.1",
+    "newrelic": "^11.0.0",
+    "pg": "^8.11.3"
+  },
+  "author": {
+    "name": "Adam Rafiandri"
+  },
+  "strapi": {
+    "uuid": "37505947-6fe2-4af9-b109-b8fa50750ddf",
+    "telemetryDisabled": true
+  },
+  "engines": {
+    "node": ">=16.x.x <=20.x.x",
+    "npm": ">=6.x.x"
+  }
+}
