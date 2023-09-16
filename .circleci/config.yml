@@ -1,24 +1,20 @@
 version: 2.1
 
 orbs:
-  node: circleci/node@5.1.0
-  sonarcloud: sonarsource/sonarcloud@2.0.0
+  sonar: sonarsource/sonarcloud@2.0.0
 
 jobs:
   install:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:lts
     steps:
       - checkout
-      - node/install:
-          install-yarn: true
-          node-version: "20"
       - run:
           name: Install Dependencies
           command: yarn install --ignore-engines
   build:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:lts
     environment:
       NEXT_PUBLIC_GA_MEASUREMENT_ID: sundayx/todo-api
       NEXT_PUBLIC_CMS_URL: latest
@@ -30,12 +26,12 @@ jobs:
           command: yarn build
   analyze:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/node:lts
     steps:
       - checkout
       - run:
           name: Analyze Code
-          command: sonarcloud/scan
+          command: sonar/scan
 
 workflows:
   ci:
