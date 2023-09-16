@@ -41,5 +41,9 @@ workflows:
   ci:
     jobs:
       - install
-      - build
-      - analyze
+      - build:
+          requires:
+            - install
+      - analyze:
+          requires:
+            - build
