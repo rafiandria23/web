@@ -28,9 +28,7 @@ const ProjectsPage: FC = async () => {
         container
         justifyContent='center'
         alignItems='center'
-        sx={{
-          bgcolor: 'primary.light',
-        }}
+        bgcolor='primary.light'
       >
         <Grid component={Container} item>
           <Typography

@@ -12,18 +12,12 @@ const Footer: FC = () => {
   const theme = useTheme();
 
   return (
-    <Box
-      component='footer'
-      sx={{
-        bgcolor: theme.palette.primary.light,
-        p: theme.spacing(2, 0),
-      }}
-    >
+    <Box component='footer' bgcolor='primary.light' p={theme.spacing(2, 0)}>
       <Stack component={Container} direction='row'>
         <Typography
           variant='subtitle2'
           component='p'
-          color={theme.palette.primary.contrastText}
+          color='primary.contrastText'
         >
           &copy; {now.format(DateTimeFormat.YYYY)}. All rights reserved.
         </Typography>

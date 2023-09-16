@@ -25,11 +25,7 @@ const HomePage: FC = async () => {
   return (
     <>
       {/* Introduction Section */}
-      <Box
-        sx={{
-          bgcolor: 'primary.light',
-        }}
-      >
+      <Box bgcolor='primary.light'>
         <Stack component={Container} spacing={2}>
           <Typography
             component='h1'
@@ -85,7 +81,7 @@ const HomePage: FC = async () => {
       </Stack>
 
       {/* Latest Projects Section */}
-      <Box sx={{ bgcolor: 'primary.light' }}>
+      <Box bgcolor='primary.light'>
         <Stack component={Container} spacing={8}>
           <Typography
             component='h2'

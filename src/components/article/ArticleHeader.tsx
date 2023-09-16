@@ -1,8 +1,6 @@
-'use client';
-
 import type { FC } from 'react';
 import { memo } from 'react';
-import { useTheme, Box, Stack, Container, Typography } from '@mui/material';
+import { Box, Stack, Container, Typography } from '@mui/material';
 import dayjs from 'dayjs';
 
 // Types
@@ -19,21 +17,10 @@ export interface IArticleHeaderProps {
 }
 
 const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
-  const theme = useTheme();
-
   return (
-    <Box
-      component='section'
-      sx={{
-        bgcolor: theme.palette.primary.light,
-      }}
-    >
+    <Box component='section' bgcolor='primary.light'>
       <Stack component={Container}>
-        <Typography
-          variant='overline'
-          color={theme.palette.primary.contrastText}
-          paragraph
-        >
+        <Typography variant='overline' color='primary.contrastText' paragraph>
           {dayjs(article.attributes.updatedAt).format(
             DateTimeFormat['MMM D, YYYY'],
           )}
@@ -42,7 +29,7 @@ const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
         <Typography
           component='h1'
           variant='h3'
-          color={theme.palette.primary.contrastText}
+          color='primary.contrastText'
           gutterBottom
         >
           {article.attributes.title}

@@ -232,28 +232,26 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
   return (
     <Box
       component={Paper}
+      position='relative'
+      my={theme.spacing(2)}
       sx={{
-        position: 'relative',
         '& .linenumber': {
           fontStyle: 'normal !important',
         },
-        my: theme.spacing(2),
       }}
     >
       <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          right: 0,
-          zIndex: 1,
-          p: theme.spacing(1),
-        }}
+        position='absolute'
+        top={0}
+        right={0}
+        zIndex={1}
+        p={theme.spacing(1)}
       >
         <CopyToClipboard text={children as string}>
           <IconButton
             onClick={handleCopy}
             sx={{
-              color: theme.palette.primary.contrastText,
+              color: 'primary.contrastText',
             }}
           >
             {copied ? (
@@ -297,8 +295,8 @@ const MarkdownBlockquote: Components['blockquote'] = ({ children }) => {
     <Box
       component='blockquote'
       dir='auto'
+      my={theme.spacing(2)}
       sx={{
-        my: theme.spacing(2),
         borderInlineStart: `${theme.spacing(0.5)} solid ${
           theme.palette.primary.main
         }`,
