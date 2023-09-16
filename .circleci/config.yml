@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  sonar: sonarsource/sonarcloud@2.0.0
+  sonarcloud: sonarsource/sonarcloud@2.0.0
 
 jobs:
   install:
@@ -37,7 +37,7 @@ jobs:
           at: .
       - run:
           name: Analyze Code
-          command: sonar/scan
+          command: sonarcloud/scan
 
 workflows:
   ci:
@@ -47,6 +47,6 @@ workflows:
           requires:
             - install
       - analyze:
-          context: sonar
+          context: sonarcloud
           requires:
             - install
