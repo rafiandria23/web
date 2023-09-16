@@ -1,5 +1,6 @@
 {
   "name": "rafiandria23.tech",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "dev": "lerna run dev",
