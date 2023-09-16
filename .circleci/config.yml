@@ -35,9 +35,7 @@ jobs:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Analyze Code
-          command: sonarcloud/scan
+      - sonarcloud/scan
 
 workflows:
   ci:
