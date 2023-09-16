@@ -11,24 +11,34 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install --ignore-engines
+          command: yarn install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   build:
     docker:
       - image: cimg/node:lts
     environment:
-      NEXT_PUBLIC_GA_MEASUREMENT_ID: sundayx/todo-api
-      NEXT_PUBLIC_CMS_URL: latest
-      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: asd
+      NEXT_PUBLIC_GA_MEASUREMENT_ID: test
+      NEXT_PUBLIC_CMS_URL: test
+      NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: test
     steps:
-      - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Build Packages
           command: yarn build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
   analyze:
     docker:
       - image: cimg/node:lts
     steps:
-      - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: Analyze Code
           command: sonar/scan
