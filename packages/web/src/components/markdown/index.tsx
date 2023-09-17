@@ -268,8 +268,6 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
         language={language[1]}
         showLineNumbers
         showInlineLineNumbers
-        wrapLines
-        wrapLongLines
         customStyle={{
           fontSize: theme.typography.body1.fontSize,
           borderRadius: theme.shape.borderRadius,

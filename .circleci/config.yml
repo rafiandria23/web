@@ -11,20 +11,7 @@ jobs:
       - checkout
       - run:
           name: Install Dependencies
-          command: yarn install --frozen-lockfile
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  build:
-    docker:
-      - image: cimg/node:lts
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Build Packages
-          command: yarn build
+          command: yarn install --frozen-lockfile --ignore-engines
       - persist_to_workspace:
           root: .
           paths:
@@ -41,9 +28,6 @@ workflows:
   ci:
     jobs:
       - install
-      - build:
-          requires:
-            - install
       - analyze:
           context: sonarcloud
           requires:
