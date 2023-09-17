@@ -141,7 +141,12 @@ const HomeClientPage: FC = () => {
         >
           {loading
             ? Array.from({ length: 6 }).map((_, idx) => (
-                <Grid key={`article-skeleton-${idx + 1}`} xs={12} xl={3.83}>
+                <Grid
+                  key={`article-skeleton-${idx + 1}`}
+                  item
+                  xs={12}
+                  xl={3.83}
+                >
                   <Skeleton height={theme.spacing(15)} />
                 </Grid>
               ))
@@ -175,7 +180,12 @@ const HomeClientPage: FC = () => {
           >
             {loading
               ? Array.from({ length: 6 }).map((_, idx) => (
-                  <Grid key={`project-skeleton-${idx + 1}`} xs={12} xl={3.83}>
+                  <Grid
+                    key={`project-skeleton-${idx + 1}`}
+                    item
+                    xs={12}
+                    xl={3.83}
+                  >
                     <Skeleton height={theme.spacing(15)} />
                   </Grid>
                 ))

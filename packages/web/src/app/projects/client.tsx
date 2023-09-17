@@ -108,7 +108,12 @@ const ProjectsClientPage: FC = () => {
           {loading
             ? Array.from({ length: PaginationDefaults.PAGE_SIZE }).map(
                 (_, idx) => (
-                  <Grid key={`project-skeleton-${idx + 1}`} xs={12} xl={5.87}>
+                  <Grid
+                    key={`project-skeleton-${idx + 1}`}
+                    item
+                    xs={12}
+                    xl={5.87}
+                  >
                     <Skeleton height={theme.spacing(20)} />
                   </Grid>
                 ),
