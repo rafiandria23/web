@@ -1,21 +1,25 @@
 {
-  "name": "rafiandria23.tech",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "dev": "lerna run dev",
-    "build": "lerna run build",
-    "start": "lerna run start",
-    "lint": "lerna run lint",
-    "prepare": "husky install"
-  },
-  "workspaces": [
-    "packages/*"
-  ],
-  "dependencies": {},
-  "devDependencies": {
-    "husky": "^8.0.3",
-    "lerna": "^7.3.0"
-  },
-  "license": "MIT"
+	"name": "rafiandria23.tech",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "lerna run dev",
+		"build": "lerna run build",
+		"start": "lerna run start",
+		"lint": "lerna run lint",
+		"prepare": "husky install"
+	},
+	"workspaces": [
+		"packages/*"
+	],
+	"dependencies": {},
+	"devDependencies": {
+		"husky": "^8.0.3",
+		"lerna": "^7.3.0"
+	},
+	"engines": {
+		"node": ">=16.x.x <=20.x.x",
+		"npm": ">=6.x.x"
+	},
+	"license": "MIT"
 }
