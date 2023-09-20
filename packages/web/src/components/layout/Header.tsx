@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactElement, Ref, FC } from 'react';
-import { forwardRef, useState, useCallback, useMemo } from 'react';
+import { forwardRef, memo, useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import NextLink from 'next/link';
@@ -80,8 +80,8 @@ const Header: FC = () => {
   );
 
   const calculatedElevation = useMemo(() => {
-    return scrollTriggered ? 6 : 0;
-  }, [scrollTriggered]);
+    return scrollTriggered || dialogVisible ? 6 : 0;
+  }, [scrollTriggered, dialogVisible]);
 
   return (
     <>
@@ -90,7 +90,7 @@ const Header: FC = () => {
         position='fixed'
         elevation={calculatedElevation}
         sx={{
-          ...(!scrollTriggered && {
+          ...(!(scrollTriggered || dialogVisible) && {
             bgcolor: 'transparent',
           }),
         }}
@@ -183,7 +183,9 @@ const Header: FC = () => {
 
       <Dialog
         TransitionComponent={HeaderTransition}
+        keepMounted
         fullScreen
+        fullWidth
         open={dialogVisible}
         onClick={handleDialogVisibility}
         sx={{
@@ -236,4 +238,4 @@ const Header: FC = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

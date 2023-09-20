@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
+import { memo } from 'react';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
@@ -19,4 +20,4 @@ const ReduxProvider: FC<IReduxProviderProps> = ({ children }) => {
   );
 };
 
-export default ReduxProvider;
+export default memo(ReduxProvider);
