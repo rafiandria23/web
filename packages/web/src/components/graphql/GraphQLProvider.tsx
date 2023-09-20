@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
+import { memo } from 'react';
 import { ApolloProvider } from '@apollo/client';
 
 // GraphQL
@@ -14,4 +15,4 @@ const GraphQLProvider: FC<IGraphQLProviderProps> = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
 };
 
-export default GraphQLProvider;
+export default memo(GraphQLProvider);

@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
-import { useState, useMemo, useCallback } from 'react';
+import { memo, useState, useMemo, useCallback } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { CacheProvider } from '@emotion/react';
 import type { Options as CacheOptions } from '@emotion/cache';
@@ -113,4 +113,4 @@ const ThemeRegistry: FC<IThemeRegistryProps> = ({ options, children }) => {
   );
 };
 
-export default ThemeRegistry;
+export default memo(ThemeRegistry);

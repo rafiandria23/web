@@ -20,6 +20,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
 
       <Stack
         component='main'
+        minHeight='100vh'
         sx={{
           '& > :first-of-type': {
             mb: theme.spacing(4),

@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC, ReactNode } from 'react';
+import { memo } from 'react';
 import Script from 'next/script';
 import { GoogleAnalytics } from 'nextjs-google-analytics';
 
@@ -36,4 +37,4 @@ const AnalyticsProvider: FC<IAnalyticsProviderProps> = ({ children }) => {
   );
 };
 
-export default AnalyticsProvider;
+export default memo(AnalyticsProvider);

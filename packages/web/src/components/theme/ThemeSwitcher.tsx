@@ -1,7 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
-import { useState, useRef } from 'react';
+import { memo, useState, useRef } from 'react';
 import type { IconButtonProps } from '@mui/material';
 import {
   IconButton,
@@ -130,4 +130,4 @@ const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ mode, edge, onChange }) => {
   );
 };
 
-export default ThemeSwitcher;
+export default memo(ThemeSwitcher);

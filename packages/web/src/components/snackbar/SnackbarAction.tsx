@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
+import { memo } from 'react';
 import type { SnackbarKey } from 'notistack';
 import { useSnackbar } from 'notistack';
 import { IconButton } from '@mui/material';
@@ -24,4 +25,4 @@ const SnackbarAction: FC<ISnackbarActionProps> = ({ key }) => {
   );
 };
 
-export default SnackbarAction;
+export default memo(SnackbarAction);

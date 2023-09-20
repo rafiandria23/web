@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { gql } from '@apollo/client';
 
 // Types
@@ -11,7 +12,7 @@ import type { ITag } from '@/types/tag';
 import { client } from '@/graphql';
 
 // Client Page
-import TagClientPage from './client';
+const TagClientPage = dynamic(() => import('./client-page'));
 
 export interface ITagPageProps {
   params: {
