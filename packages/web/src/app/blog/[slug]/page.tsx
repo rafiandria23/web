@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { gql } from '@apollo/client';
 import { getCldOgImageUrl } from 'next-cloudinary';
 
@@ -11,7 +12,18 @@ import type { IArticle } from '@/types/article';
 import { client } from '@/graphql';
 
 // Components
-import { ArticleHeader, ArticleBody } from '@/components/article';
+const ArticleHeader = dynamic(
+  () => import('@/components/article').then((mod) => mod.ArticleHeader),
+  {
+    ssr: false,
+  },
+);
+const ArticleBody = dynamic(
+  () => import('@/components/article').then((mod) => mod.ArticleBody),
+  {
+    ssr: false,
+  },
+);
 
 export interface IArticlePageProps {
   params: {

@@ -1,18 +1,45 @@
 import type { FC, ReactNode } from 'react';
 import type { Metadata } from 'next';
+import dynamic from 'next/dynamic';
 import { Roboto } from 'next/font/google';
 
 // Components
-import { AnalyticsProvider } from '@/components/analytics';
-import { ReduxProvider } from '@/components/redux';
-import { GraphQLProvider } from '@/components/graphql';
-import { ThemeRegistry } from '@/components/theme';
-import { Layout } from '@/components/layout';
+const AnalyticsProvider = dynamic(
+  () => import('@/components/analytics').then((mod) => mod.AnalyticsProvider),
+  {
+    ssr: false,
+  },
+);
+const GraphQLProvider = dynamic(
+  () => import('@/components/graphql').then((mod) => mod.GraphQLProvider),
+  {
+    ssr: false,
+  },
+);
+const ReduxProvider = dynamic(
+  () => import('@/components/redux').then((mod) => mod.ReduxProvider),
+  {
+    ssr: false,
+  },
+);
+const ThemeRegistry = dynamic(
+  () => import('@/components/theme').then((mod) => mod.ThemeRegistry),
+  {
+    ssr: false,
+  },
+);
+const Layout = dynamic(
+  () => import('@/components/layout').then((mod) => mod.Layout),
+  {
+    ssr: false,
+  },
+);
 
 const roboto = Roboto({
   subsets: ['latin'],
   display: 'swap',
   weight: ['100', '300', '400', '500', '700', '900'],
+  adjustFontFallback: true,
 });
 
 export interface IRootLayoutProps {

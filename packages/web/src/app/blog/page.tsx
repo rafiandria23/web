@@ -1,9 +1,8 @@
 import type { FC } from 'react';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 
 // Client Page
-const BlogClientPage = dynamic(() => import('./client-page'));
+import BlogClientPage from './client-page';
 
 const BlogPage: FC = () => {
   return <BlogClientPage />;

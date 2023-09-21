@@ -1,6 +1,7 @@
 'use client';
 
 import type { FC } from 'react';
+import dynamic from 'next/dynamic';
 import { gql, useQuery } from '@apollo/client';
 import { useTheme, Container, Grid, Typography, Skeleton } from '@mui/material';
 
@@ -13,7 +14,12 @@ import type { IProject } from '@/types/project';
 import { PaginationDefaults } from '@/constants/page';
 
 // Components
-import { ProjectCard } from '@/components/project';
+const ProjectCard = dynamic(
+  () => import('@/components/project').then((mod) => mod.ProjectCard),
+  {
+    ssr: false,
+  },
+);
 
 const query = gql`
   query ($pageSize: Int!, $page: Int!) {
