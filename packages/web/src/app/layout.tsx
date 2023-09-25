@@ -36,10 +36,10 @@ const Layout = dynamic(
 );
 
 const roboto = Roboto({
+  adjustFontFallback: true,
   subsets: ['latin'],
   display: 'swap',
   weight: ['100', '300', '400', '500', '700', '900'],
-  adjustFontFallback: true,
 });
 
 export interface IRootLayoutProps {

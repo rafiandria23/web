@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS='-r @newrelic/next' next dev",
+    "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
+    "start": "next start",
     "lint": "lint-staged"
   },
   "dependencies": {
