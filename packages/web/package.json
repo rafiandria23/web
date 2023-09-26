@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "next start",
+    "start": "NODE_OPTIONS='-r @newrelic/next' next start",
     "lint": "lint-staged"
   },
   "dependencies": {
