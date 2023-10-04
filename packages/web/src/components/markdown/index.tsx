@@ -1,9 +1,9 @@
 'use client';
 
-import { memo, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import NextLink from 'next/link';
 import type { Components } from 'react-markdown';
-import type { PluggableList } from 'react-markdown/lib/react-markdown';
+import type { PluggableList } from 'react-markdown/lib';
 import {
   useTheme,
   Box,
@@ -307,26 +307,26 @@ const MarkdownBlockquote: Components['blockquote'] = ({ children }) => {
 };
 
 export const components: Components = {
-  img: memo(MarkdownImg),
-  a: memo(MarkdownLink),
-  h1: memo(MarkdownHeading1),
-  h2: memo(MarkdownHeading2),
-  h3: memo(MarkdownHeading3),
-  h4: memo(MarkdownHeading4),
-  h5: memo(MarkdownHeading5),
-  h6: memo(MarkdownHeading6),
-  p: memo(MarkdownParagraph),
-  caption: memo(MarkdownCaption),
-  table: memo(MarkdownTable),
-  thead: memo(MarkdownTableHead),
-  th: memo(MarkdownTableHeaderCell),
-  tbody: memo(MarkdownTableBody),
-  tr: memo(MarkdownTableRow),
-  td: memo(MarkdownTableCell),
-  tfoot: memo(MarkdownTableFooter),
-  code: memo(MarkdownCode),
-  hr: memo(MarkdownDivider),
-  blockquote: memo(MarkdownBlockquote),
+  img: MarkdownImg,
+  a: MarkdownLink,
+  h1: MarkdownHeading1,
+  h2: MarkdownHeading2,
+  h3: MarkdownHeading3,
+  h4: MarkdownHeading4,
+  h5: MarkdownHeading5,
+  h6: MarkdownHeading6,
+  p: MarkdownParagraph,
+  caption: MarkdownCaption,
+  table: MarkdownTable,
+  thead: MarkdownTableHead,
+  th: MarkdownTableHeaderCell,
+  tbody: MarkdownTableBody,
+  tr: MarkdownTableRow,
+  td: MarkdownTableCell,
+  tfoot: MarkdownTableFooter,
+  code: MarkdownCode,
+  hr: MarkdownDivider,
+  blockquote: MarkdownBlockquote,
 };
 
 export const remarkPlugins: PluggableList = [remarkGFM, remarkUnwrapImages];
