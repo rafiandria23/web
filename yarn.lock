@@ -4604,6 +4604,23 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
+"@strapi/helper-plugin@4.14.3":
+  version "4.14.3"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.14.3.tgz#2d6c97f371bc3a0f37f69c292eb20cd9129e79d1"
+  integrity sha512-UsR8UwU9a1/Hqfo6VRR7SQJhb38sdBux9ETKcRe9y2R29r9zvg1LZ2o/yREtAYZBi6YfIuTftZU9DE1zvdBp6w==
+  dependencies:
+    axios "1.5.0"
+    date-fns "2.30.0"
+    formik "2.4.0"
+    immer "9.0.19"
+    lodash "4.17.21"
+    prop-types "^15.8.1"
+    qs "6.11.1"
+    react-helmet "6.1.0"
+    react-intl "6.4.1"
+    react-query "3.39.3"
+    react-select "5.7.0"
+
 "@strapi/icons@1.10.1":
   version "1.10.1"
   resolved "https://registry.yarnpkg.com/@strapi/icons/-/icons-1.10.1.tgz#d0805fbe630f77e86e71740f64e30b88981ff718"
@@ -4633,12 +4650,12 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^4.13.1":
-  version "4.14.2"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-4.14.2.tgz#fe660a64017d95c8e079db414281e22a0464a95a"
-  integrity sha512-ddvccbR/fCCsgL5BcwbZFskiF2xfyYhpIW9Nb1Ih28quGn7CCLDk7RXCEkHRkxLdQyKz3lnaGXch1V3vxCEcOw==
+  version "4.14.3"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-4.14.3.tgz#62cbe7d0357bd0a73d549e4e655ce3930f7eff74"
+  integrity sha512-duSXn+RvMv61TVZmIR0rqzQpON0YQQcTa268nl3S8FvxSkZPH1TtcifRVC5s1G2sPy0VuW46L+OcnBghTqRKqg==
   dependencies:
     "@strapi/design-system" "1.11.0"
-    "@strapi/helper-plugin" "4.14.2"
+    "@strapi/helper-plugin" "4.14.3"
     "@strapi/icons" "1.11.0"
     prop-types "^15.8.1"
     react-colorful "5.6.1"
