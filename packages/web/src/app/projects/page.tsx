@@ -12,5 +12,5 @@ export default ProjectsPage;
 
 export const metadata: Metadata = {
   title: 'My Projects',
-  description: "The latest projects I've been involved in so far!",
+  description: 'Projects I have been working on.',
 };

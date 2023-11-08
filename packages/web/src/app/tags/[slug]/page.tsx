@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import type { FC } from 'react';
 import type { Metadata } from 'next';
 import { gql } from '@apollo/client';
@@ -65,7 +66,7 @@ async function getData(
 
 export async function generateMetadata({
   params,
-}: ITagPageProps): Promise<Metadata> {
+}: ITagPageProps): Promise<Metadata | null> {
   const { slug } = params;
 
   const { data } = await client.query<
@@ -91,7 +92,11 @@ export async function generateMetadata({
     `,
   });
 
-  const tag = data.tags.data[0];
+  const tag = _.get(data, 'tags.data[0]');
+
+  if (!tag) {
+    return null;
+  }
 
   return {
     title: tag.attributes.name,

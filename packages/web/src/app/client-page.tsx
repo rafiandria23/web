@@ -108,17 +108,15 @@ const HomeClientPage: FC = () => {
           <Typography
             component='h1'
             variant='h3'
-            textAlign='center'
             color='primary.contrastText'
             gutterBottom
           >
-            Hey, I&apos;m Adam.
+            Hello, world!
           </Typography>
 
           <Typography
             component='p'
             variant='h6'
-            textAlign='center'
             color='primary.contrastText'
             paragraph
           >
@@ -129,18 +127,18 @@ const HomeClientPage: FC = () => {
         </Stack>
       </Box>
 
-      {/* Latest Articles Section */}
+      {/* Recent Articles Section */}
       <Stack component={Container} spacing={8}>
         <Typography
           component='h2'
-          variant='h4'
+          variant='h5'
           textAlign={{
             xs: 'left',
             xl: 'right',
           }}
           gutterBottom
         >
-          Latest Articles
+          Recent Articles
         </Typography>
 
         <Grid
@@ -169,17 +167,17 @@ const HomeClientPage: FC = () => {
         </Grid>
       </Stack>
 
-      {/* Latest Projects Section */}
+      {/* Recent Projects Section */}
       <Box bgcolor='primary.light'>
         <Stack component={Container} spacing={8}>
           <Typography
             component='h2'
-            variant='h4'
+            variant='h5'
             textAlign='left'
             color='primary.contrastText'
             gutterBottom
           >
-            Latest Projects
+            Recent Projects
           </Typography>
 
           <Grid

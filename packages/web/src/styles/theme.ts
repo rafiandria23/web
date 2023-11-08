@@ -34,7 +34,7 @@ const GlobalTheme: Partial<Theme> = {
     },
     MuiPaper: {
       defaultProps: {
-        elevation: 6,
+        elevation: 3,
       },
     },
     MuiSkeleton: {

@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://rafiandria23.tech'),
   title: {
     template: '%s | rafiandria23.tech',
-    default: 'Welcome!',
+    default: 'Hello, world!',
   },
   description: 'My personal web.',
   icons: [
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Welcome!',
+    title: 'Hello, world!',
     description: 'My personal web.',
     images: [
       {
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: 'Welcome!',
+    title: 'Hello, world!',
     description: 'My personal web.',
     images: [
       {
