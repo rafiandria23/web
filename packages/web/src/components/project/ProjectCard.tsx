@@ -1,3 +1,5 @@
+'use client';
+
 import type { FC } from 'react';
 import { memo } from 'react';
 import NextLink from 'next/link';
@@ -6,15 +8,15 @@ import {
   CardActionArea,
   Card,
   CardContent,
+  Stack,
   Box,
 } from '@mui/material';
-import dayjs from 'dayjs';
 
 // Types
 import type { IProject } from '@/types/project';
 
-// Constants
-import { DateTimeFormat } from '@/constants/datetime';
+// Components
+import { ProjectStatusChip } from '.';
 
 interface IProjectCardProps {
   project: IProject;
@@ -23,17 +25,9 @@ interface IProjectCardProps {
 const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
   return (
     <Card>
-      <CardActionArea
-        LinkComponent={NextLink}
-        href={project.attributes.link}
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'stretch',
-        }}
-      >
-        <Box component='article' display='flex' flexDirection='column'>
-          <CardContent sx={{ flex: '1 0 auto' }}>
+      <CardActionArea LinkComponent={NextLink} href={project.attributes.link}>
+        <Stack component='article' direction='row'>
+          <CardContent component={Stack}>
             <Typography component='h3' variant='h6' gutterBottom>
               {project.attributes.title}
             </Typography>
@@ -43,31 +37,15 @@ const ProjectCard: FC<IProjectCardProps> = ({ project }) => {
               display='block'
               color='text.secondary'
               paragraph
-              sx={{
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-              }}
             >
               {project.attributes.overview}
             </Typography>
-          </CardContent>
 
-          <Box display='flex' alignItems='center' pl={1} pb={1}>
-            <Typography
-              variant='overline'
-              align='left'
-              color='text.secondary'
-              paragraph
-            >
-              {dayjs(project.attributes.updatedAt).format(
-                DateTimeFormat['MMM D, YYYY'],
-              )}
-            </Typography>
-          </Box>
-        </Box>
+            <Box flexGrow={1} />
+
+            <ProjectStatusChip status={project.attributes.status} />
+          </CardContent>
+        </Stack>
       </CardActionArea>
     </Card>
   );

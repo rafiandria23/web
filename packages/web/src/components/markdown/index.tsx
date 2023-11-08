@@ -23,8 +23,8 @@ import {
   Divider,
 } from '@mui/material';
 import {
-  ContentCopyOutlined as ContentCopyOutlinedIcon,
-  ContentPasteOutlined as ContentPasteOutlinedIcon,
+  ContentCopyOutlined as ContentCopyIcon,
+  ContentPasteOutlined as ContentPasteIcon,
 } from '@mui/icons-material';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -255,9 +255,9 @@ const MarkdownCode: Components['code'] = ({ className, children }) => {
             }}
           >
             {copied ? (
-              <ContentPasteOutlinedIcon fontSize='small' />
+              <ContentPasteIcon fontSize='small' />
             ) : (
-              <ContentCopyOutlinedIcon fontSize='small' />
+              <ContentCopyIcon fontSize='small' />
             )}
           </IconButton>
         </CopyToClipboard>

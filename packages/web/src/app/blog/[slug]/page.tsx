@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import type { FC } from 'react';
 import type { Metadata } from 'next';
 import dynamic from 'next/dynamic';
@@ -103,7 +104,7 @@ async function getData(
 
 export async function generateMetadata({
   params,
-}: IArticlePageProps): Promise<Metadata> {
+}: IArticlePageProps): Promise<Metadata | null> {
   const { slug } = params;
 
   const { data } = await client.query<
@@ -144,7 +145,11 @@ export async function generateMetadata({
     `,
   });
 
-  const article = data.articles.data[0];
+  const article = _.get(data, 'articles.data[0]');
+
+  if (!article) {
+    return null;
+  }
 
   return {
     title: article.attributes.title,

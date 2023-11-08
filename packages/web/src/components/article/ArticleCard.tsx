@@ -1,8 +1,8 @@
 'use client';
 
 import type { FC } from 'react';
-import { memo, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { memo } from 'react';
+import NextLink from 'next/link';
 import {
   useTheme,
   Card,
@@ -35,23 +35,16 @@ interface IArticleCardProps {
 }
 
 const ArticleCard: FC<IArticleCardProps> = ({ article, overview = true }) => {
-  const router = useRouter();
   const theme = useTheme();
   const screenSize = useScreenSize();
-
-  const handleNavigate = useCallback(
-    (slug: string) => {
-      return () => {
-        router.push(`/blog/${slug}`);
-      };
-    },
-    [router],
-  );
 
   return (
     <Tooltip title={article.attributes.title}>
       <Card>
-        <CardActionArea onClick={handleNavigate(article.attributes.slug)}>
+        <CardActionArea
+          LinkComponent={NextLink}
+          href={`/blog/${article.attributes.slug}`}
+        >
           <Stack component='article' direction='row'>
             <CardContent component={Stack}>
               <Typography

@@ -3,6 +3,7 @@
 import type { FC, ReactNode } from 'react';
 import { memo, useState, useMemo, useCallback } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
+import { useDispatch } from 'react-redux';
 import { CacheProvider } from '@emotion/react';
 import type { Options as CacheOptions } from '@emotion/cache';
 import createCache from '@emotion/cache';
@@ -13,6 +14,9 @@ import { SnackbarProvider } from 'notistack';
 
 // Constants
 import { ThemeMode } from '@/constants/theme';
+
+// Redux
+import { setScheme } from '@/redux/theme';
 
 // Hooks
 import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
@@ -29,6 +33,7 @@ export interface IThemeRegistryProps {
 }
 
 const ThemeRegistry: FC<IThemeRegistryProps> = ({ options, children }) => {
+  const dispatch = useDispatch();
   const { mode } = useThemeState();
   const prefersDarkMode = usePrefersDarkMode();
   const [{ cache, flush }] = useState(() => {
@@ -85,16 +90,27 @@ const ThemeRegistry: FC<IThemeRegistryProps> = ({ options, children }) => {
   });
 
   const theme = useMemo<Theme>(() => {
+    let finalTheme = DarkTheme;
+    let finalScheme = ThemeMode.DARK;
+
     switch (mode) {
-      case ThemeMode.LIGHT:
-        return LightTheme;
       case ThemeMode.DARK:
-        return DarkTheme;
+        break;
+      case ThemeMode.LIGHT:
+        finalTheme = LightTheme;
+        finalScheme = ThemeMode.LIGHT;
+        break;
       case ThemeMode.SYSTEM:
       default:
-        return prefersDarkMode ? DarkTheme : LightTheme;
+        finalTheme = prefersDarkMode ? DarkTheme : LightTheme;
+        finalScheme = prefersDarkMode ? ThemeMode.DARK : ThemeMode.LIGHT;
+        break;
     }
-  }, [mode, prefersDarkMode]);
+
+    dispatch(setScheme(finalScheme));
+
+    return finalTheme;
+  }, [dispatch, mode, prefersDarkMode]);
 
   const handleSnackbarAction = useCallback((key: SnackbarKey) => {
     return <SnackbarAction key={key} />;

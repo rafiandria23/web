@@ -12,5 +12,5 @@ export default BlogPage;
 
 export const metadata: Metadata = {
   title: 'My Blog',
-  description: "The latest articles I've written so far!",
+  description: 'Articles I have written.',
 };

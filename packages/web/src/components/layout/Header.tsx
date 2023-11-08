@@ -3,7 +3,6 @@
 import type { ReactElement, Ref, FC } from 'react';
 import { forwardRef, memo, useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
 import NextLink from 'next/link';
 import type { TransitionProps } from '@mui/material/transitions';
 import {
@@ -18,13 +17,13 @@ import {
   Button,
   IconButton,
   Dialog,
-  Divider,
+  // Divider,
 } from '@mui/material';
 import {
   MenuOutlined as MenuIcon,
   CloseOutlined as CloseIcon,
-  LinkedIn as LinkedInIcon,
-  GitHub as GitHubIcon,
+  // LinkedIn as LinkedInIcon,
+  // GitHub as GitHubIcon,
 } from '@mui/icons-material';
 
 // Constants
@@ -50,7 +49,6 @@ HeaderTransition.displayName = 'HeaderTransition';
 
 const Header: FC = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const { mode } = useThemeState();
   const theme = useTheme();
   const screenSize = useScreenSize();
@@ -62,15 +60,6 @@ const Header: FC = () => {
   const handleDialogVisibility = useCallback(() => {
     setDialogVisibility(!dialogVisible);
   }, [dialogVisible, setDialogVisibility]);
-
-  const handleNavigate = useCallback(
-    (url: string) => {
-      return () => {
-        router.push(url);
-      };
-    },
-    [router],
-  );
 
   const handleChangeTheme = useCallback<IThemeSwitcherProps['onChange']>(
     (target) => {
@@ -108,9 +97,9 @@ const Header: FC = () => {
               </IconButton>
 
               <Button
+                LinkComponent={NextLink}
                 variant='text'
-                size='large'
-                onClick={handleNavigate('/')}
+                href='/'
                 sx={{
                   textTransform: 'none',
                 }}
@@ -130,16 +119,10 @@ const Header: FC = () => {
 
           {screenSize === ScreenSize.LARGE && (
             <>
-              <ThemeSwitcher
-                mode={mode}
-                edge='start'
-                onChange={handleChangeTheme}
-              />
-
               <Button
+                LinkComponent={NextLink}
                 variant='text'
-                size='large'
-                onClick={handleNavigate('/')}
+                href='/'
                 sx={{
                   textTransform: 'none',
                 }}
@@ -147,21 +130,21 @@ const Header: FC = () => {
                 rafiandria23
               </Button>
 
-              <Box flexGrow={1} />
+              {/* <Button LinkComponent={NextLink} variant='text' href='/about'>
+                About
+              </Button> */}
 
-              <Button variant='text' onClick={handleNavigate('/')}>
-                Home
-              </Button>
-
-              <Button variant='text' onClick={handleNavigate('/projects')}>
+              <Button LinkComponent={NextLink} variant='text' href='/projects'>
                 Projects
               </Button>
 
-              <Button variant='text' onClick={handleNavigate('/blog')}>
+              <Button LinkComponent={NextLink} variant='text' href='/blog'>
                 Blog
               </Button>
 
-              <IconButton
+              <Box flexGrow={1} />
+
+              {/* <IconButton
                 LinkComponent={NextLink}
                 href='https://linkedin.com/in/rafiandria23'
                 target='_blank'
@@ -175,7 +158,13 @@ const Header: FC = () => {
                 target='_blank'
               >
                 <GitHubIcon />
-              </IconButton>
+              </IconButton> */}
+
+              <ThemeSwitcher
+                mode={mode}
+                edge='end'
+                onChange={handleChangeTheme}
+              />
             </>
           )}
         </Toolbar>
@@ -194,23 +183,34 @@ const Header: FC = () => {
         }}
       >
         <Stack component={Container} pt={theme.spacing(4)} spacing={2}>
-          <Button fullWidth variant='text' onClick={handleNavigate('/')}>
-            Home
+          <Button
+            LinkComponent={NextLink}
+            variant='text'
+            href='/about'
+            fullWidth
+          >
+            About
           </Button>
 
           <Button
-            fullWidth
+            LinkComponent={NextLink}
             variant='text'
-            onClick={handleNavigate('/projects')}
+            href='/projects'
+            fullWidth
           >
             Projects
           </Button>
 
-          <Button fullWidth variant='text' onClick={handleNavigate('/blog')}>
+          <Button
+            LinkComponent={NextLink}
+            variant='text'
+            href='/blog'
+            fullWidth
+          >
             Blog
           </Button>
 
-          <Stack
+          {/* <Stack
             direction='row'
             justifyContent='center'
             spacing={2}
@@ -231,7 +231,7 @@ const Header: FC = () => {
             >
               <GitHubIcon />
             </IconButton>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Dialog>
     </>

@@ -50,19 +50,21 @@ const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ mode, edge, onChange }) => {
   };
 
   const handleRenderIcon = () => {
+    let finalIcon = <DarkModeIcon />;
+
     switch (mode) {
-      case ThemeMode.LIGHT:
-        return <LightModeIcon />;
-
       case ThemeMode.DARK:
-        return <DarkModeIcon />;
-
+        break;
+      case ThemeMode.LIGHT:
+        finalIcon = <LightModeIcon />;
+        break;
       case ThemeMode.SYSTEM:
-        return prefersDarkMode ? <DarkModeIcon /> : <LightModeIcon />;
-
       default:
-        return null;
+        finalIcon = prefersDarkMode ? <DarkModeIcon /> : <LightModeIcon />;
+        break;
     }
+
+    return finalIcon;
   };
 
   const getSelectedTheme = (target: ThemeMode) => {
@@ -92,7 +94,7 @@ const ThemeSwitcher: FC<IThemeSwitcherProps> = ({ mode, edge, onChange }) => {
           >
             <Paper>
               <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id='theme-menu' autoFocusItem={open}>
+                <MenuList id='theme-menu' autoFocusItem={open} dense>
                   <MenuItem
                     onClick={() => handleChangeTheme(ThemeMode.LIGHT)}
                     selected={getSelectedTheme(ThemeMode.LIGHT)}

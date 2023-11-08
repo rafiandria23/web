@@ -11,4 +11,5 @@ export interface IRootState {
 
 export interface IThemeReducer {
   mode: ThemeMode;
+  scheme: Exclude<ThemeMode, ThemeMode.SYSTEM>;
 }
