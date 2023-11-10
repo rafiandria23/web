@@ -9,9 +9,7 @@ import { gql, useQuery } from '@apollo/client';
 import {
   useTheme,
   Container,
-  Box,
   Grid,
-  Stack,
   Typography,
   Skeleton,
   Pagination,
