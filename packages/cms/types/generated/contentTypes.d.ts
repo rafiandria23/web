@@ -361,6 +361,133 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiArticleArticle extends Schema.CollectionType {
+  collectionName: 'articles';
+  info: {
+    singularName: 'article';
+    pluralName: 'articles';
+    displayName: 'Article';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    overview: Attribute.Text & Attribute.Required;
+    thumbnail: Attribute.Media & Attribute.Required;
+    cover: Attribute.Media & Attribute.Required;
+    slug: Attribute.UID<'api::article.article', 'title'> & Attribute.Required;
+    tags: Attribute.Relation<
+      'api::article.article',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    content: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'Markdown';
+          preset: 'standard';
+        }
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProjectProject extends Schema.CollectionType {
+  collectionName: 'projects';
+  info: {
+    singularName: 'project';
+    pluralName: 'projects';
+    displayName: 'Project';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    overview: Attribute.Text & Attribute.Required;
+    link: Attribute.String;
+    thumbnail: Attribute.Media & Attribute.Required;
+    status: Attribute.Enumeration<
+      ['validating_idea', 'prototyping', 'in_development', 'released']
+    > &
+      Attribute.Required;
+    tags: Attribute.Relation<
+      'api::project.project',
+      'manyToMany',
+      'api::tag.tag'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::project.project',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTagTag extends Schema.CollectionType {
+  collectionName: 'tags';
+  info: {
+    singularName: 'tag';
+    pluralName: 'tags';
+    displayName: 'Tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    overview: Attribute.Text & Attribute.Required;
+    slug: Attribute.UID<'api::tag.tag', 'name'> & Attribute.Required;
+    color: Attribute.String &
+      Attribute.Required &
+      Attribute.CustomField<'plugin::color-picker.color'>;
+    articles: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::article.article'
+    >;
+    projects: Attribute.Relation<
+      'api::tag.tag',
+      'manyToMany',
+      'api::project.project'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -676,133 +803,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface ApiArticleArticle extends Schema.CollectionType {
-  collectionName: 'articles';
-  info: {
-    singularName: 'article';
-    pluralName: 'articles';
-    displayName: 'Article';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    overview: Attribute.Text & Attribute.Required;
-    thumbnail: Attribute.Media & Attribute.Required;
-    cover: Attribute.Media & Attribute.Required;
-    slug: Attribute.UID<'api::article.article', 'title'> & Attribute.Required;
-    tags: Attribute.Relation<
-      'api::article.article',
-      'manyToMany',
-      'api::tag.tag'
-    >;
-    content: Attribute.RichText &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
-        {
-          output: 'Markdown';
-          preset: 'standard';
-        }
-      >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::article.article',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiProjectProject extends Schema.CollectionType {
-  collectionName: 'projects';
-  info: {
-    singularName: 'project';
-    pluralName: 'projects';
-    displayName: 'Project';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    overview: Attribute.Text & Attribute.Required;
-    link: Attribute.String;
-    thumbnail: Attribute.Media & Attribute.Required;
-    status: Attribute.Enumeration<
-      ['validating_idea', 'prototyping', 'in_development', 'released']
-    > &
-      Attribute.Required;
-    tags: Attribute.Relation<
-      'api::project.project',
-      'manyToMany',
-      'api::tag.tag'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::project.project',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::project.project',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTagTag extends Schema.CollectionType {
-  collectionName: 'tags';
-  info: {
-    singularName: 'tag';
-    pluralName: 'tags';
-    displayName: 'Tag';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    overview: Attribute.Text & Attribute.Required;
-    slug: Attribute.UID<'api::tag.tag', 'name'> & Attribute.Required;
-    color: Attribute.String &
-      Attribute.Required &
-      Attribute.CustomField<'plugin::color-picker.color'>;
-    articles: Attribute.Relation<
-      'api::tag.tag',
-      'manyToMany',
-      'api::article.article'
-    >;
-    projects: Attribute.Relation<
-      'api::tag.tag',
-      'manyToMany',
-      'api::project.project'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::tag.tag', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/strapi' {
   export module Shared {
     export interface ContentTypes {
@@ -813,15 +813,15 @@ declare module '@strapi/strapi' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::article.article': ApiArticleArticle;
+      'api::project.project': ApiProjectProject;
+      'api::tag.tag': ApiTagTag;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'api::article.article': ApiArticleArticle;
-      'api::project.project': ApiProjectProject;
-      'api::tag.tag': ApiTagTag;
     }
   }
 }

@@ -1,7 +1,10 @@
 'use client';
 
+import _ from 'lodash';
 import type { FC } from 'react';
 import dynamic from 'next/dynamic';
+import NextLink from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
 import {
   useTheme,
@@ -11,27 +14,23 @@ import {
   Stack,
   Typography,
   Skeleton,
+  Pagination,
+  PaginationItem,
 } from '@mui/material';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
 import type { ITag } from '@/types/tag';
-import type { IProject } from '@/types/project';
 import type { IArticle } from '@/types/article';
 
 // Constants
+import { RADIX } from '@/constants';
 import { PaginationDefaults } from '@/constants/page';
 
 // Components
 const ArticleCard = dynamic(
   () => import('@/components/article').then((mod) => mod.ArticleCard),
-  {
-    ssr: false,
-  },
-);
-const ProjectCard = dynamic(
-  () => import('@/components/project').then((mod) => mod.ProjectCard),
   {
     ssr: false,
   },
@@ -70,39 +69,6 @@ const query = gql`
         }
       }
     }
-
-    projects(
-      filters: { tags: { slug: { eq: $slug } } }
-      pagination: { pageSize: $pageSize, page: $page }
-      sort: ["updatedAt:DESC"]
-    ) {
-      meta {
-        pagination {
-          total
-          pageSize
-          pageCount
-          page
-        }
-      }
-
-      data {
-        id
-        attributes {
-          title
-          overview
-          link
-          thumbnail {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-          status
-          updatedAt
-        }
-      }
-    }
   }
 `;
 
@@ -111,62 +77,55 @@ export interface ITagClientPageProps {
 }
 
 const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
+  const searchParams = useSearchParams();
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
       articles: IGraphQLModelResponse<IArticle[]>;
-      projects: IGraphQLModelResponse<IProject[]>;
     },
     { slug: ITag['attributes']['slug'] } & IPagination
   >(query, {
     variables: {
       slug: tag.attributes.slug,
       pageSize: PaginationDefaults.PAGE_SIZE,
-      page: PaginationDefaults.PAGE,
+      page: _.defaultTo(
+        parseInt(searchParams.get('page') as string, RADIX),
+        PaginationDefaults.PAGE,
+      ),
     },
   });
 
   return (
     <>
       {/* Tag Hero Section */}
-      <Box component='section' bgcolor='primary.light'>
-        <Stack component={Container} spacing={2}>
+      <Grid
+        component='section'
+        container
+        justifyContent='center'
+        alignItems='center'
+        bgcolor='primary.light'
+      >
+        <Grid component={Container} item>
           <Typography
             component='h1'
-            variant='h3'
+            variant='h4'
             color='primary.contrastText'
             gutterBottom
           >
             {tag.attributes.name}
           </Typography>
 
-          <Typography
-            component='p'
-            variant='h6'
-            color='primary.contrastText'
-            paragraph
-          >
+          <Typography variant='body1' color='primary.contrastText' paragraph>
             {tag.attributes.overview}
           </Typography>
-        </Stack>
-      </Box>
+        </Grid>
+      </Grid>
 
       {/* Articles Section */}
       <Container component='section'>
-        <Stack spacing={8}>
-          <Typography
-            component='h2'
-            variant='h4'
-            textAlign={{
-              xs: 'left',
-              xl: 'right',
-            }}
-            gutterBottom
-          >
-            Articles
-          </Typography>
-
+        <Grid container rowGap={6}>
           <Grid
+            item
             container
             gap={{
               xs: 3,
@@ -192,50 +151,28 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
                   </Grid>
                 ))}
           </Grid>
-        </Stack>
-      </Container>
 
-      {/* Projects Section */}
-      <Box component='section' bgcolor='primary.light'>
-        <Stack component={Container} spacing={8}>
-          <Typography
-            component='h2'
-            variant='h4'
-            textAlign='left'
-            color='primary.contrastText'
-            gutterBottom
-          >
-            Projects
-          </Typography>
-
-          <Grid
-            container
-            gap={{
-              xs: 3,
-              xl: 3,
-            }}
-          >
-            {loading
-              ? Array.from({ length: PaginationDefaults.PAGE_SIZE }).map(
-                  (_, idx) => (
-                    <Grid
-                      key={`project-skeleton-${idx + 1}`}
-                      item
-                      xs={12}
-                      xl={5.87}
-                    >
-                      <Skeleton height={theme.spacing(20)} />
-                    </Grid>
-                  ),
-                )
-              : data?.projects.data.map((project) => (
-                  <Grid key={project.id} item xs={12} xl={5.87}>
-                    <ProjectCard project={project} />
-                  </Grid>
-                ))}
+          <Grid item xs={4}>
+            {loading ? (
+              <Skeleton variant='rounded' height={theme.spacing(4)} />
+            ) : (
+              <Pagination
+                variant='outlined'
+                color='primary'
+                count={data?.articles.meta.pagination.pageCount}
+                page={data?.articles.meta.pagination.page}
+                renderItem={(item) => (
+                  <PaginationItem
+                    component={NextLink}
+                    href={item.page === 1 ? '/blog' : `/blog?page=${item.page}`}
+                    {...item}
+                  />
+                )}
+              />
+            )}
           </Grid>
-        </Stack>
-      </Box>
+        </Grid>
+      </Container>
     </>
   );
 };
