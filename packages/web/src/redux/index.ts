@@ -25,7 +25,7 @@ const rootReducer = combineReducers<IRootState>({
 
 const persistedReducer = persistReducer(
   {
-    key: 'state',
+    key: 'root',
     whitelist: ['theme'],
     storage,
   },
