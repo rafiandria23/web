@@ -5138,9 +5138,9 @@
   integrity sha512-mmcWnRV6i0d+J1wRApzblsY6Xd9+gyzlp19tGZhUA7jLuYmCExkTl+EAzEV/Y01JqGZmcyFcfuhzM+jSjsR9mw==
 
 "@strapi/plugin-seo@^1.9.2":
-  version "1.9.6"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-1.9.6.tgz#e23a7206a47e6b96c616ce4eae5bd900e9624139"
-  integrity sha512-gqsZSNWgTTLp0eQMp9oXzSseOcs/S7Kz03CSo2nT1sXSPwybgF9gE4gedzlBFYErA7XbyDZb9ZIWpxx5jRTA4w==
+  version "1.9.8"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-1.9.8.tgz#44e9baec7c63f4f5de720215132aa677f9f6c9d1"
+  integrity sha512-66haxyQ71KozCJbzbFnFvNGhG5I8RPy0KxTTJcILfCgWwmNid4yJ9P9hBarZeCLr1PcqSCN1ju1j+iXpTG7nyg==
   dependencies:
     date-fns "^2.29.3"
     eslint-plugin-react-hooks "^4.3.0"
