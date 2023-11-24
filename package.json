@@ -15,7 +15,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"husky": "^8.0.3",
-		"lerna": "^7.3.0"
+		"lerna": "^8.0.0"
 	},
 	"license": "MIT"
 }
