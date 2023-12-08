@@ -2220,10 +2220,10 @@
     "@reinmar/ckeditor5-maximum-length" "^0.0.1"
     ckeditor5 "^40.0.0"
 
-"@cloudinary-util/url-loader@^3.16.0":
-  version "3.16.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-3.16.0.tgz#e3a4c3ec74d344ecaeff35528be06795ce80cb52"
-  integrity sha512-KqZYuSkQg5FnlREecay5sJTXYdfg/3PaS9Az+XZbCcrdbQQJtWotyE4K3S3F7YBSqTdBItE/XqmgzmmcGLZ3Pw==
+"@cloudinary-util/url-loader@^3.20.0":
+  version "3.20.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-3.20.0.tgz#435a7f829033e0f9f388209eae5437397282f9b5"
+  integrity sha512-fK7AmOTG360giHcNHQhmJqDGutuCpnqiHW6/0pJbviETZQImY2/xNgpdfdN/yiVJZY6GDFaOyYt+ehP1HFmqKA==
   dependencies:
     "@cloudinary-util/util" "2.3.0"
     "@cloudinary/url-gen" "^1.10.2"
@@ -13944,11 +13944,11 @@ newrelic@^11.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^5.0.0:
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-5.10.0.tgz#01537285fcdd69379b9e96c40b8abf47fb7dba4e"
-  integrity sha512-FmLvteYJjpvE69pNZlp/xzwf32/iNuYM9INrh0GTNhgKxoKP/Ej/ij+kjKkZq8eAA8epSeDh3IUoewwRpJfuTQ==
+  version "5.11.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-5.11.0.tgz#b5375842858315d0195c2152ae776c2e036ff5a5"
+  integrity sha512-gTPqqMG7hzoeA2wEBpUR51FExVFq3+p1qZU52xlwejpEGYaGVIVzpILOA0G2i9s0jyxudWuA5GLFh2A/bvQmFw==
   dependencies:
-    "@cloudinary-util/url-loader" "^3.16.0"
+    "@cloudinary-util/url-loader" "^3.20.0"
     "@cloudinary-util/util" "^2.3.0"
 
 next-sitemap@^4.1.3:
