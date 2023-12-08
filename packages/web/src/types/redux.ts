@@ -1,3 +1,6 @@
+import type { Reducer } from '@reduxjs/toolkit';
+
+// Constants
 import { ThemeMode } from '@/constants/theme';
 
 export interface IAction<T = unknown> {
@@ -6,7 +9,7 @@ export interface IAction<T = unknown> {
 }
 
 export interface IRootState {
-  theme: IThemeReducer;
+  theme: Reducer<IThemeReducer>;
 }
 
 export interface IThemeReducer {
