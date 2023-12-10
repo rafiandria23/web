@@ -19,7 +19,8 @@ import { ThemeMode } from '@/constants/theme';
 import { setScheme } from '@/redux/theme';
 
 // Hooks
-import { useThemeState, usePrefersDarkMode } from '@/hooks/theme';
+import { useAppSelector } from '@/hooks/redux';
+import { usePrefersDarkMode } from '@/hooks/theme';
 
 // Themes
 import { LightTheme, DarkTheme } from '@/styles/theme';
@@ -34,7 +35,7 @@ export interface IThemeRegistryProps {
 
 const ThemeRegistry: FC<IThemeRegistryProps> = ({ options, children }) => {
   const dispatch = useDispatch();
-  const { mode } = useThemeState();
+  const { mode } = useAppSelector((s) => s.theme);
   const prefersDarkMode = usePrefersDarkMode();
   const [{ cache, flush }] = useState(() => {
     const cache = createCache(options);

@@ -20,14 +20,14 @@ import { ThemeMode } from '@/constants/theme';
 import { ProjectStatus } from '@/constants/project';
 
 // Hooks
-import { useThemeState } from '@/hooks/theme';
+import { useAppSelector } from '@/hooks/redux';
 
 export interface IProjectStatusChipProps {
   status: IProject['attributes']['status'];
 }
 
 const ProjectStatusChip: FC<IProjectStatusChipProps> = ({ status }) => {
-  const { scheme } = useThemeState();
+  const { scheme } = useAppSelector((s) => s.theme);
   const finalStatus = useMemo<{
     label: string;
     color: ChipProps['color'];

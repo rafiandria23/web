@@ -8,10 +8,6 @@ export interface IAction<T = unknown> {
   payload: T;
 }
 
-export interface IRootState {
-  theme: Reducer<IThemeReducer>;
-}
-
 export interface IThemeReducer {
   mode: ThemeMode;
   scheme: Exclude<ThemeMode, ThemeMode.SYSTEM>;
