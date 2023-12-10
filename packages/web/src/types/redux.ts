@@ -1,5 +1,3 @@
-import type { Reducer } from '@reduxjs/toolkit';
-
 // Constants
 import { ThemeMode } from '@/constants/theme';
 
