@@ -10,18 +10,17 @@ import {
   REGISTER,
 } from 'redux-persist';
 
-// Types
-import type { IRootState } from '@/types/redux';
-
 // Slices
 import { themeSlice } from './theme';
 
 // Storage
 import storage from './storage';
 
-const rootReducer = combineReducers<IRootState>({
+const rootReducer = combineReducers({
   theme: themeSlice.reducer,
 });
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 const persistedReducer = persistReducer(
   {
@@ -41,5 +40,7 @@ export const store = configureStore({
       },
     }),
 });
+
+export type AppDispatch = typeof store.dispatch;
 
 export const persistor = persistStore(store);

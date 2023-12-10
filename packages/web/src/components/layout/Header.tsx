@@ -33,8 +33,8 @@ import { ScreenSize } from '@/constants/screen';
 import { setMode as setThemeMode } from '@/redux/theme';
 
 // Hooks
+import { useAppSelector } from '@/hooks/redux';
 import { useScreenSize } from '@/hooks/screen';
-import { useThemeState } from '@/hooks/theme';
 
 // Components
 import type { IThemeSwitcherProps } from '@/components/theme/ThemeSwitcher';
@@ -49,7 +49,7 @@ HeaderTransition.displayName = 'HeaderTransition';
 
 const Header: FC = () => {
   const dispatch = useDispatch();
-  const { mode } = useThemeState();
+  const { mode } = useAppSelector((s) => s.theme);
   const theme = useTheme();
   const screenSize = useScreenSize();
   const scrollTriggered = useScrollTrigger({
