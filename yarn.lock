@@ -2473,9 +2473,9 @@
     react-is "^18.2.0"
 
 "@newrelic/apollo-server-plugin@^4.0.0":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-4.0.1.tgz#49b9fa505961f0ac44ab043b26f3a0ee200bc016"
-  integrity sha512-TR6SCmZqHQpy0Bjqomn3wf1TBLflxF2ZdRY3JPqpG63nH51CQZumSF268D8npMzVFrlV8x1xn63f7VbTzA+4bQ==
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-4.1.0.tgz#7ffcbc35d6509ca42538595da4defaef16553a86"
+  integrity sha512-eMfelf8i6ELrHA6sAUcPS6NFGCy6+my8lcsAI0PMiOdUp5Y1TvPPgAZhnuCSBMwmNc+knFppvWOUNa09IcVrsA==
 
 "@newrelic/aws-sdk@^7.0.3":
   version "7.0.3"
