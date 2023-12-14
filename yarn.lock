@@ -10074,10 +10074,10 @@ import-fresh@^3.2.1, import-fresh@^3.3.0:
     parent-module "^1.0.0"
     resolve-from "^4.0.0"
 
-import-in-the-middle@^1.4.2:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/import-in-the-middle/-/import-in-the-middle-1.5.0.tgz#db939aa2b7220f6149124885160916be715d1cae"
-  integrity sha512-H2hqR0jImhqe9+1k8pYewDKWJHnDeRsWZk5aSztv6MIWD5glmbEOqy1JZrMUC6SJiO1M4A+nVvUUYtWzP5wPYg==
+import-in-the-middle@^1.6.0:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/import-in-the-middle/-/import-in-the-middle-1.7.1.tgz#3e111ff79c639d0bde459bd7ba29dd9fdf357364"
+  integrity sha512-1LrZPDtW+atAxH42S6288qyDFNQ2YCty+2mxEPRtfazH6Z5QwkaBSTS2ods7hnVJioF6rkRfNoA6A/MstpFXLg==
   dependencies:
     acorn "^8.8.2"
     acorn-import-assertions "^1.9.0"
@@ -12859,9 +12859,9 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^11.0.0:
-  version "11.6.1"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.6.1.tgz#ae2af414662bc2c201d589b235fc24cf8ab1007c"
-  integrity sha512-3tmSRqAcKdPPKGz9qswOvNDlsZXueC8QgJGty0uD95aurFzQoIOjI6/1dQBn3cxM8xxm3/vVa/Z2CAe4q0WK7g==
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.7.0.tgz#9772e8a859f67f99cc2e190a1d92990527b25322"
+  integrity sha512-izTjP1wRhz3PVhpdcufn4YAZceZfC7+DNoKXfndrSEVwd3risqcTC9swJW10guZ35fxaQu64/lFLuyMPEsBiUg==
   dependencies:
     "@grpc/grpc-js" "^1.9.4"
     "@grpc/proto-loader" "^0.7.5"
@@ -12872,7 +12872,7 @@ newrelic@^11.0.0:
     "@tyriar/fibonacci-heap" "^2.0.7"
     concat-stream "^2.0.0"
     https-proxy-agent "^7.0.1"
-    import-in-the-middle "^1.4.2"
+    import-in-the-middle "^1.6.0"
     json-bigint "^1.0.0"
     json-stringify-safe "^5.0.0"
     module-details-from-path "^1.0.3"
