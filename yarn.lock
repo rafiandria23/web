@@ -4146,10 +4146,10 @@
     react-query "3.39.3"
     react-select "5.7.0"
 
-"@strapi/helper-plugin@4.16.0":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.16.0.tgz#e3d74c320487e79a75f8f89afee951722c710e64"
-  integrity sha512-kzCelqbqz6YFo9cqEbzVDYdpfckoo0tKMWuMVS3oKx+8ZjHhH1FPODJfbHQXRIeIGXm8odbUJY7sodX72MiBjg==
+"@strapi/helper-plugin@4.16.2":
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.16.2.tgz#c9ed341965c1aba51b5adb7e413c91cac00b869e"
+  integrity sha512-O9ZWm/qHa2gZByuG4+YePvy9wfHykh4vUw7wufIWn4aTdv3AQdCIBmN33iiDXKd9Fxud+o7XIubXe2ZRTZbySQ==
   dependencies:
     axios "1.6.0"
     date-fns "2.30.0"
@@ -4214,12 +4214,12 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^4.13.1":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-4.16.0.tgz#cf3ddd3be62680b767219d34e447de2b23a558b0"
-  integrity sha512-rkD+Z5IP8OdEvm+3SsJAy3gX5XjoH99R+fDljMOtOzjIDAz77l9lKFz3sfFbMozZWjzW2eVO6nwWAoMbX7e6gQ==
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-4.16.2.tgz#abdd56b88ae2126a84b1e07a8955bd41887f4516"
+  integrity sha512-92IrkazlBlT3ZWx1CeygEx1tpepYtEpMElsY5d0eLIS3qjxV7GOryAeShxeFt6IRob8CR8B3uJgYNvSt6bxrHQ==
   dependencies:
     "@strapi/design-system" "1.13.1"
-    "@strapi/helper-plugin" "4.16.0"
+    "@strapi/helper-plugin" "4.16.2"
     "@strapi/icons" "1.13.0"
     prop-types "^15.8.1"
     react-colorful "5.6.1"
@@ -4274,16 +4274,16 @@
     yup "0.32.9"
 
 "@strapi/plugin-graphql@^4.13.1":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-4.16.0.tgz#c7b0a2cd41fdb174b0e83aba64a2018898c842eb"
-  integrity sha512-UnpRPd5Dlig4A11QhtSMo47bOCxcph65j+oZNr5T1PYsPz/TTPliwUdhYTwXPXTA5pJGBgTNBPF35Awc4OU/EQ==
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-4.16.2.tgz#40057182f02c31bb20414fecb0c5e4dd9046227b"
+  integrity sha512-1pOqDEaSUCSe0KRempcGMY2H/KEElfVpM3kexkrVORuoNPubD/LxiqYRPaj35j2TiYF/YClPGiDy+f0WxSefzg==
   dependencies:
     "@graphql-tools/schema" "8.5.1"
     "@graphql-tools/utils" "^8.13.1"
     "@strapi/design-system" "1.13.1"
-    "@strapi/helper-plugin" "4.16.0"
+    "@strapi/helper-plugin" "4.16.2"
     "@strapi/icons" "1.13.0"
-    "@strapi/utils" "4.16.0"
+    "@strapi/utils" "4.16.2"
     apollo-server-core "3.12.1"
     apollo-server-koa "3.10.0"
     graphql "^15.5.1"
@@ -4297,15 +4297,15 @@
     pluralize "8.0.0"
 
 "@strapi/plugin-i18n@^4.13.1":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.16.0.tgz#260be647c3b31720362d94eb2d10ff7e1ba9f6c1"
-  integrity sha512-+HIaS2EG/U/W6arYR89EP+C9nO+rlBcvxnf9oVgy4ekV08mGC2v2u3wMpvDKrs7+XgQBP3HH88vDsVYifTdGNg==
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.16.2.tgz#7f326515650e210885e644cf7558a19e50690efc"
+  integrity sha512-wHhgN4qWQ39L6Xn+02JZ2URojYlsZmDofAiRjYtTEcTrN5iTH2Gt9yC4OY4VHTOwwz3QMpZzYlY2lv9zvFvFJg==
   dependencies:
     "@reduxjs/toolkit" "1.9.7"
     "@strapi/design-system" "1.13.1"
-    "@strapi/helper-plugin" "4.16.0"
+    "@strapi/helper-plugin" "4.16.2"
     "@strapi/icons" "1.13.0"
-    "@strapi/utils" "4.16.0"
+    "@strapi/utils" "4.16.2"
     formik "2.4.0"
     immer "9.0.19"
     lodash "4.17.21"
@@ -4365,14 +4365,14 @@
     yup "0.32.9"
 
 "@strapi/plugin-users-permissions@^4.13.1":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.16.0.tgz#a4623e5f66ca59daf0b5a33243aa2ff9ccd340e3"
-  integrity sha512-4YHXNU07t5VZjNiEa4zQRo9iczZBy367asONDy4CPoz+BSxxyh8zVRr4IDMCv9NRtRAgSdkKjpEiHo0/zuoWLw==
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-users-permissions/-/plugin-users-permissions-4.16.2.tgz#ca20b1850253be0e1250603790c364eb6354b61e"
+  integrity sha512-27QZSKW1WpbKYt5I/+AkiIh9o6DDQE2nHilfln6bSaW5s3htM+tFR7vdTTjbHOhpMTD6kpqLFFhKVFoDcUP1Og==
   dependencies:
     "@strapi/design-system" "1.13.1"
-    "@strapi/helper-plugin" "4.16.0"
+    "@strapi/helper-plugin" "4.16.2"
     "@strapi/icons" "1.13.0"
-    "@strapi/utils" "4.16.0"
+    "@strapi/utils" "4.16.2"
     bcryptjs "2.4.3"
     formik "2.4.0"
     grant-koa "5.4.8"
@@ -4404,11 +4404,11 @@
     sendmail "^1.6.1"
 
 "@strapi/provider-upload-cloudinary@^4.13.6":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/provider-upload-cloudinary/-/provider-upload-cloudinary-4.16.0.tgz#2674f1f15af307b9d6e09b7d75e381e7c46bbfa4"
-  integrity sha512-1DOGMwKgsQuhiyyRG4XLCISQEKBYmEmsUl9hpq7rV/ImSvEnQtFzG6PQuCQy5dvf/osZIQtG7vtfXQ9rIeT9CQ==
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/provider-upload-cloudinary/-/provider-upload-cloudinary-4.16.2.tgz#547ae3ada8cfe332132b55075176896168e23f44"
+  integrity sha512-VNAHKAsBFFbfBxODnEkQ2lYQuxOHhEBFUMAwESyCJu5SC7+4tcO2140oK9+rN0/5YNDJB8MxIrfF0JDB+jiRww==
   dependencies:
-    "@strapi/utils" "4.16.0"
+    "@strapi/utils" "4.16.2"
     cloudinary "^1.41.0"
     into-stream "^5.1.0"
 
@@ -4552,10 +4552,10 @@
     p-map "4.0.0"
     yup "0.32.9"
 
-"@strapi/utils@4.16.0":
-  version "4.16.0"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.16.0.tgz#e82b35d0147ecfab071035d3fecc7581e5b183a7"
-  integrity sha512-IGWG5p/RZYSU11RxroC7OMehN2GggXrG+9iVFVuPkOdhIxaPwYvDkmXsjJmxp/Kr31mWfpbkr64wp30rfTnm9A==
+"@strapi/utils@4.16.2":
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.16.2.tgz#278b953872645e37ab46369f508bbe8c11ef0f02"
+  integrity sha512-CuAXBXXke4j0OTVuQswZ8c/Mpeb9W1DhcBhYQpc8Cwn9NeII5VGE57TrIkXL3FCU8q4fcL3IrSLaftmL6/e3uQ==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
