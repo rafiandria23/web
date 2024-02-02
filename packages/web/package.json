@@ -21,7 +21,7 @@
     "graphql": "^16.8.0",
     "lodash": "^4.17.21",
     "newrelic": "^11.0.0",
-    "next": "^14.0.0",
+    "next": "^14.1.0",
     "next-cloudinary": "^5.0.0",
     "nextjs-google-analytics": "^2.3.3",
     "notistack": "^3.0.1",
@@ -36,7 +36,7 @@
     "remark-gfm": "^4.0.0",
     "remark-unwrap-images": "^4.0.0",
     "sass": "^1.62.1",
-    "sharp": "^0.33.0"
+    "sharp": "^0.33.2"
   },
   "devDependencies": {
     "@types/newrelic": "^9.14.0",
