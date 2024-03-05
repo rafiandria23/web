@@ -777,10 +777,10 @@
   resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.0.tgz#ba272669507e8b707a37fd358d9a5537c7433fb1"
   integrity sha512-h7rGVFjOWHhxUiN41sAQako54pLqLQAfp7pr3PdA1sui24zTubV1PTRlhg0hOpvzxFknaFbNwJ+6aj2fYIoKIQ==
 
-"@cloudinary-util/url-loader@5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.0.0.tgz#719c82753d4398531adfe7bd0626ce666c573d3d"
-  integrity sha512-WjfzbI/l6uqQsnq6xnPrR6gvicQzI9jMZnhJK1fpeM9FrLemRjqXZNEsJyx909BfKtE2WKMzzw2Tw7iQ7/R6LQ==
+"@cloudinary-util/url-loader@5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.1.0.tgz#bb82ce57e134d0a3a285d2fc3eb35c835169f4cd"
+  integrity sha512-B4ou2sL0VSwUslrrAg8/0Id4YHZtXXtGNZ/lhZE8TSqdhcJm3T4eMFa5FfdUFs7Tz/nE1U9Zomdaxo34W7L53Q==
   dependencies:
     "@cloudinary-util/util" "3.0.0"
     "@cloudinary/url-gen" "1.15.0"
@@ -12289,12 +12289,12 @@ newrelic@^11.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.0.1.tgz#229473f5cf92444402db0c635bd4a9479a21bdd4"
-  integrity sha512-T+w6AVP94JGrbifvzSApsLFnZym75v9mGgmE6OnnCVbD7411+o8vZZNu1u8+LxjwXLPk9unopt9pJXv8go7thA==
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.1.0.tgz#75aa48542f3bdea438adf645b6178c2b49287259"
+  integrity sha512-bpg7zIOHX/HG5X3vdgSufShYfPwzD1H7nT95ipJ2HagvxipaMvEcpKAvnCSo99LBMhUjCt88/ILebFtsCVUyuQ==
   dependencies:
     "@cloudinary-util/types" "1.0.0"
-    "@cloudinary-util/url-loader" "5.0.0"
+    "@cloudinary-util/url-loader" "5.1.0"
     "@cloudinary-util/util" "^3.0.0"
     "@tsconfig/recommended" "^1.0.3"
 
