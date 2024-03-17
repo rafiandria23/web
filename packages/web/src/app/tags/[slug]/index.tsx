@@ -19,8 +19,8 @@ import {
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
-import type { IArticle } from '@/types/article';
 import type { ITag } from '@/types/tag';
+import type { IArticle } from '@/types/article';
 
 // Constants
 import { RADIX } from '@/constants';
@@ -35,22 +35,9 @@ const ArticleCard = dynamic(
 );
 
 const query = gql`
-  query ($pageSize: Int!, $page: Int!) {
-    tags(
-      pagination: { pageSize: $pageSize, page: $page }
-      sort: ["updatedAt:DESC"]
-    ) {
-      data {
-        id
-        attributes {
-          name
-          slug
-          color
-        }
-      }
-    }
-
+  query ($slug: String!, $pageSize: Int!, $page: Int!) {
     articles(
+      filters: { tags: { slug: { eq: $slug } } }
       pagination: { pageSize: $pageSize, page: $page }
       sort: ["updatedAt:DESC"]
     ) {
@@ -83,17 +70,21 @@ const query = gql`
   }
 `;
 
-const BlogClientPage: FC = () => {
+export interface ITagPageProps {
+  tag: ITag;
+}
+
+const TagPage: FC<ITagPageProps> = ({ tag }) => {
   const searchParams = useSearchParams();
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
-      tags: IGraphQLModelResponse<ITag[]>;
       articles: IGraphQLModelResponse<IArticle[]>;
     },
-    IPagination
+    { slug: ITag['attributes']['slug'] } & IPagination
   >(query, {
     variables: {
+      slug: tag.attributes.slug,
       pageSize: PaginationDefaults.PAGE_SIZE,
       page: _.defaultTo(
         parseInt(searchParams.get('page') as string, RADIX),
@@ -104,7 +95,7 @@ const BlogClientPage: FC = () => {
 
   return (
     <>
-      {/* Blog Hero Section */}
+      {/* Tag Hero Section */}
       <Grid
         component='section'
         container
@@ -119,11 +110,11 @@ const BlogClientPage: FC = () => {
             color='primary.contrastText'
             gutterBottom
           >
-            My Blog
+            {tag.attributes.name}
           </Typography>
 
           <Typography variant='body1' color='primary.contrastText' paragraph>
-            Articles I have written.
+            {tag.attributes.overview}
           </Typography>
         </Grid>
       </Grid>
@@ -184,4 +175,4 @@ const BlogClientPage: FC = () => {
   );
 };
 
-export default BlogClientPage;
+export default TagPage;

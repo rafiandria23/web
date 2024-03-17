@@ -19,25 +19,23 @@ import {
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
-import type { ITag } from '@/types/tag';
-import type { IArticle } from '@/types/article';
+import type { IProject } from '@/types/project';
 
 // Constants
 import { RADIX } from '@/constants';
 import { PaginationDefaults } from '@/constants/page';
 
 // Components
-const ArticleCard = dynamic(
-  () => import('@/components/article').then((mod) => mod.ArticleCard),
+const ProjectCard = dynamic(
+  () => import('@/components/project').then((mod) => mod.ProjectCard),
   {
     ssr: false,
   },
 );
 
 const query = gql`
-  query ($slug: String!, $pageSize: Int!, $page: Int!) {
-    articles(
-      filters: { tags: { slug: { eq: $slug } } }
+  query ($pageSize: Int!, $page: Int!) {
+    projects(
       pagination: { pageSize: $pageSize, page: $page }
       sort: ["updatedAt:DESC"]
     ) {
@@ -55,6 +53,7 @@ const query = gql`
         attributes {
           title
           overview
+          link
           thumbnail {
             data {
               attributes {
@@ -62,7 +61,7 @@ const query = gql`
               }
             }
           }
-          slug
+          status
           updatedAt
         }
       }
@@ -70,21 +69,16 @@ const query = gql`
   }
 `;
 
-export interface ITagClientPageProps {
-  tag: ITag;
-}
-
-const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
+const ProjectsPage: FC = () => {
   const searchParams = useSearchParams();
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
-      articles: IGraphQLModelResponse<IArticle[]>;
+      projects: IGraphQLModelResponse<IProject[]>;
     },
-    { slug: ITag['attributes']['slug'] } & IPagination
+    IPagination
   >(query, {
     variables: {
-      slug: tag.attributes.slug,
       pageSize: PaginationDefaults.PAGE_SIZE,
       page: _.defaultTo(
         parseInt(searchParams.get('page') as string, RADIX),
@@ -95,7 +89,7 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
 
   return (
     <>
-      {/* Tag Hero Section */}
+      {/* Projects Hero  Section*/}
       <Grid
         component='section'
         container
@@ -110,16 +104,16 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
             color='primary.contrastText'
             gutterBottom
           >
-            {tag.attributes.name}
+            My Projects
           </Typography>
 
           <Typography variant='body1' color='primary.contrastText' paragraph>
-            {tag.attributes.overview}
+            Projects I have been working on.
           </Typography>
         </Grid>
       </Grid>
 
-      {/* Articles Section */}
+      {/* Projects Section */}
       <Container component='section'>
         <Grid container rowGap={6}>
           <Grid
@@ -134,7 +128,7 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
               ? Array.from({ length: PaginationDefaults.PAGE_SIZE }).map(
                   (_, idx) => (
                     <Grid
-                      key={`article-skeleton-${idx + 1}`}
+                      key={`project-skeleton-${idx + 1}`}
                       item
                       xs={12}
                       xl={5.87}
@@ -143,9 +137,9 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
                     </Grid>
                   ),
                 )
-              : data?.articles.data.map((article) => (
-                  <Grid key={article.id} item xs={12} xl={5.87}>
-                    <ArticleCard article={article} />
+              : data?.projects.data.map((project) => (
+                  <Grid key={project.id} item xs={12} xl={5.87}>
+                    <ProjectCard project={project} />
                   </Grid>
                 ))}
           </Grid>
@@ -157,12 +151,16 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
               <Pagination
                 variant='outlined'
                 color='primary'
-                count={data?.articles.meta.pagination.pageCount}
-                page={data?.articles.meta.pagination.page}
+                count={data?.projects.meta.pagination.pageCount}
+                page={data?.projects.meta.pagination.page}
                 renderItem={(item) => (
                   <PaginationItem
                     component={NextLink}
-                    href={item.page === 1 ? '/blog' : `/blog?page=${item.page}`}
+                    href={
+                      item.page === 1
+                        ? '/projects'
+                        : `/projects?page=${item.page}`
+                    }
                     {...item}
                   />
                 )}
@@ -175,4 +173,4 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
   );
 };
 
-export default TagClientPage;
+export default ProjectsPage;

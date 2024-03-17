@@ -1,16 +1,11 @@
-import type { FC } from 'react';
 import type { Metadata } from 'next';
 
-// Client Page
-import BlogClientPage from './client-page';
-
-const BlogPage: FC = () => {
-  return <BlogClientPage />;
-};
-
-export default BlogPage;
+// Pages
+import BlogPage from '.';
 
 export const metadata: Metadata = {
   title: 'My Blog',
   description: 'Articles I have written.',
 };
+
+export default BlogPage;

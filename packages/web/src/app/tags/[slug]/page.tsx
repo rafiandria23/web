@@ -12,29 +12,27 @@ import type { ITag } from '@/types/tag';
 import { client } from '@/graphql';
 
 // Client Page
-import TagClientPage from './client-page';
+import TagPage from '.';
 
-export interface ITagPageProps {
+export interface IPageProps {
   params: {
     slug: ITag['attributes']['slug'];
   };
 }
 
-const TagPage: FC<ITagPageProps> = async ({ params }) => {
+const Page: FC<IPageProps> = async ({ params }) => {
   const { tag } = await getData(params.slug);
 
-  return <TagClientPage tag={tag} />;
+  return <TagPage tag={tag} />;
 };
 
-export default TagPage;
+export default Page;
 
-export interface ITagPageData {
+export interface IPageData {
   tag: ITag;
 }
 
-async function getData(
-  slug: ITag['attributes']['slug'],
-): Promise<ITagPageData> {
+async function getData(slug: ITag['attributes']['slug']): Promise<IPageData> {
   const { data } = await client.query<
     {
       tags: IGraphQLModelResponse<ITag[]>;
@@ -66,7 +64,7 @@ async function getData(
 
 export async function generateMetadata({
   params,
-}: ITagPageProps): Promise<Metadata | null> {
+}: IPageProps): Promise<Metadata | null> {
   const { slug } = params;
 
   const { data } = await client.query<

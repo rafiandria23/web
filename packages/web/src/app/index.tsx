@@ -85,7 +85,7 @@ const query = gql`
   }
 `;
 
-const HomeClientPage: FC = () => {
+const HomePage: FC = () => {
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
@@ -210,4 +210,4 @@ const HomeClientPage: FC = () => {
   );
 };
 
-export default HomeClientPage;
+export default HomePage;

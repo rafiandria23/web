@@ -19,15 +19,16 @@ import {
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
-import type { IProject } from '@/types/project';
+import type { IArticle } from '@/types/article';
+import type { ITag } from '@/types/tag';
 
 // Constants
 import { RADIX } from '@/constants';
 import { PaginationDefaults } from '@/constants/page';
 
 // Components
-const ProjectCard = dynamic(
-  () => import('@/components/project').then((mod) => mod.ProjectCard),
+const ArticleCard = dynamic(
+  () => import('@/components/article').then((mod) => mod.ArticleCard),
   {
     ssr: false,
   },
@@ -35,7 +36,21 @@ const ProjectCard = dynamic(
 
 const query = gql`
   query ($pageSize: Int!, $page: Int!) {
-    projects(
+    tags(
+      pagination: { pageSize: $pageSize, page: $page }
+      sort: ["updatedAt:DESC"]
+    ) {
+      data {
+        id
+        attributes {
+          name
+          slug
+          color
+        }
+      }
+    }
+
+    articles(
       pagination: { pageSize: $pageSize, page: $page }
       sort: ["updatedAt:DESC"]
     ) {
@@ -53,7 +68,6 @@ const query = gql`
         attributes {
           title
           overview
-          link
           thumbnail {
             data {
               attributes {
@@ -61,7 +75,7 @@ const query = gql`
               }
             }
           }
-          status
+          slug
           updatedAt
         }
       }
@@ -69,12 +83,13 @@ const query = gql`
   }
 `;
 
-const ProjectsClientPage: FC = () => {
+const BlogPage: FC = () => {
   const searchParams = useSearchParams();
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
-      projects: IGraphQLModelResponse<IProject[]>;
+      tags: IGraphQLModelResponse<ITag[]>;
+      articles: IGraphQLModelResponse<IArticle[]>;
     },
     IPagination
   >(query, {
@@ -89,7 +104,7 @@ const ProjectsClientPage: FC = () => {
 
   return (
     <>
-      {/* Projects Hero  Section*/}
+      {/* Blog Hero Section */}
       <Grid
         component='section'
         container
@@ -104,16 +119,16 @@ const ProjectsClientPage: FC = () => {
             color='primary.contrastText'
             gutterBottom
           >
-            My Projects
+            My Blog
           </Typography>
 
           <Typography variant='body1' color='primary.contrastText' paragraph>
-            Projects I have been working on.
+            Articles I have written.
           </Typography>
         </Grid>
       </Grid>
 
-      {/* Projects Section */}
+      {/* Articles Section */}
       <Container component='section'>
         <Grid container rowGap={6}>
           <Grid
@@ -128,7 +143,7 @@ const ProjectsClientPage: FC = () => {
               ? Array.from({ length: PaginationDefaults.PAGE_SIZE }).map(
                   (_, idx) => (
                     <Grid
-                      key={`project-skeleton-${idx + 1}`}
+                      key={`article-skeleton-${idx + 1}`}
                       item
                       xs={12}
                       xl={5.87}
@@ -137,9 +152,9 @@ const ProjectsClientPage: FC = () => {
                     </Grid>
                   ),
                 )
-              : data?.projects.data.map((project) => (
-                  <Grid key={project.id} item xs={12} xl={5.87}>
-                    <ProjectCard project={project} />
+              : data?.articles.data.map((article) => (
+                  <Grid key={article.id} item xs={12} xl={5.87}>
+                    <ArticleCard article={article} />
                   </Grid>
                 ))}
           </Grid>
@@ -151,16 +166,12 @@ const ProjectsClientPage: FC = () => {
               <Pagination
                 variant='outlined'
                 color='primary'
-                count={data?.projects.meta.pagination.pageCount}
-                page={data?.projects.meta.pagination.page}
+                count={data?.articles.meta.pagination.pageCount}
+                page={data?.articles.meta.pagination.page}
                 renderItem={(item) => (
                   <PaginationItem
                     component={NextLink}
-                    href={
-                      item.page === 1
-                        ? '/projects'
-                        : `/projects?page=${item.page}`
-                    }
+                    href={item.page === 1 ? '/blog' : `/blog?page=${item.page}`}
                     {...item}
                   />
                 )}
@@ -173,4 +184,4 @@ const ProjectsClientPage: FC = () => {
   );
 };
 
-export default ProjectsClientPage;
+export default BlogPage;
