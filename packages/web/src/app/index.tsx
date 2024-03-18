@@ -19,9 +19,6 @@ import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IArticle } from '@/types/article';
 import type { IProject } from '@/types/project';
 
-// Constants
-import { PaginationDefaults } from '@/constants/page';
-
 // Components
 const ArticleCard = dynamic(
   () => import('@/components/article').then((mod) => mod.ArticleCard),
@@ -37,7 +34,7 @@ const ProjectCard = dynamic(
 );
 
 const query = gql`
-  query ($pageSize: Int!, $page: Int!) {
+  query ($pageSize: Int, $page: Int) {
     articles(
       pagination: { pageSize: $pageSize, page: $page }
       sort: ["updatedAt:DESC"]
@@ -96,7 +93,6 @@ const HomePage: FC = () => {
   >(query, {
     variables: {
       pageSize: 6,
-      page: PaginationDefaults.PAGE,
     },
   });
 

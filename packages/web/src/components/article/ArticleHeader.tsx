@@ -46,7 +46,11 @@ const ArticleHeader: FC<IArticleHeaderProps> = ({ article }) => {
             }}
           >
             {article.attributes.tags.data.map((tag) => (
-              <TagChip key={tag.id} tag={tag} />
+              <TagChip
+                key={tag.id}
+                tag={tag}
+                url={`/blog?tag=${tag.attributes.slug}`}
+              />
             ))}
           </Stack>
         )}

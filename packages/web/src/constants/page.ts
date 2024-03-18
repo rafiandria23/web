@@ -1,4 +1,4 @@
-export enum PaginationDefaults {
+export enum Pagination {
   PAGE_SIZE = 10,
   PAGE = 1,
 }
