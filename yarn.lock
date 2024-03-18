@@ -4291,9 +4291,9 @@
   integrity sha512-mMQptlvOQXCDPHo2xzi8VK3ytYNIaVO41iGPVPckTbL8lrHsjy4+67c8Ui3iBtwu5/ugImnLAU7Gv+900krD3g==
 
 "@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^20.0.0":
-  version "20.11.28"
-  resolved "https://registry.npmjs.org/@types/node/-/node-20.11.28.tgz"
-  integrity sha512-M/GPWVS2wLkSkNHVeLkrF2fD5Lx5UC4PxA0uZcKc6QqbIQUJyW1jVjueJYi1z8n0I5PxYrtpnPnWglE+y9A0KA==
+  version "20.11.29"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.11.29.tgz#431253cede34f392d6aaf7acad427b9c23aa60f6"
+  integrity sha512-P99thMkD/1YkCvAtOd6/zGedKNA0p2fj4ZpjCzcNiSCBWgm3cNRTBfa/qjFnsKkkojxu4vVLtWpesnZ9+ap+gA==
   dependencies:
     undici-types "~5.26.4"
 
