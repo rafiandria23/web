@@ -11,16 +11,17 @@ import type { ITag } from '@/types/tag';
 
 export interface ITagChipProps {
   tag: ITag;
+  url: string;
 }
 
-const TagChip: FC<ITagChipProps> = ({ tag }) => {
+const TagChip: FC<ITagChipProps> = ({ tag, url }) => {
   return (
     <Chip
       component={NextLink}
       color='primary'
       size='small'
       clickable
-      href={`/tags/${tag.attributes.slug}`}
+      href={url}
       label={tag.attributes.name}
       icon={<TagIcon color='inherit' htmlColor={tag.attributes.color} />}
     />

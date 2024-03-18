@@ -1,30 +1,32 @@
 'use client';
 
 import _ from 'lodash';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
+import { useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { gql, useQuery } from '@apollo/client';
+import type { PaginationRenderItemParams as MuiPaginationRenderItemParams } from '@mui/material';
 import {
   useTheme,
   Container,
   Grid,
   Typography,
   Skeleton,
-  Pagination,
-  PaginationItem,
+  Pagination as MuiPagination,
+  PaginationItem as MuiPaginationItem,
 } from '@mui/material';
 
 // Types
 import type { IGraphQLModelResponse } from '@/types/graphql';
 import type { IPagination } from '@/types/page';
-import type { ITag } from '@/types/tag';
 import type { IArticle } from '@/types/article';
+import type { ITag } from '@/types/tag';
 
 // Constants
 import { RADIX } from '@/constants';
-import { PaginationDefaults } from '@/constants/page';
+import { Pagination } from '@/constants/page';
 
 // Components
 const ArticleCard = dynamic(
@@ -35,11 +37,25 @@ const ArticleCard = dynamic(
 );
 
 const query = gql`
-  query ($slug: String!, $pageSize: Int!, $page: Int!) {
-    articles(
-      filters: { tags: { slug: { eq: $slug } } }
+  query ($pageSize: Int, $page: Int, $tagSlug: String) {
+    tags(
       pagination: { pageSize: $pageSize, page: $page }
       sort: ["updatedAt:DESC"]
+    ) {
+      data {
+        id
+        attributes {
+          name
+          slug
+          color
+        }
+      }
+    }
+
+    articles(
+      pagination: { pageSize: $pageSize, page: $page }
+      sort: ["updatedAt:DESC"]
+      filters: { tags: { slug: { eq: $tagSlug } } }
     ) {
       meta {
         pagination {
@@ -70,32 +86,48 @@ const query = gql`
   }
 `;
 
-export interface ITagClientPageProps {
-  tag: ITag;
-}
-
-const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
+const BlogPage: FC = () => {
   const searchParams = useSearchParams();
   const theme = useTheme();
   const { data, loading } = useQuery<
     {
+      tags: IGraphQLModelResponse<ITag[]>;
       articles: IGraphQLModelResponse<IArticle[]>;
     },
-    { slug: ITag['attributes']['slug'] } & IPagination
+    IPagination & { tagSlug?: string }
   >(query, {
     variables: {
-      slug: tag.attributes.slug,
-      pageSize: PaginationDefaults.PAGE_SIZE,
+      pageSize: Pagination.PAGE_SIZE,
       page: _.defaultTo(
         parseInt(searchParams.get('page') as string, RADIX),
-        PaginationDefaults.PAGE,
+        undefined,
       ),
+      tagSlug: _.defaultTo(searchParams.get('tag'), undefined),
     },
   });
 
+  const renderPaginationItem = useCallback<
+    (item: MuiPaginationRenderItemParams) => ReactNode
+  >(
+    (item) => {
+      const clonedSearchParams = new URLSearchParams(searchParams);
+
+      clonedSearchParams.set('page', String(_.defaultTo(item.page, 1)));
+
+      return (
+        <MuiPaginationItem
+          component={NextLink}
+          href={`blog?${clonedSearchParams.toString()}`}
+          {...item}
+        />
+      );
+    },
+    [searchParams],
+  );
+
   return (
     <>
-      {/* Tag Hero Section */}
+      {/* Blog Hero Section */}
       <Grid
         component='section'
         container
@@ -110,11 +142,11 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
             color='primary.contrastText'
             gutterBottom
           >
-            {tag.attributes.name}
+            My Blog
           </Typography>
 
           <Typography variant='body1' color='primary.contrastText' paragraph>
-            {tag.attributes.overview}
+            Articles I have written.
           </Typography>
         </Grid>
       </Grid>
@@ -131,18 +163,16 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
             }}
           >
             {loading
-              ? Array.from({ length: PaginationDefaults.PAGE_SIZE }).map(
-                  (_, idx) => (
-                    <Grid
-                      key={`article-skeleton-${idx + 1}`}
-                      item
-                      xs={12}
-                      xl={5.87}
-                    >
-                      <Skeleton height={theme.spacing(20)} />
-                    </Grid>
-                  ),
-                )
+              ? Array.from({ length: Pagination.PAGE_SIZE }).map((_, idx) => (
+                  <Grid
+                    key={`article-skeleton-${idx + 1}`}
+                    item
+                    xs={12}
+                    xl={5.87}
+                  >
+                    <Skeleton height={theme.spacing(20)} />
+                  </Grid>
+                ))
               : data?.articles.data.map((article) => (
                   <Grid key={article.id} item xs={12} xl={5.87}>
                     <ArticleCard article={article} />
@@ -154,18 +184,12 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
             {loading ? (
               <Skeleton variant='rounded' height={theme.spacing(4)} />
             ) : (
-              <Pagination
+              <MuiPagination
                 variant='outlined'
                 color='primary'
                 count={data?.articles.meta.pagination.pageCount}
                 page={data?.articles.meta.pagination.page}
-                renderItem={(item) => (
-                  <PaginationItem
-                    component={NextLink}
-                    href={item.page === 1 ? '/blog' : `/blog?page=${item.page}`}
-                    {...item}
-                  />
-                )}
+                renderItem={renderPaginationItem}
               />
             )}
           </Grid>
@@ -175,4 +199,4 @@ const TagClientPage: FC<ITagClientPageProps> = ({ tag }) => {
   );
 };
 
-export default TagClientPage;
+export default BlogPage;
