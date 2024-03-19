@@ -4,31 +4,18 @@ orbs:
   sonarcloud: sonarsource/sonarcloud@2.0.0
 
 jobs:
-  install:
+  ci:
     docker:
       - image: cimg/node:lts
     steps:
       - checkout
       - run:
-          name: Install Dependencies
-          command: yarn install --frozen-lockfile --ignore-engines
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  analyze:
-    docker:
-      - image: cimg/node:lts
-    steps:
-      - attach_workspace:
-          at: .
+          name: Dependency Installation
+          command: yarn --frozen-lockfile --ignore-engines
       - sonarcloud/scan
 
 workflows:
   ci:
     jobs:
-      - install
-      - analyze:
+      - ci:
           context: sonarcloud
-          requires:
-            - install
