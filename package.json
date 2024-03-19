@@ -2,20 +2,21 @@
 	"name": "web",
 	"version": "1.0.0",
 	"private": true,
-	"scripts": {
-		"dev": "lerna run dev",
-		"build": "lerna run build",
-		"start": "lerna run start",
-		"lint": "lerna run lint",
-		"prepare": "husky install"
-	},
+	"license": "MIT",
 	"workspaces": [
 		"packages/*"
 	],
+	"scripts": {
+		"build": "lerna run build",
+		"dev": "lerna run dev",
+		"lint": "lerna run lint",
+		"prepare": "husky install",
+		"start": "lerna run start"
+	},
 	"dependencies": {},
 	"devDependencies": {
 		"husky": "^9.0.0",
 		"lerna": "^8.0.0"
 	},
-	"license": "MIT"
+	"packageManager": "yarn@1.22.22"
 }
