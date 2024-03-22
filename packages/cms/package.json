@@ -9,7 +9,7 @@
     "strapi": "strapi"
   },
   "dependencies": {
-    "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.11",
     "@newrelic/apollo-server-plugin": "^5.0.0",
     "@strapi/plugin-color-picker": "^4.13.1",
     "@strapi/plugin-graphql": "^4.13.1",
