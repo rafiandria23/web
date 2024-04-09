@@ -894,15 +894,15 @@
     "@reinmar/ckeditor5-maximum-length" "^0.0.1"
     ckeditor5 "^41.2.1"
 
-"@cloudinary-util/types@1.0.1":
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/@cloudinary-util/types/-/types-1.0.1.tgz"
-  integrity sha512-aj/m3Sn5RSYKk6dAZJcjerKfVNrcCyL6v6pcDl4aNpQ3zSWMOvnIrzCidE9paaw1r+ZWonjNnhkA0anLdwRRfA==
+"@cloudinary-util/types@1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.2.tgz#3ebc14f01f3c113183ad47cc5a9c69e65d06f762"
+  integrity sha512-j3xUfN4uMFDMSvoQeOMxqKYsGZovlRFr8niOQXfcqoHp7NVBiJm8oy6y2HDGQhxH63irmFt8VtzJEnYwGYsGXg==
 
-"@cloudinary-util/url-loader@5.2.1":
-  version "5.2.1"
-  resolved "https://registry.npmjs.org/@cloudinary-util/url-loader/-/url-loader-5.2.1.tgz"
-  integrity sha512-1GDPCnRYSGlnPqEdcvH/1h0puAYoF9tJazV/zNx3ptCN0PbwBWEw+ksZm6mCQF2cr9ofDE3B+C5YdPLLsvbuQQ==
+"@cloudinary-util/url-loader@5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.2.2.tgz#c22fdb13b738af820d9c363cf576feeaffc26c4f"
+  integrity sha512-gwoBuyoJBriUvmX3jk6Q1k5NdziloEhIp/4InLB6yBNe88K7bVbR/V8dJRhba0ZvlYDOOPjIiJLAa5J7xAnUlw==
   dependencies:
     "@cloudinary-util/util" "3.0.0"
     "@cloudinary/url-gen" "1.15.0"
@@ -12454,12 +12454,12 @@ newrelic@^11.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.3.0"
-  resolved "https://registry.npmjs.org/next-cloudinary/-/next-cloudinary-6.3.0.tgz"
-  integrity sha512-BPs+I2Qb9hdbnBZFhZeuTRdAC9jTXB6glNeswfZT7eUgwYB4d8LyrZQ4A6owaqZ9qyZm1THdJj6cuS0Y+wlrdw==
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.4.1.tgz#f68d970cd0052d830cd2608fcd1b6cf843c63ac4"
+  integrity sha512-TJy44uLyeojyy1iFlYsaRGqB8lmlEv+x23+GPB9lOTAUkK9NsMM4Hn7odq9mzDdZoUtVRLHaRoNBxVJwkvL7ew==
   dependencies:
-    "@cloudinary-util/types" "1.0.1"
-    "@cloudinary-util/url-loader" "5.2.1"
+    "@cloudinary-util/types" "1.0.2"
+    "@cloudinary-util/url-loader" "5.2.2"
     "@cloudinary-util/util" "^3.0.0"
     "@tsconfig/recommended" "^1.0.3"
 
