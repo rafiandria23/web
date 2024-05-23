@@ -903,16 +903,17 @@
     "@reinmar/ckeditor5-maximum-length" "^0.0.1"
     ckeditor5 "^41.2.1"
 
-"@cloudinary-util/types@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.3.tgz#b2687e6d0eca32601c030f38e5756807dec7086e"
-  integrity sha512-j7TcghSVC7Hwu6yijumWjImnWD7T1HPDsdE4eaaP4ykOUUuZoBg1ErAg6T89RHG9uR7lZGa++QwYAZxIvos9SA==
+"@cloudinary-util/types@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.5.tgz#0325881338b3c390b4ad27f5484e95cdb0c4f9b7"
+  integrity sha512-QySi6Q138yg/qrD7f6yscH9T+/8VwUfF9AiwFPMS89uI5wnSG9nhC+93a/8iUpgk9ujTDVqE8+TqYAbxvF0BMA==
 
-"@cloudinary-util/url-loader@5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.2.2.tgz#c22fdb13b738af820d9c363cf576feeaffc26c4f"
-  integrity sha512-gwoBuyoJBriUvmX3jk6Q1k5NdziloEhIp/4InLB6yBNe88K7bVbR/V8dJRhba0ZvlYDOOPjIiJLAa5J7xAnUlw==
+"@cloudinary-util/url-loader@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.3.0.tgz#45043e0101128842a7841eed3a85cb2c1bf0802a"
+  integrity sha512-QKXH9DwNwp81hWYMJPVzAvn03YgRvbOnrBM4BpuP2znLgiws2+Zgb5kxAEyWUjSIaiGcoT1XnrrjNF6GiRpKYA==
   dependencies:
+    "@cloudinary-util/types" "1.0.5"
     "@cloudinary-util/util" "3.0.0"
     "@cloudinary/url-gen" "1.15.0"
     zod "^3.22.4"
@@ -12495,12 +12496,12 @@ newrelic@^11.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.5.2.tgz#f0d06620b5ee7606cc1c63ef2e5895d20c6d71c3"
-  integrity sha512-uY+isu853KY29Y8PNd07iTth0hlLayDZmR+O8GLUYBOOgj0ew/VCqW/lL9AoaBwIq5S8kASjk3wkbYNyg4tf4w==
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.6.0.tgz#2c1284c349338f03707fdd0f934dcc04cb9cf637"
+  integrity sha512-16kFKO38/FDrvm2Uq8PqZ4GeFb9JLqh76FW968q1KhJUccHpGA5xCI5wahQBEOh0ftEc71QIEEnQHd1fTUaIOA==
   dependencies:
-    "@cloudinary-util/types" "1.0.3"
-    "@cloudinary-util/url-loader" "5.2.2"
+    "@cloudinary-util/types" "1.0.5"
+    "@cloudinary-util/url-loader" "5.3.0"
     "@cloudinary-util/util" "^3.0.0"
     "@tsconfig/recommended" "^1.0.3"
 
