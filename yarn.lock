@@ -3740,13 +3740,13 @@
     yup "0.32.9"
 
 "@strapi/plugin-open-ai@^1.0.1":
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/@strapi/plugin-open-ai/-/plugin-open-ai-1.0.2.tgz"
-  integrity sha512-/74xcku/d1XBTHva0RVZmZuYagp3IngBtI9yVF1UAZNh4Z7B0hQZVHDxMWqZY8OSefPtx2n0Tvh9a1toKUGugg==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-open-ai/-/plugin-open-ai-1.0.3.tgz#d4ad78b11469db39aeeba2e22384aebccadbe1e4"
+  integrity sha512-7fKQqEkiCqTDTF3pyrAPvz+sgSjbLl+pXxQseS4zROJ1sqD9drWAYlzjmJFupJXqfuO1J/9vnm9ZvAZsGIRK0g==
 
 "@strapi/plugin-seo@^1.9.2":
   version "1.9.8"
-  resolved "https://registry.npmjs.org/@strapi/plugin-seo/-/plugin-seo-1.9.8.tgz"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-1.9.8.tgz#44e9baec7c63f4f5de720215132aa677f9f6c9d1"
   integrity sha512-66haxyQ71KozCJbzbFnFvNGhG5I8RPy0KxTTJcILfCgWwmNid4yJ9P9hBarZeCLr1PcqSCN1ju1j+iXpTG7nyg==
   dependencies:
     date-fns "^2.29.3"
