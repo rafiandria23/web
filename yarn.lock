@@ -908,17 +908,22 @@
   resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.0.5.tgz#0325881338b3c390b4ad27f5484e95cdb0c4f9b7"
   integrity sha512-QySi6Q138yg/qrD7f6yscH9T+/8VwUfF9AiwFPMS89uI5wnSG9nhC+93a/8iUpgk9ujTDVqE8+TqYAbxvF0BMA==
 
-"@cloudinary-util/url-loader@5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.3.0.tgz#45043e0101128842a7841eed3a85cb2c1bf0802a"
-  integrity sha512-QKXH9DwNwp81hWYMJPVzAvn03YgRvbOnrBM4BpuP2znLgiws2+Zgb5kxAEyWUjSIaiGcoT1XnrrjNF6GiRpKYA==
+"@cloudinary-util/url-loader@5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.3.1.tgz#2898ea4f75a968a5857046d54bd589f228d04848"
+  integrity sha512-cYgnazu7cLjRaajGmhyVfMxjrOz4EaSQsWK1/utV4K5kknUUhu8vUovGunDQJbEGmBWB/TUt7zmwpdUAQ+pe4g==
   dependencies:
     "@cloudinary-util/types" "1.0.5"
-    "@cloudinary-util/util" "3.0.0"
+    "@cloudinary-util/util" "3.0.2"
     "@cloudinary/url-gen" "1.15.0"
     zod "^3.22.4"
 
-"@cloudinary-util/util@3.0.0", "@cloudinary-util/util@^3.0.0":
+"@cloudinary-util/util@3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.0.2.tgz#a86334eeec9912cf90054f5688a7d10fca9fe952"
+  integrity sha512-EMmspJLVFn9hX92DaK/yuSzSUXF/BJ88crzN8vT1qCaJMMWKapGNo2HZ6YNgG69PP/Jngdk0mTINDU+GP3A1CA==
+
+"@cloudinary-util/util@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@cloudinary-util/util/-/util-3.0.0.tgz"
   integrity sha512-o6cJsN49OIelLcSkqUf4WzgefpePDFsAaeQfJbpcKhVdtvmWv71K0oZwMXuX62IY1OolqIg0etMiHtWZPhvPNA==
@@ -12496,12 +12501,12 @@ newrelic@^11.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.6.1"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.6.1.tgz#a812ae2cfd94ef2c9e4e9a1b6408ef7fc2817d85"
-  integrity sha512-7hcThQiKHZvZJpS1ZrR33DC4FNljBPGfbOHTwQaAIZyKoVnhBGi3fm1hV5SE+kJuSorcFSlOv3ZLfxzF4BM03w==
+  version "6.6.2"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.6.2.tgz#ff1e75b1306c5b68cf298c82a672fc4ddeece252"
+  integrity sha512-MbI5WpSk4dj9YnRgDp1C7vjtMivqOdkoR/jcmjIGR2Zth5RqGgiTpi7ee87d9pEdrfuJxdDzv27KA4s8tAVQkQ==
   dependencies:
     "@cloudinary-util/types" "1.0.5"
-    "@cloudinary-util/url-loader" "5.3.0"
+    "@cloudinary-util/url-loader" "5.3.1"
     "@cloudinary-util/util" "^3.0.0"
     "@tsconfig/recommended" "^1.0.3"
 
