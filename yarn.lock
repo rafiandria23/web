@@ -2291,18 +2291,19 @@
     react-is "^18.2.0"
 
 "@newrelic/apollo-server-plugin@^5.0.0":
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/@newrelic/apollo-server-plugin/-/apollo-server-plugin-5.1.0.tgz"
-  integrity sha512-qBO3PsLv1uj6Q9Jq2jMU8x9aNOvAEWwVcMpfyiOo1S/G1qoHU6tRsygI8/22r/0JXKlID0IsCLaGiLc9D9iOiA==
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-5.2.0.tgz#9e30122b9fa83b006209207a2e6ddbcc25d9c044"
+  integrity sha512-r3sUONUSL5K3JVDuEUNqwJEPhSVnUa7YWY/PKi/8CN8tZSYsFFvq/MR2B6sgs3PACHgBWb1og6bNULIChAF1uQ==
 
 "@newrelic/native-metrics@^10.0.0":
-  version "10.1.0"
-  resolved "https://registry.npmjs.org/@newrelic/native-metrics/-/native-metrics-10.1.0.tgz"
-  integrity sha512-7ke2ZiqMICNDhmI9oLsBrm8AJfvgpGz/GlGGO9dkJ6jO9mUElmFpOLzFt5XmuWxiZMwwGdDzPWYtzEdtDR+8tg==
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-10.2.0.tgz#a11263c84c0b1f8a1071fbce1cdf204604aef350"
+  integrity sha512-yUcG8d1Zfbi/wiJ/6qhM69lhJgYlzP3CMtuC7CgCBTXJRRUqhHirwJ8kC89FvcYIvqbN0ecrc69LITsTNgccsA==
   dependencies:
-    nan "^2.18.0"
-    node-gyp-build "^4.8.0"
-    prebuildify "^6.0.0"
+    nan "^2.19.0"
+    node-gyp "^10.1.0"
+    node-gyp-build "^4.8.1"
+    prebuildify "^6.0.1"
     semver "^7.5.2"
 
 "@newrelic/next@^0.9.0":
@@ -8130,13 +8131,6 @@ execa@~8.0.1:
     signal-exit "^4.1.0"
     strip-final-newline "^3.0.0"
 
-execspawn@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npmjs.org/execspawn/-/execspawn-1.0.1.tgz"
-  integrity sha512-s2k06Jy9i8CUkYe0+DxRlvtkZoOkwwfhB+Xxo5HGUtrISVW2m98jO2tr67DGRFxZwkjQqloA3v/tNtjhBRBieg==
-  dependencies:
-    util-extend "^1.0.1"
-
 expand-brackets@^2.1.4:
   version "2.1.4"
   resolved "https://registry.npmjs.org/expand-brackets/-/expand-brackets-2.1.4.tgz"
@@ -12404,10 +12398,10 @@ nan@^2.17.0:
   resolved "https://registry.npmjs.org/nan/-/nan-2.18.0.tgz"
   integrity sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==
 
-nan@^2.18.0:
-  version "2.19.0"
-  resolved "https://registry.npmjs.org/nan/-/nan-2.19.0.tgz"
-  integrity sha512-nO1xXxfh/RWNxfd/XPfbIfFk5vgLsAxUR9y5O0cHMJu/AW9U95JLXqthYHjEp+8gQ5p96K9jUp8nbVOxCdRbtw==
+nan@^2.19.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.20.0.tgz#08c5ea813dd54ed16e5bd6505bf42af4f7838ca3"
+  integrity sha512-bk3gXBZDGILuuo/6sKtr0DQmSThYHLtNCdSdXk9YkxD/jK6X2vmCyyXBBxyqZ4XcnzTyYEAThfX3DCEnLf6igw==
 
 nano-time@1.0.0:
   version "1.0.0"
@@ -12596,12 +12590,12 @@ node-gyp-build@^4.6.0:
   resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.7.1.tgz"
   integrity sha512-wTSrZ+8lsRRa3I3H8Xr65dLWSgCvY2l4AOnaeKdPA9TB/WYMPaTcrzf3rXvFoVvjKNVnu0CcWSx54qq9GKRUYg==
 
-node-gyp-build@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.0.tgz"
-  integrity sha512-u6fs2AEUljNho3EYTJNBfImO5QTo/J/1Etd+NVdCj7qWKUSN/bSLkZwhDv7I+w/MSC6qJ4cknepkAYykDdK8og==
+node-gyp-build@^4.8.1:
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.1.tgz#976d3ad905e71b76086f4f0b0d3637fe79b6cda5"
+  integrity sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==
 
-node-gyp@^10.0.0:
+node-gyp@^10.0.0, node-gyp@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-10.1.0.tgz#75e6f223f2acb4026866c26a2ead6aab75a8ca7e"
   integrity sha512-B4J5M1cABxPc5PwfjhbV5hoy2DP9p8lFXASnEN6hugXOa61416tnTZ29x9sSwAd0o99XNIcpvDDy1swAExsVKA==
@@ -13832,12 +13826,11 @@ prebuild-install@^7.1.1:
     tar-fs "^2.0.0"
     tunnel-agent "^0.6.0"
 
-prebuildify@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/prebuildify/-/prebuildify-6.0.0.tgz"
-  integrity sha512-DEvK4C3tcimIp7Pzqbs036n9i6CTKGp1XVEpMnr4wV3enKU5sBogPP+lP3KZw7993i42bXnsd5eIxAXQ566Cqw==
+prebuildify@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/prebuildify/-/prebuildify-6.0.1.tgz#655746f91fc95b68610615898678536dd303cd03"
+  integrity sha512-8Y2oOOateom/s8dNBsGIcnm6AxPmLH4/nanQzL5lQMU+sC0CMhzARZHizwr36pUPLdvBnOkCNQzxg4djuFSgIw==
   dependencies:
-    execspawn "^1.0.1"
     minimist "^1.2.5"
     mkdirp-classic "^0.5.3"
     node-abi "^3.3.0"
@@ -16846,11 +16839,6 @@ util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
-
-util-extend@^1.0.1:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/util-extend/-/util-extend-1.0.3.tgz"
-  integrity sha512-mLs5zAK+ctllYBj+iAQvlDCwoxU/WDOUaJkcFudeiAX6OajC6BKXJUa9a+tbtkC11dz2Ufb7h0lyvIOVn4LADA==
 
 utila@~0.4:
   version "0.4.0"
