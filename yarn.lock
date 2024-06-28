@@ -1063,13 +1063,13 @@
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.6.0.tgz"
   integrity sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==
 
-"@contrast/fn-inspect@^3.3.0":
-  version "3.4.0"
-  resolved "https://registry.npmjs.org/@contrast/fn-inspect/-/fn-inspect-3.4.0.tgz"
-  integrity sha512-Jw6dMFEIt/FXF1ihJri2GFNayeEKQ6r+WRjjWl7MdgMup2D4vCPu99ZV8eHSMqNNkj3BEzUNC91ZaJVB1XJmfg==
+"@contrast/fn-inspect@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@contrast/fn-inspect/-/fn-inspect-4.2.0.tgz#34ae2ce82b7c18a56f8dd58818adf67524e82159"
+  integrity sha512-pdPYE7gP+8t1lrL2yJnqpE2N5uYoolrVKHxfWxhAhmbLuDmxgIBqvPM7+qnPIIZyRgL7ljbuYo/yRXgcd9HZYQ==
   dependencies:
-    nan "^2.17.0"
-    node-gyp-build "^4.6.0"
+    nan "^2.19.0"
+    node-gyp-build "^4.8.1"
 
 "@corex/deepmerge@^4.0.43":
   version "4.0.43"
@@ -12393,11 +12393,6 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.17.0:
-  version "2.18.0"
-  resolved "https://registry.npmjs.org/nan/-/nan-2.18.0.tgz"
-  integrity sha512-W7tfG7vMOGtD30sHoZSSc/JVYiyDPEyQVso/Zz+/uQd0B0L46gtC+pHha5FFMRpil6fm/AoEcRWyOVi4+E/f8w==
-
 nan@^2.19.0:
   version "2.20.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.20.0.tgz#08c5ea813dd54ed16e5bd6505bf42af4f7838ca3"
@@ -12458,9 +12453,9 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^11.0.0:
-  version "11.21.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.21.0.tgz#0307bc27d7b7fca43a6ee75107017db37bb72942"
-  integrity sha512-lJBvGfXtdySZMfRkQGXpxPMcQPxCZ6X/M0xW65YkIPHGjD7hCwquLSlSUorLqmwp14DIweENH5OvFCpBxOcYNg==
+  version "11.22.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.22.0.tgz#f9d62c3653084d14709b01adccf9c1a95777050d"
+  integrity sha512-TRk7HogUoYFTkvdE7cEu5J63byK88I/peWdtVCWiuSU2KCSzJWA3gcNO7Q4sN94vEINK1H773ttTj8jwYoSQZQ==
   dependencies:
     "@grpc/grpc-js" "^1.9.4"
     "@grpc/proto-loader" "^0.7.5"
@@ -12477,7 +12472,7 @@ newrelic@^11.0.0:
     semver "^7.5.2"
     winston-transport "^4.5.0"
   optionalDependencies:
-    "@contrast/fn-inspect" "^3.3.0"
+    "@contrast/fn-inspect" "^4.2.0"
     "@newrelic/native-metrics" "^10.0.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
@@ -12584,11 +12579,6 @@ node-fetch@2.7.0, node-fetch@^2.6.7:
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
-
-node-gyp-build@^4.6.0:
-  version "4.7.1"
-  resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.7.1.tgz"
-  integrity sha512-wTSrZ+8lsRRa3I3H8Xr65dLWSgCvY2l4AOnaeKdPA9TB/WYMPaTcrzf3rXvFoVvjKNVnu0CcWSx54qq9GKRUYg==
 
 node-gyp-build@^4.8.1:
   version "4.8.1"
