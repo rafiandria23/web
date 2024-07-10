@@ -12505,9 +12505,9 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^11.0.0:
-  version "11.22.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.22.0.tgz#f9d62c3653084d14709b01adccf9c1a95777050d"
-  integrity sha512-TRk7HogUoYFTkvdE7cEu5J63byK88I/peWdtVCWiuSU2KCSzJWA3gcNO7Q4sN94vEINK1H773ttTj8jwYoSQZQ==
+  version "11.23.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.23.0.tgz#bb9ae5f69db3cf84d77011359bb3c45c033d6f01"
+  integrity sha512-H4bA129BOGVoGCUjJOuxv4laf41h71Q6/BOqjTPt2eV4/AhZAyuL2JNUIFLjnH06HdPXSW6Z0L1N8/rdDVxXzg==
   dependencies:
     "@grpc/grpc-js" "^1.9.4"
     "@grpc/proto-loader" "^0.7.5"
