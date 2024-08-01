@@ -2462,10 +2462,10 @@
     "@emnapi/runtime" "^1.1.0"
     "@tybys/wasm-util" "^0.9.0"
 
-"@newrelic/apollo-server-plugin@^5.0.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-5.2.0.tgz#9e30122b9fa83b006209207a2e6ddbcc25d9c044"
-  integrity sha512-r3sUONUSL5K3JVDuEUNqwJEPhSVnUa7YWY/PKi/8CN8tZSYsFFvq/MR2B6sgs3PACHgBWb1og6bNULIChAF1uQ==
+"@newrelic/apollo-server-plugin@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-6.0.0.tgz#42329d58b6a76fe14d01a7ff4de22b88cbf477f0"
+  integrity sha512-TgFA1uBeMn6t9RAY4J1zxXU+3vb3xOkRX2x8Pb2E0+wdI+YxBJBuHelKmTGSuYT8uCO0WCLz2GabIZTmK2Y4Ig==
 
 "@newrelic/native-metrics@^11.0.0":
   version "11.0.0"
