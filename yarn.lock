@@ -2467,16 +2467,14 @@
   resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-5.2.0.tgz#9e30122b9fa83b006209207a2e6ddbcc25d9c044"
   integrity sha512-r3sUONUSL5K3JVDuEUNqwJEPhSVnUa7YWY/PKi/8CN8tZSYsFFvq/MR2B6sgs3PACHgBWb1og6bNULIChAF1uQ==
 
-"@newrelic/native-metrics@^10.0.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-10.2.0.tgz#a11263c84c0b1f8a1071fbce1cdf204604aef350"
-  integrity sha512-yUcG8d1Zfbi/wiJ/6qhM69lhJgYlzP3CMtuC7CgCBTXJRRUqhHirwJ8kC89FvcYIvqbN0ecrc69LITsTNgccsA==
+"@newrelic/native-metrics@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-11.0.0.tgz#338329bf2a47adc8873441b78b5e4369143b4843"
+  integrity sha512-+j6mzlQ7BG8+diL8VaayewSQRo9/wXhB9yWTlvwuGOdJK5v0K4HEoQJ4Vc993kMjbHzJIRWuD04dwQcMklT0eQ==
   dependencies:
     nan "^2.19.0"
-    node-gyp "^10.1.0"
     node-gyp-build "^4.8.1"
     prebuildify "^6.0.1"
-    semver "^7.5.2"
 
 "@newrelic/next@^0.10.0":
   version "0.10.0"
@@ -12583,10 +12581,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-newrelic@^11.0.0:
-  version "11.23.2"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-11.23.2.tgz#c5ad4f0291b1450d996722e65c6b9c03a356c29d"
-  integrity sha512-MHZY1Uuo5AB4WaAp1/5YBwTiuZGayEZusZwlRGfZy+04FUIWsqr7KTwAhtU2fah3E+Qji3wl4OFK3D9V0boQ8w==
+newrelic@^12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.0.0.tgz#a71fe0fc9afaea53c397ecd240d6796c96744f9d"
+  integrity sha512-l9X3QCZWIEi0rZVKPEgOnSWDyA5EeY6igzmbTTJVT6DaGngrRe4nqYMkArpIIolsg3S630gM2hQE8YobdnMkQQ==
   dependencies:
     "@grpc/grpc-js" "^1.9.4"
     "@grpc/proto-loader" "^0.7.5"
@@ -12604,7 +12602,7 @@ newrelic@^11.0.0:
     winston-transport "^4.5.0"
   optionalDependencies:
     "@contrast/fn-inspect" "^4.2.0"
-    "@newrelic/native-metrics" "^10.0.0"
+    "@newrelic/native-metrics" "^11.0.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
@@ -12730,22 +12728,6 @@ node-gyp@^10.0.0:
     proc-log "^4.1.0"
     semver "^7.3.5"
     tar "^6.2.1"
-    which "^4.0.0"
-
-node-gyp@^10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-10.1.0.tgz#75e6f223f2acb4026866c26a2ead6aab75a8ca7e"
-  integrity sha512-B4J5M1cABxPc5PwfjhbV5hoy2DP9p8lFXASnEN6hugXOa61416tnTZ29x9sSwAd0o99XNIcpvDDy1swAExsVKA==
-  dependencies:
-    env-paths "^2.2.0"
-    exponential-backoff "^3.1.1"
-    glob "^10.3.10"
-    graceful-fs "^4.2.6"
-    make-fetch-happen "^13.0.0"
-    nopt "^7.0.0"
-    proc-log "^3.0.0"
-    semver "^7.3.5"
-    tar "^6.1.2"
     which "^4.0.0"
 
 node-machine-id@1.1.12, node-machine-id@^1.1.10:
@@ -14019,11 +14001,6 @@ prismjs@~1.27.0:
   version "1.27.0"
   resolved "https://registry.npmjs.org/prismjs/-/prismjs-1.27.0.tgz"
   integrity sha512-t13BGPUlFDR7wRB5kQDG4jjl7XeuH6jbJGt11JHPL96qwsEHNX2+68tFXqc1/k+/jALsbSWJKUOT/hcYAZ5LkA==
-
-proc-log@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/proc-log/-/proc-log-3.0.0.tgz#fb05ef83ccd64fd7b20bbe9c8c1070fc08338dd8"
-  integrity sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==
 
 proc-log@^4.0.0, proc-log@^4.1.0, proc-log@^4.2.0:
   version "4.2.0"
@@ -16212,7 +16189,7 @@ tar@6.1.13:
     mkdirp "^1.0.3"
     yallist "^4.0.0"
 
-tar@6.2.1, tar@^6.1.11, tar@^6.1.2, tar@^6.2.1:
+tar@6.2.1, tar@^6.1.11, tar@^6.2.1:
   version "6.2.1"
   resolved "https://registry.yarnpkg.com/tar/-/tar-6.2.1.tgz#717549c541bc3c2af15751bea94b1dd068d4b03a"
   integrity sha512-DZ4yORTwrbTj/7MZYq2w+/ZFdI6OZ/f9SFHR+71gIVUZhOQPHzVCLpvRnPgyaMpfWxxk/4ONva3GQSyNIKRv6A==
