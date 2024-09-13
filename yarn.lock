@@ -1036,17 +1036,17 @@
     "@reinmar/ckeditor5-maximum-length" "^0.0.1"
     ckeditor5 "^42.0.0"
 
-"@cloudinary-util/types@1.5.3":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.5.3.tgz#ae07e83d99190884611b542658ff4a06097bd72d"
-  integrity sha512-/EbFhGKw942gAmBYN8iLCB8+7PfQR6DRIkfJWWoDf8OxInIrnVAhWHy+m1g1oltrTHZKbkF57oPJmi9Yv/4IIQ==
+"@cloudinary-util/types@1.5.8":
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.5.8.tgz#8591d046c5392249648b64dd4d47e8804fad5cf2"
+  integrity sha512-gD6n1mPLvqQ/0GXx0DwXk6dud1X2ij/XGzX7uz+X3AObvCAEngdBXgStuz9O8PmnlAiQvhulvwwWZVXHvgpjJg==
 
-"@cloudinary-util/url-loader@5.10.0":
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.10.0.tgz#a198c9b1ce33a38f4218e413efeb8a9efa0ced4a"
-  integrity sha512-FW2hkDpOQ9LgeecrID5NTx84Zfk7MSZXMy2W+sJ0g3R2SaXZyykqtcMluzX94CypPgsu1OoM8qPs3l1gKTwarQ==
+"@cloudinary-util/url-loader@5.10.3":
+  version "5.10.3"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.10.3.tgz#215bb679ecb2b90f6245348da756908cbc12c236"
+  integrity sha512-bKALWnD2HHL/OZlIQECdjFrGvZYu9VG+RG9pne1y9OVhdClSNS3CZKKSf4F+htcYSp8JXpjdKUzTp2t21b6kiA==
   dependencies:
-    "@cloudinary-util/types" "1.5.3"
+    "@cloudinary-util/types" "1.5.8"
     "@cloudinary-util/util" "3.3.2"
     "@cloudinary/url-gen" "1.15.0"
     zod "^3.22.4"
@@ -12730,12 +12730,12 @@ newrelic@^12.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.12.0"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.12.0.tgz#d52015992f046f3b5c6d666ae3dcfbd1240f667a"
-  integrity sha512-PJSi3lAs3O0Y1b+r3z4abBcMGiwmTDikZvMegBIMGiswk61bcPaN1xc7t9k+bolBMdiunTn5CvKNLlQKf8qamw==
+  version "6.13.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.13.0.tgz#31646602f01ee10916324e6eab4c00be93b15e09"
+  integrity sha512-jaClAJb9P3PMkN9x6Y08NVFNTYUl1KmhvIYReG+sCVaHPuMFgIkQzLTBpinmuQznAdHnpHzSmNpt2o6bcFugQQ==
   dependencies:
-    "@cloudinary-util/types" "1.5.3"
-    "@cloudinary-util/url-loader" "5.10.0"
+    "@cloudinary-util/types" "1.5.8"
+    "@cloudinary-util/url-loader" "5.10.3"
     "@cloudinary-util/util" "^3.3.2"
     "@tsconfig/recommended" "^1.0.7"
 
