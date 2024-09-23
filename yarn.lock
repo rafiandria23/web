@@ -1978,18 +1978,19 @@
   dependencies:
     semver "^7.3.7"
 
-"@newrelic/security-agent@^1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/security-agent/-/security-agent-1.3.0.tgz#bf8fb2b584a5aed635d5c186b29f4fb4af55fcff"
-  integrity sha512-kIW/9qlGwUlNE1khlta2JzrXqZZhZbWBJxDF+T4s4KC5OtOH/tQSr1OnLgwJ2dqPddcisLJkwlQCX77Kjd0mzw==
+"@newrelic/security-agent@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/security-agent/-/security-agent-2.0.0.tgz#71debcb168ae1335a5111eb437cc584c293ea251"
+  integrity sha512-nUj20Hhfn7LZNDoiLtl18nBNOesCvNpMJcR6DS0iAhlgUAYkQMmMdKjWK4Ne5yqtp5nx1iYb47HeiwIFuOfVVw==
   dependencies:
-    axios "^1.6.8"
+    axios "^1.7.4"
     check-disk-space "^3.4.0"
     content-type "^1.0.5"
     fast-safe-stringify "^2.1.1"
     find-package-json "^1.2.0"
     hash.js "^1.1.7"
     html-entities "^2.3.6"
+    https-proxy-agent "^7.0.4"
     is-invalid-path "^1.0.2"
     js-yaml "^4.1.0"
     jsonschema "^1.4.1"
@@ -2003,7 +2004,7 @@
     unescape "^1.0.1"
     unescape-js "^1.1.4"
     uuid "^9.0.1"
-    ws "^8.14.2"
+    ws "^8.17.1"
 
 "@next/env@14.2.13":
   version "14.2.13"
@@ -5630,19 +5631,19 @@ axios@1.7.4:
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
-axios@^1.6.8:
-  version "1.6.8"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.8.tgz#66d294951f5d988a00e87a0ffb955316a619ea66"
-  integrity sha512-v/ZHtJDU39mDpyBoFVkETcd/uNdxrWRrg3bKpOKzXFA6Bvqopts6ALSMU3y6ijYxbw2B+wPrIv46egTzJXCLGQ==
+axios@^1.7.2:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.3.tgz#a1125f2faf702bc8e8f2104ec3a76fab40257d85"
+  integrity sha512-Ar7ND9pU99eJ9GpoGQKhKf58GpUOgnzuaB7ueNQ5BMi0p+LZ5oaEnfF999fAArcTIBwXTCHAmGcHOZJaWPq9Nw==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
     proxy-from-env "^1.1.0"
 
-axios@^1.7.2:
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.3.tgz#a1125f2faf702bc8e8f2104ec3a76fab40257d85"
-  integrity sha512-Ar7ND9pU99eJ9GpoGQKhKf58GpUOgnzuaB7ueNQ5BMi0p+LZ5oaEnfF999fAArcTIBwXTCHAmGcHOZJaWPq9Nw==
+axios@^1.7.4:
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.7.tgz#2f554296f9892a72ac8d8e4c5b79c14a91d0a47f"
+  integrity sha512-S4kL7XrjgBmvdGut0sN3yJxqYzrDOnivkBiN0OFs6hLiUam3UPvswUo0kqGyhqUZGEOytHyumEdXsAkgCOUf3Q==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
@@ -9766,7 +9767,7 @@ http2-wrapper@^1.0.0-beta.5.2:
     quick-lru "^5.1.1"
     resolve-alpn "^1.0.0"
 
-https-proxy-agent@^7.0.1:
+https-proxy-agent@^7.0.1, https-proxy-agent@^7.0.4:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/https-proxy-agent/-/https-proxy-agent-7.0.5.tgz#9e8b5013873299e11fab6fd548405da2d6c602b2"
   integrity sha512-1e4Wqeblerz+tMKPIq2EMGiiWW1dIjZOksyHWSUm1rmuvw/how9hBHZ38lAGj5ID4Ik6EdkOw7NmWPy6LAwalw==
@@ -12773,13 +12774,13 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^12.0.0:
-  version "12.5.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.5.0.tgz#b2f68913ca3eb907211d75ae9d8cba1ac17d4441"
-  integrity sha512-MwUB6edgtCM6zNoIOUyuO1EYd4NRB093QAfL7jq2t1jzp+MRQ9XVL/fg2ex/xX+HSft2rNNqDs8Yd8p5H/CheA==
+  version "12.5.1"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.5.1.tgz#b1c391b15bc6c2b94e9dd02b34c45d79559bd21b"
+  integrity sha512-/3Vr7gN9RSRf0mSR4IetU+yImgni1o8glIIQR45cqLmYU8wzfJOS1vSJRQJCls9Ehm0WzUxwhNg4QvKKpRwJ/g==
   dependencies:
     "@grpc/grpc-js" "^1.9.4"
     "@grpc/proto-loader" "^0.7.5"
-    "@newrelic/security-agent" "^1.3.0"
+    "@newrelic/security-agent" "^2.0.0"
     "@tyriar/fibonacci-heap" "^2.0.7"
     concat-stream "^2.0.0"
     https-proxy-agent "^7.0.1"
@@ -17922,10 +17923,10 @@ ws@^7.3.1:
   resolved "https://registry.npmjs.org/ws/-/ws-7.5.9.tgz"
   integrity sha512-F+P9Jil7UiSKSkppIiD94dN07AwvFixvLIj1Og1Rl9GGMuNipJnV9JzjD6XuqmAeiswGvUmNLjr5cFuXwNS77Q==
 
-ws@^8.14.2:
-  version "8.14.2"
-  resolved "https://registry.npmjs.org/ws/-/ws-8.14.2.tgz"
-  integrity sha512-wEBG1ftX4jcglPxgFCMJmZ2PLtSbJ2Peg6TmpJFTbe9GZYOQCDPdMYu/Tm0/bGZkw8paZnJY45J4K2PZrLYq8g==
+ws@^8.17.1:
+  version "8.18.0"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-8.18.0.tgz#0d7505a6eafe2b0e712d232b42279f53bc289bbc"
+  integrity sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==
 
 xdg-app-paths@8.3.0:
   version "8.3.0"
