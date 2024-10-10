@@ -3713,9 +3713,9 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^5.0.0":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.0.4.tgz#9a496dae2010760837b375772f5ff022853b12fa"
-  integrity sha512-LD+LKYG+vgNw/5ZFhzgBgaZva9de2srAJ9dOVFaCyQH4oCR3HV1/bYXeGHXSNYQfvH3lANZIV8zF5d/01HU+SA==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.0.5.tgz#97c0c2b9ed114591660feda4d9e88bb1317226b3"
+  integrity sha512-xmwYHNYoXwfHkwSKGZKLYXuCbMb78EzrNuOHk9e0psdm1lYu1BqEERn/7mcrzH9NdFf6e9sXxhEILnBpZDsxYg==
   dependencies:
     "@strapi/design-system" "2.0.0-rc.11"
     "@strapi/icons" "2.0.0-rc.11"
@@ -3723,9 +3723,9 @@
     react-intl "6.6.2"
 
 "@strapi/plugin-graphql@^5.0.0":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.0.4.tgz#11b932cc97d72d6c6abead7827d7a5f765743ee0"
-  integrity sha512-GlGcdxn+ca7qzaiM8B8MES6SDsDM0HaicTU/aJxWOB+tuMvBFEBCPi+7hOkpe2CTFmeiBYeCWSEO2k/TLYjXDw==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.0.5.tgz#8b33be0b5b618f0837a20c99611c1748e9d9c24a"
+  integrity sha512-Ie9dPMUXAxMJPT58TX4yzD7ygmat5i78bTDfY8+5+iJrHHlCdFpBjVZLEBu5VaFDncMzAnEkQdIiRHvV0DrK5Q==
   dependencies:
     "@apollo/server" "4.11.0"
     "@as-integrations/koa" "1.1.1"
@@ -3734,7 +3734,7 @@
     "@koa/cors" "5.0.0"
     "@strapi/design-system" "2.0.0-rc.11"
     "@strapi/icons" "2.0.0-rc.11"
-    "@strapi/utils" "5.0.4"
+    "@strapi/utils" "5.0.5"
     graphql "^16.8.1"
     graphql-depth-limit "^1.1.0"
     graphql-playground-middleware-koa "^1.6.21"
@@ -3823,11 +3823,11 @@
     sendmail "^1.6.1"
 
 "@strapi/provider-upload-cloudinary@^5.0.0":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@strapi/provider-upload-cloudinary/-/provider-upload-cloudinary-5.0.4.tgz#957b03f381ca0e75c2ded33acd03aab6aad9e371"
-  integrity sha512-T79VSWqCJ/dXxHXJqPr32a2h8n+lG4ku/6J6ecEV5cb3TaMV7z0oesL2YTzS8jUBpSy03ToJjjDtyWAxy8sHow==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@strapi/provider-upload-cloudinary/-/provider-upload-cloudinary-5.0.5.tgz#7e4d1858d3335ed80dd94a86804056eb822fcc4b"
+  integrity sha512-XUwt84/uasyk532gmhu3GPkya4d+SneHvlWXmJtOUK9xXMWQp3OcThYuF5gwyGkP/wb6e2IKVRwUtDeK+82Uvw==
   dependencies:
-    "@strapi/utils" "5.0.4"
+    "@strapi/utils" "5.0.5"
     cloudinary "^1.41.0"
     into-stream "^5.1.0"
 
@@ -4058,6 +4058,22 @@
   version "5.0.4"
   resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.0.4.tgz#97a55b5e96fa24ddfe518c506366ba2b1d6df465"
   integrity sha512-3e9ApopV/8at5keSFMl5E1xVPEmarKvBPiH0eqHzBP+2/nXyMmM4Ff9Xvan+s5yzpRJGgAb3wSGtmkFFQyx0kQ==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    date-fns "2.30.0"
+    execa "5.1.1"
+    http-errors "2.0.0"
+    lodash "4.17.21"
+    node-machine-id "1.1.12"
+    p-map "4.0.0"
+    preferred-pm "3.1.2"
+    yup "0.32.9"
+    zod "^3.22.4"
+
+"@strapi/utils@5.0.5":
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.0.5.tgz#fb4e9b54e0abadd36fb0d3abeb4531fe5159bf76"
+  integrity sha512-pQ8iycOABVz074QlE6Z2Si8wX1O5Jnrj7gllU9MKlvXKXSsG4mo4XewBc8ai4y+nS81yq8Mafrs7yS6AO6ns8A==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
