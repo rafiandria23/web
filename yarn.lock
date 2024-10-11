@@ -15203,14 +15203,10 @@ remark-stringify@^11.0.0:
     mdast-util-to-markdown "^2.0.0"
     unified "^11.0.0"
 
-remark-unwrap-images@^4.0.0:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/remark-unwrap-images/-/remark-unwrap-images-4.0.1.tgz#55c1aa535bc86be011be036237da54aa25b01b9e"
-  integrity sha512-J9HibCHx0/X7ovgqaFe0otizCHpbb1s6Jh3IeiD5ibQm2Oz/OhCDXSKMEW5T54iBw5CxuqRL6BrYp+jLLdqBOw==
-  dependencies:
-    "@types/mdast" "^4.0.0"
-    hast-util-whitespace "^3.0.0"
-    unist-util-visit "^5.0.0"
+remark-unwrap-images@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/remark-unwrap-images/-/remark-unwrap-images-5.0.0.tgz#3d6d1d819607ae8f8ac794c4baaa2cb76c87b756"
+  integrity sha512-s7WSIA6s98ywa93v/5x+wFeGgJSl1VJnNYgg//0MUgu12CyxVMi+vcCifXFEUtQfnnWSTXWOH6f8LkDBNLthrg==
 
 remove-accents@0.4.2:
   version "0.4.2"
