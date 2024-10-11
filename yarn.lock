@@ -4680,9 +4680,9 @@
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
 "@types/newrelic@^9.14.0":
-  version "9.14.4"
-  resolved "https://registry.yarnpkg.com/@types/newrelic/-/newrelic-9.14.4.tgz#818e66a74fc2827273f973502943ef8c5c2c2711"
-  integrity sha512-/Wtr8evFvbOo0P3BNL8gKJiVUDDuAJ9wjwAb7UdmN+amxP5nrR7L8dvyJ5jZmLUmKSiFzMBX7xbMydnRgRoSyQ==
+  version "9.14.5"
+  resolved "https://registry.yarnpkg.com/@types/newrelic/-/newrelic-9.14.5.tgz#05efa456c72e776de9ff6c10f16f8921559c00e4"
+  integrity sha512-GqpjINi1Wp3bAV7txVGRdPr9jMO1DvEW3ICN0X3bviboQXnj5apYCk+1bAVAFF2gCz6HQqJ2IBaR8pnPw+ucaQ==
 
 "@types/node-fetch@^2.6.1":
   version "2.6.11"
