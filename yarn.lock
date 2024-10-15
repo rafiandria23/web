@@ -308,10 +308,15 @@
     "@cloudinary/url-gen" "1.15.0"
     zod "^3.22.4"
 
-"@cloudinary-util/util@3.3.2", "@cloudinary-util/util@^3.3.2":
+"@cloudinary-util/util@3.3.2":
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.3.2.tgz#a5cd48d82d5f344008674ebad99767e997bea222"
   integrity sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==
+
+"@cloudinary-util/util@4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-4.0.0.tgz#5ba8e15c8efd2455f5d21c61b87ee89255b190dd"
+  integrity sha512-S4xcou/3A7l5o+bcKlw2VHBNgwups7/0lbVDT/cO5YmtrcEYXgj6LGmwnjvpTm/x571VPVN8x5jWdT3rLZiKJQ==
 
 "@cloudinary/transformation-builder-sdk@^1.10.0":
   version "1.10.1"
@@ -12845,13 +12850,13 @@ newrelic@^12.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.14.2"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.14.2.tgz#e3d585bac9075150c86bce5e407cd1a880aa010a"
-  integrity sha512-e4AcyrHpxPVGCd5nwZ74rgpApVU4xgU3hOyX0IOPKS9NvNIOtrmN3z5Nrg5zly4A2/Wy/lXd5/Pp6R4qTKfuVQ==
+  version "6.15.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.15.0.tgz#4615fa7e4b07a0b69edad86235ad956e399cbaf9"
+  integrity sha512-wiJaslzgUwK9KOD5vmwsIDeNRbIfGLNekiFfAwlEq6yjADJO8jKWqpsxIyBfcP3TzSt5Q4wIGgh4ppuI+bZhUQ==
   dependencies:
     "@cloudinary-util/types" "1.5.10"
     "@cloudinary-util/url-loader" "5.10.4"
-    "@cloudinary-util/util" "^3.3.2"
+    "@cloudinary-util/util" "4.0.0"
 
 next-sitemap@^4.1.3:
   version "4.2.3"
