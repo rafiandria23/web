@@ -4812,14 +4812,14 @@
   integrity sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==
 
 "@types/newrelic@^9.14.0":
-  version "9.14.5"
-  resolved "https://registry.yarnpkg.com/@types/newrelic/-/newrelic-9.14.5.tgz#05efa456c72e776de9ff6c10f16f8921559c00e4"
-  integrity sha512-GqpjINi1Wp3bAV7txVGRdPr9jMO1DvEW3ICN0X3bviboQXnj5apYCk+1bAVAFF2gCz6HQqJ2IBaR8pnPw+ucaQ==
+  version "9.14.6"
+  resolved "https://registry.yarnpkg.com/@types/newrelic/-/newrelic-9.14.6.tgz#c76eaaa5f8aab5210ac58818e5b7a76d90a10694"
+  integrity sha512-0YOpoN+I2clvMDXxQE8VERlsef5iR7Wm/XbOHsk0o4arb+H9gedf+1PU8o7tGAOhMLBBiZjFctPs0vaauQ91mg==
 
 "@types/node-fetch@^2.6.1":
-  version "2.6.11"
-  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.11.tgz#9b39b78665dae0e82a08f02f4967d62c66f95d24"
-  integrity sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-2.6.12.tgz#8ab5c3ef8330f13100a7479e2cd56d3386830a03"
+  integrity sha512-8nneRWKCg3rMtF69nLQJnOYUcbafYeFSjqkw3jCRLsqkWFlHaoQrr5mXmofFGOx3DKn7UfmBMyov8ySvLRVldA==
   dependencies:
     "@types/node" "*"
     form-data "^4.0.0"
