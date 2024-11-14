@@ -1,5 +1,5 @@
 {
-	"name": "web",
+	"name": "@rafiandria23/web",
 	"version": "1.0.0",
 	"private": true,
 	"license": "MIT",
@@ -10,12 +10,11 @@
 		"build": "lerna run build",
 		"dev": "lerna run dev",
 		"lint": "lerna run lint",
-		"prepare": "husky install",
 		"start": "lerna run start"
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"husky": "^9.0.0",
+		"husky": "^9.1.6",
 		"lerna": "^8.0.0"
 	},
 	"packageManager": "yarn@1.22.22"
