@@ -48,10 +48,10 @@ import oneDark from 'react-syntax-highlighter/dist/cjs/styles/prism/one-dark';
 
 // remark Plugins
 import remarkGFM from 'remark-gfm';
-import remarkUnwrapImages from 'remark-unwrap-images';
 
 // rehype Plugins
 import rehypeRaw from 'rehype-raw';
+import rehypeUnwrapImages from 'rehype-unwrap-images';
 
 // Components
 import { Image } from '@/components/utils';
@@ -329,8 +329,6 @@ export const components: Components = {
   blockquote: MarkdownBlockquote,
 };
 
-export const remarkPlugins: PluggableList = [remarkGFM, remarkUnwrapImages];
+export const remarkPlugins: PluggableList = [remarkGFM];
 
-export const rehypePlugins: PluggableList = [
-  rehypeRaw as PluggableList[number],
-];
+export const rehypePlugins: PluggableList = [rehypeRaw, rehypeUnwrapImages];
