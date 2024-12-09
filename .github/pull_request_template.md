@@ -4,4 +4,4 @@
 
 ## Description
 
-- add something revolutionary
+- Added something revolutionary.
