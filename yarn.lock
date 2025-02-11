@@ -4191,9 +4191,9 @@
   integrity sha512-7fKQqEkiCqTDTF3pyrAPvz+sgSjbLl+pXxQseS4zROJ1sqD9drWAYlzjmJFupJXqfuO1J/9vnm9ZvAZsGIRK0g==
 
 "@strapi/plugin-seo@^2.0.0":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-2.0.6.tgz#6ced5e8410ee6483ad591590f417872a718a8319"
-  integrity sha512-j4lVcOa+9w0UoyK+Bb5E6tclCDD+iIvd8uPazTl5GT9YupbHWMHm0KUzt3b6GGjZJEAH+Zq2Of4z91o5rOWBvw==
+  version "2.0.7"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-2.0.7.tgz#840ceee5c1171bcc5b3b0eb66d5432ee34e354a2"
+  integrity sha512-EuxxNvmCpD/ZMRxLk9IIsazAlr3aarcCTuzCID27Dql37Fhdycftb8xK3KfaNEz2KhzJpp1iHsRMkbvHpCyedA==
   dependencies:
     "@strapi/design-system" "^2.0.0-rc.10"
     "@strapi/icons" "^2.0.0-rc.10"
@@ -8290,6 +8290,8 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^15.0.0:
   version "15.1.7"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-15.1.7.tgz#80d287e6d1c0742304de8fe57cbc45000c455c11"
+  integrity sha512-zXoMnYUIy3XHaAoOhrcYkT9UQWvXqWju2K7NNsmb5wd/7XESDwof61eUdW4QhERr3eJ9Ko/vnXqIrj8kk/drYw==
   dependencies:
     "@next/eslint-plugin-next" "15.1.7"
     "@rushstack/eslint-patch" "^1.10.3"
