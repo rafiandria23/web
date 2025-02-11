@@ -4191,9 +4191,9 @@
   integrity sha512-7fKQqEkiCqTDTF3pyrAPvz+sgSjbLl+pXxQseS4zROJ1sqD9drWAYlzjmJFupJXqfuO1J/9vnm9ZvAZsGIRK0g==
 
 "@strapi/plugin-seo@^2.0.0":
-  version "2.0.7"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-2.0.7.tgz#840ceee5c1171bcc5b3b0eb66d5432ee34e354a2"
-  integrity sha512-EuxxNvmCpD/ZMRxLk9IIsazAlr3aarcCTuzCID27Dql37Fhdycftb8xK3KfaNEz2KhzJpp1iHsRMkbvHpCyedA==
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-seo/-/plugin-seo-2.0.8.tgz#9785f3a2734aadc6761de0224f0d6bd27d559883"
+  integrity sha512-k0/O6cx/O9wlYOcp0ZIM6ISiamYbalrm157GGpkQpVFOdle62rH7ftA+60ZKqOi55xnnSpyYTIBe7y5gGcOkwQ==
   dependencies:
     "@strapi/design-system" "^2.0.0-rc.10"
     "@strapi/icons" "^2.0.0-rc.10"
