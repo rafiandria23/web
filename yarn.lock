@@ -3911,9 +3911,9 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^5.0.0":
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.12.0.tgz#07329462cf14c754be9bb87de6ea4fe1d42ff4b2"
-  integrity sha512-uYRaMr/DZxj711Xky/d3T+87kU7yxUKOpcNe+NAYxZ77yUgOdy4Wtgt5528azZ0J74evk9BDce/AWDL99COQSA==
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.12.1.tgz#6932e1066b327261e54480030ceaa5c3021cb66a"
+  integrity sha512-5ocKOVGvUIXBXv7SkuLEQ/KO2lA9TXOYyHS5yufyZ5+QRaSo640BjywIkDbW7zcTlfdLm+3M/zhSflSCR9TyVw==
   dependencies:
     "@strapi/design-system" "2.0.0-rc.18"
     "@strapi/icons" "2.0.0-rc.18"
@@ -3921,9 +3921,9 @@
     react-intl "6.6.2"
 
 "@strapi/plugin-graphql@^5.0.0":
-  version "5.12.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.12.0.tgz#5c8725889d8aefdcd642c6b71e9abd12c0407567"
-  integrity sha512-VFT88NrgwGbwYIBXHeEyEPIqaOvsd4TUlRI/YlAaFUpxE92LuUPAaJFQdTZdTspLDWceDm+vsDsquey7/zR16Q==
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.12.1.tgz#6e9e48d81e5899de1bbcfe45a170b9a92ff0e42b"
+  integrity sha512-p1amQPR4OIyZmzqJeaYcedDMBTbLpSf41c4ygNjv2UFXEN2iFZlKtjWwxaC117V46ZLVvFg4KJbBKsjYXntGLQ==
   dependencies:
     "@apollo/server" "4.11.0"
     "@as-integrations/koa" "1.1.1"
@@ -3932,7 +3932,7 @@
     "@koa/cors" "5.0.0"
     "@strapi/design-system" "2.0.0-rc.18"
     "@strapi/icons" "2.0.0-rc.18"
-    "@strapi/utils" "5.12.0"
+    "@strapi/utils" "5.12.1"
     graphql "^16.8.1"
     graphql-depth-limit "^1.1.0"
     graphql-playground-middleware-koa "^1.6.21"
@@ -4280,6 +4280,22 @@
   version "5.12.0"
   resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.12.0.tgz#29ff6ffac3534f456d56a3615e8b21f32b553195"
   integrity sha512-I2Wyx4Err9l4h6kV+SA5+03FhBhJcWUf8eckc5jiOQpYxgF+Lr0Wq4se56zSWoDB7kinLJdHloVRjgj1X4BTnQ==
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
+    date-fns "2.30.0"
+    execa "5.1.1"
+    http-errors "2.0.0"
+    lodash "4.17.21"
+    node-machine-id "1.1.12"
+    p-map "4.0.0"
+    preferred-pm "3.1.2"
+    yup "0.32.9"
+    zod "^3.22.4"
+
+"@strapi/utils@5.12.1":
+  version "5.12.1"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.12.1.tgz#a6d0d3d268dafe9bb67e4619fa696323f7158d61"
+  integrity sha512-A9z+M6zayNLDjRaz9dh6rTAemF0rDJAcqZRR+k723G2lEJB7DfM/jWIcfXAB6ignadxCpwT9JauPl9jLKWtXLQ==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
