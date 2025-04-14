@@ -1225,10 +1225,10 @@
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.2.0.tgz#5f3d96ec6b2354ad6d8a28bf216a1d97b5426861"
   integrity sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==
 
-"@grpc/grpc-js@^1.12.2":
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.12.4.tgz#3208808435ebf1e495f9a5c5c5a0bc3dc8c9e891"
-  integrity sha512-NBhrxEWnFh0FxeA0d//YP95lRFsSx2TNLEUQg4/W+5f/BMxcCjgOOIT24iD+ZB/tZw057j44DaIxja7w4XMrhg==
+"@grpc/grpc-js@^1.13.2":
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.13.3.tgz#6ad08d186c2a8651697085f790c5c68eaca45904"
+  integrity sha512-FTXHdOoPbZrBjlVLHuKbDZnsTxXv2BlHF57xw6LuThXacXvtkahEPED0CKMk6obZDf65Hv4k3z62eyPNpvinIg==
   dependencies:
     "@grpc/proto-loader" "^0.7.13"
     "@js-sdsl/ordered-map" "^4.4.2"
@@ -12781,11 +12781,11 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^12.0.0:
-  version "12.17.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.17.0.tgz#d0d569197fb9cd6c3fd1d54bae4fedf90e5b679c"
-  integrity sha512-Rn+V3ym7EYkzMXcylyLQBNgBS+zBoo+XR+ki5An1I91o2h0mWZzuTJC65ROrHLKHV2tXUFuVlc7FuOufnNdtRg==
+  version "12.18.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.18.0.tgz#60a2b3915f81d0d276f75ef8df7b0c38abfe8fbf"
+  integrity sha512-Nslha2a64qJwb4M1uF3pPr0NSwmeHIb2W5P+TYxa0AOQiure5It0FLO4CaIIrje1QaIuQeGlisc1h7PEo4qdNQ==
   dependencies:
-    "@grpc/grpc-js" "^1.12.2"
+    "@grpc/grpc-js" "^1.13.2"
     "@grpc/proto-loader" "^0.7.5"
     "@newrelic/security-agent" "^2.3.0"
     "@opentelemetry/api" "^1.9.0"
