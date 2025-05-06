@@ -1891,9 +1891,9 @@
     "@tybys/wasm-util" "^0.9.0"
 
 "@newrelic/apollo-server-plugin@^7.0.0":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.0.1.tgz#70a5dd4221cdc9bc8a50c5cc354eca52ecd3cd5f"
-  integrity sha512-EnLS/F0mAe98ZQn+9WuRh05Dp+h7xSpyzpf4v7XZO7nQSCiNt3ozos0GKOBuQ0g8AVWqz8ih10RRvmADTF1RIw==
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.0.2.tgz#144536e0e728ece57d1c99ce8fb48382da1c379e"
+  integrity sha512-aBfBoYKn6D8Gj/yZpWI22DK4MXN8Bsd2waurVNKdgdbnl1uD8U6exOpdYWrTBJkRrb2wFOicXMacYQ7yT1EK6g==
 
 "@newrelic/native-metrics@^11.0.0":
   version "11.0.0"
