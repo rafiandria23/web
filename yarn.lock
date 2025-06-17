@@ -1926,16 +1926,16 @@
     "@tybys/wasm-util" "^0.9.0"
 
 "@newrelic/apollo-server-plugin@^7.0.0":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.0.2.tgz#144536e0e728ece57d1c99ce8fb48382da1c379e"
-  integrity sha512-aBfBoYKn6D8Gj/yZpWI22DK4MXN8Bsd2waurVNKdgdbnl1uD8U6exOpdYWrTBJkRrb2wFOicXMacYQ7yT1EK6g==
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.1.0.tgz#2636753dd5f72395003b704ad498fb164f41bded"
+  integrity sha512-OwJYtsrrGqzBgn255Ty6Ibs3ZuaxcFb4nHyQRWdanQEbQunY8VBLi3atORPxYlFhnIShSU9qPDSI0GMAFkPJhA==
 
 "@newrelic/native-metrics@^11.0.0":
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-11.0.0.tgz#338329bf2a47adc8873441b78b5e4369143b4843"
-  integrity sha512-+j6mzlQ7BG8+diL8VaayewSQRo9/wXhB9yWTlvwuGOdJK5v0K4HEoQJ4Vc993kMjbHzJIRWuD04dwQcMklT0eQ==
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-11.1.0.tgz#6a42005dce61a2ff8ba1cae8978cfc98c085a698"
+  integrity sha512-V+FRgRgv6R8LAnVsix8d1bL5SMmBONURaT/6F//rOgycvU7PfPoVEocacpSRzPFxMI27e46iAf3W5fGosbQ8yQ==
   dependencies:
-    nan "^2.19.0"
+    nan "^2.22.2"
     node-gyp-build "^4.8.1"
     prebuildify "^6.0.1"
 
@@ -12907,6 +12907,11 @@ nan@^2.19.0:
   version "2.22.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.22.0.tgz#31bc433fc33213c97bad36404bb68063de604de3"
   integrity sha512-nbajikzWTMwsW+eSsNm3QwlOs7het9gGJU5dDZzRTQGk03vyBOauxgI4VakDzE0PtsGTmXPsXTbbjVhRwR5mpw==
+
+nan@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/nan/-/nan-2.22.2.tgz#6b504fd029fb8f38c0990e52ad5c26772fdacfbb"
+  integrity sha512-DANghxFkS1plDdRsX0X9pm0Z6SJNN6gBdtXfanwoZ8hooC5gosGFSBGRYHUVPz1asKA/kMRqDRdHrluZ61SpBQ==
 
 nano-spawn@^1.0.2:
   version "1.0.2"
