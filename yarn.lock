@@ -442,14 +442,6 @@
   resolved "https://registry.yarnpkg.com/@colors/colors/-/colors-1.6.0.tgz#ec6cd237440700bc23ca23087f513c75508958b0"
   integrity sha512-Ir+AOibqzrIsL6ajt3Rz3LskB7OiMVHqltZmspbW/TJuTVuyOMirVqAkjfY6JISiLHgyNqicAC8AyHHGzNd/dA==
 
-"@contrast/fn-inspect@^4.2.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@contrast/fn-inspect/-/fn-inspect-4.3.0.tgz#9ce60c0f03fd48473221802430a03127670cb2b6"
-  integrity sha512-XGfFm1iO48fsoiJxh2ngTLqBvo6yweJvu1eMs9QxArLDXxxrQvCQ78zywBhYfQ9fChAOZFsbwoVWYxk390KVKw==
-  dependencies:
-    nan "^2.19.0"
-    node-gyp-build "^4.8.1"
-
 "@corex/deepmerge@^4.0.43":
   version "4.0.43"
   resolved "https://registry.yarnpkg.com/@corex/deepmerge/-/deepmerge-4.0.43.tgz#9bd42559ebb41cc5a7fb7cfeea5f231c20977dca"
@@ -1932,7 +1924,16 @@
   resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.1.0.tgz#2636753dd5f72395003b704ad498fb164f41bded"
   integrity sha512-OwJYtsrrGqzBgn255Ty6Ibs3ZuaxcFb4nHyQRWdanQEbQunY8VBLi3atORPxYlFhnIShSU9qPDSI0GMAFkPJhA==
 
-"@newrelic/native-metrics@^11.0.0":
+"@newrelic/fn-inspect@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/fn-inspect/-/fn-inspect-4.4.0.tgz#f1884812186854704cb276501fabd9e76fabcef7"
+  integrity sha512-VgoXZp3zqP1167XvrA772EHDFUNuYGQh14whFq1d2sE6dC3ZL46tXI9JY0yZdAAeyCERi7mhq7CPx9BYiTOl/A==
+  dependencies:
+    nan "^2.22.2"
+    node-gyp-build "^4.8.1"
+    prebuildify "^6.0.1"
+
+"@newrelic/native-metrics@^11.1.0":
   version "11.1.0"
   resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-11.1.0.tgz#6a42005dce61a2ff8ba1cae8978cfc98c085a698"
   integrity sha512-V+FRgRgv6R8LAnVsix8d1bL5SMmBONURaT/6F//rOgycvU7PfPoVEocacpSRzPFxMI27e46iAf3W5fGosbQ8yQ==
@@ -12919,11 +12920,6 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.19.0:
-  version "2.22.0"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.22.0.tgz#31bc433fc33213c97bad36404bb68063de604de3"
-  integrity sha512-nbajikzWTMwsW+eSsNm3QwlOs7het9gGJU5dDZzRTQGk03vyBOauxgI4VakDzE0PtsGTmXPsXTbbjVhRwR5mpw==
-
 nan@^2.22.2:
   version "2.22.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.22.2.tgz#6b504fd029fb8f38c0990e52ad5c26772fdacfbb"
@@ -12972,9 +12968,9 @@ neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^12.0.0:
-  version "12.22.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.22.0.tgz#2defae06aa4bbdf5b986d351bc7eec63bea7cf3a"
-  integrity sha512-hiBJFMU0jAtoGYoi1SHGf0BklqSu3W65pPSDVicnY9DAkstG07HZNMUFaC1MafHxy0xj166WY1eDSEGfHzoi+g==
+  version "12.23.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-12.23.0.tgz#9f45ef350f901f1bd00762ebcc51e9e5abd3834c"
+  integrity sha512-SPZdoUgONqwKbUamwL5u8A+Nya+LFWMHRVGL2W3kRuo0nFtJ/7n9Xj/d41fjNfotSkha12rU46S+AMZrgiAO1w==
   dependencies:
     "@grpc/grpc-js" "^1.13.2"
     "@grpc/proto-loader" "^0.7.5"
@@ -12997,8 +12993,8 @@ newrelic@^12.0.0:
     semver "^7.5.2"
     winston-transport "^4.5.0"
   optionalDependencies:
-    "@contrast/fn-inspect" "^4.2.0"
-    "@newrelic/native-metrics" "^11.0.0"
+    "@newrelic/fn-inspect" "^4.4.0"
+    "@newrelic/native-metrics" "^11.1.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
