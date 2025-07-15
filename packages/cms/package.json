@@ -34,7 +34,7 @@
     "telemetryDisabled": true
   },
   "engines": {
-    "node": ">=16.x.x <=22.17.0"
+    "node": ">=16.x.x <=22.17.1"
   },
   "license": "MIT"
 }
