@@ -4149,12 +4149,12 @@
     plop "4.0.1"
     pluralize "8.0.0"
 
-"@strapi/helper-plugin@4.25.13":
-  version "4.25.13"
-  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.13.tgz#4464c21f603f3b98498fd12cfd28e9b0e4b3f2d1"
-  integrity sha512-RRVQj0+yWQiYx1vgnuLQS3CbB0nTPTLQDy5LTLYKIDVahuZnjDxEvy8WrMSYDfAOn5b7WCHH5ctMdyFrrAkTWA==
+"@strapi/helper-plugin@4.25.23":
+  version "4.25.23"
+  resolved "https://registry.yarnpkg.com/@strapi/helper-plugin/-/helper-plugin-4.25.23.tgz#eba79dd63506275e8d57de6b650001293192e6b8"
+  integrity sha512-QYxYQa8cD3RLJw427uTgVtfiVfVbKBMEtBmHLPTZFBJZVOl6p7lG5lEC+c3tUCnz0Hxrf7oQ1uIAlMdEsIXTYA==
   dependencies:
-    axios "1.7.4"
+    axios "1.8.2"
     date-fns "2.30.0"
     formik "2.4.0"
     immer "9.0.19"
@@ -4248,16 +4248,16 @@
     pluralize "8.0.0"
 
 "@strapi/plugin-i18n@^4.13.1":
-  version "4.25.13"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.25.13.tgz#a1d955aecba1fa38224e677d757fe1706713ac8b"
-  integrity sha512-+mi5bL21W08I+GqkrDIAZZ4lMeysc4OYMybma0+QVk3M0G2lmcIUFT8p2BiNaD5SR0AJi/U183RDwbhkvGhn8A==
+  version "4.25.23"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-i18n/-/plugin-i18n-4.25.23.tgz#731eb21151420fe5f42c47906a0ab99be93a7e5a"
+  integrity sha512-BpaWBgKwHFJM8d2EkmQU4GuHN6ULg8Ckxzm5JfjsTVt3MzcgK5h0OYNtG7YWXHOk1SnfinH2Yyu8au1YOUaryg==
   dependencies:
     "@reduxjs/toolkit" "1.9.7"
     "@strapi/design-system" "1.19.0"
-    "@strapi/helper-plugin" "4.25.13"
+    "@strapi/helper-plugin" "4.25.23"
     "@strapi/icons" "1.19.0"
-    "@strapi/utils" "4.25.13"
-    axios "1.7.4"
+    "@strapi/utils" "4.25.23"
+    axios "1.8.2"
     formik "2.4.0"
     immer "9.0.19"
     lodash "4.17.21"
@@ -4569,10 +4569,10 @@
     sharp "0.33.5"
     yup "0.32.9"
 
-"@strapi/utils@4.25.13":
-  version "4.25.13"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.25.13.tgz#074025cc23f08a367f5b4a8e69c393a500db5919"
-  integrity sha512-jcmzTA8zK275aBuvI0gQuYdffyFAWvwyOT1strSO9oSU8GmlcWQ7+5/md9KBlrralQroNkc4KtJbasr9PqWCmQ==
+"@strapi/utils@4.25.23":
+  version "4.25.23"
+  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-4.25.23.tgz#65b14aad241562669bb34464f449e6c7d4cdc6ae"
+  integrity sha512-BVuohaFGRe4tGEtglic8rmPdRIXTtQ4SvB/QLXBe3YuN4P8LOIfA26MmN7UmXPkbtBhN3SSGwLBZTZR7E76Vxw==
   dependencies:
     "@sindresorhus/slugify" "1.1.0"
     date-fns "2.30.0"
@@ -6077,10 +6077,10 @@ axe-core@^4.10.0:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.10.2.tgz#85228e3e1d8b8532a27659b332e39b7fa0e022df"
   integrity sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==
 
-axios@1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.7.4.tgz#4c8ded1b43683c8dd362973c393f3ede24052aa2"
-  integrity sha512-DukmaFRnY6AzAALSH4J2M3k6PkaC+MfaAGdEERRWcC9q3/TWQwLpHR8ZRLKTdQ3aBDL64EdluRDjJqKw+BPZEw==
+axios@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.2.tgz#fabe06e241dfe83071d4edfbcaa7b1c3a40f7979"
+  integrity sha512-ls4GYBm5aig9vWx8AWDSGLpnpDQRtWAfrjU+EuytuODrFBkqesN2RkOQCBzrA1RQNHw1SmRMSDDDSwzNAYQ6Rg==
   dependencies:
     follow-redirects "^1.15.6"
     form-data "^4.0.0"
