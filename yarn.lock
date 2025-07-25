@@ -1932,10 +1932,10 @@
     "@emnapi/runtime" "^1.1.0"
     "@tybys/wasm-util" "^0.9.0"
 
-"@newrelic/apollo-server-plugin@^7.0.0":
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-7.1.0.tgz#2636753dd5f72395003b704ad498fb164f41bded"
-  integrity sha512-OwJYtsrrGqzBgn255Ty6Ibs3ZuaxcFb4nHyQRWdanQEbQunY8VBLi3atORPxYlFhnIShSU9qPDSI0GMAFkPJhA==
+"@newrelic/apollo-server-plugin@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-8.0.0.tgz#a6314ba061557d340282c7fc4c6a7d350916d411"
+  integrity sha512-EzUhfUZHcyBKfwrkOVIqB8Cahhf84iSsyI7J4CydgLspb60H4ovSCsKNA6q9vJspVl+epTu7n8ejEMLzPzm6fw==
 
 "@newrelic/fn-inspect@^4.4.0":
   version "4.4.0"
