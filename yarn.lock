@@ -8,9 +8,9 @@
   integrity sha512-F17/vCp7QVwom9eG7ToauIKdAxpSoadsJnqIfyryLFSkLSOEqu+eC5Z3N8OXcUVStuOMcNHlyraRsA6rRICu4g==
 
 "@apollo/client@^3.8.1":
-  version "3.13.8"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.13.8.tgz#ef1d49a5b134c69a55e3f137164a8e323aef4e2a"
-  integrity sha512-YM9lQpm0VfVco4DSyKooHS/fDTiKQcCHfxr7i3iL6a0kP/jNO5+4NFK6vtRDxaYisd5BrwOZHLJpPBnvRVpKPg==
+  version "3.13.9"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.13.9.tgz#311e0df1734aaa5598e01a292bb7982df49cc062"
+  integrity sha512-RStSzQfL1XwL6/NWd7W8avhGQYTgPCtJ+qHkkTTSj9Upp3VVm6Oppv81YWdXG1FgEpDPW4hvCrTUELdcC4inCQ==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/caches" "^1.0.0"
@@ -8278,6 +8278,8 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^15.0.0:
   version "15.4.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-15.4.4.tgz#df20632c342b2b48e8450d0028b8fd15edb10a60"
+  integrity sha512-sK/lWLUVF5om18O5w76Jt3F8uzu/LP5mVa6TprCMWkjWHUmByq80iHGHcdH7k1dLiJlj+DRIWf98d5piwRsSuA==
   dependencies:
     "@next/eslint-plugin-next" "15.4.4"
     "@rushstack/eslint-patch" "^1.10.3"
