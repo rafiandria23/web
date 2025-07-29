@@ -5108,9 +5108,9 @@
   integrity sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==
 
 "@types/node@^22.0.0":
-  version "22.16.5"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.16.5.tgz#cc46ac3994cd957000d0c11095a0b1dae2ea2368"
-  integrity sha512-bJFoMATwIGaxxx8VJPeM8TonI8t579oRvgAuT8zFugJsJZgzqv0Fu8Mhp68iecjzG7cnN3mO2dJQ5uUM2EFrgQ==
+  version "22.17.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.17.0.tgz#e8c9090e957bd4d9860efb323eb92d297347eac7"
+  integrity sha512-bbAKTCqX5aNVryi7qXVMi+OkB3w/OyblodicMbvE38blyAz7GxXf6XYhklokijuPwwVg9sDLKRxt0ZHXQwZVfQ==
   dependencies:
     undici-types "~6.21.0"
 
@@ -8278,6 +8278,8 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^15.0.0:
   version "15.4.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-15.4.4.tgz#df20632c342b2b48e8450d0028b8fd15edb10a60"
+  integrity sha512-sK/lWLUVF5om18O5w76Jt3F8uzu/LP5mVa6TprCMWkjWHUmByq80iHGHcdH7k1dLiJlj+DRIWf98d5piwRsSuA==
   dependencies:
     "@next/eslint-plugin-next" "15.4.4"
     "@rushstack/eslint-patch" "^1.10.3"
