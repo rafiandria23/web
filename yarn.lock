@@ -8316,8 +8316,6 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^15.0.0:
   version "15.5.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-15.5.2.tgz#9629ed1deaa131e8e80cbae20acf631c8595ca3e"
-  integrity sha512-3hPZghsLupMxxZ2ggjIIrat/bPniM2yRpsVPVM40rp8ZMzKWOJp2CGWn7+EzoV2ddkUr5fxNfHpF+wU1hGt/3g==
   dependencies:
     "@next/eslint-plugin-next" "15.5.2"
     "@rushstack/eslint-patch" "^1.10.3"
