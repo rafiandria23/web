@@ -15,7 +15,7 @@
 	"dependencies": {},
 	"devDependencies": {
 		"husky": "^9.1.6",
-		"lerna": "^8.0.0"
+		"lerna": "^9.0.0"
 	},
 	"packageManager": "yarn@1.22.22"
 }
