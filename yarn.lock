@@ -4555,9 +4555,9 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^5.0.0":
-  version "5.27.0"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.27.0.tgz#97c55f9f9d46a2f12fc93fc568cf80814c55d162"
-  integrity sha512-lEUwfWpneW2kVA4uc2dof5sCHe+l18lsWh/QVwx7Ln8SwaHxF9ldgmEUm/zO4s8ITS8cW9B/eY0yoltlzdUSQw==
+  version "5.28.0"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.28.0.tgz#4de62130ed53aa4f7d73ab3776704d72d2fc9657"
+  integrity sha512-4iQLCqPh6y4LhGny1Ffcc4Nk46VW0SDQGhYY9yLxL4b8jRtwoe6vX7Ju1V3p7LMRmZp2Cekn/3Q4ya1O2R01Qg==
   dependencies:
     "@strapi/design-system" "2.0.0-rc.30"
     "@strapi/icons" "2.0.0-rc.30"
