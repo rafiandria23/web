@@ -8973,6 +8973,8 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^16.0.0:
   version "16.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-16.0.1.tgz#dab652b044a80a46e7ec6462804496ef0ebaa7de"
+  integrity sha512-wNuHw5gNOxwLUvpg0cu6IL0crrVC9hAwdS/7UwleNkwyaMiWIOAwf8yzXVqBBzL3c9A7jVRngJxjoSpPP1aEhg==
   dependencies:
     "@next/eslint-plugin-next" "16.0.1"
     eslint-import-resolver-node "^0.3.6"
@@ -13706,9 +13708,9 @@ neo-async@^2.6.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^13.0.0:
-  version "13.6.1"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.6.1.tgz#5167ca93f1ed8f16dad5a6d9c3ecdf38650188d4"
-  integrity sha512-9PsejtNZdP7PcwBR+sVsae4yeX2hzc9LzcthGgUJ7mb6z5NzxszClVb0EVgRaocImxfJIu7PfWrwlhJjCRaM2w==
+  version "13.6.2"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.6.2.tgz#55087dc93f79a5927434c89422ea07ee3fbb058f"
+  integrity sha512-8h35/49BvhlvG1rk5AoWFD6zWn214BOub9pUf7ratyFSQ93vmc2v3GIWBR3hN0g/uSeJWFweWVSlwVCAON/Pjg==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.3.1"
     "@grpc/grpc-js" "^1.13.2"
