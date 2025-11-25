@@ -9151,8 +9151,6 @@ escape-string-regexp@^4.0.0:
 
 eslint-config-next@^16.0.0:
   version "16.0.4"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-16.0.4.tgz#ec680fc7d014260bddea1a6d46b0d040ee71f827"
-  integrity sha512-FknAsm/uexYriO6UXzV2QEm4Yz/5DVQCtMUHx0FRYAKqqf5ia8xPqdyoqXzoCc45nRF5brkFpBYMvtciavzD4g==
   dependencies:
     "@next/eslint-plugin-next" "16.0.4"
     eslint-import-resolver-node "^0.3.6"
