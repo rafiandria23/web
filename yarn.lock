@@ -15510,9 +15510,9 @@ prettier@3.3.3:
   integrity sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==
 
 prettier@^3.0.3, prettier@^3.3.3:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.0.tgz#d6ce84a345ff7e3b663ca104b949a0365df28978"
-  integrity sha512-pBiBj/gjRY9Qpk1b7cDda6Rbwvkaggos779AHQ0Ek/odwDx6xG6DRBxtnp1QmxbuD7pAO8/SQ8vuhtGv9LoLWA==
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-3.7.1.tgz#8dfbf54c98e85a113962d3d8414ae82ff3722991"
+  integrity sha512-RWKXE4qB3u5Z6yz7omJkjWwmTfLdcbv44jUVHC5NpfXwFGzvpQM798FGv/6WNK879tc+Cn0AAyherCl1KjbyZQ==
 
 pretty-bytes@^5.6.0:
   version "5.6.0"
