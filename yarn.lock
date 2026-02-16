@@ -672,9 +672,9 @@
     prop-types "^15.7.2"
 
 "@ckeditor/strapi-plugin-ckeditor@^1.0.0":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@ckeditor/strapi-plugin-ckeditor/-/strapi-plugin-ckeditor-1.1.1.tgz#2b1ec733b08c04c69e88e5d210d8ea54b0387ed1"
-  integrity sha512-9uSnpq1zDvmW+2xpKSPsM11A/FTkK3q+JcmgBJVU6qNuR1WCkaYrQml8d/O43akOlHXng5ODCyVf2pVdYZpfOg==
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@ckeditor/strapi-plugin-ckeditor/-/strapi-plugin-ckeditor-1.1.2.tgz#32c5ca89e045b72a8c34ac0e795c23823fd342e8"
+  integrity sha512-qLn+Xj/y7BQadxpjPxOJagrCAZDMeROja/e9Ng9jt54joqnz1NnZHqE9Iu/c1nTHUMhFOYuTle6g9ncLDrFM+g==
   dependencies:
     "@ckeditor/ckeditor5-react" "^9.3.0"
 
