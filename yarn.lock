@@ -61,17 +61,17 @@
     swr "^2.2.5"
     throttleit "2.1.0"
 
-"@apm-js-collab/code-transformer@^0.9.0":
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/@apm-js-collab/code-transformer/-/code-transformer-0.9.0.tgz#566005334b78f83b699231b765e06c9dac5c3a91"
-  integrity sha512-cfHtufVUBKJz6se/tQBJqizgoot5AOxhVy5B9Cuo493p6b7hXKBEIi6tcZEbr4XwN1VnV9JZOu52MMTCOCSBMw==
+"@apm-js-collab/code-transformer@^0.10.0":
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/@apm-js-collab/code-transformer/-/code-transformer-0.10.0.tgz#0290294a86395bdb0a091b25e85b78f742091cb3"
+  integrity sha512-6Y0pDhTIiVetgioIiHeFQ+vwpxd7Pz2h5xI33n0R9juRbxBaFUfhBfGOAUF+Y4TdcT5ccpjS6/5sLLYDDS3FHw==
 
-"@apm-js-collab/tracing-hooks@^0.4.0":
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/@apm-js-collab/tracing-hooks/-/tracing-hooks-0.4.0.tgz#6411f32fcc9207541bbd4cbbdfb35a96b8144a2c"
-  integrity sha512-Ke6rAqN2pORpmpaKCmcmwg0Qvg1dvbyJ5j4h8k1i23SvwE9H2xpdymCXE9u6cunsuG7RBj28XcF9OZr7X7kBIw==
+"@apm-js-collab/tracing-hooks@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@apm-js-collab/tracing-hooks/-/tracing-hooks-0.5.0.tgz#e6de91d8d2472fee8ca21bc8d15934c52095cb1d"
+  integrity sha512-Fj2E03RnXtMkn5/XupRnNRC7CJcXRPVPmlTcw1ZJ3F/2iDyTXYMVKImuhU+Q9R7L0nxnuvwaP3ITpl2Y8mtXng==
   dependencies:
-    "@apm-js-collab/code-transformer" "^0.9.0"
+    "@apm-js-collab/code-transformer" "^0.10.0"
     debug "^4.4.1"
     module-details-from-path "^1.0.4"
 
@@ -13977,11 +13977,11 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^13.0.0:
-  version "13.15.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.15.0.tgz#4f075e60c5cd9e1511aad4f6c636550fd51d1f7c"
-  integrity sha512-znGiOunXNtykRoIjlcf+4blQgXsQIIN7IwfnF5D/PgpFN4DKoUGhXdK9QRE9UD7f9VgfgCJrq1nIHIYSLnuxMw==
+  version "13.16.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.16.0.tgz#4b843580a1d166d6de1233dc802c0911961a8cba"
+  integrity sha512-pw7wkHvWUaFtQg6X3pJmSwtAQDBF8W++z7DvEP/GYeeVGj4NrOYNIBdB0OOKSW5lasNjOwL3SW6Tl9DyjK5/Ig==
   dependencies:
-    "@apm-js-collab/tracing-hooks" "^0.4.0"
+    "@apm-js-collab/tracing-hooks" "^0.5.0"
     "@grpc/grpc-js" "^1.13.2"
     "@grpc/proto-loader" "^0.7.5"
     "@newrelic/security-agent" "^3.0.0"
