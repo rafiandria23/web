@@ -832,6 +832,15 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
+"@datadog/pprof@^5.13.3":
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/@datadog/pprof/-/pprof-5.14.0.tgz#a5a43fde3ca9369345994cc5cf82d5dcf743fb1c"
+  integrity sha512-bXYptMf0BY3NdKcAmX5aAOnozj7GFdNYE4SIdPF0/Q/Yfb2fYBIYZaN/Le6BhiDIepBvvH/H75d3EIFhB64kOw==
+  dependencies:
+    node-gyp-build "<4.0"
+    pprof-format "^2.2.1"
+    source-map "^0.7.4"
+
 "@discoveryjs/json-ext@0.5.7":
   version "0.5.7"
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
@@ -13913,9 +13922,9 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^13.0.0:
-  version "13.16.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.16.0.tgz#4b843580a1d166d6de1233dc802c0911961a8cba"
-  integrity sha512-pw7wkHvWUaFtQg6X3pJmSwtAQDBF8W++z7DvEP/GYeeVGj4NrOYNIBdB0OOKSW5lasNjOwL3SW6Tl9DyjK5/Ig==
+  version "13.17.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.17.0.tgz#ef18190c7b556b20c58d557952977ba8f70fd8e3"
+  integrity sha512-+YdPJF3Zb1ZbtBAe3danheXYXxbn75QIYoh98tsddsDpw8Qv4raLQZ2Oz8rJSjclEGdQvhmIfQrg1JqCSuDsYQ==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.5.0"
     "@grpc/grpc-js" "^1.13.2"
@@ -13941,6 +13950,7 @@ newrelic@^13.0.0:
     semver "^7.5.2"
     winston-transport "^4.5.0"
   optionalDependencies:
+    "@datadog/pprof" "^5.13.3"
     "@newrelic/fn-inspect" "^4.4.0"
     "@newrelic/native-metrics" "^12.0.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
@@ -14031,6 +14041,11 @@ node-fetch@^2.6.7:
   integrity sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==
   dependencies:
     whatwg-url "^5.0.0"
+
+node-gyp-build@<4.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-3.9.0.tgz#53a350187dd4d5276750da21605d1cb681d09e25"
+  integrity sha512-zLcTg6P4AbcHPq465ZMFNXx7XpKKJh+7kkN699NiQWisR2uWYOWNWqRHAmbnmKiL4e9aLSlmy5U7rEMUXV59+A==
 
 node-gyp-build@^4.8.1:
   version "4.8.4"
@@ -15347,6 +15362,11 @@ postgres-interval@^1.1.0:
   integrity sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==
   dependencies:
     xtend "^4.0.0"
+
+pprof-format@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/pprof-format/-/pprof-format-2.2.1.tgz#64d32207fb46990349eb52825defb449d6ccc9b4"
+  integrity sha512-p4tVN7iK19ccDqQv8heyobzUmbHyds4N2FI6aBMcXz6y99MglTWDxIyhFkNaLeEXs6IFUEzT0zya0icbSLLY0g==
 
 prebuildify@^6.0.1:
   version "6.0.1"
@@ -17254,6 +17274,11 @@ source-map@^0.7.3:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
   integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
+
+source-map@^0.7.4:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.7.6.tgz#a3658ab87e5b6429c8a1f3ba0083d4c61ca3ef02"
+  integrity sha512-i5uvt8C3ikiWeNZSVZNWcfZPItFQOsYTUAOkcUPGd8DqDy1uOUikjt5dG+uRlwyvR108Fb9DOd4GvXfT0N2/uQ==
 
 space-separated-tokens@^2.0.0:
   version "2.0.2"
