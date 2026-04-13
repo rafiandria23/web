@@ -61,17 +61,24 @@
     swr "^2.2.5"
     throttleit "2.1.0"
 
-"@apm-js-collab/code-transformer@^0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@apm-js-collab/code-transformer/-/code-transformer-0.10.0.tgz#0290294a86395bdb0a091b25e85b78f742091cb3"
-  integrity sha512-6Y0pDhTIiVetgioIiHeFQ+vwpxd7Pz2h5xI33n0R9juRbxBaFUfhBfGOAUF+Y4TdcT5ccpjS6/5sLLYDDS3FHw==
-
-"@apm-js-collab/tracing-hooks@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@apm-js-collab/tracing-hooks/-/tracing-hooks-0.5.0.tgz#e6de91d8d2472fee8ca21bc8d15934c52095cb1d"
-  integrity sha512-Fj2E03RnXtMkn5/XupRnNRC7CJcXRPVPmlTcw1ZJ3F/2iDyTXYMVKImuhU+Q9R7L0nxnuvwaP3ITpl2Y8mtXng==
+"@apm-js-collab/code-transformer@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/@apm-js-collab/code-transformer/-/code-transformer-0.12.0.tgz#6ad92205c31936c91eb9a10f46d97a34df219919"
+  integrity sha512-5F2ob4cMYezbaUGAk+YltbDvb9BFIghN92ubct9Ho/0MFx4FkChCxYV99NkU6Kx+RAgaqBV6yxKuWreQ6K8SOw==
   dependencies:
-    "@apm-js-collab/code-transformer" "^0.10.0"
+    "@types/estree" "^1.0.8"
+    astring "^1.9.0"
+    esquery "^1.7.0"
+    meriyah "^6.1.4"
+    semifies "^1.0.0"
+    source-map "^0.6.0"
+
+"@apm-js-collab/tracing-hooks@^0.6.0":
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/@apm-js-collab/tracing-hooks/-/tracing-hooks-0.6.0.tgz#a93f0acf61f99e8f326746f55cfd511600ef1438"
+  integrity sha512-akdKDRbvPWC7mRfyoJ2f/tpmKqn5rLDPJMQ3+ZImgtiRJsC3LSoDJF3enrEufURIieH/H0S7Le6KLnRaCTk9rQ==
+  dependencies:
+    "@apm-js-collab/code-transformer" "^0.12.0"
     debug "^4.4.1"
     module-details-from-path "^1.0.4"
 
@@ -6831,6 +6838,11 @@ ast-types@^0.16.1:
   dependencies:
     tslib "^2.0.1"
 
+astring@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/astring/-/astring-1.9.0.tgz#cc73e6062a7eb03e7d19c22d8b0b3451fd9bfeef"
+  integrity sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==
+
 async-retry@^1.2.1:
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/async-retry/-/async-retry-1.3.3.tgz#0e7f36c04d8478e7a58bdbed80cedf977785f280"
@@ -12975,6 +12987,11 @@ merge2@^1.3.0:
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
   integrity sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==
 
+meriyah@^6.1.4:
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/meriyah/-/meriyah-6.1.4.tgz#2d49a8934fbcd9205c20564579c3560d9b1e077b"
+  integrity sha512-Sz8FzjzI0kN13GK/6MVEsVzMZEPvOhnmmI1lU5+/1cGOiK3QUahntrNNtdVeihrO7t9JpoH75iMNXg6R6uWflQ==
+
 methods@^1.1.2, methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
@@ -13616,11 +13633,11 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^13.0.0:
-  version "13.18.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.18.0.tgz#cde48f2368b4e3b6616220bf541256c02ef5fcc9"
-  integrity sha512-9GYhtXTzjcsH4HUPeGwN6i24z6YZuB/ikWced3h9D/SH984MH9GxpWJjlurouA92GP667fIN0TjGuTNIfYa54Q==
+  version "13.19.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-13.19.0.tgz#51411523b2ab817d0cbb08a3e96f6a3b6621e47f"
+  integrity sha512-hw08b3E+Ir3qGZEqLE7oicoSvUpX4vqV6wvdNotJQXC1L6M/2hAavx44UrRObF81LwnUTDebLQd+oixiCnbhPw==
   dependencies:
-    "@apm-js-collab/tracing-hooks" "^0.5.0"
+    "@apm-js-collab/tracing-hooks" "^0.6.0"
     "@grpc/grpc-js" "^1.13.2"
     "@grpc/proto-loader" "^0.7.5"
     "@newrelic/security-agent" "^3.0.0"
@@ -16365,6 +16382,11 @@ scroll-into-view-if-needed@^2.2.20:
   integrity sha512-dGCXy99wZQivjmjIqihaBQNjryrz5rueJY7eHfTdyWEiR4ttYpsajb14rn9s5d4DY4EcY6+4+U/maARBXJedkA==
   dependencies:
     compute-scroll-into-view "^1.0.20"
+
+semifies@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/semifies/-/semifies-1.0.0.tgz#b69569f32c2ba2ac04f705ea82831364289b2ae2"
+  integrity sha512-xXR3KGeoxTNWPD4aBvL5NUpMTT7WMANr3EWnaS190QVkY52lqqcVRD7Q05UVbBhiWDGWMlJEUam9m7uFFGVScw==
 
 "semver@2 || 3 || 4 || 5", semver@^5.6.0:
   version "5.7.2"
