@@ -88,9 +88,9 @@
   integrity sha512-F17/vCp7QVwom9eG7ToauIKdAxpSoadsJnqIfyryLFSkLSOEqu+eC5Z3N8OXcUVStuOMcNHlyraRsA6rRICu4g==
 
 "@apollo/client@^4.0.0":
-  version "4.1.7"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-4.1.7.tgz#c7a85132437fbc62f48eb67337a25664c7174257"
-  integrity sha512-CE1Pe22vszRBMGrBOovIXzTa5infy1kwF0kWX2JBLcGFXoOPBOAo9zoM++tuSRZr8PscWJyv2ka2FKoyEquEHw==
+  version "4.1.8"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-4.1.8.tgz#5f041c7d428feba1eb9b1eea943ea70adf623162"
+  integrity sha512-0joBqkgwxDTzAni0azryXQjbSIKBFqfzEa1eh8KX6aWl4RHWAlfNwZAaWlIpOYWTeRnSZu2glnyGiHGPMAAerA==
   dependencies:
     "@graphql-typed-document-node/core" "^3.1.1"
     "@wry/caches" "^1.0.0"
