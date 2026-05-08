@@ -5900,7 +5900,9 @@
   integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
 "@types/react@*", "@types/react@^19.0.0":
-  version "19.2.6"
+  version "19.2.14"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.2.14.tgz#39604929b5e3957e3a6fa0001dafb17c7af70bad"
+  integrity sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==
   dependencies:
     csstype "^3.2.2"
 
@@ -12274,9 +12276,9 @@ linkify-it@^5.0.0:
     uc.micro "^2.0.0"
 
 lint-staged@^17.0.0:
-  version "17.0.2"
-  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-17.0.2.tgz#722692fe789eb5240f5bf0851aa285cbf359bce3"
-  integrity sha512-Rbr6rdmbCn1fIDHBZpn0madg0hEkdlh+QwajnL3Qq0ZUq/icAJfLGj9BVBajAXi7657ZzKQ7kobGP9S5XOHYRw==
+  version "17.0.3"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-17.0.3.tgz#d2bdb92a76589f3495e31c2ef006f68232e3d091"
+  integrity sha512-wnvMRhzC3GNpjixxleiG+pAW09dHTUgBCjMS7XouAg5E7wKUc8YdfogpF7zIgvXKDbH+452O6+XpnKm6V67rPw==
   dependencies:
     listr2 "^10.2.1"
     picomatch "^4.0.4"
