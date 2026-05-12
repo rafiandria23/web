@@ -5813,9 +5813,9 @@
     undici-types "~5.26.4"
 
 "@types/node@^24.0.0":
-  version "24.12.3"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.12.3.tgz#c7e80a5ac6d7438bca394d95ee982b705b94e460"
-  integrity sha512-8oljBDGun9cIsZRJR6fkihn0TSXJI0UDOOhncYaERq6M0JMDoPLxyscwruJcb4GKS6dvK/d8xebYBg27h/duaQ==
+  version "24.12.4"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-24.12.4.tgz#2709745569811dcbdc57c097fafdd387c6330382"
+  integrity sha512-GUUEShf+PBCGW2KaXwcIt3Yk+e3pkKwWKb9GSyM9WQVE+ep2jzmHdGsHzu4wgcZy5fN9FBdVzjpBQsYlpfpgLA==
   dependencies:
     undici-types "~7.16.0"
 
@@ -9033,6 +9033,8 @@ escape-string-regexp@^5.0.0:
 
 eslint-config-next@^16.0.0:
   version "16.2.6"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-16.2.6.tgz#1a04578efe6fde5cdb6265e98e88c9f61927e2c7"
+  integrity sha512-z2ELYSkyrrJ6cuunTU8vhsT/RpouPkjaSah06nVW6Rg2Hpg0Vs8s497/e5s8G8qtdp4ccsiovz5P1rv+5VSW2Q==
   dependencies:
     "@next/eslint-plugin-next" "16.2.6"
     eslint-import-resolver-node "^0.3.6"
