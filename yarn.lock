@@ -4970,9 +4970,9 @@
     sift "16.0.1"
 
 "@strapi/plugin-color-picker@^5.0.0":
-  version "5.45.1"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.45.1.tgz#703b2e75c780c80178c2ea9b9cdf42546a8ae4c3"
-  integrity sha512-nsbbnqCkXlFN+RKeb/N1sdvpPUga7Gy4c8d1NR0UiAWLyCjeris4hoGYwmmKzLfI8IRr8rN0Bs6H0dGTkrtp8w==
+  version "5.46.0"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-color-picker/-/plugin-color-picker-5.46.0.tgz#14de63ece14e75c3ac9a47db8a933283bc42ffce"
+  integrity sha512-Y/iLYALNRUvQeZ0Z1BGd7JxTgRDZO9nNKMct5zhO2msADQLcCMMh15C6SpIFJHzFXaetUwrj7vx9JYmqA9lCpA==
   dependencies:
     "@strapi/design-system" "2.2.0"
     "@strapi/icons" "2.2.0"
@@ -4980,9 +4980,9 @@
     react-intl "6.6.2"
 
 "@strapi/plugin-graphql@^5.0.0":
-  version "5.45.1"
-  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.45.1.tgz#303b4f2dcdce4f42f909f16c464f3e8f3b71ab3d"
-  integrity sha512-VJNDdORsZUhIYwyqWoXHzkvv4pf4i4pFA22Iill0uV07pr/qDetY9/XN+bSmBmdbztWb84Ngn9Z3imYcpbf2uA==
+  version "5.46.0"
+  resolved "https://registry.yarnpkg.com/@strapi/plugin-graphql/-/plugin-graphql-5.46.0.tgz#6b31bf77e8044c8c5ebb6f2be3fc5f5eb93d681d"
+  integrity sha512-f0CMKU2FjsAKZUrnbvQQ9I69H3hHXMUry9WvIZEWYWJcRxkZilN+RYrFa3wO+eFIFl+BVeYy8MUb7c8d1wsqkg==
   dependencies:
     "@apollo/server" "4.13.0"
     "@as-integrations/koa" "1.1.1"
@@ -4991,7 +4991,7 @@
     "@koa/cors" "5.0.0"
     "@strapi/design-system" "2.2.0"
     "@strapi/icons" "2.2.0"
-    "@strapi/utils" "5.45.1"
+    "@strapi/utils" "5.46.0"
     graphql "^16.8.1"
     graphql-depth-limit "^1.1.0"
     graphql-playground-middleware-koa "^1.6.21"
@@ -5342,22 +5342,6 @@
     lodash "4.17.21"
     p-map "4.0.0"
     yup "0.32.9"
-
-"@strapi/utils@5.45.1":
-  version "5.45.1"
-  resolved "https://registry.yarnpkg.com/@strapi/utils/-/utils-5.45.1.tgz#e376dc289cf2d75a93817e6883dcdbb499b2c721"
-  integrity sha512-iHQJJ9Vdobyldm8ccMe/+BiqjKi4MjfouXwc2jYN3K3hZsh6yrg5f3tukqVgVfkdA9nitL1QYSti2+WoIBzu/A==
-  dependencies:
-    "@sindresorhus/slugify" "1.1.0"
-    date-fns "2.30.0"
-    execa "5.1.1"
-    http-errors "2.0.0"
-    lodash "4.18.1"
-    node-machine-id "1.1.12"
-    p-map "4.0.0"
-    preferred-pm "3.1.3"
-    yup "0.32.9"
-    zod "3.25.67"
 
 "@strapi/utils@5.46.0":
   version "5.46.0"
