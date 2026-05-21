@@ -52,7 +52,7 @@
     "typescript": "^6.0.0"
   },
   "engines": {
-    "node": ">=16.x.x <=24.15.0"
+    "node": ">=16.x.x <=24.16.0"
   },
   "license": "MIT"
 }
