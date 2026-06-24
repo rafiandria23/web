@@ -9357,6 +9357,8 @@ escape-string-regexp@^5.0.0:
 
 eslint-config-next@^16.0.0:
   version "16.2.9"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-16.2.9.tgz#cc3f63fe657cdb980078835f85f1f518cd549276"
+  integrity sha512-olGtBrs07bQchpaJWeqbk9GaMoU0oGmN/pYNEBXSbfgKngb5uHnPe37X6tVeh6DJfaWFQildvinGEOrolo5fmw==
   dependencies:
     "@next/eslint-plugin-next" "16.2.9"
     eslint-import-resolver-node "^0.3.6"
@@ -17697,9 +17699,9 @@ style-to-object@^1.0.0:
     inline-style-parser "0.2.4"
 
 styled-components@^6.0.0:
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-6.4.2.tgz#2e92f7b8a1e49f5791c80c864eddf215dd1046c6"
-  integrity sha512-xZBhBJsMtGqb+aKcwKgaT+BtuFums9VynX2JRvXJGTx5UfZzN12rk5r4nVdhXYvRw+hE7yiYxVrOqJZaK2+Txg==
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-6.4.3.tgz#9544423c537b76ba091cb5a8b6b4f36833df4cfc"
+  integrity sha512-wYXrhu+JmDjZ1Tv7O0OopGTfztbzun43Pjjhh2H+xc0h5A09dwpZ5FJbrifJDcL8g5TA9btpWOX2+iSRuJTExw==
   dependencies:
     "@emotion/is-prop-valid" "1.4.0"
     css-to-react-native "3.2.0"
