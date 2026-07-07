@@ -839,12 +839,12 @@
     enabled "2.0.x"
     kuler "^2.0.0"
 
-"@datadog/pprof@^5.13.3":
-  version "5.14.0"
-  resolved "https://registry.yarnpkg.com/@datadog/pprof/-/pprof-5.14.0.tgz#a5a43fde3ca9369345994cc5cf82d5dcf743fb1c"
-  integrity sha512-bXYptMf0BY3NdKcAmX5aAOnozj7GFdNYE4SIdPF0/Q/Yfb2fYBIYZaN/Le6BhiDIepBvvH/H75d3EIFhB64kOw==
+"@datadog/pprof@^5.14.2":
+  version "5.16.0"
+  resolved "https://registry.yarnpkg.com/@datadog/pprof/-/pprof-5.16.0.tgz#8a0c9893d324caf742d3ac1b2045c757cdf32e48"
+  integrity sha512-/m/YYXM/uPN5BVvRXjQaJWW9VF3rEOMaacvvjr9hdX2YFS0Tv9Tq440t/OIxunmQ5QGjRJs/qjabO+XE7Je0Vg==
   dependencies:
-    node-gyp-build "<4.0"
+    node-gyp-build "^4.8.4"
     pprof-format "^2.2.1"
     source-map "^0.7.4"
 
@@ -2668,19 +2668,19 @@
   resolved "https://registry.yarnpkg.com/@newrelic/apollo-server-plugin/-/apollo-server-plugin-8.0.0.tgz#a6314ba061557d340282c7fc4c6a7d350916d411"
   integrity sha512-EzUhfUZHcyBKfwrkOVIqB8Cahhf84iSsyI7J4CydgLspb60H4ovSCsKNA6q9vJspVl+epTu7n8ejEMLzPzm6fw==
 
-"@newrelic/fn-inspect@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/fn-inspect/-/fn-inspect-5.0.0.tgz#b4b4d61dc1a5513212d1c91b8c09c1c6538c2ceb"
-  integrity sha512-X/NciddM5AQ17JggcrmN230wlM/P+5j2fLos+m7pj0u1fiQK8F4Kru4qkNq7YRT/RhjYDSvy79KR80EYNhzVaw==
+"@newrelic/fn-inspect@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/fn-inspect/-/fn-inspect-5.1.0.tgz#d14e39ab9fe4a2ce342553d7382b989b43e23598"
+  integrity sha512-2ogTrZYTSr/hTh+kMIzzSOIGoary2MqUFxDV9abC2kBY3renTfTWMHM0dUkenBNFtjtQDyARDVwVqsdbbJSbSw==
   dependencies:
     nan "^2.22.2"
     node-gyp-build "^4.8.1"
     prebuildify "^6.0.1"
 
-"@newrelic/native-metrics@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-13.0.0.tgz#048f69f642bb2c470df8afa0cc86939698e968e2"
-  integrity sha512-xtCzhiY6rLFseV5GfEEra0rGe8jyBzFl0DoqfYbjgIfmI/6h3O3z0KMKfuk2Xb2KINiXWRtKHYpfxwD4AWXoWA==
+"@newrelic/native-metrics@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-13.1.0.tgz#0793afa36781ab4d01ad6127cb7c6d1bb484e08f"
+  integrity sha512-MoBcOr3FmO7CUOLafnN9D8FGbpSYz2RTXk/yhXPm6lNkNge+IFgSGMowImYm8oYe20m3PN1Dv+bGqEhJ7UI+7g==
   dependencies:
     nan "^2.22.2"
     node-gyp-build "^4.8.1"
@@ -13914,9 +13914,9 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^14.0.0:
-  version "14.1.2"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.1.2.tgz#adb33fea7607b7755b5ffcadcf0854bfe7c39c3b"
-  integrity sha512-RYEIchr5bd7sJ6r6XE/GQQ7aXq9pTcqXulmN5Z7wCLqulXAGKZpHDbfWs0MxGixTHj3Xnm+YY5C4XhhmrnHWUg==
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.2.0.tgz#7323c0b7b577fc3ad77c9476885bffe39f90cd2e"
+  integrity sha512-WeRVxmXT3rPzaVk1g8gf76HAac5B5N8/7nvJzcxh4ipb2fXJgTXkmu0wC2zQLTr0+jgQDkCunAp+i3j0mZZABw==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.9.1"
     "@grpc/grpc-js" "^1.13.2"
@@ -13943,9 +13943,9 @@ newrelic@^14.0.0:
     semver "^7.5.2"
     winston-transport "^4.5.0"
   optionalDependencies:
-    "@datadog/pprof" "^5.13.3"
-    "@newrelic/fn-inspect" "^5.0.0"
-    "@newrelic/native-metrics" "^13.0.0"
+    "@datadog/pprof" "^5.14.2"
+    "@newrelic/fn-inspect" "^5.1.0"
+    "@newrelic/native-metrics" "^13.1.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
@@ -14035,12 +14035,7 @@ node-fetch@^2.6.7:
   dependencies:
     whatwg-url "^5.0.0"
 
-node-gyp-build@<4.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-3.9.0.tgz#53a350187dd4d5276750da21605d1cb681d09e25"
-  integrity sha512-zLcTg6P4AbcHPq465ZMFNXx7XpKKJh+7kkN699NiQWisR2uWYOWNWqRHAmbnmKiL4e9aLSlmy5U7rEMUXV59+A==
-
-node-gyp-build@^4.8.1:
+node-gyp-build@^4.8.1, node-gyp-build@^4.8.4:
   version "4.8.4"
   resolved "https://registry.yarnpkg.com/node-gyp-build/-/node-gyp-build-4.8.4.tgz#8a70ee85464ae52327772a90d66c6077a900cfc8"
   integrity sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ==
