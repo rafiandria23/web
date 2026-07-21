@@ -6043,7 +6043,9 @@
   integrity sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==
 
 "@types/react@*", "@types/react@^19.0.0":
-  version "19.2.8"
+  version "19.2.17"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-19.2.17.tgz#dccac365baa0f1734ec270ff4b51c89465e8dc7f"
+  integrity sha512-MXfmqaVPEVgkBT/aY0aGCkRWWtByiYQXo3xdQ8r5RzuFrPiRn8Gar2tQdXSUQ2GKV3bkXckek89V8wQBY2Q/Aw==
   dependencies:
     csstype "^3.2.2"
 
@@ -13813,9 +13815,9 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^14.0.0:
-  version "14.3.1"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.3.1.tgz#586d65fd2cb7a15786f807fe886710ec480c4bc9"
-  integrity sha512-icA7mHy4DCfJlspHB5W+yyeY/f4juG/gM0jjdUjoKqnJD/En16s6U3VzL3B+gBvnxBOlxdFHboXDV2Tp6duPjg==
+  version "14.3.2"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.3.2.tgz#cd228effdeaa42e52d36d5544daaae5a8de9fe9b"
+  integrity sha512-phRYJE6KFB7gjVH+Qgq8bFci9Sr/HT4Su/k41prkk3Lo/yKjgq9EyST10VJFHiN5sBi+u/2fy4z0rkA2UO5aHw==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.9.1"
     "@grpc/grpc-js" "^1.13.2"
