@@ -13815,9 +13815,9 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^14.0.0:
-  version "14.3.2"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.3.2.tgz#cd228effdeaa42e52d36d5544daaae5a8de9fe9b"
-  integrity sha512-phRYJE6KFB7gjVH+Qgq8bFci9Sr/HT4Su/k41prkk3Lo/yKjgq9EyST10VJFHiN5sBi+u/2fy4z0rkA2UO5aHw==
+  version "14.3.3"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.3.3.tgz#e8d01be271cdae432f3cce5864644090072fa3be"
+  integrity sha512-pIydXzM3d/gM18Uro1zX7BbvMemb45FbNTqta2Ypo3L1iKW/x+W712dZAl6aOy+moevTIgC1tesdtpnh1Bxstw==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.9.1"
     "@grpc/grpc-js" "^1.13.2"
