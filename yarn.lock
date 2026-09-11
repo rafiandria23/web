@@ -13339,9 +13339,9 @@ newrelic@^14.0.0:
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^6.0.0:
-  version "6.18.8"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.18.8.tgz#9409bde33f426e99b4ab39d68a86d5714d464422"
-  integrity sha512-uF/2OxMgzGPQcMUhUt6KO3w7r9O8kYWhzsNjsOvuvNH1vVqFfp3hrBrQI6/dzqejwlZAHyI12+QtD5xK8zyaZg==
+  version "6.19.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.19.0.tgz#766df7928134fd5c7ea70218554b6781c7511370"
+  integrity sha512-d0kcfitgLOaSzvWQV5eZy9hOrBC4RkCuUT0z+UrUt7alX2C+R4HgJscAPrPjXXKtBae8GB3jSQckvZ4ax6w/8w==
   dependencies:
     "@cloudinary-util/types" "1.5.10"
     "@cloudinary-util/url-loader" "5.10.4"
