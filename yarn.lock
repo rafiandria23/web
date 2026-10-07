@@ -3179,10 +3179,17 @@
   dependencies:
     "@octokit/openapi-types" "^24.2.0"
 
-"@opentelemetry/api-logs@0.221.0", "@opentelemetry/api-logs@^0.221.0":
+"@opentelemetry/api-logs@0.221.0":
   version "0.221.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api-logs/-/api-logs-0.221.0.tgz#66b8405b122ff1c76ee743b9bd2ca73800a2e2df"
   integrity sha512-OlanaW1vv7ufTqQ3/fPLI4arGt5ZoM+P8abOMki6uEYnpRazepSWDwDnnw+la7kE26SHVC18//SMccrDvLKOXQ==
+  dependencies:
+    "@opentelemetry/api" "^1.3.0"
+
+"@opentelemetry/api-logs@^0.222.0":
+  version "0.222.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api-logs/-/api-logs-0.222.0.tgz#317519a857d01e16e1b0731e23f118c843023457"
+  integrity sha512-9mb1If+IF6u0ZVXkHQ6ogEae5HwA6ajIVUgpSDQyRASxft6BSXHvBvPooRle3yFN/fKnCdSOnuu0OC3PLcF6+g==
   dependencies:
     "@opentelemetry/api" "^1.3.0"
 
@@ -3190,13 +3197,6 @@
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"
   integrity sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==
-
-"@opentelemetry/core@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/core/-/core-2.0.0.tgz#37e9f0e9ddec4479b267aca6f32d88757c941b3a"
-  integrity sha512-SLX36allrcnVaPYG3R78F/UZZsBsvbc7lMCLx37LyH5MJ1KAAZ2E3mW9OAD3zGz0G8q/BtoS5VUrjzDydhD6LQ==
-  dependencies:
-    "@opentelemetry/semantic-conventions" "^1.29.0"
 
 "@opentelemetry/core@2.0.1":
   version "2.0.1"
@@ -3243,14 +3243,6 @@
     "@opentelemetry/sdk-metrics" "2.10.0"
     "@opentelemetry/sdk-trace" "2.10.0"
 
-"@opentelemetry/resources@2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-2.0.0.tgz#15c04794c32b7d0b3c7589225ece6ae9bba25989"
-  integrity sha512-rnZr6dML2z4IARI4zPGQV4arDikF/9OXZQzrC01dLmn0CZxU5U5OLd/m1T7YkGRj5UitjeoCtg/zorlgMQcdTg==
-  dependencies:
-    "@opentelemetry/core" "2.0.0"
-    "@opentelemetry/semantic-conventions" "^1.29.0"
-
 "@opentelemetry/resources@2.0.1", "@opentelemetry/resources@^2.0.1":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@opentelemetry/resources/-/resources-2.0.1.tgz#0365d134291c0ed18d96444a1e21d0e6a481c840"
@@ -3267,7 +3259,7 @@
     "@opentelemetry/core" "2.10.0"
     "@opentelemetry/semantic-conventions" "^1.29.0"
 
-"@opentelemetry/sdk-logs@0.221.0", "@opentelemetry/sdk-logs@^0.221.0":
+"@opentelemetry/sdk-logs@0.221.0":
   version "0.221.0"
   resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-logs/-/sdk-logs-0.221.0.tgz#9ec0e2cbfb572917b948101983e08868a690915e"
   integrity sha512-FaDcazjyMp7TZZZAsqbo4IkovP0UegoCu0EBkiNt+qCqvUf7FPAsfcrZ3+ZEkKgXZ/jHafop+JoGPDk3A0SmLg==
@@ -3292,15 +3284,6 @@
   dependencies:
     "@opentelemetry/core" "2.0.1"
     "@opentelemetry/resources" "2.0.1"
-
-"@opentelemetry/sdk-trace-base@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@opentelemetry/sdk-trace-base/-/sdk-trace-base-2.0.0.tgz#ebc06ea7537dea62f3882f8236c1234f4faf6b23"
-  integrity sha512-qQnYdX+ZCkonM7tA5iU4fSRsVxbFGml8jbxOgipRGMFHKaXKHQ30js03rTobYjKjIfnOsZSbHKWF0/0v0OQGfw==
-  dependencies:
-    "@opentelemetry/core" "2.0.0"
-    "@opentelemetry/resources" "2.0.0"
-    "@opentelemetry/semantic-conventions" "^1.29.0"
 
 "@opentelemetry/sdk-trace@2.10.0":
   version "2.10.0"
@@ -13639,23 +13622,21 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^14.0.0:
-  version "14.6.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.6.0.tgz#3622ae8ba96fb597b344952c27aadb787ec31466"
-  integrity sha512-wb/xkCVrbu9zcDmuZfg/N6MPZ1zM5NtdHXKg9h7gqvYCjYw+k0aJ7mG36/YbiUUMCnn1BghwY8PG7sS99Gbw2A==
+  version "14.7.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.7.0.tgz#c99f41b9f8c25f0e0299fabeb3a2e53028c5ce53"
+  integrity sha512-JkNuM+scSFB8LjtstK4YnKp+tUd+nYC30rVBVYC1LCIYxs83RBkXFeRExh8S9DSp230EwQu58haIBb4i12uLng==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.13.0"
     "@grpc/grpc-js" "^1.13.2"
     "@grpc/proto-loader" "^0.8.1"
     "@newrelic/security-agent" "^3.0.0"
     "@opentelemetry/api" "^1.9.0"
-    "@opentelemetry/api-logs" "^0.221.0"
+    "@opentelemetry/api-logs" "^0.222.0"
     "@opentelemetry/exporter-metrics-otlp-http" "^0.221.0"
     "@opentelemetry/otlp-exporter-base" "^0.221.0"
     "@opentelemetry/otlp-transformer" "^0.221.0"
     "@opentelemetry/resources" "^2.0.1"
-    "@opentelemetry/sdk-logs" "^0.221.0"
     "@opentelemetry/sdk-metrics" "^2.0.1"
-    "@opentelemetry/sdk-trace-base" "^2.0.0"
     "@tyriar/fibonacci-heap" "^2.0.7"
     ajv "^8.17.1"
     concat-stream "^2.0.0"
