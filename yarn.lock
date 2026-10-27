@@ -703,30 +703,24 @@
     fast-wrap-ansi "^0.2.0"
     sisteransi "^1.0.5"
 
-"@cloudinary-util/types@1.5.10":
-  version "1.5.10"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.5.10.tgz#e1003f47fa1bd4ecc83fce37c997c618138d1c67"
-  integrity sha512-n5lrm7SdAXhgWEbkSJKHZGnaoO9G/g4WYS6HYnq/k4nLj79sYfQZOoKjyR8hF2iyLRdLkT+qlk68RNFFv5tKew==
+"@cloudinary-util/types@1.7.0", "@cloudinary-util/types@^1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/types/-/types-1.7.0.tgz#ea889e780554c7e43ac2cfdbe56865bd0fccbd5c"
+  integrity sha512-4oz0zVupn1KFpi9BxzmhurYiVX5eek5DXhE1VlVwr+MeKEzrAFzrEkq2BAY0S7LRUnNT2p5UQIKoCE82MNju4g==
 
-"@cloudinary-util/url-loader@5.10.4":
-  version "5.10.4"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-5.10.4.tgz#96fbf8648fc37ad11a34bc4637789898026e903d"
-  integrity sha512-gHkdvOaV+rlcwuIT7Vqd0ts/H5bsH4+bwFten/gIZ8oRjzdTBvgIY3R6F8bbJt0pFIEfpFEQLe4rPkl0NNqEWg==
+"@cloudinary-util/url-loader@6.3.2":
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/url-loader/-/url-loader-6.3.2.tgz#4f51cb245419e56bb14904168ddc886924f0e9f6"
+  integrity sha512-l/hLdFmTlQu0XCHzOBzXoSzhQKYuu96egPu7+W2Z5wBe7jRDfNHdH+ID4Ase1Jby8HI2xniJX2L83fglJV83+w==
   dependencies:
-    "@cloudinary-util/types" "1.5.10"
-    "@cloudinary-util/util" "3.3.2"
+    "@cloudinary-util/types" "^1.7.0"
+    "@cloudinary-util/util" "^4.3.0"
     "@cloudinary/url-gen" "1.15.0"
-    zod "^3.22.4"
 
-"@cloudinary-util/util@3.3.2":
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-3.3.2.tgz#a5cd48d82d5f344008674ebad99767e997bea222"
-  integrity sha512-Cc0iFxzfl7fcOXuznpeZFGYC885Of/vDgccRDnhTe/8Rf8YKv2PjLtezyo0VgmdA/CpeZy29NCXAsf6liokbwg==
-
-"@cloudinary-util/util@4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-4.0.0.tgz#5ba8e15c8efd2455f5d21c61b87ee89255b190dd"
-  integrity sha512-S4xcou/3A7l5o+bcKlw2VHBNgwups7/0lbVDT/cO5YmtrcEYXgj6LGmwnjvpTm/x571VPVN8x5jWdT3rLZiKJQ==
+"@cloudinary-util/util@4.3.0", "@cloudinary-util/util@^4.3.0":
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/@cloudinary-util/util/-/util-4.3.0.tgz#4852961663464284db0280c3cae245d3efe0f37a"
+  integrity sha512-oP0HozxMd7XZcnh6VRUri2lXLvJVcT8IDou2470ZEcNXeX+6eeixZR1rAngjLcg+p6lVJsSHvrbJ3hODaYBXxw==
 
 "@cloudinary/transformation-builder-sdk@^1.10.0", "@cloudinary/transformation-builder-sdk@^1.15.1":
   version "1.16.1"
@@ -13438,14 +13432,14 @@ newrelic@^14.0.0:
     "@newrelic/native-metrics" "^13.1.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
-next-cloudinary@^6.0.0:
-  version "6.19.3"
-  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-6.19.3.tgz#3c9f9982c85d26237c317fe756191d44dcafe8fc"
-  integrity sha512-31VNjuBBeHPSYsZwpRSFdOXzY19Z9kN6yLEtodWoEr926AQBv8qwNv6MF+H1+1Sc9i3ztMRqku34bibc2CUYHg==
+next-cloudinary@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/next-cloudinary/-/next-cloudinary-7.0.0.tgz#297f14931bed26ad0e3ce555756e8698d0c611e7"
+  integrity sha512-+u+kbUU11wiiLuGtT50/UrBHjsMJ5SXUX20I/QEI0QO0aJZb72jJFoWf/rDY9jb7o+VMItcEuoPQJJbIkUxilA==
   dependencies:
-    "@cloudinary-util/types" "1.5.10"
-    "@cloudinary-util/url-loader" "5.10.4"
-    "@cloudinary-util/util" "4.0.0"
+    "@cloudinary-util/types" "1.7.0"
+    "@cloudinary-util/url-loader" "6.3.2"
+    "@cloudinary-util/util" "4.3.0"
 
 next-sitemap@^4.1.3:
   version "4.2.3"
@@ -18024,7 +18018,7 @@ zod@4.4.3:
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.4.3.tgz#b680f172885d18bbebf21a834ea25e55a1bbf356"
   integrity sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==
 
-zod@^3.19.1, zod@^3.22.4:
+zod@^3.19.1:
   version "3.23.8"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
   integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==
