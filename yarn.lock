@@ -2693,15 +2693,6 @@
     node-gyp-build "^4.8.1"
     prebuildify "^6.0.1"
 
-"@newrelic/native-metrics@^13.1.0":
-  version "13.1.0"
-  resolved "https://registry.yarnpkg.com/@newrelic/native-metrics/-/native-metrics-13.1.0.tgz#0793afa36781ab4d01ad6127cb7c6d1bb484e08f"
-  integrity sha512-MoBcOr3FmO7CUOLafnN9D8FGbpSYz2RTXk/yhXPm6lNkNge+IFgSGMowImYm8oYe20m3PN1Dv+bGqEhJ7UI+7g==
-  dependencies:
-    nan "^2.22.2"
-    node-gyp-build "^4.8.1"
-    prebuildify "^6.0.1"
-
 "@newrelic/next@^0.10.0":
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/@newrelic/next/-/next-0.10.0.tgz#95c9884f4e677b70271c9d9a7da38ab508913695"
@@ -13609,9 +13600,9 @@ neo-async@^2.5.0, neo-async@^2.6.2:
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
 newrelic@^14.0.0:
-  version "14.10.0"
-  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.10.0.tgz#cda504f5cfb0454e9363fa5db885d0e085e86feb"
-  integrity sha512-1GMlCTTvcE3lvrYRHpwDZKpRsX/7wZzOYbmmBLZAKybC8Dhe5yZocvQcuLU5OTfijAvgcxoM8gS415MWFH7eNw==
+  version "14.11.0"
+  resolved "https://registry.yarnpkg.com/newrelic/-/newrelic-14.11.0.tgz#f70307c404484f400aa4170d2a01420793fb882b"
+  integrity sha512-llGQY/MScadhXdWjpVI3TFmyRsGDllHU6qLrD+zBfUj42vup7BaqpLrrLp+nABa/tJMz/Va3QVL2NK/j2z8muA==
   dependencies:
     "@apm-js-collab/tracing-hooks" "^0.13.0"
     "@grpc/grpc-js" "^1.13.2"
@@ -13637,7 +13628,6 @@ newrelic@^14.0.0:
   optionalDependencies:
     "@datadog/pprof" "^5.14.2"
     "@newrelic/fn-inspect" "^5.1.0"
-    "@newrelic/native-metrics" "^13.1.0"
     "@prisma/prisma-fmt-wasm" "^4.17.0-16.27eb2449f178cd9fe1a4b892d732cc4795f75085"
 
 next-cloudinary@^7.0.0:
